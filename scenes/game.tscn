@@ -14,6 +14,12 @@ script = ExtResource("2_bysne")
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=387976947]
 position = Vector2(1, -18)
 zoom = Vector2(4, 4)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.35
+drag_top_margin = 0.35
+drag_right_margin = 0.35
+drag_bottom_margin = 0.35
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1175761177]
 position = Vector2(44, 101)
