@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/prototypes/rooms/bedroom_room.tscn" id="1_room"]
+[ext_resource type="PackedScene" uid="uid://b1aoc87u33jos" path="res://scenes/player.tscn" id="2_player"]
+[ext_resource type="Script" uid="uid://cbuuh60heihia" path="res://scripts/playerMovement.gd" id="3_movement"]
+
+[node name="CameraLaboratory" type="Node2D"]
+texture_filter = 1
+
+[node name="Bedroom" parent="." instance=ExtResource("1_room")]
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+z_index = 1
+position = Vector2(208, 112)
+script = ExtResource("3_movement")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(144, 80)
+zoom = Vector2(4, 4)
