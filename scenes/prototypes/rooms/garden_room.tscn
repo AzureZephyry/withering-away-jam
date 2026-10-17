@@ -1,0 +1,1912 @@
+[gd_scene load_steps=63 format=3]
+
+[ext_resource type="Script" path="res://scenes/prototypes/garden_ground.gd" id="1_ground"]
+[ext_resource type="Script" path="res://scenes/prototypes/garden_prop.gd" id="2_prop"]
+[ext_resource type="Script" path="res://scenes/prototypes/garden_overhang.gd" id="3_overhang"]
+
+[sub_resource type="RectangleShape2D" id="GardenShape_1"]
+size = Vector2(2048, 24)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_2"]
+size = Vector2(2048, 24)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_3"]
+size = Vector2(24, 1104)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_4"]
+size = Vector2(24, 1104)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_5"]
+size = Vector2(12, 18)
+
+[sub_resource type="CircleShape2D" id="GardenShape_6"]
+radius = 18.0
+
+[sub_resource type="RectangleShape2D" id="GardenShape_7"]
+size = Vector2(12, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_8"]
+size = Vector2(12, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_9"]
+size = Vector2(18, 18)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_10"]
+size = Vector2(76, 24)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_11"]
+size = Vector2(76, 24)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_12"]
+size = Vector2(76, 24)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_13"]
+size = Vector2(76, 24)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_14"]
+size = Vector2(76, 24)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_15"]
+size = Vector2(76, 24)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_16"]
+size = Vector2(104, 48)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_17"]
+size = Vector2(88, 40)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_18"]
+size = Vector2(80, 40)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_19"]
+size = Vector2(72, 40)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_20"]
+size = Vector2(88, 40)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_21"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_22"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_23"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_24"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_25"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_26"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_27"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_28"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_29"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_30"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_31"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_32"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_33"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_34"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_35"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_36"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_37"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_38"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_39"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_40"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_41"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_42"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_43"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_44"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_45"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_46"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_47"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_48"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_49"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_50"]
+size = Vector2(22, 14)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_51"]
+size = Vector2(22, 14)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_52"]
+size = Vector2(22, 14)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_53"]
+size = Vector2(22, 14)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_54"]
+size = Vector2(22, 14)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_55"]
+size = Vector2(22, 14)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_56"]
+size = Vector2(22, 14)
+
+[sub_resource type="RectangleShape2D" id="GardenShape_57"]
+size = Vector2(22, 14)
+
+[sub_resource type="RectangleShape2D" id="GazeboSideRail"]
+size = Vector2(10, 88)
+
+[sub_resource type="RectangleShape2D" id="GazeboFrontRail"]
+size = Vector2(64, 10)
+
+[node name="Garden" type="Node2D"]
+y_sort_enabled = true
+texture_filter = 1
+
+[node name="Floor" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 2048, 0, 2048, 1152, 0, 1152)
+color = Color(0.51, 0.616, 0.424, 1)
+script = ExtResource("1_ground")
+extent = Vector2i(2048, 1152)
+
+[node name="GroundTreatments" type="Node2D" parent="."]
+
+
+[node name="TreeWalkShade" type="Node2D" parent="GroundTreatments"]
+position = Vector2(100, 110)
+script = ExtResource("1_ground")
+surface = "Shade"
+extent = Vector2i(608, 472)
+variant = 0
+
+[node name="WesternGlade" type="Node2D" parent="GroundTreatments"]
+position = Vector2(112, 552)
+script = ExtResource("1_ground")
+surface = "Lawn"
+extent = Vector2i(552, 208)
+variant = 1
+
+[node name="OpenLawn" type="Node2D" parent="GroundTreatments"]
+position = Vector2(1400, 716)
+script = ExtResource("1_ground")
+surface = "Lawn"
+extent = Vector2i(456, 288)
+variant = 2
+
+[node name="FlowerMeadow" type="Node2D" parent="GroundTreatments"]
+position = Vector2(1392, 152)
+script = ExtResource("1_ground")
+surface = "Lawn"
+extent = Vector2i(496, 416)
+variant = 3
+
+[node name="GazeboCourt" type="Node2D" parent="GroundTreatments"]
+position = Vector2(224, 768)
+script = ExtResource("1_ground")
+surface = "Plaza"
+extent = Vector2i(320, 232)
+variant = 0
+
+[node name="QuietCorner" type="Node2D" parent="GroundTreatments"]
+position = Vector2(1664, 560)
+script = ExtResource("1_ground")
+surface = "Plaza"
+extent = Vector2i(272, 176)
+variant = 4
+
+[node name="LilyClearing" type="Node2D" parent="GroundTreatments"]
+position = Vector2(774, 400)
+script = ExtResource("1_ground")
+surface = "Clearing"
+extent = Vector2i(500, 352)
+variant = 5
+
+[node name="PathEdges" type="Node2D" parent="."]
+
+[node name="GazeboApproach" type="Node2D" parent="PathEdges"]
+script = ExtResource("1_ground")
+surface = "PathEdge"
+points = PackedVector2Array(384, 952, 384, 960, 384, 974, 386, 986, 390, 1000, 400, 1008, 410, 1012, 420, 1014, 434, 1018, 450, 1018, 464, 1018, 480, 1018, 496, 1014, 512, 1008, 522, 1004, 532, 996, 542, 990, 552, 982, 562, 972, 572, 962, 582, 954, 592, 944, 602, 932, 612, 924, 622, 914, 632, 904, 640, 896, 650, 886, 662, 876, 672, 866, 682, 854, 692, 846, 700, 836, 710, 826, 718, 816, 728, 808, 736, 800, 748, 790, 760, 780, 770, 770, 782, 762, 792, 754, 802, 746, 810, 740, 816, 736)
+path_width = 88.0
+
+[node name="WestPromenade" type="Node2D" parent="PathEdges"]
+script = ExtResource("1_ground")
+surface = "PathEdge"
+points = PackedVector2Array(640, 896, 644, 890, 650, 882, 658, 874, 664, 864, 674, 854, 682, 844, 688, 832, 696, 820, 700, 810, 704, 800, 706, 790, 708, 778, 708, 768, 708, 756, 708, 746, 704, 734, 700, 724, 696, 714, 688, 704, 682, 698, 672, 690, 660, 684, 648, 678, 634, 670, 620, 664, 606, 658, 594, 652, 582, 646, 572, 640, 564, 634, 560, 630, 560, 624, 562, 620, 570, 616, 578, 610, 590, 606, 602, 602, 616, 598, 632, 596, 648, 592, 662, 588, 678, 586, 692, 582, 704, 580, 712, 578, 720, 576)
+path_width = 88.0
+
+[node name="TreeWalk" type="Node2D" parent="PathEdges"]
+script = ExtResource("1_ground")
+surface = "PathEdge"
+points = PackedVector2Array(720, 576, 714, 572, 704, 566, 694, 558, 680, 552, 668, 544, 654, 534, 642, 524, 630, 516, 618, 506, 608, 496, 600, 486, 594, 474, 588, 464, 584, 452, 580, 440, 574, 426, 568, 416, 562, 404, 554, 394, 544, 384, 534, 378, 524, 372, 514, 366, 502, 360, 490, 356, 476, 352, 464, 346, 450, 342, 436, 338, 422, 334, 410, 330, 396, 324, 384, 320, 372, 316, 358, 310, 344, 306, 330, 302, 316, 296, 302, 292, 290, 288, 276, 282, 264, 278, 252, 272, 242, 268, 232, 262, 224, 256, 214, 244, 206, 232, 202, 218, 198, 204, 196, 190, 194, 178, 194, 168, 192, 160)
+path_width = 76.0
+
+[node name="NorthLoop" type="Node2D" parent="PathEdges"]
+script = ExtResource("1_ground")
+surface = "PathEdge"
+points = PackedVector2Array(192, 160, 200, 158, 210, 156, 220, 154, 232, 152, 246, 148, 260, 146, 276, 142, 292, 138, 308, 136, 324, 134, 340, 132, 354, 130, 370, 128, 384, 128, 398, 128, 412, 130, 426, 130, 438, 132, 452, 134, 466, 138, 480, 140, 494, 142, 508, 146, 522, 148, 534, 152, 548, 154, 562, 158, 576, 160, 590, 162, 604, 164, 618, 166, 632, 166, 648, 168, 662, 170, 676, 172, 690, 172, 704, 174, 718, 178, 732, 180, 744, 184, 756, 188, 768, 192, 780, 198, 792, 206, 802, 214, 812, 222, 822, 232, 832, 242, 840, 252, 850, 262, 858, 272, 868, 280, 876, 290, 886, 298, 896, 304, 910, 312, 924, 318, 938, 324, 954, 330, 968, 336, 982, 340, 996, 344, 1006, 346, 1016, 350, 1024, 352)
+path_width = 76.0
+
+[node name="FlowerWalk" type="Node2D" parent="PathEdges"]
+script = ExtResource("1_ground")
+surface = "PathEdge"
+points = PackedVector2Array(1024, 352, 1032, 350, 1040, 346, 1050, 344, 1062, 340, 1074, 336, 1086, 332, 1100, 326, 1114, 322, 1128, 316, 1144, 312, 1158, 306, 1174, 302, 1188, 298, 1202, 292, 1216, 288, 1228, 284, 1242, 280, 1254, 274, 1266, 270, 1280, 264, 1292, 260, 1306, 254, 1318, 250, 1332, 246, 1344, 240, 1358, 236, 1370, 234, 1384, 230, 1398, 228, 1410, 226, 1424, 224, 1436, 224, 1450, 224, 1464, 224, 1476, 224, 1490, 226, 1504, 228, 1518, 230, 1532, 232, 1544, 234, 1558, 236, 1572, 240, 1586, 242, 1598, 244, 1612, 248, 1624, 250, 1636, 254, 1648, 256, 1662, 260, 1676, 262, 1692, 264, 1706, 268, 1720, 270, 1734, 274, 1748, 276, 1762, 280, 1774, 284, 1786, 288, 1796, 294, 1806, 298, 1816, 304, 1824, 312, 1832, 322, 1842, 332, 1852, 344, 1860, 358, 1866, 372, 1874, 386, 1878, 400, 1880, 414, 1878, 428, 1874, 440, 1868, 452, 1856, 464, 1850, 468, 1842, 474, 1832, 478, 1822, 482, 1812, 486, 1800, 490, 1788, 494, 1774, 500, 1760, 504, 1746, 508, 1732, 512, 1716, 514, 1700, 518, 1686, 522, 1670, 526, 1654, 530, 1638, 532, 1622, 536, 1608, 540, 1592, 542, 1578, 546, 1564, 548, 1550, 550, 1538, 554, 1526, 556, 1514, 558, 1504, 560, 1484, 564, 1466, 568, 1448, 570, 1432, 572, 1416, 572, 1400, 574, 1388, 574, 1374, 574, 1364, 574, 1352, 576, 1344, 576, 1336, 576, 1328, 576)
+path_width = 88.0
+
+[node name="LawnLoop" type="Node2D" parent="PathEdges"]
+script = ExtResource("1_ground")
+surface = "PathEdge"
+points = PackedVector2Array(1328, 576, 1336, 578, 1346, 582, 1356, 584, 1370, 588, 1384, 592, 1398, 596, 1414, 600, 1428, 606, 1444, 612, 1458, 618, 1472, 624, 1484, 630, 1494, 636, 1506, 642, 1516, 648, 1528, 656, 1540, 662, 1550, 670, 1562, 678, 1572, 686, 1584, 694, 1594, 702, 1606, 712, 1616, 720, 1626, 728, 1636, 738, 1646, 746, 1656, 756, 1666, 764, 1676, 774, 1686, 784, 1696, 794, 1704, 804, 1714, 814, 1722, 826, 1730, 836, 1738, 846, 1744, 856, 1752, 868, 1760, 882, 1768, 896, 1776, 910, 1784, 924, 1792, 938, 1796, 952, 1800, 966, 1802, 978, 1802, 990, 1798, 1000, 1792, 1008, 1786, 1012, 1778, 1018, 1770, 1022, 1758, 1024, 1748, 1028, 1734, 1030, 1722, 1032, 1706, 1034, 1692, 1036, 1676, 1036, 1660, 1038, 1646, 1038, 1630, 1040, 1614, 1040, 1598, 1040, 1582, 1040, 1566, 1040, 1552, 1040, 1540, 1040, 1526, 1040, 1512, 1040, 1498, 1040, 1484, 1038, 1470, 1038, 1456, 1038, 1440, 1036, 1426, 1036, 1412, 1034, 1398, 1032, 1384, 1030, 1370, 1028, 1356, 1026, 1342, 1024, 1328, 1022, 1316, 1018, 1304, 1016, 1292, 1012, 1280, 1008, 1266, 1002, 1252, 996, 1240, 990, 1228, 982, 1214, 974, 1202, 964, 1192, 956, 1180, 948, 1170, 938, 1158, 928, 1148, 920, 1140, 910, 1130, 902, 1120, 894, 1112, 886, 1104, 880, 1090, 868, 1078, 858, 1068, 846, 1058, 836, 1048, 828, 1042, 818, 1034, 812, 1028, 806, 1024, 800)
+path_width = 88.0
+
+[node name="SouthLink" type="Node2D" parent="PathEdges"]
+script = ExtResource("1_ground")
+surface = "PathEdge"
+points = PackedVector2Array(1024, 800, 1020, 806, 1014, 814, 1006, 822, 1000, 834, 992, 844, 982, 856, 972, 868, 962, 880, 952, 892, 940, 902, 928, 912, 918, 918, 908, 926, 898, 934, 888, 940, 876, 948, 864, 954, 854, 962, 840, 968, 828, 974, 816, 982, 804, 988, 790, 994, 778, 998, 764, 1004, 752, 1008, 740, 1012, 728, 1016, 714, 1018, 702, 1022, 688, 1024, 674, 1026, 660, 1030, 648, 1032, 634, 1032, 620, 1034, 606, 1036, 594, 1036, 580, 1038, 568, 1038, 556, 1040, 544, 1040, 528, 1040, 512, 1040, 496, 1040, 482, 1040, 466, 1040, 452, 1038, 436, 1038, 424, 1036, 412, 1034, 400, 1030, 392, 1028, 384, 1024, 374, 1014, 372, 1002, 374, 988, 378, 972, 382, 960, 384, 952)
+path_width = 72.0
+
+[node name="RestWalk" type="Node2D" parent="PathEdges"]
+script = ExtResource("1_ground")
+surface = "PathEdge"
+points = PackedVector2Array(1856, 464, 1860, 472, 1864, 482, 1870, 494, 1878, 506, 1884, 522, 1890, 536, 1896, 550, 1902, 564, 1904, 576, 1906, 590, 1906, 606, 1904, 620, 1902, 634, 1900, 648, 1894, 660, 1888, 672, 1882, 682, 1876, 692, 1868, 702, 1860, 712, 1850, 720, 1838, 726, 1824, 732, 1808, 736, 1798, 738, 1784, 738, 1770, 738, 1756, 736, 1740, 736, 1724, 734, 1708, 732, 1690, 730, 1674, 728, 1660, 726, 1646, 724, 1634, 722, 1624, 720, 1616, 720)
+path_width = 72.0
+
+[node name="PerimeterWalk" type="Node2D" parent="PathEdges"]
+script = ExtResource("1_ground")
+surface = "PathEdge"
+points = PackedVector2Array(128, 912, 128, 904, 126, 896, 126, 886, 124, 874, 124, 862, 122, 850, 122, 836, 120, 822, 120, 808, 118, 792, 116, 776, 116, 760, 114, 746, 114, 730, 112, 714, 112, 700, 112, 686, 112, 672, 112, 658, 112, 646, 112, 632, 114, 620, 114, 606, 114, 594, 116, 580, 116, 568, 118, 554, 120, 540, 120, 528, 122, 514, 122, 500, 124, 488, 124, 474, 126, 460, 128, 446, 128, 432, 128, 418, 128, 406, 128, 390, 128, 376, 126, 362, 126, 346, 124, 330, 124, 316, 122, 300, 122, 286, 122, 270, 122, 256, 122, 242, 122, 228, 124, 214, 126, 202, 130, 190, 134, 178, 138, 168, 144, 160, 152, 152, 160, 144, 170, 136, 180, 130, 192, 124, 204, 120, 218, 116, 230, 112, 246, 110, 260, 108, 274, 106, 290, 104, 306, 102, 320, 100, 336, 100, 352, 98, 368, 98, 384, 96, 396, 96, 408, 94, 422, 94, 434, 94, 448, 94, 462, 94, 476, 94, 490, 96, 504, 96, 518, 98, 532, 98, 546, 100, 560, 100, 576, 102, 590, 104, 604, 104, 618, 106, 632, 108, 648, 108, 662, 110, 676, 110, 690, 112, 704, 112, 718, 112, 732, 114, 746, 114, 760, 116, 774, 116, 788, 116, 802, 118, 816, 118, 830, 120, 844, 120, 858, 122, 870, 122, 884, 124, 898, 124, 912, 124, 926, 126, 940, 126, 954, 126, 968, 128, 982, 128, 996, 128, 1010, 128, 1024, 128, 1038, 128, 1052, 128, 1066, 128, 1080, 128, 1094, 126, 1108, 126, 1122, 126, 1136, 124, 1150, 124, 1164, 124, 1178, 122, 1192, 122, 1206, 120, 1220, 120, 1234, 118, 1248, 118, 1262, 116, 1276, 116, 1290, 116, 1304, 114, 1316, 114, 1330, 112, 1344, 112, 1358, 112, 1372, 110, 1386, 110, 1402, 108, 1416, 108, 1430, 106, 1444, 106, 1458, 104, 1472, 104, 1486, 102, 1502, 102, 1516, 100, 1528, 100, 1542, 98, 1556, 98, 1570, 96, 1584, 96, 1596, 96, 1610, 96, 1622, 96, 1636, 96, 1648, 96, 1664, 96, 1678, 96, 1694, 96, 1710, 96, 1724, 94, 1740, 94, 1754, 94, 1770, 94, 1784, 94, 1798, 94, 1812, 96, 1824, 98, 1838, 100, 1848, 104, 1860, 108, 1870, 114, 1880, 120, 1888, 128, 1894, 136, 1900, 146, 1906, 156, 1910, 168, 1916, 180, 1918, 192, 1922, 206, 1924, 220, 1926, 234, 1928, 250, 1930, 264, 1930, 280, 1932, 296, 1932, 310, 1934, 326, 1934, 342, 1934, 356, 1934, 372, 1936, 386, 1936, 400, 1936, 414, 1936, 428, 1936, 440, 1936, 454, 1936, 468, 1936, 482, 1934, 494, 1934, 508, 1932, 522, 1932, 536, 1930, 548, 1928, 562, 1926, 576, 1926, 590, 1924, 602, 1924, 616, 1922, 630, 1922, 644, 1920, 658, 1920, 672, 1920, 686, 1920, 700, 1920, 714, 1922, 728, 1924, 744, 1924, 758, 1926, 774, 1928, 790, 1928, 804, 1930, 820, 1932, 834, 1932, 850, 1934, 864, 1934, 878, 1934, 892, 1932, 904, 1932, 916, 1930, 928, 1928, 940, 1924, 950, 1920, 960, 1914, 972, 1906, 982, 1898, 992, 1888, 1000, 1878, 1006, 1868, 1014, 1856, 1020, 1844, 1026, 1832, 1030, 1818, 1034, 1804, 1038, 1790, 1042, 1774, 1046, 1760, 1050, 1744, 1052, 1728, 1056, 1716, 1058, 1704, 1060, 1692, 1062, 1680, 1064, 1666, 1066, 1654, 1068, 1640, 1068, 1626, 1070, 1612, 1070, 1598, 1072, 1584, 1072, 1568, 1072, 1554, 1072, 1540, 1072, 1524, 1074, 1510, 1074, 1494, 1074, 1480, 1074, 1466, 1074, 1450, 1072, 1436, 1072, 1422, 1072, 1408, 1072, 1394, 1072, 1380, 1070, 1366, 1070, 1352, 1070, 1338, 1068, 1322, 1068, 1308, 1066, 1294, 1064, 1280, 1062, 1266, 1062, 1252, 1060, 1236, 1058, 1222, 1056, 1208, 1054, 1194, 1054, 1180, 1052, 1166, 1050, 1154, 1048, 1140, 1046, 1126, 1044, 1114, 1042, 1100, 1042, 1088, 1040, 1072, 1038, 1058, 1036, 1044, 1034, 1028, 1032, 1014, 1030, 1000, 1028, 986, 1026, 972, 1024, 958, 1022, 946, 1018, 932, 1016, 918, 1016, 906, 1014, 894, 1012, 880, 1010, 868, 1010, 856, 1008, 844, 1008, 832, 1008, 816, 1008, 802, 1010, 788, 1012, 774, 1014, 762, 1016, 748, 1020, 736, 1024, 724, 1026, 710, 1030, 698, 1032, 684, 1036, 670, 1038, 656, 1040, 640, 1040, 628, 1040, 616, 1040, 604, 1040, 590, 1040, 578, 1040, 564, 1038, 550, 1038, 536, 1036, 522, 1036, 510, 1034, 496, 1034, 482, 1032, 468, 1030, 454, 1030, 440, 1028, 426, 1028, 412, 1026, 398, 1024, 384, 1024, 370, 1024, 356, 1022, 340, 1022, 326, 1022, 310, 1022, 294, 1022, 278, 1022, 264, 1022, 248, 1022, 232, 1020, 218, 1020, 204, 1020, 190, 1018, 178, 1018, 166, 1016, 154, 1016, 144, 1014, 136, 1010, 128, 1008, 114, 998, 110, 984, 110, 968, 114, 950, 120, 934, 126, 922, 128, 912)
+path_width = 64.0
+
+[node name="LilyRing" type="Node2D" parent="PathEdges"]
+script = ExtResource("1_ground")
+surface = "PathEdge"
+points = PackedVector2Array(1328, 576, 1328, 590, 1326, 606, 1322, 620, 1318, 634, 1312, 648, 1304, 662, 1296, 676, 1288, 688, 1276, 700, 1266, 712, 1252, 724, 1238, 734, 1224, 744, 1210, 754, 1192, 762, 1176, 770, 1158, 776, 1140, 782, 1122, 788, 1102, 792, 1084, 796, 1064, 798, 1044, 800, 1024, 800, 1004, 800, 984, 798, 964, 796, 946, 792, 926, 788, 908, 782, 890, 776, 872, 770, 856, 762, 838, 754, 824, 744, 810, 734, 796, 724, 782, 712, 772, 700, 760, 688, 752, 676, 744, 662, 736, 648, 730, 634, 726, 620, 722, 606, 720, 590, 720, 576, 720, 562, 722, 546, 726, 532, 730, 518, 736, 504, 744, 490, 752, 476, 760, 464, 772, 452, 782, 440, 796, 428, 810, 418, 824, 408, 838, 398, 856, 390, 872, 382, 890, 376, 908, 370, 926, 364, 946, 360, 964, 356, 984, 354, 1004, 352, 1024, 352, 1044, 352, 1064, 354, 1084, 356, 1102, 360, 1122, 364, 1140, 370, 1158, 376, 1176, 382, 1192, 390, 1210, 398, 1224, 408, 1238, 418, 1252, 428, 1266, 440, 1276, 452, 1288, 464, 1296, 476, 1304, 490, 1312, 504, 1318, 518, 1322, 532, 1326, 546, 1328, 562, 1328, 576)
+path_width = 64.0
+
+[node name="Paths" type="Node2D" parent="."]
+
+
+[node name="GazeboApproach" type="Node2D" parent="Paths"]
+script = ExtResource("1_ground")
+surface = "Path"
+points = PackedVector2Array(384, 952, 384, 960, 384, 974, 386, 986, 390, 1000, 400, 1008, 410, 1012, 420, 1014, 434, 1018, 450, 1018, 464, 1018, 480, 1018, 496, 1014, 512, 1008, 522, 1004, 532, 996, 542, 990, 552, 982, 562, 972, 572, 962, 582, 954, 592, 944, 602, 932, 612, 924, 622, 914, 632, 904, 640, 896, 650, 886, 662, 876, 672, 866, 682, 854, 692, 846, 700, 836, 710, 826, 718, 816, 728, 808, 736, 800, 748, 790, 760, 780, 770, 770, 782, 762, 792, 754, 802, 746, 810, 740, 816, 736)
+path_width = 88.0
+
+[node name="WestPromenade" type="Node2D" parent="Paths"]
+script = ExtResource("1_ground")
+surface = "Path"
+points = PackedVector2Array(640, 896, 644, 890, 650, 882, 658, 874, 664, 864, 674, 854, 682, 844, 688, 832, 696, 820, 700, 810, 704, 800, 706, 790, 708, 778, 708, 768, 708, 756, 708, 746, 704, 734, 700, 724, 696, 714, 688, 704, 682, 698, 672, 690, 660, 684, 648, 678, 634, 670, 620, 664, 606, 658, 594, 652, 582, 646, 572, 640, 564, 634, 560, 630, 560, 624, 562, 620, 570, 616, 578, 610, 590, 606, 602, 602, 616, 598, 632, 596, 648, 592, 662, 588, 678, 586, 692, 582, 704, 580, 712, 578, 720, 576)
+path_width = 88.0
+
+[node name="TreeWalk" type="Node2D" parent="Paths"]
+script = ExtResource("1_ground")
+surface = "Path"
+points = PackedVector2Array(720, 576, 714, 572, 704, 566, 694, 558, 680, 552, 668, 544, 654, 534, 642, 524, 630, 516, 618, 506, 608, 496, 600, 486, 594, 474, 588, 464, 584, 452, 580, 440, 574, 426, 568, 416, 562, 404, 554, 394, 544, 384, 534, 378, 524, 372, 514, 366, 502, 360, 490, 356, 476, 352, 464, 346, 450, 342, 436, 338, 422, 334, 410, 330, 396, 324, 384, 320, 372, 316, 358, 310, 344, 306, 330, 302, 316, 296, 302, 292, 290, 288, 276, 282, 264, 278, 252, 272, 242, 268, 232, 262, 224, 256, 214, 244, 206, 232, 202, 218, 198, 204, 196, 190, 194, 178, 194, 168, 192, 160)
+path_width = 76.0
+
+[node name="NorthLoop" type="Node2D" parent="Paths"]
+script = ExtResource("1_ground")
+surface = "Path"
+points = PackedVector2Array(192, 160, 200, 158, 210, 156, 220, 154, 232, 152, 246, 148, 260, 146, 276, 142, 292, 138, 308, 136, 324, 134, 340, 132, 354, 130, 370, 128, 384, 128, 398, 128, 412, 130, 426, 130, 438, 132, 452, 134, 466, 138, 480, 140, 494, 142, 508, 146, 522, 148, 534, 152, 548, 154, 562, 158, 576, 160, 590, 162, 604, 164, 618, 166, 632, 166, 648, 168, 662, 170, 676, 172, 690, 172, 704, 174, 718, 178, 732, 180, 744, 184, 756, 188, 768, 192, 780, 198, 792, 206, 802, 214, 812, 222, 822, 232, 832, 242, 840, 252, 850, 262, 858, 272, 868, 280, 876, 290, 886, 298, 896, 304, 910, 312, 924, 318, 938, 324, 954, 330, 968, 336, 982, 340, 996, 344, 1006, 346, 1016, 350, 1024, 352)
+path_width = 76.0
+
+[node name="FlowerWalk" type="Node2D" parent="Paths"]
+script = ExtResource("1_ground")
+surface = "Path"
+points = PackedVector2Array(1024, 352, 1032, 350, 1040, 346, 1050, 344, 1062, 340, 1074, 336, 1086, 332, 1100, 326, 1114, 322, 1128, 316, 1144, 312, 1158, 306, 1174, 302, 1188, 298, 1202, 292, 1216, 288, 1228, 284, 1242, 280, 1254, 274, 1266, 270, 1280, 264, 1292, 260, 1306, 254, 1318, 250, 1332, 246, 1344, 240, 1358, 236, 1370, 234, 1384, 230, 1398, 228, 1410, 226, 1424, 224, 1436, 224, 1450, 224, 1464, 224, 1476, 224, 1490, 226, 1504, 228, 1518, 230, 1532, 232, 1544, 234, 1558, 236, 1572, 240, 1586, 242, 1598, 244, 1612, 248, 1624, 250, 1636, 254, 1648, 256, 1662, 260, 1676, 262, 1692, 264, 1706, 268, 1720, 270, 1734, 274, 1748, 276, 1762, 280, 1774, 284, 1786, 288, 1796, 294, 1806, 298, 1816, 304, 1824, 312, 1832, 322, 1842, 332, 1852, 344, 1860, 358, 1866, 372, 1874, 386, 1878, 400, 1880, 414, 1878, 428, 1874, 440, 1868, 452, 1856, 464, 1850, 468, 1842, 474, 1832, 478, 1822, 482, 1812, 486, 1800, 490, 1788, 494, 1774, 500, 1760, 504, 1746, 508, 1732, 512, 1716, 514, 1700, 518, 1686, 522, 1670, 526, 1654, 530, 1638, 532, 1622, 536, 1608, 540, 1592, 542, 1578, 546, 1564, 548, 1550, 550, 1538, 554, 1526, 556, 1514, 558, 1504, 560, 1484, 564, 1466, 568, 1448, 570, 1432, 572, 1416, 572, 1400, 574, 1388, 574, 1374, 574, 1364, 574, 1352, 576, 1344, 576, 1336, 576, 1328, 576)
+path_width = 88.0
+
+[node name="LawnLoop" type="Node2D" parent="Paths"]
+script = ExtResource("1_ground")
+surface = "Path"
+points = PackedVector2Array(1328, 576, 1336, 578, 1346, 582, 1356, 584, 1370, 588, 1384, 592, 1398, 596, 1414, 600, 1428, 606, 1444, 612, 1458, 618, 1472, 624, 1484, 630, 1494, 636, 1506, 642, 1516, 648, 1528, 656, 1540, 662, 1550, 670, 1562, 678, 1572, 686, 1584, 694, 1594, 702, 1606, 712, 1616, 720, 1626, 728, 1636, 738, 1646, 746, 1656, 756, 1666, 764, 1676, 774, 1686, 784, 1696, 794, 1704, 804, 1714, 814, 1722, 826, 1730, 836, 1738, 846, 1744, 856, 1752, 868, 1760, 882, 1768, 896, 1776, 910, 1784, 924, 1792, 938, 1796, 952, 1800, 966, 1802, 978, 1802, 990, 1798, 1000, 1792, 1008, 1786, 1012, 1778, 1018, 1770, 1022, 1758, 1024, 1748, 1028, 1734, 1030, 1722, 1032, 1706, 1034, 1692, 1036, 1676, 1036, 1660, 1038, 1646, 1038, 1630, 1040, 1614, 1040, 1598, 1040, 1582, 1040, 1566, 1040, 1552, 1040, 1540, 1040, 1526, 1040, 1512, 1040, 1498, 1040, 1484, 1038, 1470, 1038, 1456, 1038, 1440, 1036, 1426, 1036, 1412, 1034, 1398, 1032, 1384, 1030, 1370, 1028, 1356, 1026, 1342, 1024, 1328, 1022, 1316, 1018, 1304, 1016, 1292, 1012, 1280, 1008, 1266, 1002, 1252, 996, 1240, 990, 1228, 982, 1214, 974, 1202, 964, 1192, 956, 1180, 948, 1170, 938, 1158, 928, 1148, 920, 1140, 910, 1130, 902, 1120, 894, 1112, 886, 1104, 880, 1090, 868, 1078, 858, 1068, 846, 1058, 836, 1048, 828, 1042, 818, 1034, 812, 1028, 806, 1024, 800)
+path_width = 88.0
+
+[node name="SouthLink" type="Node2D" parent="Paths"]
+script = ExtResource("1_ground")
+surface = "Path"
+points = PackedVector2Array(1024, 800, 1020, 806, 1014, 814, 1006, 822, 1000, 834, 992, 844, 982, 856, 972, 868, 962, 880, 952, 892, 940, 902, 928, 912, 918, 918, 908, 926, 898, 934, 888, 940, 876, 948, 864, 954, 854, 962, 840, 968, 828, 974, 816, 982, 804, 988, 790, 994, 778, 998, 764, 1004, 752, 1008, 740, 1012, 728, 1016, 714, 1018, 702, 1022, 688, 1024, 674, 1026, 660, 1030, 648, 1032, 634, 1032, 620, 1034, 606, 1036, 594, 1036, 580, 1038, 568, 1038, 556, 1040, 544, 1040, 528, 1040, 512, 1040, 496, 1040, 482, 1040, 466, 1040, 452, 1038, 436, 1038, 424, 1036, 412, 1034, 400, 1030, 392, 1028, 384, 1024, 374, 1014, 372, 1002, 374, 988, 378, 972, 382, 960, 384, 952)
+path_width = 72.0
+
+[node name="RestWalk" type="Node2D" parent="Paths"]
+script = ExtResource("1_ground")
+surface = "Path"
+points = PackedVector2Array(1856, 464, 1860, 472, 1864, 482, 1870, 494, 1878, 506, 1884, 522, 1890, 536, 1896, 550, 1902, 564, 1904, 576, 1906, 590, 1906, 606, 1904, 620, 1902, 634, 1900, 648, 1894, 660, 1888, 672, 1882, 682, 1876, 692, 1868, 702, 1860, 712, 1850, 720, 1838, 726, 1824, 732, 1808, 736, 1798, 738, 1784, 738, 1770, 738, 1756, 736, 1740, 736, 1724, 734, 1708, 732, 1690, 730, 1674, 728, 1660, 726, 1646, 724, 1634, 722, 1624, 720, 1616, 720)
+path_width = 72.0
+
+[node name="PerimeterWalk" type="Node2D" parent="Paths"]
+script = ExtResource("1_ground")
+surface = "Path"
+points = PackedVector2Array(128, 912, 128, 904, 126, 896, 126, 886, 124, 874, 124, 862, 122, 850, 122, 836, 120, 822, 120, 808, 118, 792, 116, 776, 116, 760, 114, 746, 114, 730, 112, 714, 112, 700, 112, 686, 112, 672, 112, 658, 112, 646, 112, 632, 114, 620, 114, 606, 114, 594, 116, 580, 116, 568, 118, 554, 120, 540, 120, 528, 122, 514, 122, 500, 124, 488, 124, 474, 126, 460, 128, 446, 128, 432, 128, 418, 128, 406, 128, 390, 128, 376, 126, 362, 126, 346, 124, 330, 124, 316, 122, 300, 122, 286, 122, 270, 122, 256, 122, 242, 122, 228, 124, 214, 126, 202, 130, 190, 134, 178, 138, 168, 144, 160, 152, 152, 160, 144, 170, 136, 180, 130, 192, 124, 204, 120, 218, 116, 230, 112, 246, 110, 260, 108, 274, 106, 290, 104, 306, 102, 320, 100, 336, 100, 352, 98, 368, 98, 384, 96, 396, 96, 408, 94, 422, 94, 434, 94, 448, 94, 462, 94, 476, 94, 490, 96, 504, 96, 518, 98, 532, 98, 546, 100, 560, 100, 576, 102, 590, 104, 604, 104, 618, 106, 632, 108, 648, 108, 662, 110, 676, 110, 690, 112, 704, 112, 718, 112, 732, 114, 746, 114, 760, 116, 774, 116, 788, 116, 802, 118, 816, 118, 830, 120, 844, 120, 858, 122, 870, 122, 884, 124, 898, 124, 912, 124, 926, 126, 940, 126, 954, 126, 968, 128, 982, 128, 996, 128, 1010, 128, 1024, 128, 1038, 128, 1052, 128, 1066, 128, 1080, 128, 1094, 126, 1108, 126, 1122, 126, 1136, 124, 1150, 124, 1164, 124, 1178, 122, 1192, 122, 1206, 120, 1220, 120, 1234, 118, 1248, 118, 1262, 116, 1276, 116, 1290, 116, 1304, 114, 1316, 114, 1330, 112, 1344, 112, 1358, 112, 1372, 110, 1386, 110, 1402, 108, 1416, 108, 1430, 106, 1444, 106, 1458, 104, 1472, 104, 1486, 102, 1502, 102, 1516, 100, 1528, 100, 1542, 98, 1556, 98, 1570, 96, 1584, 96, 1596, 96, 1610, 96, 1622, 96, 1636, 96, 1648, 96, 1664, 96, 1678, 96, 1694, 96, 1710, 96, 1724, 94, 1740, 94, 1754, 94, 1770, 94, 1784, 94, 1798, 94, 1812, 96, 1824, 98, 1838, 100, 1848, 104, 1860, 108, 1870, 114, 1880, 120, 1888, 128, 1894, 136, 1900, 146, 1906, 156, 1910, 168, 1916, 180, 1918, 192, 1922, 206, 1924, 220, 1926, 234, 1928, 250, 1930, 264, 1930, 280, 1932, 296, 1932, 310, 1934, 326, 1934, 342, 1934, 356, 1934, 372, 1936, 386, 1936, 400, 1936, 414, 1936, 428, 1936, 440, 1936, 454, 1936, 468, 1936, 482, 1934, 494, 1934, 508, 1932, 522, 1932, 536, 1930, 548, 1928, 562, 1926, 576, 1926, 590, 1924, 602, 1924, 616, 1922, 630, 1922, 644, 1920, 658, 1920, 672, 1920, 686, 1920, 700, 1920, 714, 1922, 728, 1924, 744, 1924, 758, 1926, 774, 1928, 790, 1928, 804, 1930, 820, 1932, 834, 1932, 850, 1934, 864, 1934, 878, 1934, 892, 1932, 904, 1932, 916, 1930, 928, 1928, 940, 1924, 950, 1920, 960, 1914, 972, 1906, 982, 1898, 992, 1888, 1000, 1878, 1006, 1868, 1014, 1856, 1020, 1844, 1026, 1832, 1030, 1818, 1034, 1804, 1038, 1790, 1042, 1774, 1046, 1760, 1050, 1744, 1052, 1728, 1056, 1716, 1058, 1704, 1060, 1692, 1062, 1680, 1064, 1666, 1066, 1654, 1068, 1640, 1068, 1626, 1070, 1612, 1070, 1598, 1072, 1584, 1072, 1568, 1072, 1554, 1072, 1540, 1072, 1524, 1074, 1510, 1074, 1494, 1074, 1480, 1074, 1466, 1074, 1450, 1072, 1436, 1072, 1422, 1072, 1408, 1072, 1394, 1072, 1380, 1070, 1366, 1070, 1352, 1070, 1338, 1068, 1322, 1068, 1308, 1066, 1294, 1064, 1280, 1062, 1266, 1062, 1252, 1060, 1236, 1058, 1222, 1056, 1208, 1054, 1194, 1054, 1180, 1052, 1166, 1050, 1154, 1048, 1140, 1046, 1126, 1044, 1114, 1042, 1100, 1042, 1088, 1040, 1072, 1038, 1058, 1036, 1044, 1034, 1028, 1032, 1014, 1030, 1000, 1028, 986, 1026, 972, 1024, 958, 1022, 946, 1018, 932, 1016, 918, 1016, 906, 1014, 894, 1012, 880, 1010, 868, 1010, 856, 1008, 844, 1008, 832, 1008, 816, 1008, 802, 1010, 788, 1012, 774, 1014, 762, 1016, 748, 1020, 736, 1024, 724, 1026, 710, 1030, 698, 1032, 684, 1036, 670, 1038, 656, 1040, 640, 1040, 628, 1040, 616, 1040, 604, 1040, 590, 1040, 578, 1040, 564, 1038, 550, 1038, 536, 1036, 522, 1036, 510, 1034, 496, 1034, 482, 1032, 468, 1030, 454, 1030, 440, 1028, 426, 1028, 412, 1026, 398, 1024, 384, 1024, 370, 1024, 356, 1022, 340, 1022, 326, 1022, 310, 1022, 294, 1022, 278, 1022, 264, 1022, 248, 1022, 232, 1020, 218, 1020, 204, 1020, 190, 1018, 178, 1018, 166, 1016, 154, 1016, 144, 1014, 136, 1010, 128, 1008, 114, 998, 110, 984, 110, 968, 114, 950, 120, 934, 126, 922, 128, 912)
+path_width = 64.0
+
+[node name="LilyRing" type="Node2D" parent="Paths"]
+script = ExtResource("1_ground")
+surface = "Path"
+points = PackedVector2Array(1328, 576, 1328, 590, 1326, 606, 1322, 620, 1318, 634, 1312, 648, 1304, 662, 1296, 676, 1288, 688, 1276, 700, 1266, 712, 1252, 724, 1238, 734, 1224, 744, 1210, 754, 1192, 762, 1176, 770, 1158, 776, 1140, 782, 1122, 788, 1102, 792, 1084, 796, 1064, 798, 1044, 800, 1024, 800, 1004, 800, 984, 798, 964, 796, 946, 792, 926, 788, 908, 782, 890, 776, 872, 770, 856, 762, 838, 754, 824, 744, 810, 734, 796, 724, 782, 712, 772, 700, 760, 688, 752, 676, 744, 662, 736, 648, 730, 634, 726, 620, 722, 606, 720, 590, 720, 576, 720, 562, 722, 546, 726, 532, 730, 518, 736, 504, 744, 490, 752, 476, 760, 464, 772, 452, 782, 440, 796, 428, 810, 418, 824, 408, 838, 398, 856, 390, 872, 382, 890, 376, 908, 370, 926, 364, 946, 360, 964, 356, 984, 354, 1004, 352, 1024, 352, 1044, 352, 1064, 354, 1084, 356, 1102, 360, 1122, 364, 1140, 370, 1158, 376, 1176, 382, 1192, 390, 1210, 398, 1224, 408, 1238, 418, 1252, 428, 1266, 440, 1276, 452, 1288, 464, 1296, 476, 1304, 490, 1312, 504, 1318, 518, 1322, 532, 1326, 546, 1328, 562, 1328, 576)
+path_width = 64.0
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+
+[node name="NorthCollision" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1024, 12)
+shape = SubResource("GardenShape_1")
+
+[node name="North" type="Node2D" parent="Walls"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Hedge"
+extent = Vector2(2048, 24)
+
+[node name="SouthCollision" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1024, 1140)
+shape = SubResource("GardenShape_2")
+
+[node name="South" type="Node2D" parent="Walls"]
+position = Vector2(0, 1128)
+script = ExtResource("2_prop")
+kind = "Hedge"
+extent = Vector2(2048, 24)
+
+[node name="WestCollision" type="CollisionShape2D" parent="Walls"]
+position = Vector2(12, 576)
+shape = SubResource("GardenShape_3")
+
+[node name="West" type="Node2D" parent="Walls"]
+position = Vector2(0, 24)
+script = ExtResource("2_prop")
+kind = "Hedge"
+extent = Vector2(24, 1104)
+
+[node name="EastCollision" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2036, 576)
+shape = SubResource("GardenShape_4")
+
+[node name="East" type="Node2D" parent="Walls"]
+position = Vector2(2024, 24)
+script = ExtResource("2_prop")
+kind = "Hedge"
+extent = Vector2(24, 1104)
+
+[node name="Decoration" type="Node2D" parent="."]
+
+[node name="Props" type="Node2D" parent="."]
+y_sort_enabled = true
+
+
+[node name="Gazebo" type="Node2D" parent="Props"]
+y_sort_enabled = true
+position = Vector2(256, 784)
+
+[node name="Visual" type="Node2D" parent="Props/Gazebo"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "GazeboBase"
+extent = Vector2(256, 176)
+variant = 0
+
+[node name="GazeboStructure" type="StaticBody2D" parent="Props/Gazebo"]
+
+
+[node name="Post0" type="CollisionShape2D" parent="Props/Gazebo/GazeboStructure"]
+position = Vector2(40, 80)
+shape = SubResource("GardenShape_5")
+
+[node name="Post1" type="CollisionShape2D" parent="Props/Gazebo/GazeboStructure"]
+position = Vector2(216, 80)
+shape = SubResource("GardenShape_5")
+
+[node name="Post2" type="CollisionShape2D" parent="Props/Gazebo/GazeboStructure"]
+position = Vector2(24, 160)
+shape = SubResource("GardenShape_5")
+
+[node name="Post3" type="CollisionShape2D" parent="Props/Gazebo/GazeboStructure"]
+position = Vector2(232, 160)
+shape = SubResource("GardenShape_5")
+
+
+[node name="Roof" type="CanvasGroup" parent="Props/Gazebo"]
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+faded_opacity = 0.6
+
+[node name="Visual" type="Node2D" parent="Props/Gazebo/Roof"]
+script = ExtResource("2_prop")
+kind = "GazeboRoof"
+extent = Vector2(256, 176)
+
+[node name="FrontRail" type="Node2D" parent="Props/Gazebo"]
+position = Vector2(0, 160)
+script = ExtResource("2_prop")
+kind = "GazeboFront"
+extent = Vector2(256, 176)
+
+[node name="RearBayCollision" type="CollisionPolygon2D" parent="Props/Gazebo/GazeboStructure"]
+polygon = PackedVector2Array(-4, 48, 40, 12, 128, -12, 216, 12, 260, 48, 232, 64, 24, 64)
+
+[node name="LeftRailCollision" type="CollisionShape2D" parent="Props/Gazebo/GazeboStructure"]
+position = Vector2(26, 116)
+shape = SubResource("GazeboSideRail")
+
+[node name="RightRailCollision" type="CollisionShape2D" parent="Props/Gazebo/GazeboStructure"]
+position = Vector2(230, 116)
+shape = SubResource("GazeboSideRail")
+
+[node name="FrontLeftRailCollision" type="CollisionShape2D" parent="Props/Gazebo/GazeboStructure"]
+position = Vector2(56, 160)
+shape = SubResource("GazeboFrontRail")
+
+[node name="FrontRightRailCollision" type="CollisionShape2D" parent="Props/Gazebo/GazeboStructure"]
+position = Vector2(200, 160)
+shape = SubResource("GazeboFrontRail")
+
+[node name="CorpseLily" type="StaticBody2D" parent="Props"]
+position = Vector2(1024, 576)
+
+[node name="Visual" type="Node2D" parent="Props/CorpseLily"]
+position = Vector2(-56, -72)
+script = ExtResource("2_prop")
+kind = "CorpseLily"
+extent = Vector2(112, 104)
+variant = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/CorpseLily"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_6")
+
+[node name="FlowerArbor" type="Node2D" parent="Props"]
+position = Vector2(1424, 272)
+
+[node name="Visual" type="Node2D" parent="Props/FlowerArbor"]
+position = Vector2(-64, -80)
+script = ExtResource("2_prop")
+kind = "Arbor"
+extent = Vector2(128, 96)
+variant = 0
+
+[node name="Posts" type="StaticBody2D" parent="Props/FlowerArbor"]
+
+
+[node name="Post0" type="CollisionShape2D" parent="Props/FlowerArbor/Posts"]
+position = Vector2(-54, 0)
+shape = SubResource("GardenShape_7")
+
+[node name="Post1" type="CollisionShape2D" parent="Props/FlowerArbor/Posts"]
+position = Vector2(54, 0)
+shape = SubResource("GardenShape_8")
+
+[node name="Birdbath" type="StaticBody2D" parent="Props"]
+position = Vector2(1816, 624)
+
+[node name="Visual" type="Node2D" parent="Props/Birdbath"]
+position = Vector2(-20, -48)
+script = ExtResource("2_prop")
+kind = "Birdbath"
+extent = Vector2(40, 48)
+variant = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Birdbath"]
+position = Vector2(0, -9)
+shape = SubResource("GardenShape_9")
+
+[node name="BenchA" type="StaticBody2D" parent="Props"]
+position = Vector2(288, 568)
+
+[node name="Visual" type="Node2D" parent="Props/BenchA"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Bench"
+extent = Vector2(80, 32)
+variant = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/BenchA"]
+position = Vector2(40, 16)
+shape = SubResource("GardenShape_10")
+
+[node name="BenchB" type="StaticBody2D" parent="Props"]
+position = Vector2(1680, 632)
+
+[node name="Visual" type="Node2D" parent="Props/BenchB"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Bench"
+extent = Vector2(80, 32)
+variant = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/BenchB"]
+position = Vector2(40, 16)
+shape = SubResource("GardenShape_11")
+
+[node name="FlowerBench" type="StaticBody2D" parent="Props"]
+position = Vector2(1624, 136)
+
+[node name="Visual" type="Node2D" parent="Props/FlowerBench"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Bench"
+extent = Vector2(80, 32)
+variant = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/FlowerBench"]
+position = Vector2(40, 16)
+shape = SubResource("GardenShape_12")
+
+[node name="LawnBench" type="StaticBody2D" parent="Props"]
+position = Vector2(1800, 816)
+
+[node name="Visual" type="Node2D" parent="Props/LawnBench"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Bench"
+extent = Vector2(80, 32)
+variant = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LawnBench"]
+position = Vector2(40, 16)
+shape = SubResource("GardenShape_13")
+
+[node name="NorthBench" type="StaticBody2D" parent="Props"]
+position = Vector2(1056, 240)
+
+[node name="Visual" type="Node2D" parent="Props/NorthBench"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Bench"
+extent = Vector2(80, 32)
+variant = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/NorthBench"]
+position = Vector2(40, 16)
+shape = SubResource("GardenShape_14")
+
+[node name="GazeboBench" type="StaticBody2D" parent="Props"]
+position = Vector2(560, 760)
+
+[node name="Visual" type="Node2D" parent="Props/GazeboBench"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Bench"
+extent = Vector2(80, 32)
+variant = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/GazeboBench"]
+position = Vector2(40, 16)
+shape = SubResource("GardenShape_15")
+
+[node name="FlowersA" type="StaticBody2D" parent="Props"]
+position = Vector2(1432, 320)
+
+[node name="Visual" type="Node2D" parent="Props/FlowersA"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Flowers"
+extent = Vector2(128, 72)
+variant = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/FlowersA"]
+position = Vector2(64, 36)
+shape = SubResource("GardenShape_16")
+
+[node name="FlowersB" type="StaticBody2D" parent="Props"]
+position = Vector2(1616, 344)
+
+[node name="Visual" type="Node2D" parent="Props/FlowersB"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Flowers"
+extent = Vector2(112, 64)
+variant = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/FlowersB"]
+position = Vector2(56, 32)
+shape = SubResource("GardenShape_17")
+
+[node name="FlowerC" type="StaticBody2D" parent="Props"]
+position = Vector2(1720, 376)
+
+[node name="Visual" type="Node2D" parent="Props/FlowerC"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Flowers"
+extent = Vector2(104, 64)
+variant = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/FlowerC"]
+position = Vector2(52, 32)
+shape = SubResource("GardenShape_18")
+
+[node name="FlowerD" type="StaticBody2D" parent="Props"]
+position = Vector2(1496, 104)
+
+[node name="Visual" type="Node2D" parent="Props/FlowerD"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Flowers"
+extent = Vector2(96, 64)
+variant = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/FlowerD"]
+position = Vector2(48, 32)
+shape = SubResource("GardenShape_19")
+
+[node name="FlowerE" type="StaticBody2D" parent="Props"]
+position = Vector2(1744, 176)
+
+[node name="Visual" type="Node2D" parent="Props/FlowerE"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Flowers"
+extent = Vector2(112, 64)
+variant = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/FlowerE"]
+position = Vector2(56, 32)
+shape = SubResource("GardenShape_20")
+
+[node name="GazeboFlowersWest" type="Node2D" parent="Props"]
+position = Vector2(208, 912)
+
+[node name="Visual" type="Node2D" parent="Props/GazeboFlowersWest"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Flowers"
+extent = Vector2(72, 48)
+variant = 5
+
+[node name="GazeboFlowersEast" type="Node2D" parent="Props"]
+position = Vector2(520, 920)
+
+[node name="Visual" type="Node2D" parent="Props/GazeboFlowersEast"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Flowers"
+extent = Vector2(72, 48)
+variant = 6
+
+[node name="GazeboFlowersBack" type="Node2D" parent="Props"]
+position = Vector2(344, 744)
+
+[node name="Visual" type="Node2D" parent="Props/GazeboFlowersBack"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Flowers"
+extent = Vector2(80, 40)
+variant = 7
+
+[node name="LawnFlowers" type="Node2D" parent="Props"]
+position = Vector2(1664, 936)
+
+[node name="Visual" type="Node2D" parent="Props/LawnFlowers"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Flowers"
+extent = Vector2(96, 56)
+variant = 8
+
+[node name="CornerFlowers" type="Node2D" parent="Props"]
+position = Vector2(1816, 536)
+
+[node name="Visual" type="Node2D" parent="Props/CornerFlowers"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Flowers"
+extent = Vector2(72, 48)
+variant = 9
+
+[node name="RestFlowers" type="Node2D" parent="Props"]
+position = Vector2(1728, 632)
+
+[node name="Visual" type="Node2D" parent="Props/RestFlowers"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Flowers"
+extent = Vector2(64, 48)
+variant = 10
+
+[node name="WestFlowers" type="Node2D" parent="Props"]
+position = Vector2(320, 592)
+
+[node name="Visual" type="Node2D" parent="Props/WestFlowers"]
+position = Vector2(0, 0)
+script = ExtResource("2_prop")
+kind = "Flowers"
+extent = Vector2(80, 40)
+variant = 11
+
+[node name="TreeA" type="StaticBody2D" parent="Props"]
+position = Vector2(320, 208)
+
+[node name="Visual" type="Node2D" parent="Props/TreeA"]
+position = Vector2(-44, -120)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(88, 120)
+variant = 0
+
+[node name="Canopy" type="CanvasGroup" parent="Props/TreeA"]
+position = Vector2(-44, -120)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/TreeA/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(88, 120)
+variant = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/TreeA"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_21")
+
+[node name="TreeB" type="StaticBody2D" parent="Props"]
+position = Vector2(448, 256)
+
+[node name="Visual" type="Node2D" parent="Props/TreeB"]
+position = Vector2(-52, -144)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(104, 144)
+variant = 1
+
+[node name="Canopy" type="CanvasGroup" parent="Props/TreeB"]
+position = Vector2(-52, -144)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/TreeB/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(104, 144)
+variant = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/TreeB"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_22")
+
+[node name="TreeC" type="StaticBody2D" parent="Props"]
+position = Vector2(560, 256)
+
+[node name="Visual" type="Node2D" parent="Props/TreeC"]
+position = Vector2(-48, -128)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(96, 128)
+variant = 2
+
+[node name="Canopy" type="CanvasGroup" parent="Props/TreeC"]
+position = Vector2(-48, -128)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/TreeC/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(96, 128)
+variant = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/TreeC"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_23")
+
+[node name="TreeD" type="StaticBody2D" parent="Props"]
+position = Vector2(256, 448)
+
+[node name="Visual" type="Node2D" parent="Props/TreeD"]
+position = Vector2(-60, -152)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(120, 152)
+variant = 3
+
+[node name="Canopy" type="CanvasGroup" parent="Props/TreeD"]
+position = Vector2(-60, -152)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/TreeD/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(120, 152)
+variant = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/TreeD"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_24")
+
+[node name="TreeE" type="StaticBody2D" parent="Props"]
+position = Vector2(400, 448)
+
+[node name="Visual" type="Node2D" parent="Props/TreeE"]
+position = Vector2(-44, -120)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(88, 120)
+variant = 4
+
+[node name="Canopy" type="CanvasGroup" parent="Props/TreeE"]
+position = Vector2(-44, -120)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/TreeE/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(88, 120)
+variant = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/TreeE"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_25")
+
+[node name="TreeF" type="StaticBody2D" parent="Props"]
+position = Vector2(512, 512)
+
+[node name="Visual" type="Node2D" parent="Props/TreeF"]
+position = Vector2(-52, -144)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(104, 144)
+variant = 5
+
+[node name="Canopy" type="CanvasGroup" parent="Props/TreeF"]
+position = Vector2(-52, -144)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/TreeF/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(104, 144)
+variant = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/TreeF"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_26")
+
+[node name="Canopy07" type="StaticBody2D" parent="Props"]
+position = Vector2(688, 288)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy07"]
+position = Vector2(-48, -128)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(96, 128)
+variant = 6
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy07"]
+position = Vector2(-48, -128)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy07/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(96, 128)
+variant = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy07"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_27")
+
+[node name="Canopy08" type="StaticBody2D" parent="Props"]
+position = Vector2(256, 600)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy08"]
+position = Vector2(-60, -152)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(120, 152)
+variant = 7
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy08"]
+position = Vector2(-60, -152)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy08/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(120, 152)
+variant = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy08"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_28")
+
+[node name="Canopy09" type="StaticBody2D" parent="Props"]
+position = Vector2(128, 1080)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy09"]
+position = Vector2(-44, -120)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(88, 120)
+variant = 8
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy09"]
+position = Vector2(-44, -120)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy09/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(88, 120)
+variant = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy09"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_29")
+
+[node name="Canopy10" type="StaticBody2D" parent="Props"]
+position = Vector2(272, 1096)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy10"]
+position = Vector2(-52, -144)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(104, 144)
+variant = 9
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy10"]
+position = Vector2(-52, -144)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy10/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(104, 144)
+variant = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy10"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_30")
+
+[node name="Canopy11" type="StaticBody2D" parent="Props"]
+position = Vector2(464, 1104)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy11"]
+position = Vector2(-48, -128)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(96, 128)
+variant = 10
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy11"]
+position = Vector2(-48, -128)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy11/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(96, 128)
+variant = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy11"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_31")
+
+[node name="Canopy12" type="StaticBody2D" parent="Props"]
+position = Vector2(608, 1104)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy12"]
+position = Vector2(-60, -152)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(120, 152)
+variant = 11
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy12"]
+position = Vector2(-60, -152)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy12/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(120, 152)
+variant = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy12"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_32")
+
+[node name="Canopy13" type="StaticBody2D" parent="Props"]
+position = Vector2(784, 1104)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy13"]
+position = Vector2(-44, -120)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(88, 120)
+variant = 12
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy13"]
+position = Vector2(-44, -120)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy13/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(88, 120)
+variant = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy13"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_33")
+
+[node name="Canopy14" type="StaticBody2D" parent="Props"]
+position = Vector2(1008, 1104)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy14"]
+position = Vector2(-52, -144)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(104, 144)
+variant = 13
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy14"]
+position = Vector2(-52, -144)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy14/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(104, 144)
+variant = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy14"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_34")
+
+[node name="Canopy15" type="StaticBody2D" parent="Props"]
+position = Vector2(1792, 1104)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy15"]
+position = Vector2(-48, -128)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(96, 128)
+variant = 14
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy15"]
+position = Vector2(-48, -128)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy15/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(96, 128)
+variant = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy15"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_35")
+
+[node name="Canopy16" type="StaticBody2D" parent="Props"]
+position = Vector2(1968, 1072)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy16"]
+position = Vector2(-60, -152)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(120, 152)
+variant = 15
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy16"]
+position = Vector2(-60, -152)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy16/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(120, 152)
+variant = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy16"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_36")
+
+[node name="Canopy17" type="StaticBody2D" parent="Props"]
+position = Vector2(1992, 736)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy17"]
+position = Vector2(-44, -120)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(88, 120)
+variant = 16
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy17"]
+position = Vector2(-44, -120)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy17/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(88, 120)
+variant = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy17"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_37")
+
+[node name="Canopy18" type="StaticBody2D" parent="Props"]
+position = Vector2(1992, 560)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy18"]
+position = Vector2(-52, -144)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(104, 144)
+variant = 17
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy18"]
+position = Vector2(-52, -144)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy18/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(104, 144)
+variant = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy18"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_38")
+
+[node name="Canopy19" type="StaticBody2D" parent="Props"]
+position = Vector2(1832, 208)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy19"]
+position = Vector2(-48, -128)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(96, 128)
+variant = 18
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy19"]
+position = Vector2(-48, -128)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy19/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(96, 128)
+variant = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy19"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_39")
+
+[node name="Canopy20" type="StaticBody2D" parent="Props"]
+position = Vector2(1312, 176)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy20"]
+position = Vector2(-60, -152)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(120, 152)
+variant = 19
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy20"]
+position = Vector2(-60, -152)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy20/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(120, 152)
+variant = 19
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy20"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_40")
+
+[node name="Canopy21" type="StaticBody2D" parent="Props"]
+position = Vector2(1168, 208)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy21"]
+position = Vector2(-44, -120)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(88, 120)
+variant = 20
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy21"]
+position = Vector2(-44, -120)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy21/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(88, 120)
+variant = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy21"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_41")
+
+[node name="Canopy22" type="StaticBody2D" parent="Props"]
+position = Vector2(1008, 208)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy22"]
+position = Vector2(-52, -144)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(104, 144)
+variant = 21
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy22"]
+position = Vector2(-52, -144)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy22/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(104, 144)
+variant = 21
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy22"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_42")
+
+[node name="Canopy23" type="StaticBody2D" parent="Props"]
+position = Vector2(176, 704)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy23"]
+position = Vector2(-48, -128)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(96, 128)
+variant = 22
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy23"]
+position = Vector2(-48, -128)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy23/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(96, 128)
+variant = 22
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy23"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_43")
+
+[node name="Canopy24" type="StaticBody2D" parent="Props"]
+position = Vector2(592, 704)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy24"]
+position = Vector2(-60, -152)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(120, 152)
+variant = 23
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy24"]
+position = Vector2(-60, -152)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy24/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(120, 152)
+variant = 23
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy24"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_44")
+
+[node name="Canopy25" type="StaticBody2D" parent="Props"]
+position = Vector2(1424, 856)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy25"]
+position = Vector2(-44, -120)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(88, 120)
+variant = 24
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy25"]
+position = Vector2(-44, -120)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy25/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(88, 120)
+variant = 24
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy25"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_45")
+
+[node name="Canopy26" type="StaticBody2D" parent="Props"]
+position = Vector2(1856, 784)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy26"]
+position = Vector2(-52, -144)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(104, 144)
+variant = 25
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy26"]
+position = Vector2(-52, -144)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy26/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(104, 144)
+variant = 25
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy26"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_46")
+
+[node name="Canopy27" type="StaticBody2D" parent="Props"]
+position = Vector2(1728, 592)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy27"]
+position = Vector2(-48, -128)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(96, 128)
+variant = 26
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy27"]
+position = Vector2(-48, -128)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy27/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(96, 128)
+variant = 26
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy27"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_47")
+
+[node name="Canopy28" type="StaticBody2D" parent="Props"]
+position = Vector2(1568, 608)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy28"]
+position = Vector2(-60, -152)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(120, 152)
+variant = 27
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy28"]
+position = Vector2(-60, -152)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy28/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(120, 152)
+variant = 27
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy28"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_48")
+
+[node name="Canopy29" type="StaticBody2D" parent="Props"]
+position = Vector2(1392, 936)
+
+[node name="Visual" type="Node2D" parent="Props/Canopy29"]
+position = Vector2(-44, -120)
+script = ExtResource("2_prop")
+kind = "TreeTrunk"
+extent = Vector2(88, 120)
+variant = 28
+
+[node name="Canopy" type="CanvasGroup" parent="Props/Canopy29"]
+position = Vector2(-44, -120)
+z_index = 2
+clear_margin = 2.0
+fit_margin = 2.0
+script = ExtResource("3_overhang")
+
+[node name="Visual" type="Node2D" parent="Props/Canopy29/Canopy"]
+script = ExtResource("2_prop")
+kind = "TreeCanopy"
+extent = Vector2(88, 120)
+variant = 28
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Canopy29"]
+position = Vector2(0, -10)
+shape = SubResource("GardenShape_49")
+
+[node name="Fern0" type="Node2D" parent="Props"]
+position = Vector2(192, 464)
+
+[node name="Visual" type="Node2D" parent="Props/Fern0"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 0
+
+[node name="Fern1" type="Node2D" parent="Props"]
+position = Vector2(336, 224)
+
+[node name="Visual" type="Node2D" parent="Props/Fern1"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 1
+
+[node name="Fern2" type="Node2D" parent="Props"]
+position = Vector2(464, 560)
+
+[node name="Visual" type="Node2D" parent="Props/Fern2"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 2
+
+[node name="Fern3" type="Node2D" parent="Props"]
+position = Vector2(568, 320)
+
+[node name="Visual" type="Node2D" parent="Props/Fern3"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 3
+
+[node name="Fern4" type="Node2D" parent="Props"]
+position = Vector2(608, 656)
+
+[node name="Visual" type="Node2D" parent="Props/Fern4"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 4
+
+[node name="Fern5" type="Node2D" parent="Props"]
+position = Vector2(672, 352)
+
+[node name="Visual" type="Node2D" parent="Props/Fern5"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 5
+
+[node name="Fern6" type="Node2D" parent="Props"]
+position = Vector2(160, 608)
+
+[node name="Visual" type="Node2D" parent="Props/Fern6"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 6
+
+[node name="Fern7" type="Node2D" parent="Props"]
+position = Vector2(464, 736)
+
+[node name="Visual" type="Node2D" parent="Props/Fern7"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 7
+
+[node name="Fern8" type="Node2D" parent="Props"]
+position = Vector2(584, 992)
+
+[node name="Visual" type="Node2D" parent="Props/Fern8"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 8
+
+[node name="Fern9" type="Node2D" parent="Props"]
+position = Vector2(1120, 960)
+
+[node name="Visual" type="Node2D" parent="Props/Fern9"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 9
+
+[node name="Fern10" type="Node2D" parent="Props"]
+position = Vector2(1496, 800)
+
+[node name="Visual" type="Node2D" parent="Props/Fern10"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 10
+
+[node name="Fern11" type="Node2D" parent="Props"]
+position = Vector2(1840, 736)
+
+[node name="Visual" type="Node2D" parent="Props/Fern11"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 11
+
+[node name="Fern12" type="Node2D" parent="Props"]
+position = Vector2(1672, 1008)
+
+[node name="Visual" type="Node2D" parent="Props/Fern12"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 12
+
+[node name="Fern13" type="Node2D" parent="Props"]
+position = Vector2(1888, 496)
+
+[node name="Visual" type="Node2D" parent="Props/Fern13"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 13
+
+[node name="Fern14" type="Node2D" parent="Props"]
+position = Vector2(1344, 224)
+
+[node name="Visual" type="Node2D" parent="Props/Fern14"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 14
+
+[node name="Fern15" type="Node2D" parent="Props"]
+position = Vector2(1424, 656)
+
+[node name="Visual" type="Node2D" parent="Props/Fern15"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 15
+
+[node name="Fern16" type="Node2D" parent="Props"]
+position = Vector2(1544, 464)
+
+[node name="Visual" type="Node2D" parent="Props/Fern16"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 16
+
+[node name="Fern17" type="Node2D" parent="Props"]
+position = Vector2(1848, 256)
+
+[node name="Visual" type="Node2D" parent="Props/Fern17"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 17
+
+[node name="Fern18" type="Node2D" parent="Props"]
+position = Vector2(192, 1024)
+
+[node name="Visual" type="Node2D" parent="Props/Fern18"]
+position = Vector2(-16, -32)
+script = ExtResource("2_prop")
+kind = "Fern"
+extent = Vector2(32, 32)
+variant = 18
+
+[node name="Stone0" type="StaticBody2D" parent="Props"]
+position = Vector2(160, 640)
+
+[node name="Visual" type="Node2D" parent="Props/Stone0"]
+position = Vector2(-16, -20)
+script = ExtResource("2_prop")
+kind = "Rock"
+extent = Vector2(28, 20)
+variant = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Stone0"]
+position = Vector2(0, -7)
+shape = SubResource("GardenShape_50")
+
+[node name="Stone1" type="StaticBody2D" parent="Props"]
+position = Vector2(640, 304)
+
+[node name="Visual" type="Node2D" parent="Props/Stone1"]
+position = Vector2(-16, -20)
+script = ExtResource("2_prop")
+kind = "Rock"
+extent = Vector2(36, 20)
+variant = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Stone1"]
+position = Vector2(0, -7)
+shape = SubResource("GardenShape_51")
+
+[node name="Stone2" type="StaticBody2D" parent="Props"]
+position = Vector2(1840, 608)
+
+[node name="Visual" type="Node2D" parent="Props/Stone2"]
+position = Vector2(-16, -20)
+script = ExtResource("2_prop")
+kind = "Rock"
+extent = Vector2(44, 20)
+variant = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Stone2"]
+position = Vector2(0, -7)
+shape = SubResource("GardenShape_52")
+
+[node name="Stone3" type="StaticBody2D" parent="Props"]
+position = Vector2(1760, 584)
+
+[node name="Visual" type="Node2D" parent="Props/Stone3"]
+position = Vector2(-16, -20)
+script = ExtResource("2_prop")
+kind = "Rock"
+extent = Vector2(28, 20)
+variant = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Stone3"]
+position = Vector2(0, -7)
+shape = SubResource("GardenShape_53")
+
+[node name="Stone4" type="StaticBody2D" parent="Props"]
+position = Vector2(1248, 848)
+
+[node name="Visual" type="Node2D" parent="Props/Stone4"]
+position = Vector2(-16, -20)
+script = ExtResource("2_prop")
+kind = "Rock"
+extent = Vector2(36, 20)
+variant = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Stone4"]
+position = Vector2(0, -7)
+shape = SubResource("GardenShape_54")
+
+[node name="Stone5" type="StaticBody2D" parent="Props"]
+position = Vector2(1536, 960)
+
+[node name="Visual" type="Node2D" parent="Props/Stone5"]
+position = Vector2(-16, -20)
+script = ExtResource("2_prop")
+kind = "Rock"
+extent = Vector2(44, 20)
+variant = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Stone5"]
+position = Vector2(0, -7)
+shape = SubResource("GardenShape_55")
+
+[node name="Stone6" type="StaticBody2D" parent="Props"]
+position = Vector2(672, 960)
+
+[node name="Visual" type="Node2D" parent="Props/Stone6"]
+position = Vector2(-16, -20)
+script = ExtResource("2_prop")
+kind = "Rock"
+extent = Vector2(28, 20)
+variant = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Stone6"]
+position = Vector2(0, -7)
+shape = SubResource("GardenShape_56")
+
+[node name="Stone7" type="StaticBody2D" parent="Props"]
+position = Vector2(176, 960)
+
+[node name="Visual" type="Node2D" parent="Props/Stone7"]
+position = Vector2(-16, -20)
+script = ExtResource("2_prop")
+kind = "Rock"
+extent = Vector2(36, 20)
+variant = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Stone7"]
+position = Vector2(0, -7)
+shape = SubResource("GardenShape_57")
+
+
+
+[node name="Landmarks" type="Node2D" parent="."]
+
+
+[node name="GazeboSpawn" type="Marker2D" parent="Landmarks"]
+position = Vector2(384, 904)
+
+[node name="LilyCenter" type="Marker2D" parent="Landmarks"]
+position = Vector2(1024, 576)
+
+[node name="FlowerGarden" type="Marker2D" parent="Landmarks"]
+position = Vector2(1648, 272)
+
+[node name="ShadedWalk" type="Marker2D" parent="Landmarks"]
+position = Vector2(384, 320)
+
+[node name="OpenLawn" type="Marker2D" parent="Landmarks"]
+position = Vector2(1648, 848)
+
+[node name="QuietCorner" type="Marker2D" parent="Landmarks"]
+position = Vector2(1856, 640)
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(384, 904)
+
+[node name="LawnDaisiesA" type="Node2D" parent="Decoration"]
+position = Vector2(1568, 848)
+script = ExtResource("2_prop")
+kind = "Wildflowers"
+extent = Vector2(104, 56)
+variant = 0
+
+[node name="LawnDaisiesB" type="Node2D" parent="Decoration"]
+position = Vector2(1632, 944)
+script = ExtResource("2_prop")
+kind = "Wildflowers"
+extent = Vector2(112, 48)
+variant = 1
+
+[node name="LawnDaisiesC" type="Node2D" parent="Decoration"]
+position = Vector2(1456, 768)
+script = ExtResource("2_prop")
+kind = "Wildflowers"
+extent = Vector2(88, 40)
+variant = 2
+
+[node name="WoodlandViolets" type="Node2D" parent="Decoration"]
+position = Vector2(320, 400)
+script = ExtResource("2_prop")
+kind = "Wildflowers"
+extent = Vector2(64, 40)
+variant = 3
+
+[node name="GazeboDaisies" type="Node2D" parent="Decoration"]
+position = Vector2(608, 864)
+script = ExtResource("2_prop")
+kind = "Wildflowers"
+extent = Vector2(64, 40)
+variant = 4
+
+[node name="LilyEastPetals" type="Node2D" parent="Decoration"]
+position = Vector2(1248, 600)
+script = ExtResource("2_prop")
+kind = "Wildflowers"
+extent = Vector2(32, 24)
+variant = 5

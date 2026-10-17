@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/prototypes/rooms/garden_room.tscn" id="1_garden"]
+[ext_resource type="PackedScene" uid="uid://b1aoc87u33jos" path="res://scenes/player.tscn" id="2_player"]
+[ext_resource type="Script" uid="uid://cbuuh60heihia" path="res://scripts/playerMovement.gd" id="3_movement"]
+
+[node name="DreamGardenLaboratory" type="Node2D"]
+y_sort_enabled = true
+texture_filter = 1
+
+[node name="Garden" parent="." instance=ExtResource("1_garden")]
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(384, 904)
+script = ExtResource("3_movement")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -24)
+zoom = Vector2(2.5, 2.5)
+offset = Vector2(0, 0)
+limit_left = 0
+limit_top = 0
+limit_right = 2048
+limit_bottom = 1152
+position_smoothing_enabled = false
+drag_horizontal_enabled = false
+drag_vertical_enabled = false
+drag_horizontal_offset = 0.0
+drag_vertical_offset = 0.0
+
