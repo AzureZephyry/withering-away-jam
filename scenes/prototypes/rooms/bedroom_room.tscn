@@ -1,198 +1,375 @@
-[gd_scene format=3 uid="uid://cah67qrc30ruq"]
+[gd_scene load_steps=14 format=3 uid="uid://cah67qrc30ruq"]
 
 [ext_resource type="Script" uid="uid://b1bxln4x1byhf" path="res://scenes/prototypes/pixel_floor.gd" id="1_floor"]
 [ext_resource type="Script" uid="uid://bgdlid2qa4c26" path="res://scenes/prototypes/pixel_prop.gd" id="2_prop"]
 
 [sub_resource type="RectangleShape2D" id="Rectangle_1"]
-size = Vector2(288, 16)
+size = Vector2(384, 16)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_2"]
-size = Vector2(288, 16)
+size = Vector2(16, 184)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_3"]
-size = Vector2(16, 128)
+size = Vector2(16, 88)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_4"]
-size = Vector2(16, 48)
+size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_5"]
-size = Vector2(16, 16)
+size = Vector2(72, 104)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_6"]
-size = Vector2(48, 64)
+size = Vector2(24, 24)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_7"]
-size = Vector2(48, 24)
+size = Vector2(72, 32)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_8"]
-size = Vector2(16, 16)
+size = Vector2(64, 24)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_9"]
-size = Vector2(32, 40)
+size = Vector2(48, 56)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_10"]
+size = Vector2(24, 32)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_11"]
+size = Vector2(24, 20)
 
 [node name="Bedroom" type="Node2D" unique_id=794978626]
 texture_filter = 1
 
-[node name="Floor" type="Node2D" parent="." unique_id=946298206]
+[node name="Floors" type="Node2D" parent="."]
+
+
+[node name="Floor" type="Node2D" parent="Floors"]
+position = Vector2(0, 0)
 script = ExtResource("1_floor")
+pattern = "WarmWood"
+extent = Vector2i(384, 216)
 
-[node name="Walls" type="StaticBody2D" parent="." unique_id=973397408]
+[node name="FloorDetails" type="Node2D" parent="."]
 
-[node name="NorthCollision" type="CollisionShape2D" parent="Walls" unique_id=721030474]
-position = Vector2(144, 8)
+
+[node name="WovenRug" type="Node2D" parent="FloorDetails"]
+position = Vector2(144, 128)
+script = ExtResource("2_prop")
+kind = "Rug"
+extent = Vector2(144, 64)
+
+[node name="Walls" type="Node2D" parent="." unique_id=973397408]
+
+
+[node name="North" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, 0)
+
+[node name="Face" type="Polygon2D" parent="Walls/North"]
+position = Vector2(0, 0)
+polygon = PackedVector2Array(0, 0, 384, 0, 384, 16, 0, 16)
+color = Color(0.84706, 0.73333, 0.57255, 1)
+
+[node name="Cap" type="Polygon2D" parent="Walls/North"]
+position = Vector2(2, 2)
+polygon = PackedVector2Array(0, 0, 380, 0, 380, 3, 0, 3)
+color = Color(0.9451, 0.86667, 0.72941, 1)
+
+[node name="Skirting" type="Polygon2D" parent="Walls/North"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 384, 0, 384, 4, 0, 4)
+color = Color(0.53333, 0.37647, 0.26667, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/North"]
+position = Vector2(192, 8)
 shape = SubResource("Rectangle_1")
 
-[node name="North" type="Polygon2D" parent="Walls" unique_id=397847832]
-color = Color(0.3451, 0.41176, 0.45882, 1)
-polygon = PackedVector2Array(0, 0, 288, 0, 288, 16, 0, 16)
+[node name="South" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, 200)
 
-[node name="NorthHighlight" type="Polygon2D" parent="Walls" unique_id=1089707336]
+[node name="Face" type="Polygon2D" parent="Walls/South"]
+position = Vector2(0, 0)
+polygon = PackedVector2Array(0, 0, 384, 0, 384, 16, 0, 16)
+color = Color(0.84706, 0.73333, 0.57255, 1)
+
+[node name="Cap" type="Polygon2D" parent="Walls/South"]
 position = Vector2(2, 2)
-color = Color(0.5098, 0.56471, 0.60392, 1)
-polygon = PackedVector2Array(0, 0, 284, 0, 284, 2, 0, 2)
+polygon = PackedVector2Array(0, 0, 380, 0, 380, 3, 0, 3)
+color = Color(0.9451, 0.86667, 0.72941, 1)
 
-[node name="SouthCollision" type="CollisionShape2D" parent="Walls" unique_id=634953950]
-position = Vector2(144, 152)
+[node name="Skirting" type="Polygon2D" parent="Walls/South"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 384, 0, 384, 4, 0, 4)
+color = Color(0.53333, 0.37647, 0.26667, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/South"]
+position = Vector2(192, 8)
+shape = SubResource("Rectangle_1")
+
+[node name="West" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, 16)
+
+[node name="Face" type="Polygon2D" parent="Walls/West"]
+position = Vector2(0, 0)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 184, 0, 184)
+color = Color(0.84706, 0.73333, 0.57255, 1)
+
+[node name="Cap" type="Polygon2D" parent="Walls/West"]
+position = Vector2(2, 2)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.86667, 0.72941, 1)
+
+[node name="Skirting" type="Polygon2D" parent="Walls/West"]
+position = Vector2(0, 180)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.53333, 0.37647, 0.26667, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/West"]
+position = Vector2(8, 92)
 shape = SubResource("Rectangle_2")
 
-[node name="South" type="Polygon2D" parent="Walls" unique_id=1092674252]
-position = Vector2(0, 144)
-color = Color(0.3451, 0.41176, 0.45882, 1)
-polygon = PackedVector2Array(0, 0, 288, 0, 288, 16, 0, 16)
+[node name="SideSkirting" type="Polygon2D" parent="Walls/West"]
+position = Vector2(13, 0)
+polygon = PackedVector2Array(0, 0, 3, 0, 3, 184, 0, 184)
+color = Color(0.53333, 0.37647, 0.26667, 1)
 
-[node name="SouthHighlight" type="Polygon2D" parent="Walls" unique_id=317097987]
-position = Vector2(2, 146)
-color = Color(0.5098, 0.56471, 0.60392, 1)
-polygon = PackedVector2Array(0, 0, 284, 0, 284, 2, 0, 2)
+[node name="SideHighlight" type="Polygon2D" parent="Walls/West"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 184, 0, 184)
+color = Color(0.9451, 0.86667, 0.72941, 1)
 
-[node name="WestCollision" type="CollisionShape2D" parent="Walls" unique_id=495223307]
-position = Vector2(8, 80)
+[node name="EastUpper" type="StaticBody2D" parent="Walls"]
+position = Vector2(368, 16)
+
+[node name="Face" type="Polygon2D" parent="Walls/EastUpper"]
+position = Vector2(0, 0)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 88, 0, 88)
+color = Color(0.84706, 0.73333, 0.57255, 1)
+
+[node name="Cap" type="Polygon2D" parent="Walls/EastUpper"]
+position = Vector2(2, 2)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.86667, 0.72941, 1)
+
+[node name="Skirting" type="Polygon2D" parent="Walls/EastUpper"]
+position = Vector2(0, 84)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.53333, 0.37647, 0.26667, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/EastUpper"]
+position = Vector2(8, 44)
 shape = SubResource("Rectangle_3")
 
-[node name="West" type="Polygon2D" parent="Walls" unique_id=343886860]
-position = Vector2(0, 16)
-color = Color(0.3451, 0.41176, 0.45882, 1)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 128, 0, 128)
+[node name="SideSkirting" type="Polygon2D" parent="Walls/EastUpper"]
+position = Vector2(13, 0)
+polygon = PackedVector2Array(0, 0, 3, 0, 3, 88, 0, 88)
+color = Color(0.53333, 0.37647, 0.26667, 1)
 
-[node name="WestHighlight" type="Polygon2D" parent="Walls" unique_id=1481502095]
-position = Vector2(2, 18)
-color = Color(0.5098, 0.56471, 0.60392, 1)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
+[node name="SideHighlight" type="Polygon2D" parent="Walls/EastUpper"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 88, 0, 88)
+color = Color(0.9451, 0.86667, 0.72941, 1)
 
-[node name="EastUpperCollision" type="CollisionShape2D" parent="Walls" unique_id=768682567]
-position = Vector2(280, 40)
-shape = SubResource("Rectangle_4")
+[node name="EastLower" type="StaticBody2D" parent="Walls"]
+position = Vector2(368, 184)
 
-[node name="EastUpper" type="Polygon2D" parent="Walls" unique_id=1974009529]
-position = Vector2(272, 16)
-color = Color(0.3451, 0.41176, 0.45882, 1)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 48, 0, 48)
-
-[node name="EastUpperHighlight" type="Polygon2D" parent="Walls" unique_id=882183119]
-position = Vector2(274, 18)
-color = Color(0.5098, 0.56471, 0.60392, 1)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
-
-[node name="EastLowerCollision" type="CollisionShape2D" parent="Walls" unique_id=1099289039]
-position = Vector2(280, 136)
-shape = SubResource("Rectangle_5")
-
-[node name="EastLower" type="Polygon2D" parent="Walls" unique_id=214361934]
-position = Vector2(272, 128)
-color = Color(0.3451, 0.41176, 0.45882, 1)
+[node name="Face" type="Polygon2D" parent="Walls/EastLower"]
+position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 16, 0, 16)
+color = Color(0.84706, 0.73333, 0.57255, 1)
 
-[node name="EastLowerHighlight" type="Polygon2D" parent="Walls" unique_id=1824652134]
-position = Vector2(274, 130)
-color = Color(0.5098, 0.56471, 0.60392, 1)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
+[node name="Cap" type="Polygon2D" parent="Walls/EastLower"]
+position = Vector2(2, 2)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.86667, 0.72941, 1)
+
+[node name="Skirting" type="Polygon2D" parent="Walls/EastLower"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.53333, 0.37647, 0.26667, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/EastLower"]
+position = Vector2(8, 8)
+shape = SubResource("Rectangle_4")
 
 [node name="Props" type="Node2D" parent="." unique_id=1530482264]
 
-[node name="Bed" type="StaticBody2D" parent="Props" unique_id=1933221593]
-position = Vector2(64, 16)
 
-[node name="Visual" type="Node2D" parent="Props/Bed" unique_id=343887760]
+[node name="Bed" type="StaticBody2D" parent="Props"]
+position = Vector2(16, 24)
+
+[node name="Visual" type="Node2D" parent="Props/Bed"]
 script = ExtResource("2_prop")
-extent = Vector2(48, 64)
+kind = "BedroomBed"
+extent = Vector2(72, 104)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Bed" unique_id=1839048636]
-position = Vector2(24, 32)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Bed"]
+position = Vector2(36, 52)
+shape = SubResource("Rectangle_5")
+
+[node name="BedsideTable" type="StaticBody2D" parent="Props"]
+position = Vector2(104, 32)
+
+[node name="Visual" type="Node2D" parent="Props/BedsideTable"]
+script = ExtResource("2_prop")
+kind = "Nightstand"
+extent = Vector2(24, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/BedsideTable"]
+position = Vector2(12, 12)
 shape = SubResource("Rectangle_6")
 
-[node name="Desk" type="StaticBody2D" parent="Props" unique_id=936323623]
-position = Vector2(144, 32)
+[node name="Desk" type="StaticBody2D" parent="Props"]
+position = Vector2(224, 40)
 
-[node name="Visual" type="Node2D" parent="Props/Desk" unique_id=879399822]
+[node name="Visual" type="Node2D" parent="Props/Desk"]
 script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(48, 24)
+kind = "ComputerDesk"
+extent = Vector2(72, 32)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Desk" unique_id=148849962]
-position = Vector2(24, 12)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Desk"]
+position = Vector2(36, 16)
 shape = SubResource("Rectangle_7")
 
-[node name="Chair" type="StaticBody2D" parent="Props" unique_id=1137527570]
-position = Vector2(160, 64)
+[node name="Chair" type="StaticBody2D" parent="Props"]
+position = Vector2(248, 88)
 
-[node name="Visual" type="Node2D" parent="Props/Chair" unique_id=378334487]
+[node name="Visual" type="Node2D" parent="Props/Chair"]
 script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
+kind = "HomeChair"
+extent = Vector2(24, 24)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Chair" unique_id=62268855]
-position = Vector2(8, 8)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Chair"]
+position = Vector2(12, 12)
+shape = SubResource("Rectangle_6")
+
+[node name="Bookshelf" type="StaticBody2D" parent="Props"]
+position = Vector2(144, 24)
+
+[node name="Visual" type="Node2D" parent="Props/Bookshelf"]
+script = ExtResource("2_prop")
+kind = "Bookshelf"
+extent = Vector2(64, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Bookshelf"]
+position = Vector2(32, 12)
 shape = SubResource("Rectangle_8")
 
-[node name="Cabinet" type="StaticBody2D" parent="Props" unique_id=1540877270]
-position = Vector2(240, 16)
+[node name="Cabinet" type="StaticBody2D" parent="Props"]
+position = Vector2(320, 24)
 
-[node name="Visual" type="Node2D" parent="Props/Cabinet" unique_id=920209928]
+[node name="Visual" type="Node2D" parent="Props/Cabinet"]
 script = ExtResource("2_prop")
-kind = "Cabinet"
-extent = Vector2(32, 40)
+kind = "Wardrobe"
+extent = Vector2(48, 56)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Cabinet" unique_id=52325131]
-position = Vector2(16, 20)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Cabinet"]
+position = Vector2(24, 28)
 shape = SubResource("Rectangle_9")
+
+[node name="Plant" type="StaticBody2D" parent="Props"]
+position = Vector2(16, 168)
+
+[node name="Visual" type="Node2D" parent="Props/Plant"]
+script = ExtResource("2_prop")
+kind = "Planter"
+extent = Vector2(24, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Plant"]
+position = Vector2(12, 16)
+shape = SubResource("Rectangle_10")
+
+[node name="BookCrate" type="StaticBody2D" parent="Props"]
+position = Vector2(104, 180)
+
+[node name="Visual" type="Node2D" parent="Props/BookCrate"]
+script = ExtResource("2_prop")
+kind = "BookStack"
+extent = Vector2(24, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/BookCrate"]
+position = Vector2(12, 10)
+shape = SubResource("Rectangle_11")
 
 [node name="Decoration" type="Node2D" parent="." unique_id=438142725]
 
-[node name="Window" type="Node2D" parent="Decoration" unique_id=1549954677]
-position = Vector2(144, 16)
-script = ExtResource("2_prop")
-kind = "Window"
-extent = Vector2(48, 16)
 
-[node name="Picture" type="Node2D" parent="Decoration" unique_id=250876304]
-position = Vector2(112, 16)
+[node name="Window" type="Node2D" parent="Decoration"]
+position = Vector2(224, 6)
+script = ExtResource("2_prop")
+kind = "CurtainedWindow"
+extent = Vector2(72, 24)
+
+[node name="StudyPinboard" type="Node2D" parent="Decoration"]
+position = Vector2(144, 2)
+script = ExtResource("2_prop")
+kind = "Noticeboard"
+extent = Vector2(56, 20)
+
+[node name="Schedule" type="Node2D" parent="Decoration"]
+position = Vector2(208, 2)
+script = ExtResource("2_prop")
+kind = "Calendar"
+extent = Vector2(16, 22)
+
+[node name="Picture" type="Node2D" parent="Decoration"]
+position = Vector2(104, 4)
 script = ExtResource("2_prop")
 kind = "Picture"
-extent = Vector2(16, 16)
+extent = Vector2(24, 20)
 
-[node name="DoorRightThreshold" type="Polygon2D" parent="Decoration" unique_id=92485104]
-position = Vector2(280, 64)
-color = Color(0.71373, 0.67451, 0.58431, 1)
-polygon = PackedVector2Array(0, 0, 8, 0, 8, 64, 0, 64)
+[node name="DeskReferenceBooks" type="Node2D" parent="Decoration"]
+position = Vector2(300, 42)
+script = ExtResource("2_prop")
+kind = "BookStack"
+extent = Vector2(16, 20)
 
-[node name="DoorUpperFrame" type="Polygon2D" parent="Decoration" unique_id=993157854]
-position = Vector2(272, 60)
-color = Color(0.58, 0.47, 0.35, 1)
+[node name="Notebook" type="Polygon2D" parent="Decoration"]
+position = Vector2(192, 152)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 16, 0, 16)
+color = Color(0.89804, 0.83529, 0.6902, 1)
+
+[node name="NotebookBinding" type="Polygon2D" parent="Decoration"]
+position = Vector2(192, 152)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 16, 0, 16)
+color = Color(0.55686, 0.61176, 0.51765, 1)
+
+[node name="NotebookLine" type="Polygon2D" parent="Decoration"]
+position = Vector2(196, 158)
+polygon = PackedVector2Array(0, 0, 6, 0, 6, 1, 0, 1)
+color = Color(0.72549, 0.70588, 0.58039, 1)
+
+[node name="ShoesLeft" type="Polygon2D" parent="Decoration"]
+position = Vector2(304, 188)
+polygon = PackedVector2Array(0, 0, 9, 0, 9, 4, 0, 4)
+color = Color(0.47843, 0.36078, 0.28235, 1)
+
+[node name="ShoesRight" type="Polygon2D" parent="Decoration"]
+position = Vector2(316, 188)
+polygon = PackedVector2Array(0, 0, 9, 0, 9, 4, 0, 4)
+color = Color(0.47843, 0.36078, 0.28235, 1)
+
+[node name="DoorRightThreshold" type="Polygon2D" parent="Decoration"]
+position = Vector2(368, 104)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 80, 0, 80)
+color = Color(0.72549, 0.58039, 0.4, 1)
+
+[node name="DoorUpperFrame" type="Polygon2D" parent="Decoration"]
+position = Vector2(368, 100)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.53333, 0.37647, 0.26667, 1)
 
-[node name="DoorLowerFrame" type="Polygon2D" parent="Decoration" unique_id=1870939122]
-position = Vector2(272, 128)
-color = Color(0.58, 0.47, 0.35, 1)
+[node name="DoorLowerFrame" type="Polygon2D" parent="Decoration"]
+position = Vector2(368, 184)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.53333, 0.37647, 0.26667, 1)
 
-[node name="DoorThresholdInset" type="Polygon2D" parent="Decoration" unique_id=614206731]
-position = Vector2(284, 64)
-color = Color(0.39, 0.34, 0.28, 1)
-polygon = PackedVector2Array(0, 0, 2, 0, 2, 64, 0, 64)
+[node name="DoorThresholdInset" type="Polygon2D" parent="Decoration"]
+position = Vector2(380, 104)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 80, 0, 80)
+color = Color(0.47451, 0.36471, 0.26667, 1)
 
 [node name="DoorRight" type="Marker2D" parent="." unique_id=500307979]
-position = Vector2(288, 112)
+position = Vector2(384, 168)
 
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=197781062]
-position = Vector2(208, 112)
+position = Vector2(320, 168)
 

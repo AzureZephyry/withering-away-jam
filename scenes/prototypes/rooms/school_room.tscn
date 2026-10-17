@@ -1,8 +1,7 @@
-[gd_scene load_steps=27 format=3]
+[gd_scene load_steps=38 format=3]
 
-[ext_resource type="Script" path="res://scenes/prototypes/pixel_floor.gd" id="1_floor"]
-
-[ext_resource type="Script" path="res://scenes/prototypes/pixel_prop.gd" id="2_prop"]
+[ext_resource type="Script" uid="uid://b1bxln4x1byhf" path="res://scenes/prototypes/pixel_floor.gd" id="1_floor"]
+[ext_resource type="Script" uid="uid://bgdlid2qa4c26" path="res://scenes/prototypes/pixel_prop.gd" id="2_prop"]
 
 [sub_resource type="RectangleShape2D" id="Rectangle_1"]
 size = Vector2(1600, 16)
@@ -47,34 +46,67 @@ size = Vector2(16, 128)
 size = Vector2(384, 16)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_15"]
-size = Vector2(96, 32)
-
-[sub_resource type="RectangleShape2D" id="Rectangle_16"]
-size = Vector2(64, 16)
-
-[sub_resource type="RectangleShape2D" id="Rectangle_17"]
-size = Vector2(96, 16)
-
-[sub_resource type="RectangleShape2D" id="Rectangle_18"]
-size = Vector2(48, 32)
-
-[sub_resource type="RectangleShape2D" id="Rectangle_19"]
-size = Vector2(128, 16)
-
-[sub_resource type="RectangleShape2D" id="Rectangle_20"]
-size = Vector2(64, 24)
-
-[sub_resource type="RectangleShape2D" id="Rectangle_21"]
 size = Vector2(48, 24)
 
+[sub_resource type="RectangleShape2D" id="Rectangle_16"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_17"]
+size = Vector2(64, 28)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_18"]
+size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_19"]
+size = Vector2(96, 32)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_20"]
+size = Vector2(96, 28)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_21"]
+size = Vector2(80, 32)
+
 [sub_resource type="RectangleShape2D" id="Rectangle_22"]
-size = Vector2(16, 16)
+size = Vector2(160, 40)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_23"]
-size = Vector2(128, 32)
+size = Vector2(24, 24)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_24"]
-size = Vector2(24, 24)
+size = Vector2(128, 32)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_25"]
+size = Vector2(112, 28)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_26"]
+size = Vector2(24, 32)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_27"]
+size = Vector2(16, 24)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_28"]
+size = Vector2(80, 28)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_29"]
+size = Vector2(128, 28)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_30"]
+size = Vector2(48, 32)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_31"]
+size = Vector2(32, 112)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_32"]
+size = Vector2(128, 40)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_33"]
+size = Vector2(96, 48)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_34"]
+size = Vector2(112, 48)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_35"]
+size = Vector2(160, 32)
 
 [node name="School" type="Node2D"]
 texture_filter = 1
@@ -85,84 +117,73 @@ texture_filter = 1
 [node name="Floor" type="Node2D" parent="Floors"]
 position = Vector2(0, 0)
 script = ExtResource("1_floor")
-pattern = "Tile"
+pattern = "Terrazzo"
 extent = Vector2i(1600, 896)
 
 [node name="ClassroomA" type="Node2D" parent="Floors"]
 position = Vector2(16, 16)
 script = ExtResource("1_floor")
-pattern = "Wood"
+pattern = "Classroom"
 extent = Vector2i(320, 320)
 
 [node name="ClassroomB" type="Node2D" parent="Floors"]
 position = Vector2(352, 16)
 script = ExtResource("1_floor")
-pattern = "Wood"
+pattern = "Classroom"
 extent = Vector2i(336, 320)
 
 [node name="Library" type="Node2D" parent="Floors"]
 position = Vector2(912, 16)
 script = ExtResource("1_floor")
-pattern = "Wood"
+pattern = "Parquet"
 extent = Vector2i(672, 320)
-modulate = Color(0.85098, 0.87843, 0.85098, 1)
 
 [node name="Lobby" type="Node2D" parent="Floors"]
 position = Vector2(16, 544)
 script = ExtResource("1_floor")
-pattern = "Tile"
+pattern = "Terrazzo"
 extent = Vector2i(672, 336)
-modulate = Color(0.83922, 0.88627, 0.8902, 1)
 
 [node name="StudyHall" type="Node2D" parent="Floors"]
 position = Vector2(912, 544)
 script = ExtResource("1_floor")
-pattern = "Wood"
+pattern = "Carpet"
 extent = Vector2i(672, 336)
-modulate = Color(0.79608, 0.82745, 0.76863, 1)
 
 [node name="FloorDetails" type="Node2D" parent="."]
 
 
-[node name="MainRunner" type="Polygon2D" parent="FloorDetails"]
-position = Vector2(16, 416)
-polygon = PackedVector2Array(0, 0, 1568, 0, 1568, 32, 0, 32)
-color = Color(0.49804, 0.58824, 0.56471, 1)
+[node name="JunctionInlay" type="Node2D" parent="FloorDetails"]
+position = Vector2(752, 384)
+script = ExtResource("2_prop")
+kind = "CampusInlay"
+extent = Vector2(96, 96)
 
-[node name="SpineRunner" type="Polygon2D" parent="FloorDetails"]
-position = Vector2(784, 16)
-polygon = PackedVector2Array(0, 0, 32, 0, 32, 864, 0, 864)
-color = Color(0.49804, 0.58824, 0.56471, 1)
+[node name="EntranceMat" type="Node2D" parent="FloorDetails"]
+position = Vector2(184, 800)
+script = ExtResource("2_prop")
+kind = "Rug"
+extent = Vector2(176, 64)
 
-[node name="JunctionBorder" type="Polygon2D" parent="FloorDetails"]
-position = Vector2(736, 368)
-polygon = PackedVector2Array(0, 0, 128, 0, 128, 128, 0, 128)
-color = Color(0.32157, 0.42745, 0.43922, 1)
+[node name="LobbyBorder" type="Polygon2D" parent="FloorDetails"]
+position = Vector2(24, 552)
+polygon = PackedVector2Array(0, 0, 656, 0, 656, 3, 0, 3)
+color = Color(0.73333, 0.63137, 0.4902, 1)
 
-[node name="JunctionInset" type="Polygon2D" parent="FloorDetails"]
-position = Vector2(744, 376)
-polygon = PackedVector2Array(0, 0, 112, 0, 112, 112, 0, 112)
-color = Color(0.66275, 0.72157, 0.67843, 1)
+[node name="LobbyBorderWest" type="Polygon2D" parent="FloorDetails"]
+position = Vector2(24, 552)
+polygon = PackedVector2Array(0, 0, 3, 0, 3, 320, 0, 320)
+color = Color(0.73333, 0.63137, 0.4902, 1)
 
-[node name="JunctionDiamond" type="Polygon2D" parent="FloorDetails"]
-position = Vector2(768, 400)
-polygon = PackedVector2Array(0, 0, 64, 0, 64, 64, 0, 64)
-color = Color(0.39608, 0.49804, 0.51373, 1)
+[node name="LibraryReadingRug" type="Polygon2D" parent="FloorDetails"]
+position = Vector2(1248, 96)
+polygon = PackedVector2Array(0, 0, 304, 0, 304, 192, 0, 192)
+color = Color(0.72157, 0.63922, 0.4902, 1)
 
-[node name="JunctionCenter" type="Polygon2D" parent="FloorDetails"]
-position = Vector2(784, 416)
-polygon = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
-color = Color(0.75294, 0.77255, 0.68235, 1)
-
-[node name="EntryMat" type="Polygon2D" parent="FloorDetails"]
-position = Vector2(192, 800)
-polygon = PackedVector2Array(0, 0, 160, 0, 160, 64, 0, 64)
-color = Color(0.31373, 0.41176, 0.43529, 1)
-
-[node name="EntryMatInset" type="Polygon2D" parent="FloorDetails"]
-position = Vector2(200, 808)
-polygon = PackedVector2Array(0, 0, 144, 0, 144, 48, 0, 48)
-color = Color(0.44314, 0.54118, 0.54902, 1)
+[node name="LibraryReadingRugInset" type="Polygon2D" parent="FloorDetails"]
+position = Vector2(1252, 100)
+polygon = PackedVector2Array(0, 0, 296, 0, 296, 184, 0, 184)
+color = Color(0.78039, 0.70196, 0.54902, 1)
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -173,17 +194,17 @@ position = Vector2(0, 0)
 [node name="Face" type="Polygon2D" parent="Walls/North"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 1600, 0, 1600, 16, 0, 16)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/North"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 1596, 0, 1596, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 1596, 0, 1596, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/North"]
-position = Vector2(0, 14)
-polygon = PackedVector2Array(0, 0, 1600, 0, 1600, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/North"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 1600, 0, 1600, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/North"]
 position = Vector2(800, 8)
@@ -195,17 +216,17 @@ position = Vector2(0, 880)
 [node name="Face" type="Polygon2D" parent="Walls/South"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 1600, 0, 1600, 16, 0, 16)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/South"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 1596, 0, 1596, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 1596, 0, 1596, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/South"]
-position = Vector2(0, 14)
-polygon = PackedVector2Array(0, 0, 1600, 0, 1600, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/South"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 1600, 0, 1600, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/South"]
 position = Vector2(800, 8)
@@ -217,17 +238,17 @@ position = Vector2(0, 16)
 [node name="Face" type="Polygon2D" parent="Walls/West"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 864, 0, 864)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/West"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/West"]
-position = Vector2(0, 862)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/West"]
+position = Vector2(0, 860)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/West"]
 position = Vector2(8, 432)
@@ -239,17 +260,17 @@ position = Vector2(1584, 16)
 [node name="Face" type="Polygon2D" parent="Walls/East"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 864, 0, 864)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/East"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/East"]
-position = Vector2(0, 862)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/East"]
+position = Vector2(0, 860)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/East"]
 position = Vector2(8, 432)
@@ -261,17 +282,17 @@ position = Vector2(336, 16)
 [node name="Face" type="Polygon2D" parent="Walls/ClassDivider"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 320, 0, 320)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/ClassDivider"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/ClassDivider"]
-position = Vector2(0, 318)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/ClassDivider"]
+position = Vector2(0, 316)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/ClassDivider"]
 position = Vector2(8, 160)
@@ -283,17 +304,17 @@ position = Vector2(16, 336)
 [node name="Face" type="Polygon2D" parent="Walls/ClassASouthLeft"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 112, 0, 112, 16, 0, 16)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/ClassASouthLeft"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 108, 0, 108, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 108, 0, 108, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/ClassASouthLeft"]
-position = Vector2(0, 14)
-polygon = PackedVector2Array(0, 0, 112, 0, 112, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/ClassASouthLeft"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 112, 0, 112, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/ClassASouthLeft"]
 position = Vector2(56, 8)
@@ -305,17 +326,17 @@ position = Vector2(224, 336)
 [node name="Face" type="Polygon2D" parent="Walls/ClassASouthRight"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 112, 0, 112, 16, 0, 16)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/ClassASouthRight"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 108, 0, 108, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 108, 0, 108, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/ClassASouthRight"]
-position = Vector2(0, 14)
-polygon = PackedVector2Array(0, 0, 112, 0, 112, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/ClassASouthRight"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 112, 0, 112, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/ClassASouthRight"]
 position = Vector2(56, 8)
@@ -327,17 +348,17 @@ position = Vector2(352, 336)
 [node name="Face" type="Polygon2D" parent="Walls/ClassBSouthLeft"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 112, 0, 112, 16, 0, 16)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/ClassBSouthLeft"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 108, 0, 108, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 108, 0, 108, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/ClassBSouthLeft"]
-position = Vector2(0, 14)
-polygon = PackedVector2Array(0, 0, 112, 0, 112, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/ClassBSouthLeft"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 112, 0, 112, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/ClassBSouthLeft"]
 position = Vector2(56, 8)
@@ -349,17 +370,17 @@ position = Vector2(560, 336)
 [node name="Face" type="Polygon2D" parent="Walls/ClassBSouthRight"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 144, 0, 144, 16, 0, 16)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/ClassBSouthRight"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 140, 0, 140, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 140, 0, 140, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/ClassBSouthRight"]
-position = Vector2(0, 14)
-polygon = PackedVector2Array(0, 0, 144, 0, 144, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/ClassBSouthRight"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 144, 0, 144, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/ClassBSouthRight"]
 position = Vector2(72, 8)
@@ -371,17 +392,17 @@ position = Vector2(688, 16)
 [node name="Face" type="Polygon2D" parent="Walls/ClassBEastNorth"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 160, 0, 160)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/ClassBEastNorth"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/ClassBEastNorth"]
-position = Vector2(0, 158)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/ClassBEastNorth"]
+position = Vector2(0, 156)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/ClassBEastNorth"]
 position = Vector2(8, 80)
@@ -393,17 +414,17 @@ position = Vector2(688, 272)
 [node name="Face" type="Polygon2D" parent="Walls/ClassBEastSouth"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 64, 0, 64)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/ClassBEastSouth"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/ClassBEastSouth"]
-position = Vector2(0, 62)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/ClassBEastSouth"]
+position = Vector2(0, 60)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/ClassBEastSouth"]
 position = Vector2(8, 32)
@@ -415,17 +436,17 @@ position = Vector2(896, 16)
 [node name="Face" type="Polygon2D" parent="Walls/LibraryWestNorth"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 160, 0, 160)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/LibraryWestNorth"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/LibraryWestNorth"]
-position = Vector2(0, 158)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/LibraryWestNorth"]
+position = Vector2(0, 156)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LibraryWestNorth"]
 position = Vector2(8, 80)
@@ -437,17 +458,17 @@ position = Vector2(896, 272)
 [node name="Face" type="Polygon2D" parent="Walls/LibraryWestSouth"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 80, 0, 80)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/LibraryWestSouth"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/LibraryWestSouth"]
-position = Vector2(0, 78)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/LibraryWestSouth"]
+position = Vector2(0, 76)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LibraryWestSouth"]
 position = Vector2(8, 40)
@@ -459,17 +480,17 @@ position = Vector2(912, 336)
 [node name="Face" type="Polygon2D" parent="Walls/LibrarySouthWest"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 368, 0, 368, 16, 0, 16)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/LibrarySouthWest"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 364, 0, 364, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 364, 0, 364, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/LibrarySouthWest"]
-position = Vector2(0, 14)
-polygon = PackedVector2Array(0, 0, 368, 0, 368, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/LibrarySouthWest"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 368, 0, 368, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LibrarySouthWest"]
 position = Vector2(184, 8)
@@ -481,17 +502,17 @@ position = Vector2(1376, 336)
 [node name="Face" type="Polygon2D" parent="Walls/LibrarySouthEast"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 208, 0, 208, 16, 0, 16)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/LibrarySouthEast"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 204, 0, 204, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 204, 0, 204, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/LibrarySouthEast"]
-position = Vector2(0, 14)
-polygon = PackedVector2Array(0, 0, 208, 0, 208, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/LibrarySouthEast"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 208, 0, 208, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LibrarySouthEast"]
 position = Vector2(104, 8)
@@ -503,17 +524,17 @@ position = Vector2(16, 528)
 [node name="Face" type="Polygon2D" parent="Walls/LobbyNorthWest"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 144, 0, 144, 16, 0, 16)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/LobbyNorthWest"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 140, 0, 140, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 140, 0, 140, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/LobbyNorthWest"]
-position = Vector2(0, 14)
-polygon = PackedVector2Array(0, 0, 144, 0, 144, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/LobbyNorthWest"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 144, 0, 144, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LobbyNorthWest"]
 position = Vector2(72, 8)
@@ -525,17 +546,17 @@ position = Vector2(288, 528)
 [node name="Face" type="Polygon2D" parent="Walls/LobbyNorthEast"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 416, 0, 416, 16, 0, 16)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/LobbyNorthEast"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 412, 0, 412, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 412, 0, 412, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/LobbyNorthEast"]
-position = Vector2(0, 14)
-polygon = PackedVector2Array(0, 0, 416, 0, 416, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/LobbyNorthEast"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 416, 0, 416, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LobbyNorthEast"]
 position = Vector2(208, 8)
@@ -547,17 +568,17 @@ position = Vector2(688, 544)
 [node name="Face" type="Polygon2D" parent="Walls/LobbyEastNorth"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 112, 0, 112)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/LobbyEastNorth"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/LobbyEastNorth"]
-position = Vector2(0, 110)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/LobbyEastNorth"]
+position = Vector2(0, 108)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LobbyEastNorth"]
 position = Vector2(8, 56)
@@ -569,17 +590,17 @@ position = Vector2(688, 752)
 [node name="Face" type="Polygon2D" parent="Walls/LobbyEastSouth"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 128, 0, 128)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/LobbyEastSouth"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/LobbyEastSouth"]
-position = Vector2(0, 126)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/LobbyEastSouth"]
+position = Vector2(0, 124)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LobbyEastSouth"]
 position = Vector2(8, 64)
@@ -591,17 +612,17 @@ position = Vector2(896, 528)
 [node name="Face" type="Polygon2D" parent="Walls/StudyNorthWest"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 384, 0, 384, 16, 0, 16)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/StudyNorthWest"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 380, 0, 380, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 380, 0, 380, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/StudyNorthWest"]
-position = Vector2(0, 14)
-polygon = PackedVector2Array(0, 0, 384, 0, 384, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/StudyNorthWest"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 384, 0, 384, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StudyNorthWest"]
 position = Vector2(192, 8)
@@ -613,17 +634,17 @@ position = Vector2(1376, 528)
 [node name="Face" type="Polygon2D" parent="Walls/StudyNorthEast"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 208, 0, 208, 16, 0, 16)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/StudyNorthEast"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 204, 0, 204, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 204, 0, 204, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/StudyNorthEast"]
-position = Vector2(0, 14)
-polygon = PackedVector2Array(0, 0, 208, 0, 208, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/StudyNorthEast"]
+position = Vector2(0, 12)
+polygon = PackedVector2Array(0, 0, 208, 0, 208, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StudyNorthEast"]
 position = Vector2(104, 8)
@@ -635,17 +656,17 @@ position = Vector2(896, 544)
 [node name="Face" type="Polygon2D" parent="Walls/StudyWestNorth"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 112, 0, 112)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/StudyWestNorth"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/StudyWestNorth"]
-position = Vector2(0, 110)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/StudyWestNorth"]
+position = Vector2(0, 108)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StudyWestNorth"]
 position = Vector2(8, 56)
@@ -657,24 +678,566 @@ position = Vector2(896, 752)
 [node name="Face" type="Polygon2D" parent="Walls/StudyWestSouth"]
 position = Vector2(0, 0)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 128, 0, 128)
-color = Color(0.38039, 0.44314, 0.42353, 1)
+color = Color(0.81961, 0.7451, 0.62745, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/StudyWestSouth"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 2, 0, 2)
-color = Color(0.61569, 0.66667, 0.58039, 1)
+polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
+color = Color(0.9451, 0.89804, 0.78431, 1)
 
-[node name="Base" type="Polygon2D" parent="Walls/StudyWestSouth"]
-position = Vector2(0, 126)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 2, 0, 2)
-color = Color(0.22353, 0.30196, 0.30196, 1)
+[node name="Skirting" type="Polygon2D" parent="Walls/StudyWestSouth"]
+position = Vector2(0, 124)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
+color = Color(0.64314, 0.52941, 0.37647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StudyWestSouth"]
 position = Vector2(8, 64)
 shape = SubResource("Rectangle_13")
 
+[node name="SideHighlight" type="Polygon2D" parent="Walls/West"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 864, 0, 864)
+color = Color(0.945, 0.898, 0.784, 1)
+
+[node name="SideSkirting" type="Polygon2D" parent="Walls/West"]
+position = Vector2(12, 0)
+polygon = PackedVector2Array(0, 0, 4, 0, 4, 864, 0, 864)
+color = Color(0.62, 0.49, 0.34, 1)
+
+[node name="SideHighlight" type="Polygon2D" parent="Walls/East"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 864, 0, 864)
+color = Color(0.945, 0.898, 0.784, 1)
+
+[node name="SideSkirting" type="Polygon2D" parent="Walls/East"]
+position = Vector2(12, 0)
+polygon = PackedVector2Array(0, 0, 4, 0, 4, 864, 0, 864)
+color = Color(0.62, 0.49, 0.34, 1)
+
+[node name="SideHighlight" type="Polygon2D" parent="Walls/ClassDivider"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 320, 0, 320)
+color = Color(0.945, 0.898, 0.784, 1)
+
+[node name="SideSkirting" type="Polygon2D" parent="Walls/ClassDivider"]
+position = Vector2(12, 0)
+polygon = PackedVector2Array(0, 0, 4, 0, 4, 320, 0, 320)
+color = Color(0.62, 0.49, 0.34, 1)
+
+[node name="SideHighlight" type="Polygon2D" parent="Walls/ClassBEastNorth"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 160, 0, 160)
+color = Color(0.945, 0.898, 0.784, 1)
+
+[node name="SideSkirting" type="Polygon2D" parent="Walls/ClassBEastNorth"]
+position = Vector2(12, 0)
+polygon = PackedVector2Array(0, 0, 4, 0, 4, 160, 0, 160)
+color = Color(0.62, 0.49, 0.34, 1)
+
+[node name="SideHighlight" type="Polygon2D" parent="Walls/ClassBEastSouth"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 64, 0, 64)
+color = Color(0.945, 0.898, 0.784, 1)
+
+[node name="SideSkirting" type="Polygon2D" parent="Walls/ClassBEastSouth"]
+position = Vector2(12, 0)
+polygon = PackedVector2Array(0, 0, 4, 0, 4, 64, 0, 64)
+color = Color(0.62, 0.49, 0.34, 1)
+
+[node name="SideHighlight" type="Polygon2D" parent="Walls/LibraryWestNorth"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 160, 0, 160)
+color = Color(0.945, 0.898, 0.784, 1)
+
+[node name="SideSkirting" type="Polygon2D" parent="Walls/LibraryWestNorth"]
+position = Vector2(12, 0)
+polygon = PackedVector2Array(0, 0, 4, 0, 4, 160, 0, 160)
+color = Color(0.62, 0.49, 0.34, 1)
+
+[node name="SideHighlight" type="Polygon2D" parent="Walls/LibraryWestSouth"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 80, 0, 80)
+color = Color(0.945, 0.898, 0.784, 1)
+
+[node name="SideSkirting" type="Polygon2D" parent="Walls/LibraryWestSouth"]
+position = Vector2(12, 0)
+polygon = PackedVector2Array(0, 0, 4, 0, 4, 80, 0, 80)
+color = Color(0.62, 0.49, 0.34, 1)
+
+[node name="SideHighlight" type="Polygon2D" parent="Walls/LobbyEastNorth"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 112, 0, 112)
+color = Color(0.945, 0.898, 0.784, 1)
+
+[node name="SideSkirting" type="Polygon2D" parent="Walls/LobbyEastNorth"]
+position = Vector2(12, 0)
+polygon = PackedVector2Array(0, 0, 4, 0, 4, 112, 0, 112)
+color = Color(0.62, 0.49, 0.34, 1)
+
+[node name="SideHighlight" type="Polygon2D" parent="Walls/LobbyEastSouth"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 128, 0, 128)
+color = Color(0.945, 0.898, 0.784, 1)
+
+[node name="SideSkirting" type="Polygon2D" parent="Walls/LobbyEastSouth"]
+position = Vector2(12, 0)
+polygon = PackedVector2Array(0, 0, 4, 0, 4, 128, 0, 128)
+color = Color(0.62, 0.49, 0.34, 1)
+
+[node name="SideHighlight" type="Polygon2D" parent="Walls/StudyWestNorth"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 112, 0, 112)
+color = Color(0.945, 0.898, 0.784, 1)
+
+[node name="SideSkirting" type="Polygon2D" parent="Walls/StudyWestNorth"]
+position = Vector2(12, 0)
+polygon = PackedVector2Array(0, 0, 4, 0, 4, 112, 0, 112)
+color = Color(0.62, 0.49, 0.34, 1)
+
+[node name="SideHighlight" type="Polygon2D" parent="Walls/StudyWestSouth"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 128, 0, 128)
+color = Color(0.945, 0.898, 0.784, 1)
+
+[node name="SideSkirting" type="Polygon2D" parent="Walls/StudyWestSouth"]
+position = Vector2(12, 0)
+polygon = PackedVector2Array(0, 0, 4, 0, 4, 128, 0, 128)
+color = Color(0.62, 0.49, 0.34, 1)
+
 [node name="Props" type="Node2D" parent="."]
 
+
+[node name="ClassADesk00" type="StaticBody2D" parent="Props"]
+position = Vector2(48, 112)
+
+[node name="Visual" type="Node2D" parent="Props/ClassADesk00"]
+script = ExtResource("2_prop")
+kind = "SchoolDesk"
+extent = Vector2(48, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassADesk00"]
+position = Vector2(24, 12)
+shape = SubResource("Rectangle_15")
+
+[node name="ClassAChair00" type="StaticBody2D" parent="Props"]
+position = Vector2(64, 144)
+
+[node name="Visual" type="Node2D" parent="Props/ClassAChair00"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassAChair00"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassADesk01" type="StaticBody2D" parent="Props"]
+position = Vector2(144, 112)
+
+[node name="Visual" type="Node2D" parent="Props/ClassADesk01"]
+script = ExtResource("2_prop")
+kind = "SchoolDesk"
+extent = Vector2(48, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassADesk01"]
+position = Vector2(24, 12)
+shape = SubResource("Rectangle_15")
+
+[node name="ClassAChair01" type="StaticBody2D" parent="Props"]
+position = Vector2(160, 144)
+
+[node name="Visual" type="Node2D" parent="Props/ClassAChair01"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassAChair01"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassADesk02" type="StaticBody2D" parent="Props"]
+position = Vector2(240, 112)
+
+[node name="Visual" type="Node2D" parent="Props/ClassADesk02"]
+script = ExtResource("2_prop")
+kind = "SchoolDesk"
+extent = Vector2(48, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassADesk02"]
+position = Vector2(24, 12)
+shape = SubResource("Rectangle_15")
+
+[node name="ClassAChair02" type="StaticBody2D" parent="Props"]
+position = Vector2(256, 144)
+
+[node name="Visual" type="Node2D" parent="Props/ClassAChair02"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassAChair02"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassADesk10" type="StaticBody2D" parent="Props"]
+position = Vector2(48, 224)
+
+[node name="Visual" type="Node2D" parent="Props/ClassADesk10"]
+script = ExtResource("2_prop")
+kind = "SchoolDesk"
+extent = Vector2(48, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassADesk10"]
+position = Vector2(24, 12)
+shape = SubResource("Rectangle_15")
+
+[node name="ClassAChair10" type="StaticBody2D" parent="Props"]
+position = Vector2(64, 256)
+
+[node name="Visual" type="Node2D" parent="Props/ClassAChair10"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassAChair10"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassADesk11" type="StaticBody2D" parent="Props"]
+position = Vector2(144, 224)
+
+[node name="Visual" type="Node2D" parent="Props/ClassADesk11"]
+script = ExtResource("2_prop")
+kind = "SchoolDesk"
+extent = Vector2(48, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassADesk11"]
+position = Vector2(24, 12)
+shape = SubResource("Rectangle_15")
+
+[node name="ClassAChair11" type="StaticBody2D" parent="Props"]
+position = Vector2(160, 256)
+
+[node name="Visual" type="Node2D" parent="Props/ClassAChair11"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassAChair11"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassADesk12" type="StaticBody2D" parent="Props"]
+position = Vector2(240, 224)
+
+[node name="Visual" type="Node2D" parent="Props/ClassADesk12"]
+script = ExtResource("2_prop")
+kind = "SchoolDesk"
+extent = Vector2(48, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassADesk12"]
+position = Vector2(24, 12)
+shape = SubResource("Rectangle_15")
+
+[node name="ClassAChair12" type="StaticBody2D" parent="Props"]
+position = Vector2(256, 256)
+
+[node name="Visual" type="Node2D" parent="Props/ClassAChair12"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassAChair12"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassATeacherDesk" type="StaticBody2D" parent="Props"]
+position = Vector2(80, 32)
+
+[node name="Visual" type="Node2D" parent="Props/ClassATeacherDesk"]
+script = ExtResource("2_prop")
+kind = "SchoolDesk"
+extent = Vector2(64, 28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassATeacherDesk"]
+position = Vector2(32, 14)
+shape = SubResource("Rectangle_17")
+
+[node name="ClassAShelf" type="StaticBody2D" parent="Props"]
+position = Vector2(256, 32)
+
+[node name="Visual" type="Node2D" parent="Props/ClassAShelf"]
+script = ExtResource("2_prop")
+kind = "Bookshelf"
+extent = Vector2(64, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassAShelf"]
+position = Vector2(32, 16)
+shape = SubResource("Rectangle_18")
+
+[node name="ClassBTable00" type="StaticBody2D" parent="Props"]
+position = Vector2(384, 112)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBTable00"]
+script = ExtResource("2_prop")
+kind = "GroupTable"
+extent = Vector2(96, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBTable00"]
+position = Vector2(48, 16)
+shape = SubResource("Rectangle_19")
+
+[node name="ClassBChair000" type="StaticBody2D" parent="Props"]
+position = Vector2(396, 152)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBChair000"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair000"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassBChair001" type="StaticBody2D" parent="Props"]
+position = Vector2(448, 152)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBChair001"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair001"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassBTable01" type="StaticBody2D" parent="Props"]
+position = Vector2(544, 112)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBTable01"]
+script = ExtResource("2_prop")
+kind = "GroupTable"
+extent = Vector2(96, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBTable01"]
+position = Vector2(48, 16)
+shape = SubResource("Rectangle_19")
+
+[node name="ClassBChair010" type="StaticBody2D" parent="Props"]
+position = Vector2(556, 152)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBChair010"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair010"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassBChair011" type="StaticBody2D" parent="Props"]
+position = Vector2(608, 152)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBChair011"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair011"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassBTable10" type="StaticBody2D" parent="Props"]
+position = Vector2(384, 240)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBTable10"]
+script = ExtResource("2_prop")
+kind = "GroupTable"
+extent = Vector2(96, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBTable10"]
+position = Vector2(48, 16)
+shape = SubResource("Rectangle_19")
+
+[node name="ClassBChair100" type="StaticBody2D" parent="Props"]
+position = Vector2(396, 280)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBChair100"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair100"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassBChair101" type="StaticBody2D" parent="Props"]
+position = Vector2(448, 280)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBChair101"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair101"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassBTable11" type="StaticBody2D" parent="Props"]
+position = Vector2(544, 240)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBTable11"]
+script = ExtResource("2_prop")
+kind = "GroupTable"
+extent = Vector2(96, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBTable11"]
+position = Vector2(48, 16)
+shape = SubResource("Rectangle_19")
+
+[node name="ClassBChair110" type="StaticBody2D" parent="Props"]
+position = Vector2(556, 280)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBChair110"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair110"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassBChair111" type="StaticBody2D" parent="Props"]
+position = Vector2(608, 280)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBChair111"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair111"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="ClassBTeacherDesk" type="StaticBody2D" parent="Props"]
+position = Vector2(528, 48)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBTeacherDesk"]
+script = ExtResource("2_prop")
+kind = "SchoolDesk"
+extent = Vector2(96, 28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBTeacherDesk"]
+position = Vector2(48, 14)
+shape = SubResource("Rectangle_20")
+
+[node name="ClassBShelf" type="StaticBody2D" parent="Props"]
+position = Vector2(368, 32)
+
+[node name="Visual" type="Node2D" parent="Props/ClassBShelf"]
+script = ExtResource("2_prop")
+kind = "Bookshelf"
+extent = Vector2(80, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBShelf"]
+position = Vector2(40, 16)
+shape = SubResource("Rectangle_21")
+
+[node name="ReceptionDesk" type="StaticBody2D" parent="Props"]
+position = Vector2(64, 576)
+
+[node name="Visual" type="Node2D" parent="Props/ReceptionDesk"]
+script = ExtResource("2_prop")
+kind = "ReceptionCounter"
+extent = Vector2(160, 40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ReceptionDesk"]
+position = Vector2(80, 20)
+shape = SubResource("Rectangle_22")
+
+[node name="ReceptionChair" type="StaticBody2D" parent="Props"]
+position = Vector2(128, 632)
+
+[node name="Visual" type="Node2D" parent="Props/ReceptionChair"]
+script = ExtResource("2_prop")
+kind = "HomeChair"
+extent = Vector2(24, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ReceptionChair"]
+position = Vector2(12, 12)
+shape = SubResource("Rectangle_23")
+
+[node name="ReceptionStorage" type="StaticBody2D" parent="Props"]
+position = Vector2(496, 576)
+
+[node name="Visual" type="Node2D" parent="Props/ReceptionStorage"]
+script = ExtResource("2_prop")
+kind = "Bookshelf"
+extent = Vector2(128, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ReceptionStorage"]
+position = Vector2(64, 16)
+shape = SubResource("Rectangle_24")
+
+[node name="LobbyBenchWest" type="StaticBody2D" parent="Props"]
+position = Vector2(64, 784)
+
+[node name="Visual" type="Node2D" parent="Props/LobbyBenchWest"]
+script = ExtResource("2_prop")
+kind = "CampusBench"
+extent = Vector2(96, 28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LobbyBenchWest"]
+position = Vector2(48, 14)
+shape = SubResource("Rectangle_20")
+
+[node name="LobbyBenchEast" type="StaticBody2D" parent="Props"]
+position = Vector2(400, 784)
+
+[node name="Visual" type="Node2D" parent="Props/LobbyBenchEast"]
+script = ExtResource("2_prop")
+kind = "CampusBench"
+extent = Vector2(112, 28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LobbyBenchEast"]
+position = Vector2(56, 14)
+shape = SubResource("Rectangle_25")
+
+[node name="LobbyPlant" type="StaticBody2D" parent="Props"]
+position = Vector2(608, 800)
+
+[node name="Visual" type="Node2D" parent="Props/LobbyPlant"]
+script = ExtResource("2_prop")
+kind = "Planter"
+extent = Vector2(24, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LobbyPlant"]
+position = Vector2(12, 16)
+shape = SubResource("Rectangle_26")
+
+[node name="ReceptionBin" type="StaticBody2D" parent="Props"]
+position = Vector2(240, 584)
+
+[node name="Visual" type="Node2D" parent="Props/ReceptionBin"]
+script = ExtResource("2_prop")
+kind = "Bin"
+extent = Vector2(16, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ReceptionBin"]
+position = Vector2(8, 12)
+shape = SubResource("Rectangle_27")
+
+[node name="ReceptionPlant" type="StaticBody2D" parent="Props"]
+position = Vector2(32, 576)
+
+[node name="Visual" type="Node2D" parent="Props/ReceptionPlant"]
+script = ExtResource("2_prop")
+kind = "Planter"
+extent = Vector2(24, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ReceptionPlant"]
+position = Vector2(12, 16)
+shape = SubResource("Rectangle_26")
 
 [node name="LockersA" type="StaticBody2D" parent="Props"]
 position = Vector2(352, 360)
@@ -686,31 +1249,7 @@ extent = Vector2(96, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LockersA"]
 position = Vector2(48, 16)
-shape = SubResource("Rectangle_15")
-
-[node name="LockersB" type="StaticBody2D" parent="Props"]
-position = Vector2(576, 360)
-
-[node name="Visual" type="Node2D" parent="Props/LockersB"]
-script = ExtResource("2_prop")
-kind = "Lockers"
-extent = Vector2(96, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LockersB"]
-position = Vector2(48, 16)
-shape = SubResource("Rectangle_15")
-
-[node name="LockersC" type="StaticBody2D" parent="Props"]
-position = Vector2(960, 360)
-
-[node name="Visual" type="Node2D" parent="Props/LockersC"]
-script = ExtResource("2_prop")
-kind = "Lockers"
-extent = Vector2(96, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LockersC"]
-position = Vector2(48, 16)
-shape = SubResource("Rectangle_15")
+shape = SubResource("Rectangle_19")
 
 [node name="LockersD" type="StaticBody2D" parent="Props"]
 position = Vector2(1120, 360)
@@ -722,1117 +1261,744 @@ extent = Vector2(96, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LockersD"]
 position = Vector2(48, 16)
-shape = SubResource("Rectangle_15")
-
-[node name="BenchA" type="StaticBody2D" parent="Props"]
-position = Vector2(400, 496)
-
-[node name="Visual" type="Node2D" parent="Props/BenchA"]
-script = ExtResource("2_prop")
-kind = "Bench"
-extent = Vector2(64, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/BenchA"]
-position = Vector2(32, 8)
-shape = SubResource("Rectangle_16")
-
-[node name="BenchB" type="StaticBody2D" parent="Props"]
-position = Vector2(1120, 496)
-
-[node name="Visual" type="Node2D" parent="Props/BenchB"]
-script = ExtResource("2_prop")
-kind = "Bench"
-extent = Vector2(64, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/BenchB"]
-position = Vector2(32, 8)
-shape = SubResource("Rectangle_16")
+shape = SubResource("Rectangle_19")
 
 [node name="WestBench" type="StaticBody2D" parent="Props"]
-position = Vector2(48, 496)
+position = Vector2(48, 484)
 
 [node name="Visual" type="Node2D" parent="Props/WestBench"]
 script = ExtResource("2_prop")
-kind = "Bench"
-extent = Vector2(96, 16)
+kind = "CampusBench"
+extent = Vector2(96, 28)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/WestBench"]
-position = Vector2(48, 8)
-shape = SubResource("Rectangle_17")
+position = Vector2(48, 14)
+shape = SubResource("Rectangle_20")
 
 [node name="EastBench" type="StaticBody2D" parent="Props"]
-position = Vector2(1440, 496)
+position = Vector2(1440, 484)
 
 [node name="Visual" type="Node2D" parent="Props/EastBench"]
 script = ExtResource("2_prop")
-kind = "Bench"
-extent = Vector2(96, 16)
+kind = "CampusBench"
+extent = Vector2(96, 28)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/EastBench"]
-position = Vector2(48, 8)
-shape = SubResource("Rectangle_17")
+position = Vector2(48, 14)
+shape = SubResource("Rectangle_20")
 
-[node name="NorthSpineLockers" type="StaticBody2D" parent="Props"]
-position = Vector2(720, 32)
+[node name="BenchA" type="StaticBody2D" parent="Props"]
+position = Vector2(576, 484)
 
-[node name="Visual" type="Node2D" parent="Props/NorthSpineLockers"]
+[node name="Visual" type="Node2D" parent="Props/BenchA"]
 script = ExtResource("2_prop")
-kind = "Cabinet"
-extent = Vector2(48, 32)
+kind = "CampusBench"
+extent = Vector2(80, 28)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/NorthSpineLockers"]
-position = Vector2(24, 16)
-shape = SubResource("Rectangle_18")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/BenchA"]
+position = Vector2(40, 14)
+shape = SubResource("Rectangle_28")
+
+[node name="BenchB" type="StaticBody2D" parent="Props"]
+position = Vector2(992, 484)
+
+[node name="Visual" type="Node2D" parent="Props/BenchB"]
+script = ExtResource("2_prop")
+kind = "CampusBench"
+extent = Vector2(80, 28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/BenchB"]
+position = Vector2(40, 14)
+shape = SubResource("Rectangle_28")
+
+[node name="JunctionPlantWest" type="StaticBody2D" parent="Props"]
+position = Vector2(720, 352)
+
+[node name="Visual" type="Node2D" parent="Props/JunctionPlantWest"]
+script = ExtResource("2_prop")
+kind = "Planter"
+extent = Vector2(24, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/JunctionPlantWest"]
+position = Vector2(12, 16)
+shape = SubResource("Rectangle_26")
+
+[node name="JunctionPlantEast" type="StaticBody2D" parent="Props"]
+position = Vector2(856, 496)
+
+[node name="Visual" type="Node2D" parent="Props/JunctionPlantEast"]
+script = ExtResource("2_prop")
+kind = "Planter"
+extent = Vector2(24, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/JunctionPlantEast"]
+position = Vector2(12, 16)
+shape = SubResource("Rectangle_26")
 
 [node name="SouthSpineBench" type="StaticBody2D" parent="Props"]
 position = Vector2(736, 832)
 
 [node name="Visual" type="Node2D" parent="Props/SouthSpineBench"]
 script = ExtResource("2_prop")
-kind = "Bench"
-extent = Vector2(128, 16)
+kind = "CampusBench"
+extent = Vector2(128, 28)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/SouthSpineBench"]
-position = Vector2(64, 8)
-shape = SubResource("Rectangle_19")
+position = Vector2(64, 14)
+shape = SubResource("Rectangle_29")
 
-[node name="ClassATeacherDesk" type="StaticBody2D" parent="Props"]
-position = Vector2(48, 48)
+[node name="NorthDisplayShelf" type="StaticBody2D" parent="Props"]
+position = Vector2(720, 32)
 
-[node name="Visual" type="Node2D" parent="Props/ClassATeacherDesk"]
+[node name="Visual" type="Node2D" parent="Props/NorthDisplayShelf"]
 script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(64, 24)
+kind = "Bookshelf"
+extent = Vector2(48, 32)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassATeacherDesk"]
-position = Vector2(32, 12)
-shape = SubResource("Rectangle_20")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/NorthDisplayShelf"]
+position = Vector2(24, 16)
+shape = SubResource("Rectangle_30")
 
-[node name="ClassADesk00" type="StaticBody2D" parent="Props"]
-position = Vector2(48, 112)
+[node name="HallBinWest" type="StaticBody2D" parent="Props"]
+position = Vector2(304, 360)
 
-[node name="Visual" type="Node2D" parent="Props/ClassADesk00"]
+[node name="Visual" type="Node2D" parent="Props/HallBinWest"]
 script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(48, 24)
+kind = "Bin"
+extent = Vector2(16, 24)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassADesk00"]
-position = Vector2(24, 12)
-shape = SubResource("Rectangle_21")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/HallBinWest"]
+position = Vector2(8, 12)
+shape = SubResource("Rectangle_27")
 
-[node name="ClassAChair00" type="StaticBody2D" parent="Props"]
-position = Vector2(64, 144)
+[node name="HallBinEast" type="StaticBody2D" parent="Props"]
+position = Vector2(1552, 488)
 
-[node name="Visual" type="Node2D" parent="Props/ClassAChair00"]
+[node name="Visual" type="Node2D" parent="Props/HallBinEast"]
 script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
+kind = "Bin"
+extent = Vector2(16, 24)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassAChair00"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/HallBinEast"]
+position = Vector2(8, 12)
+shape = SubResource("Rectangle_27")
 
-[node name="ClassADesk01" type="StaticBody2D" parent="Props"]
-position = Vector2(144, 112)
-
-[node name="Visual" type="Node2D" parent="Props/ClassADesk01"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(48, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassADesk01"]
-position = Vector2(24, 12)
-shape = SubResource("Rectangle_21")
-
-[node name="ClassAChair01" type="StaticBody2D" parent="Props"]
-position = Vector2(160, 144)
-
-[node name="Visual" type="Node2D" parent="Props/ClassAChair01"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassAChair01"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="ClassADesk02" type="StaticBody2D" parent="Props"]
-position = Vector2(240, 112)
-
-[node name="Visual" type="Node2D" parent="Props/ClassADesk02"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(48, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassADesk02"]
-position = Vector2(24, 12)
-shape = SubResource("Rectangle_21")
-
-[node name="ClassAChair02" type="StaticBody2D" parent="Props"]
-position = Vector2(256, 144)
-
-[node name="Visual" type="Node2D" parent="Props/ClassAChair02"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassAChair02"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="ClassADesk10" type="StaticBody2D" parent="Props"]
-position = Vector2(48, 224)
-
-[node name="Visual" type="Node2D" parent="Props/ClassADesk10"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(48, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassADesk10"]
-position = Vector2(24, 12)
-shape = SubResource("Rectangle_21")
-
-[node name="ClassAChair10" type="StaticBody2D" parent="Props"]
-position = Vector2(64, 256)
-
-[node name="Visual" type="Node2D" parent="Props/ClassAChair10"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassAChair10"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="ClassADesk11" type="StaticBody2D" parent="Props"]
-position = Vector2(144, 224)
-
-[node name="Visual" type="Node2D" parent="Props/ClassADesk11"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(48, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassADesk11"]
-position = Vector2(24, 12)
-shape = SubResource("Rectangle_21")
-
-[node name="ClassAChair11" type="StaticBody2D" parent="Props"]
-position = Vector2(160, 256)
-
-[node name="Visual" type="Node2D" parent="Props/ClassAChair11"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassAChair11"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="ClassADesk12" type="StaticBody2D" parent="Props"]
-position = Vector2(240, 224)
-
-[node name="Visual" type="Node2D" parent="Props/ClassADesk12"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(48, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassADesk12"]
-position = Vector2(24, 12)
-shape = SubResource("Rectangle_21")
-
-[node name="ClassAChair12" type="StaticBody2D" parent="Props"]
-position = Vector2(256, 256)
-
-[node name="Visual" type="Node2D" parent="Props/ClassAChair12"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassAChair12"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="ClassBTeacherDesk" type="StaticBody2D" parent="Props"]
-position = Vector2(384, 48)
-
-[node name="Visual" type="Node2D" parent="Props/ClassBTeacherDesk"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(64, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBTeacherDesk"]
-position = Vector2(32, 12)
-shape = SubResource("Rectangle_20")
-
-[node name="ClassBDesk00" type="StaticBody2D" parent="Props"]
-position = Vector2(384, 112)
-
-[node name="Visual" type="Node2D" parent="Props/ClassBDesk00"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(48, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBDesk00"]
-position = Vector2(24, 12)
-shape = SubResource("Rectangle_21")
-
-[node name="ClassBChair00" type="StaticBody2D" parent="Props"]
-position = Vector2(400, 144)
-
-[node name="Visual" type="Node2D" parent="Props/ClassBChair00"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair00"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="ClassBDesk01" type="StaticBody2D" parent="Props"]
-position = Vector2(480, 112)
-
-[node name="Visual" type="Node2D" parent="Props/ClassBDesk01"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(48, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBDesk01"]
-position = Vector2(24, 12)
-shape = SubResource("Rectangle_21")
-
-[node name="ClassBChair01" type="StaticBody2D" parent="Props"]
-position = Vector2(496, 144)
-
-[node name="Visual" type="Node2D" parent="Props/ClassBChair01"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair01"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="ClassBDesk02" type="StaticBody2D" parent="Props"]
-position = Vector2(576, 112)
-
-[node name="Visual" type="Node2D" parent="Props/ClassBDesk02"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(48, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBDesk02"]
-position = Vector2(24, 12)
-shape = SubResource("Rectangle_21")
-
-[node name="ClassBChair02" type="StaticBody2D" parent="Props"]
-position = Vector2(592, 144)
-
-[node name="Visual" type="Node2D" parent="Props/ClassBChair02"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair02"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="ClassBDesk10" type="StaticBody2D" parent="Props"]
-position = Vector2(384, 224)
-
-[node name="Visual" type="Node2D" parent="Props/ClassBDesk10"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(48, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBDesk10"]
-position = Vector2(24, 12)
-shape = SubResource("Rectangle_21")
-
-[node name="ClassBChair10" type="StaticBody2D" parent="Props"]
-position = Vector2(400, 256)
-
-[node name="Visual" type="Node2D" parent="Props/ClassBChair10"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair10"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="ClassBDesk11" type="StaticBody2D" parent="Props"]
-position = Vector2(480, 224)
-
-[node name="Visual" type="Node2D" parent="Props/ClassBDesk11"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(48, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBDesk11"]
-position = Vector2(24, 12)
-shape = SubResource("Rectangle_21")
-
-[node name="ClassBChair11" type="StaticBody2D" parent="Props"]
-position = Vector2(496, 256)
-
-[node name="Visual" type="Node2D" parent="Props/ClassBChair11"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair11"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="ClassBDesk12" type="StaticBody2D" parent="Props"]
-position = Vector2(576, 224)
-
-[node name="Visual" type="Node2D" parent="Props/ClassBDesk12"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(48, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBDesk12"]
-position = Vector2(24, 12)
-shape = SubResource("Rectangle_21")
-
-[node name="ClassBChair12" type="StaticBody2D" parent="Props"]
-position = Vector2(592, 256)
-
-[node name="Visual" type="Node2D" parent="Props/ClassBChair12"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ClassBChair12"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="ReceptionDesk" type="StaticBody2D" parent="Props"]
-position = Vector2(64, 576)
-
-[node name="Visual" type="Node2D" parent="Props/ReceptionDesk"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(128, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ReceptionDesk"]
-position = Vector2(64, 16)
-shape = SubResource("Rectangle_23")
-
-[node name="ReceptionChair" type="StaticBody2D" parent="Props"]
-position = Vector2(112, 624)
-
-[node name="Visual" type="Node2D" parent="Props/ReceptionChair"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(24, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ReceptionChair"]
-position = Vector2(12, 12)
-shape = SubResource("Rectangle_24")
-
-[node name="ReceptionCabinet" type="StaticBody2D" parent="Props"]
-position = Vector2(464, 576)
-
-[node name="Visual" type="Node2D" parent="Props/ReceptionCabinet"]
-script = ExtResource("2_prop")
-kind = "Cabinet"
-extent = Vector2(96, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/ReceptionCabinet"]
-position = Vector2(48, 16)
-shape = SubResource("Rectangle_15")
-
-[node name="LobbyBenchWest" type="StaticBody2D" parent="Props"]
-position = Vector2(64, 784)
-
-[node name="Visual" type="Node2D" parent="Props/LobbyBenchWest"]
-script = ExtResource("2_prop")
-kind = "Bench"
-extent = Vector2(96, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LobbyBenchWest"]
-position = Vector2(48, 8)
-shape = SubResource("Rectangle_17")
-
-[node name="LobbyBenchEast" type="StaticBody2D" parent="Props"]
-position = Vector2(384, 784)
-
-[node name="Visual" type="Node2D" parent="Props/LobbyBenchEast"]
-script = ExtResource("2_prop")
-kind = "Bench"
-extent = Vector2(128, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LobbyBenchEast"]
-position = Vector2(64, 8)
-shape = SubResource("Rectangle_19")
-
-[node name="LibraryShelf0" type="StaticBody2D" parent="Props"]
+[node name="LibraryShelfNorth" type="StaticBody2D" parent="Props"]
 position = Vector2(960, 32)
 
-[node name="Visual" type="Node2D" parent="Props/LibraryShelf0"]
+[node name="Visual" type="Node2D" parent="Props/LibraryShelfNorth"]
 script = ExtResource("2_prop")
-kind = "Cabinet"
+kind = "Bookshelf"
 extent = Vector2(128, 32)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryShelf0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryShelfNorth"]
 position = Vector2(64, 16)
-shape = SubResource("Rectangle_23")
+shape = SubResource("Rectangle_24")
 
-[node name="LibraryShelf1" type="StaticBody2D" parent="Props"]
+[node name="LibraryShelfCenter" type="StaticBody2D" parent="Props"]
 position = Vector2(1152, 32)
 
-[node name="Visual" type="Node2D" parent="Props/LibraryShelf1"]
+[node name="Visual" type="Node2D" parent="Props/LibraryShelfCenter"]
 script = ExtResource("2_prop")
-kind = "Cabinet"
+kind = "Bookshelf"
 extent = Vector2(128, 32)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryShelf1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryShelfCenter"]
 position = Vector2(64, 16)
-shape = SubResource("Rectangle_23")
+shape = SubResource("Rectangle_24")
 
-[node name="LibraryShelf2" type="StaticBody2D" parent="Props"]
+[node name="LibraryShelfIslandA" type="StaticBody2D" parent="Props"]
+position = Vector2(976, 112)
+
+[node name="Visual" type="Node2D" parent="Props/LibraryShelfIslandA"]
+script = ExtResource("2_prop")
+kind = "Bookshelf"
+extent = Vector2(32, 112)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryShelfIslandA"]
+position = Vector2(16, 56)
+shape = SubResource("Rectangle_31")
+
+[node name="LibraryShelfIslandB" type="StaticBody2D" parent="Props"]
+position = Vector2(1120, 112)
+
+[node name="Visual" type="Node2D" parent="Props/LibraryShelfIslandB"]
+script = ExtResource("2_prop")
+kind = "Bookshelf"
+extent = Vector2(32, 112)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryShelfIslandB"]
+position = Vector2(16, 56)
+shape = SubResource("Rectangle_31")
+
+[node name="LibraryReadingTable" type="StaticBody2D" parent="Props"]
+position = Vector2(1296, 144)
+
+[node name="Visual" type="Node2D" parent="Props/LibraryReadingTable"]
+script = ExtResource("2_prop")
+kind = "GroupTable"
+extent = Vector2(128, 40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryReadingTable"]
+position = Vector2(64, 20)
+shape = SubResource("Rectangle_32")
+
+[node name="LibraryChairA" type="StaticBody2D" parent="Props"]
+position = Vector2(1320, 200)
+
+[node name="Visual" type="Node2D" parent="Props/LibraryChairA"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryChairA"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="LibraryChairB" type="StaticBody2D" parent="Props"]
+position = Vector2(1384, 200)
+
+[node name="Visual" type="Node2D" parent="Props/LibraryChairB"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryChairB"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="LibraryCounter" type="StaticBody2D" parent="Props"]
 position = Vector2(1408, 32)
 
-[node name="Visual" type="Node2D" parent="Props/LibraryShelf2"]
+[node name="Visual" type="Node2D" parent="Props/LibraryCounter"]
 script = ExtResource("2_prop")
-kind = "Cabinet"
-extent = Vector2(128, 32)
+kind = "ReceptionCounter"
+extent = Vector2(96, 32)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryShelf2"]
-position = Vector2(64, 16)
-shape = SubResource("Rectangle_23")
-
-[node name="LibraryTable0" type="StaticBody2D" parent="Props"]
-position = Vector2(976, 128)
-
-[node name="Visual" type="Node2D" parent="Props/LibraryTable0"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(128, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryTable0"]
-position = Vector2(64, 16)
-shape = SubResource("Rectangle_23")
-
-[node name="LibraryChair0_24" type="StaticBody2D" parent="Props"]
-position = Vector2(1000, 176)
-
-[node name="Visual" type="Node2D" parent="Props/LibraryChair0_24"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryChair0_24"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="LibraryChair0_88" type="StaticBody2D" parent="Props"]
-position = Vector2(1064, 176)
-
-[node name="Visual" type="Node2D" parent="Props/LibraryChair0_88"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryChair0_88"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="LibraryTable1" type="StaticBody2D" parent="Props"]
-position = Vector2(1376, 128)
-
-[node name="Visual" type="Node2D" parent="Props/LibraryTable1"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(128, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryTable1"]
-position = Vector2(64, 16)
-shape = SubResource("Rectangle_23")
-
-[node name="LibraryChair1_24" type="StaticBody2D" parent="Props"]
-position = Vector2(1400, 176)
-
-[node name="Visual" type="Node2D" parent="Props/LibraryChair1_24"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryChair1_24"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="LibraryChair1_88" type="StaticBody2D" parent="Props"]
-position = Vector2(1464, 176)
-
-[node name="Visual" type="Node2D" parent="Props/LibraryChair1_88"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryChair1_88"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryCounter"]
+position = Vector2(48, 16)
+shape = SubResource("Rectangle_19")
 
 [node name="LibraryReadingBench" type="StaticBody2D" parent="Props"]
-position = Vector2(1120, 256)
+position = Vector2(1184, 280)
 
 [node name="Visual" type="Node2D" parent="Props/LibraryReadingBench"]
 script = ExtResource("2_prop")
-kind = "Bench"
-extent = Vector2(96, 16)
+kind = "CampusBench"
+extent = Vector2(80, 28)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryReadingBench"]
-position = Vector2(48, 8)
-shape = SubResource("Rectangle_17")
+position = Vector2(40, 14)
+shape = SubResource("Rectangle_28")
 
-[node name="StudyShelf0" type="StaticBody2D" parent="Props"]
-position = Vector2(960, 560)
+[node name="LibraryPlant" type="StaticBody2D" parent="Props"]
+position = Vector2(1536, 272)
 
-[node name="Visual" type="Node2D" parent="Props/StudyShelf0"]
+[node name="Visual" type="Node2D" parent="Props/LibraryPlant"]
 script = ExtResource("2_prop")
-kind = "Cabinet"
+kind = "Planter"
+extent = Vector2(24, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryPlant"]
+position = Vector2(12, 16)
+shape = SubResource("Rectangle_26")
+
+[node name="StudyGroupA" type="StaticBody2D" parent="Props"]
+position = Vector2(992, 624)
+
+[node name="Visual" type="Node2D" parent="Props/StudyGroupA"]
+script = ExtResource("2_prop")
+kind = "GroupTable"
+extent = Vector2(96, 48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyGroupA"]
+position = Vector2(48, 24)
+shape = SubResource("Rectangle_33")
+
+[node name="StudyGroupB" type="StaticBody2D" parent="Props"]
+position = Vector2(1200, 688)
+
+[node name="Visual" type="Node2D" parent="Props/StudyGroupB"]
+script = ExtResource("2_prop")
+kind = "GroupTable"
+extent = Vector2(112, 48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyGroupB"]
+position = Vector2(56, 24)
+shape = SubResource("Rectangle_34")
+
+[node name="StudyGroupC" type="StaticBody2D" parent="Props"]
+position = Vector2(1408, 592)
+
+[node name="Visual" type="Node2D" parent="Props/StudyGroupC"]
+script = ExtResource("2_prop")
+kind = "GroupTable"
+extent = Vector2(112, 48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyGroupC"]
+position = Vector2(56, 24)
+shape = SubResource("Rectangle_34")
+
+[node name="StudyChairA" type="StaticBody2D" parent="Props"]
+position = Vector2(1016, 688)
+
+[node name="Visual" type="Node2D" parent="Props/StudyChairA"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyChairA"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="StudyChairB" type="StaticBody2D" parent="Props"]
+position = Vector2(1056, 688)
+
+[node name="Visual" type="Node2D" parent="Props/StudyChairB"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyChairB"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="StudyChairC" type="StaticBody2D" parent="Props"]
+position = Vector2(1224, 752)
+
+[node name="Visual" type="Node2D" parent="Props/StudyChairC"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyChairC"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="StudyChairD" type="StaticBody2D" parent="Props"]
+position = Vector2(1280, 752)
+
+[node name="Visual" type="Node2D" parent="Props/StudyChairD"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyChairD"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="StudyChairE" type="StaticBody2D" parent="Props"]
+position = Vector2(1432, 656)
+
+[node name="Visual" type="Node2D" parent="Props/StudyChairE"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyChairE"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="StudyChairF" type="StaticBody2D" parent="Props"]
+position = Vector2(1480, 656)
+
+[node name="Visual" type="Node2D" parent="Props/StudyChairF"]
+script = ExtResource("2_prop")
+kind = "SchoolChair"
+extent = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyChairF"]
+position = Vector2(10, 10)
+shape = SubResource("Rectangle_16")
+
+[node name="StudyStorage" type="StaticBody2D" parent="Props"]
+position = Vector2(944, 560)
+
+[node name="Visual" type="Node2D" parent="Props/StudyStorage"]
+script = ExtResource("2_prop")
+kind = "Bookshelf"
 extent = Vector2(128, 32)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyShelf0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyStorage"]
 position = Vector2(64, 16)
-shape = SubResource("Rectangle_23")
+shape = SubResource("Rectangle_24")
 
-[node name="StudyShelf1" type="StaticBody2D" parent="Props"]
-position = Vector2(1152, 560)
+[node name="StudySideboard" type="StaticBody2D" parent="Props"]
+position = Vector2(1360, 832)
 
-[node name="Visual" type="Node2D" parent="Props/StudyShelf1"]
+[node name="Visual" type="Node2D" parent="Props/StudySideboard"]
 script = ExtResource("2_prop")
-kind = "Cabinet"
-extent = Vector2(128, 32)
+kind = "Bookshelf"
+extent = Vector2(160, 32)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyShelf1"]
-position = Vector2(64, 16)
-shape = SubResource("Rectangle_23")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudySideboard"]
+position = Vector2(80, 16)
+shape = SubResource("Rectangle_35")
 
-[node name="StudyShelf2" type="StaticBody2D" parent="Props"]
-position = Vector2(1408, 560)
+[node name="StudyPlant" type="StaticBody2D" parent="Props"]
+position = Vector2(1504, 816)
 
-[node name="Visual" type="Node2D" parent="Props/StudyShelf2"]
+[node name="Visual" type="Node2D" parent="Props/StudyPlant"]
 script = ExtResource("2_prop")
-kind = "Cabinet"
-extent = Vector2(128, 32)
+kind = "Planter"
+extent = Vector2(24, 32)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyShelf2"]
-position = Vector2(64, 16)
-shape = SubResource("Rectangle_23")
-
-[node name="StudyTable0" type="StaticBody2D" parent="Props"]
-position = Vector2(976, 656)
-
-[node name="Visual" type="Node2D" parent="Props/StudyTable0"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(128, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyTable0"]
-position = Vector2(64, 16)
-shape = SubResource("Rectangle_23")
-
-[node name="StudyChair0_24" type="StaticBody2D" parent="Props"]
-position = Vector2(1000, 704)
-
-[node name="Visual" type="Node2D" parent="Props/StudyChair0_24"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyChair0_24"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="StudyChair0_88" type="StaticBody2D" parent="Props"]
-position = Vector2(1064, 704)
-
-[node name="Visual" type="Node2D" parent="Props/StudyChair0_88"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyChair0_88"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="StudyTable1" type="StaticBody2D" parent="Props"]
-position = Vector2(1376, 656)
-
-[node name="Visual" type="Node2D" parent="Props/StudyTable1"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(128, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyTable1"]
-position = Vector2(64, 16)
-shape = SubResource("Rectangle_23")
-
-[node name="StudyChair1_24" type="StaticBody2D" parent="Props"]
-position = Vector2(1400, 704)
-
-[node name="Visual" type="Node2D" parent="Props/StudyChair1_24"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyChair1_24"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="StudyChair1_88" type="StaticBody2D" parent="Props"]
-position = Vector2(1464, 704)
-
-[node name="Visual" type="Node2D" parent="Props/StudyChair1_88"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyChair1_88"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="StudyReadingBench" type="StaticBody2D" parent="Props"]
-position = Vector2(1120, 784)
-
-[node name="Visual" type="Node2D" parent="Props/StudyReadingBench"]
-script = ExtResource("2_prop")
-kind = "Bench"
-extent = Vector2(96, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyReadingBench"]
-position = Vector2(48, 8)
-shape = SubResource("Rectangle_17")
-
-[node name="LibraryCenterTable" type="StaticBody2D" parent="Props"]
-position = Vector2(1152, 128)
-
-[node name="Visual" type="Node2D" parent="Props/LibraryCenterTable"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(96, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryCenterTable"]
-position = Vector2(48, 16)
-shape = SubResource("Rectangle_15")
-
-[node name="LibraryCenterChairA" type="StaticBody2D" parent="Props"]
-position = Vector2(1168, 176)
-
-[node name="Visual" type="Node2D" parent="Props/LibraryCenterChairA"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryCenterChairA"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="LibraryCenterChairB" type="StaticBody2D" parent="Props"]
-position = Vector2(1216, 176)
-
-[node name="Visual" type="Node2D" parent="Props/LibraryCenterChairB"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/LibraryCenterChairB"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="StudyCenterTable" type="StaticBody2D" parent="Props"]
-position = Vector2(1152, 656)
-
-[node name="Visual" type="Node2D" parent="Props/StudyCenterTable"]
-script = ExtResource("2_prop")
-kind = "Desk"
-extent = Vector2(96, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyCenterTable"]
-position = Vector2(48, 16)
-shape = SubResource("Rectangle_15")
-
-[node name="StudyCenterChairA" type="StaticBody2D" parent="Props"]
-position = Vector2(1168, 704)
-
-[node name="Visual" type="Node2D" parent="Props/StudyCenterChairA"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyCenterChairA"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
-
-[node name="StudyCenterChairB" type="StaticBody2D" parent="Props"]
-position = Vector2(1216, 704)
-
-[node name="Visual" type="Node2D" parent="Props/StudyCenterChairB"]
-script = ExtResource("2_prop")
-kind = "Chair"
-extent = Vector2(16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyCenterChairB"]
-position = Vector2(8, 8)
-shape = SubResource("Rectangle_22")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/StudyPlant"]
+position = Vector2(12, 16)
+shape = SubResource("Rectangle_26")
 
 [node name="Decoration" type="Node2D" parent="."]
 
-[node name="LibraryBooks0_0" type="Polygon2D" parent="Decoration"]
-position = Vector2(968, 40)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 16, 0, 16)
-color = Color(0.37, 0.48, 0.5, 1)
 
-[node name="LibraryBooks0_1" type="Polygon2D" parent="Decoration"]
-position = Vector2(986, 42)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 14, 0, 14)
-color = Color(0.64, 0.56, 0.4, 1)
-
-[node name="LibraryBooks0_2" type="Polygon2D" parent="Decoration"]
-position = Vector2(1004, 40)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 16, 0, 16)
-color = Color(0.47, 0.55, 0.44, 1)
-
-[node name="LibraryBooks0_3" type="Polygon2D" parent="Decoration"]
-position = Vector2(1022, 42)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 14, 0, 14)
-color = Color(0.37, 0.48, 0.5, 1)
-
-[node name="LibraryBooks0_4" type="Polygon2D" parent="Decoration"]
-position = Vector2(1040, 40)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 16, 0, 16)
-color = Color(0.64, 0.56, 0.4, 1)
-
-[node name="LibraryBooks0_5" type="Polygon2D" parent="Decoration"]
-position = Vector2(1058, 42)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 14, 0, 14)
-color = Color(0.47, 0.55, 0.44, 1)
-
-[node name="LibraryBooks1_0" type="Polygon2D" parent="Decoration"]
-position = Vector2(1160, 40)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 16, 0, 16)
-color = Color(0.37, 0.48, 0.5, 1)
-
-[node name="LibraryBooks1_1" type="Polygon2D" parent="Decoration"]
-position = Vector2(1178, 42)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 14, 0, 14)
-color = Color(0.64, 0.56, 0.4, 1)
-
-[node name="LibraryBooks1_2" type="Polygon2D" parent="Decoration"]
-position = Vector2(1196, 40)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 16, 0, 16)
-color = Color(0.47, 0.55, 0.44, 1)
-
-[node name="LibraryBooks1_3" type="Polygon2D" parent="Decoration"]
-position = Vector2(1214, 42)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 14, 0, 14)
-color = Color(0.37, 0.48, 0.5, 1)
-
-[node name="LibraryBooks1_4" type="Polygon2D" parent="Decoration"]
-position = Vector2(1232, 40)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 16, 0, 16)
-color = Color(0.64, 0.56, 0.4, 1)
-
-[node name="LibraryBooks1_5" type="Polygon2D" parent="Decoration"]
-position = Vector2(1250, 42)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 14, 0, 14)
-color = Color(0.47, 0.55, 0.44, 1)
-
-[node name="LibraryBooks2_0" type="Polygon2D" parent="Decoration"]
-position = Vector2(1416, 40)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 16, 0, 16)
-color = Color(0.37, 0.48, 0.5, 1)
-
-[node name="LibraryBooks2_1" type="Polygon2D" parent="Decoration"]
-position = Vector2(1434, 42)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 14, 0, 14)
-color = Color(0.64, 0.56, 0.4, 1)
-
-[node name="LibraryBooks2_2" type="Polygon2D" parent="Decoration"]
-position = Vector2(1452, 40)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 16, 0, 16)
-color = Color(0.47, 0.55, 0.44, 1)
-
-[node name="LibraryBooks2_3" type="Polygon2D" parent="Decoration"]
-position = Vector2(1470, 42)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 14, 0, 14)
-color = Color(0.37, 0.48, 0.5, 1)
-
-[node name="LibraryBooks2_4" type="Polygon2D" parent="Decoration"]
-position = Vector2(1488, 40)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 16, 0, 16)
-color = Color(0.64, 0.56, 0.4, 1)
-
-[node name="LibraryBooks2_5" type="Polygon2D" parent="Decoration"]
-position = Vector2(1506, 42)
-polygon = PackedVector2Array(0, 0, 12, 0, 12, 14, 0, 14)
-color = Color(0.47, 0.55, 0.44, 1)
-
-
-[node name="BoardA" type="Node2D" parent="Decoration"]
-position = Vector2(80, 530)
-script = ExtResource("2_prop")
-kind = "Board"
-extent = Vector2(64, 12)
-
-[node name="BoardB" type="Node2D" parent="Decoration"]
-position = Vector2(1440, 338)
-script = ExtResource("2_prop")
-kind = "Board"
-extent = Vector2(96, 12)
-
-[node name="ReceptionNotices" type="Node2D" parent="Decoration"]
-position = Vector2(64, 548)
-script = ExtResource("2_prop")
-kind = "Board"
-extent = Vector2(96, 16)
-
-[node name="JunctionNotices" type="Node2D" parent="Decoration"]
-position = Vector2(736, 2)
-script = ExtResource("2_prop")
-kind = "Board"
-extent = Vector2(128, 12)
-
-[node name="ClassABoardFrame" type="Polygon2D" parent="Decoration"]
+[node name="ClassABoard" type="Node2D" parent="Decoration"]
 position = Vector2(144, 18)
-polygon = PackedVector2Array(0, 0, 128, 0, 128, 24, 0, 24)
-color = Color(0.45882, 0.4, 0.31765, 1)
+script = ExtResource("2_prop")
+kind = "TeachingBoard"
+extent = Vector2(128, 28)
 
-[node name="ClassAChalkboard" type="Polygon2D" parent="Decoration"]
-position = Vector2(148, 20)
-polygon = PackedVector2Array(0, 0, 120, 0, 120, 18, 0, 18)
-color = Color(0.21176, 0.3098, 0.2902, 1)
+[node name="ClassBBoard" type="Node2D" parent="Decoration"]
+position = Vector2(384, 18)
+script = ExtResource("2_prop")
+kind = "TeachingBoard"
+extent = Vector2(128, 28)
 
-[node name="ClassAChalkLine" type="Polygon2D" parent="Decoration"]
-position = Vector2(160, 26)
-polygon = PackedVector2Array(0, 0, 48, 0, 48, 2, 0, 2)
-color = Color(0.70588, 0.72941, 0.65098, 1)
+[node name="ClassAMaterials" type="Node2D" parent="Decoration"]
+position = Vector2(272, 68)
+script = ExtResource("2_prop")
+kind = "Noticeboard"
+extent = Vector2(48, 24)
 
-[node name="ClassAChalkDiagram" type="Polygon2D" parent="Decoration"]
-position = Vector2(224, 24)
-polygon = PackedVector2Array(0, 0, 20, 0, 20, 10, 0, 10)
-color = Color(0.45882, 0.54118, 0.45882, 1)
+[node name="ClassBMaterials" type="Node2D" parent="Decoration"]
+position = Vector2(608, 80)
+script = ExtResource("2_prop")
+kind = "Noticeboard"
+extent = Vector2(64, 24)
 
 [node name="ClassAWindow" type="Node2D" parent="Decoration"]
 position = Vector2(32, 2)
 script = ExtResource("2_prop")
-kind = "Window"
-extent = Vector2(96, 12)
-
-[node name="ClassBBoardFrame" type="Polygon2D" parent="Decoration"]
-position = Vector2(480, 18)
-polygon = PackedVector2Array(0, 0, 128, 0, 128, 24, 0, 24)
-color = Color(0.45882, 0.4, 0.31765, 1)
-
-[node name="ClassBChalkboard" type="Polygon2D" parent="Decoration"]
-position = Vector2(484, 20)
-polygon = PackedVector2Array(0, 0, 120, 0, 120, 18, 0, 18)
-color = Color(0.21176, 0.3098, 0.2902, 1)
-
-[node name="ClassBChalkLine" type="Polygon2D" parent="Decoration"]
-position = Vector2(496, 26)
-polygon = PackedVector2Array(0, 0, 48, 0, 48, 2, 0, 2)
-color = Color(0.70588, 0.72941, 0.65098, 1)
-
-[node name="ClassBChalkDiagram" type="Polygon2D" parent="Decoration"]
-position = Vector2(560, 24)
-polygon = PackedVector2Array(0, 0, 20, 0, 20, 10, 0, 10)
-color = Color(0.45882, 0.54118, 0.45882, 1)
+kind = "SchoolWindow"
+extent = Vector2(96, 14)
 
 [node name="ClassBWindow" type="Node2D" parent="Decoration"]
-position = Vector2(368, 2)
+position = Vector2(480, 2)
 script = ExtResource("2_prop")
-kind = "Window"
-extent = Vector2(96, 12)
+kind = "SchoolWindow"
+extent = Vector2(96, 14)
+
+[node name="ClassBClock" type="Node2D" parent="Decoration"]
+position = Vector2(652, 26)
+script = ExtResource("2_prop")
+kind = "Clock"
+extent = Vector2(20, 20)
+
+[node name="ClassAClock" type="Node2D" parent="Decoration"]
+position = Vector2(304, 26)
+script = ExtResource("2_prop")
+kind = "Clock"
+extent = Vector2(20, 20)
+
+[node name="NorthWindow" type="Node2D" parent="Decoration"]
+position = Vector2(752, 2)
+script = ExtResource("2_prop")
+kind = "SchoolWindow"
+extent = Vector2(96, 14)
+
+[node name="LobbyWindowWest" type="Node2D" parent="Decoration"]
+position = Vector2(48, 882)
+script = ExtResource("2_prop")
+kind = "SchoolWindow"
+extent = Vector2(128, 12)
+
+[node name="LobbyWindowEast" type="Node2D" parent="Decoration"]
+position = Vector2(464, 882)
+script = ExtResource("2_prop")
+kind = "SchoolWindow"
+extent = Vector2(128, 12)
+
+[node name="ReceptionNoticeboard" type="Node2D" parent="Decoration"]
+position = Vector2(64, 548)
+script = ExtResource("2_prop")
+kind = "Noticeboard"
+extent = Vector2(128, 24)
+
+[node name="LobbyCalendar" type="Node2D" parent="Decoration"]
+position = Vector2(232, 548)
+script = ExtResource("2_prop")
+kind = "Calendar"
+extent = Vector2(24, 24)
+
+[node name="LobbyInformation" type="Node2D" parent="Decoration"]
+position = Vector2(432, 548)
+script = ExtResource("2_prop")
+kind = "Noticeboard"
+extent = Vector2(96, 24)
+
+[node name="HallwayPosterWest" type="Node2D" parent="Decoration"]
+position = Vector2(32, 354)
+script = ExtResource("2_prop")
+kind = "Noticeboard"
+extent = Vector2(80, 24)
+
+[node name="HallwayPosterEast" type="Node2D" parent="Decoration"]
+position = Vector2(1392, 354)
+script = ExtResource("2_prop")
+kind = "Noticeboard"
+extent = Vector2(96, 24)
+
+[node name="CorridorClock" type="Node2D" parent="Decoration"]
+position = Vector2(1504, 354)
+script = ExtResource("2_prop")
+kind = "Clock"
+extent = Vector2(20, 20)
+
+[node name="JunctionNoticeboard" type="Node2D" parent="Decoration"]
+position = Vector2(768, 32)
+script = ExtResource("2_prop")
+kind = "Noticeboard"
+extent = Vector2(96, 24)
+
+[node name="StudyMaterials" type="Node2D" parent="Decoration"]
+position = Vector2(1120, 546)
+script = ExtResource("2_prop")
+kind = "Noticeboard"
+extent = Vector2(96, 24)
 
 [node name="LibraryWindow0" type="Node2D" parent="Decoration"]
 position = Vector2(960, 2)
 script = ExtResource("2_prop")
-kind = "Window"
+kind = "SchoolWindow"
+extent = Vector2(128, 14)
+
+[node name="StudyWindow0" type="Node2D" parent="Decoration"]
+position = Vector2(960, 882)
+script = ExtResource("2_prop")
+kind = "SchoolWindow"
 extent = Vector2(128, 12)
 
 [node name="LibraryWindow1" type="Node2D" parent="Decoration"]
 position = Vector2(1184, 2)
 script = ExtResource("2_prop")
-kind = "Window"
+kind = "SchoolWindow"
+extent = Vector2(128, 14)
+
+[node name="StudyWindow1" type="Node2D" parent="Decoration"]
+position = Vector2(1184, 882)
+script = ExtResource("2_prop")
+kind = "SchoolWindow"
 extent = Vector2(128, 12)
 
 [node name="LibraryWindow2" type="Node2D" parent="Decoration"]
 position = Vector2(1408, 2)
 script = ExtResource("2_prop")
-kind = "Window"
-extent = Vector2(128, 12)
-
-[node name="StudyWindow0" type="Node2D" parent="Decoration"]
-position = Vector2(960, 882)
-script = ExtResource("2_prop")
-kind = "Window"
-extent = Vector2(128, 12)
-
-[node name="StudyWindow1" type="Node2D" parent="Decoration"]
-position = Vector2(1184, 882)
-script = ExtResource("2_prop")
-kind = "Window"
-extent = Vector2(128, 12)
+kind = "SchoolWindow"
+extent = Vector2(128, 14)
 
 [node name="StudyWindow2" type="Node2D" parent="Decoration"]
 position = Vector2(1408, 882)
 script = ExtResource("2_prop")
-kind = "Window"
-extent = Vector2(128, 12)
-
-[node name="LobbyWindow0" type="Node2D" parent="Decoration"]
-position = Vector2(48, 882)
-script = ExtResource("2_prop")
-kind = "Window"
-extent = Vector2(128, 12)
-
-[node name="LobbyWindow1" type="Node2D" parent="Decoration"]
-position = Vector2(448, 882)
-script = ExtResource("2_prop")
-kind = "Window"
+kind = "SchoolWindow"
 extent = Vector2(128, 12)
 
 [node name="ClassroomAThreshold" type="Polygon2D" parent="Decoration"]
 position = Vector2(128, 336)
 polygon = PackedVector2Array(0, 0, 96, 0, 96, 16, 0, 16)
-color = Color(0.77647, 0.72157, 0.56863, 1)
+color = Color(0.7098, 0.58824, 0.40784, 1)
 
 [node name="ClassroomAJambLeft" type="Polygon2D" parent="Decoration"]
 position = Vector2(128, 336)
 polygon = PackedVector2Array(0, 0, 4, 0, 4, 16, 0, 16)
-color = Color(0.34118, 0.30588, 0.27059, 1)
+color = Color(0.53333, 0.4, 0.28235, 1)
 
 [node name="ClassroomAJambRight" type="Polygon2D" parent="Decoration"]
 position = Vector2(220, 336)
 polygon = PackedVector2Array(0, 0, 4, 0, 4, 16, 0, 16)
-color = Color(0.34118, 0.30588, 0.27059, 1)
+color = Color(0.53333, 0.4, 0.28235, 1)
 
 [node name="ClassroomBThreshold" type="Polygon2D" parent="Decoration"]
 position = Vector2(464, 336)
 polygon = PackedVector2Array(0, 0, 96, 0, 96, 16, 0, 16)
-color = Color(0.77647, 0.72157, 0.56863, 1)
+color = Color(0.7098, 0.58824, 0.40784, 1)
 
 [node name="ClassroomBJambLeft" type="Polygon2D" parent="Decoration"]
 position = Vector2(464, 336)
 polygon = PackedVector2Array(0, 0, 4, 0, 4, 16, 0, 16)
-color = Color(0.34118, 0.30588, 0.27059, 1)
+color = Color(0.53333, 0.4, 0.28235, 1)
 
 [node name="ClassroomBJambRight" type="Polygon2D" parent="Decoration"]
 position = Vector2(556, 336)
 polygon = PackedVector2Array(0, 0, 4, 0, 4, 16, 0, 16)
-color = Color(0.34118, 0.30588, 0.27059, 1)
+color = Color(0.53333, 0.4, 0.28235, 1)
 
 [node name="LibraryDoorThreshold" type="Polygon2D" parent="Decoration"]
 position = Vector2(1280, 336)
 polygon = PackedVector2Array(0, 0, 96, 0, 96, 16, 0, 16)
-color = Color(0.77647, 0.72157, 0.56863, 1)
+color = Color(0.7098, 0.58824, 0.40784, 1)
 
 [node name="LibraryDoorJambLeft" type="Polygon2D" parent="Decoration"]
 position = Vector2(1280, 336)
 polygon = PackedVector2Array(0, 0, 4, 0, 4, 16, 0, 16)
-color = Color(0.34118, 0.30588, 0.27059, 1)
+color = Color(0.53333, 0.4, 0.28235, 1)
 
 [node name="LibraryDoorJambRight" type="Polygon2D" parent="Decoration"]
 position = Vector2(1372, 336)
 polygon = PackedVector2Array(0, 0, 4, 0, 4, 16, 0, 16)
-color = Color(0.34118, 0.30588, 0.27059, 1)
+color = Color(0.53333, 0.4, 0.28235, 1)
 
 [node name="LobbyDoorThreshold" type="Polygon2D" parent="Decoration"]
 position = Vector2(160, 528)
 polygon = PackedVector2Array(0, 0, 128, 0, 128, 16, 0, 16)
-color = Color(0.77647, 0.72157, 0.56863, 1)
+color = Color(0.7098, 0.58824, 0.40784, 1)
 
 [node name="LobbyDoorJambLeft" type="Polygon2D" parent="Decoration"]
 position = Vector2(160, 528)
 polygon = PackedVector2Array(0, 0, 4, 0, 4, 16, 0, 16)
-color = Color(0.34118, 0.30588, 0.27059, 1)
+color = Color(0.53333, 0.4, 0.28235, 1)
 
 [node name="LobbyDoorJambRight" type="Polygon2D" parent="Decoration"]
 position = Vector2(284, 528)
 polygon = PackedVector2Array(0, 0, 4, 0, 4, 16, 0, 16)
-color = Color(0.34118, 0.30588, 0.27059, 1)
+color = Color(0.53333, 0.4, 0.28235, 1)
 
 [node name="StudyDoorThreshold" type="Polygon2D" parent="Decoration"]
 position = Vector2(1280, 528)
 polygon = PackedVector2Array(0, 0, 96, 0, 96, 16, 0, 16)
-color = Color(0.77647, 0.72157, 0.56863, 1)
+color = Color(0.7098, 0.58824, 0.40784, 1)
 
 [node name="StudyDoorJambLeft" type="Polygon2D" parent="Decoration"]
 position = Vector2(1280, 528)
 polygon = PackedVector2Array(0, 0, 4, 0, 4, 16, 0, 16)
-color = Color(0.34118, 0.30588, 0.27059, 1)
+color = Color(0.53333, 0.4, 0.28235, 1)
 
 [node name="StudyDoorJambRight" type="Polygon2D" parent="Decoration"]
 position = Vector2(1372, 528)
 polygon = PackedVector2Array(0, 0, 4, 0, 4, 16, 0, 16)
-color = Color(0.34118, 0.30588, 0.27059, 1)
+color = Color(0.53333, 0.4, 0.28235, 1)
 
 [node name="ClassBEastThreshold" type="Polygon2D" parent="Decoration"]
 position = Vector2(688, 176)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 96, 0, 96)
-color = Color(0.77647, 0.72157, 0.56863, 1)
+color = Color(0.7098, 0.58824, 0.40784, 1)
 
 [node name="LibraryWestThreshold" type="Polygon2D" parent="Decoration"]
 position = Vector2(896, 176)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 96, 0, 96)
-color = Color(0.77647, 0.72157, 0.56863, 1)
+color = Color(0.7098, 0.58824, 0.40784, 1)
 
 [node name="LobbyEastThreshold" type="Polygon2D" parent="Decoration"]
 position = Vector2(688, 656)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 96, 0, 96)
-color = Color(0.77647, 0.72157, 0.56863, 1)
+color = Color(0.7098, 0.58824, 0.40784, 1)
 
 [node name="StudyWestThreshold" type="Polygon2D" parent="Decoration"]
 position = Vector2(896, 656)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 96, 0, 96)
-color = Color(0.77647, 0.72157, 0.56863, 1)
+color = Color(0.7098, 0.58824, 0.40784, 1)
 
-[node name="ClassroomC" type="Node2D" parent="Decoration"]
-position = Vector2(192, 2)
-script = ExtResource("2_prop")
-kind = "ClassroomDoor"
-extent = Vector2(48, 12)
+[node name="ClassASignBacking" type="Polygon2D" parent="Decoration"]
+position = Vector2(240, 338)
+polygon = PackedVector2Array(0, 0, 48, 0, 48, 16, 0, 16)
+color = Color(0.55686, 0.4549, 0.32549, 1)
+
+[node name="ClassASign" type="Label" parent="Decoration"]
+offset_left = 244
+offset_top = 339
+offset_right = 286
+offset_bottom = 353
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.94118, 0.89412, 0.77647, 1)
+theme_override_font_sizes/font_size = 10
+text = "01"
+
+[node name="ClassBSignBacking" type="Polygon2D" parent="Decoration"]
+position = Vector2(576, 338)
+polygon = PackedVector2Array(0, 0, 48, 0, 48, 16, 0, 16)
+color = Color(0.55686, 0.4549, 0.32549, 1)
+
+[node name="ClassBSign" type="Label" parent="Decoration"]
+offset_left = 580
+offset_top = 339
+offset_right = 622
+offset_bottom = 353
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.94118, 0.89412, 0.77647, 1)
+theme_override_font_sizes/font_size = 10
+text = "02"
+
+[node name="LibrarySignBacking" type="Polygon2D" parent="Decoration"]
+position = Vector2(1392, 338)
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 16, 0, 16)
+color = Color(0.55686, 0.4549, 0.32549, 1)
+
+[node name="LibrarySign" type="Label" parent="Decoration"]
+offset_left = 1396
+offset_top = 339
+offset_right = 1486
+offset_bottom = 353
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.94118, 0.89412, 0.77647, 1)
+theme_override_font_sizes/font_size = 10
+text = "LIBRARY"
+
+[node name="StudySignBacking" type="Polygon2D" parent="Decoration"]
+position = Vector2(1392, 530)
+polygon = PackedVector2Array(0, 0, 80, 0, 80, 16, 0, 16)
+color = Color(0.55686, 0.4549, 0.32549, 1)
+
+[node name="StudySign" type="Label" parent="Decoration"]
+offset_left = 1396
+offset_top = 531
+offset_right = 1470
+offset_bottom = 545
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.94118, 0.89412, 0.77647, 1)
+theme_override_font_sizes/font_size = 10
+text = "STUDY"
+
+[node name="GardenSignBacking" type="Polygon2D" parent="Decoration"]
+position = Vector2(1512, 360)
+polygon = PackedVector2Array(0, 0, 56, 0, 56, 16, 0, 16)
+color = Color(0.55686, 0.4549, 0.32549, 1)
+
+[node name="GardenSign" type="Label" parent="Decoration"]
+offset_left = 1516
+offset_top = 361
+offset_right = 1566
+offset_bottom = 375
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.94118, 0.89412, 0.77647, 1)
+theme_override_font_sizes/font_size = 10
+text = "EXIT"
 
 [node name="EntranceFrame" type="Polygon2D" parent="Decoration"]
 position = Vector2(208, 880)
 polygon = PackedVector2Array(0, 0, 128, 0, 128, 16, 0, 16)
-color = Color(0.23922, 0.31765, 0.33333, 1)
+color = Color(0.58039, 0.45882, 0.31373, 1)
 
 [node name="EntranceGlassLeft" type="Polygon2D" parent="Decoration"]
 position = Vector2(212, 882)
 polygon = PackedVector2Array(0, 0, 58, 0, 58, 10, 0, 10)
-color = Color(0.55686, 0.64314, 0.65098, 1)
+color = Color(0.72941, 0.81569, 0.73725, 1)
 
 [node name="EntranceGlassRight" type="Polygon2D" parent="Decoration"]
 position = Vector2(274, 882)
 polygon = PackedVector2Array(0, 0, 58, 0, 58, 10, 0, 10)
-color = Color(0.55686, 0.64314, 0.65098, 1)
+color = Color(0.72941, 0.81569, 0.73725, 1)
 
 [node name="GardenDoorFrame" type="Polygon2D" parent="Decoration"]
 position = Vector2(1584, 392)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 80, 0, 80)
-color = Color(0.23922, 0.31765, 0.33333, 1)
+color = Color(0.58039, 0.45882, 0.31373, 1)
 
 [node name="GardenDoorGlassTop" type="Polygon2D" parent="Decoration"]
 position = Vector2(1586, 396)
 polygon = PackedVector2Array(0, 0, 10, 0, 10, 32, 0, 32)
-color = Color(0.55686, 0.64314, 0.65098, 1)
+color = Color(0.72549, 0.79608, 0.71373, 1)
 
 [node name="GardenDoorGlassBottom" type="Polygon2D" parent="Decoration"]
 position = Vector2(1586, 436)
 polygon = PackedVector2Array(0, 0, 10, 0, 10, 32, 0, 32)
-color = Color(0.55686, 0.64314, 0.65098, 1)
-
-[node name="GardenLandingBoard" type="Node2D" parent="Decoration"]
-position = Vector2(1488, 360)
-script = ExtResource("2_prop")
-kind = "Board"
-extent = Vector2(64, 16)
+color = Color(0.72549, 0.79608, 0.71373, 1)
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(272, 832)

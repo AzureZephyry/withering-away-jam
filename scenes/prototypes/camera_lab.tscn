@@ -11,9 +11,9 @@ texture_filter = 1
 
 [node name="Player" parent="." instance=ExtResource("2_player")]
 z_index = 1
-position = Vector2(208, 112)
+position = Vector2(320, 168)
 script = ExtResource("3_movement")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(144, 80)
-zoom = Vector2(4, 4)
+position = Vector2(192, 108)
+zoom = Vector2(3, 3)
