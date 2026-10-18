@@ -1,9 +1,33 @@
 [gd_scene format=3 uid="uid://dcmji66t7ii8d"]
 
-[node name="Node2D" type="Node2D" unique_id=1639986076]
+[ext_resource type="FontFile" uid="uid://bw7pav7rmjw8v" path="res://assets/fonts/Pixel handwriting_regular.ttf" id="1_dl4p2"]
+[ext_resource type="Script" uid="uid://c1f2fv8k5p3g4" path="res://text_Type.gd" id="2_jorlq"]
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1821971510]
-offset_top = 5.0
-offset_right = 1283.0
-offset_bottom = 954.0
+[sub_resource type="FontVariation" id="FontVariation_61muk"]
+base_font = ExtResource("1_dl4p2")
+
+[node name="Control" type="Control" unique_id=1095812566]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1277.0
+offset_bottom = 952.0
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=614097138]
+layout_mode = 0
+offset_right = 1285.0
+offset_bottom = 966.0
 color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=53110914]
+layout_mode = 0
+offset_right = 1283.0
+offset_bottom = 960.0
+theme_override_fonts/font = SubResource("FontVariation_61muk")
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_jorlq")
+new_text = "there you are..."
+new_text2 = "you have always been here..."
+wait_time = 0.1
+start_delay = 2.0
