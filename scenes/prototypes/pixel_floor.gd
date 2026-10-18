@@ -82,4 +82,3 @@ func _draw_room_floor() -> bool:
 		_:
 			return false
 	return true
-

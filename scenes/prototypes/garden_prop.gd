@@ -255,4 +255,3 @@ func _oval(rect: Rect2, color: String) -> void:
 		var half: float = floorf(sqrt(maxf(0, 1 - t * t)) * rect.size.x * 0.25) * 2
 		if half > 0:
 			_box(c.x - half, y, half * 2, 4, color)
-

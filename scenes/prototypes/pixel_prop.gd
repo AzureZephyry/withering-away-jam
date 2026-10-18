@@ -276,4 +276,3 @@ func _draw_room_prop(w: float, h: float) -> bool:
 		_:
 			return false
 	return true
-

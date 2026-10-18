@@ -115,4 +115,3 @@ func _oval(rect: Rect2, color: Color) -> void:
 		var half: float = floorf(sqrt(maxf(0.0, 1.0 - t * t)) * rect.size.x * 0.25) * 2
 		if half > 0:
 			draw_rect(Rect2(center.x - half, y, half * 2, 4), color)
-
