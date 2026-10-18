@@ -1,0 +1,91 @@
+[gd_scene format=3]
+
+[ext_resource type="FontFile" uid="uid://bw7pav7rmjw8v" path="res://assets/fonts/Pixel handwriting_regular.ttf" id="1_font"]
+[ext_resource type="Script" uid="uid://c1f2fv8k5p3g4" path="res://scripts/text_Type.gd" id="2_typewriter"]
+[ext_resource type="Script" path="res://scripts/dialogue_panel.gd" id="3_panel"]
+[ext_resource type="Texture2D" uid="uid://kv7an7q3doaf" path="res://assets/ui/dialogue/dialogue_dream_world.png" id="4_dream"]
+
+[sub_resource type="FontVariation" id="OpeningFont"]
+base_font = ExtResource("1_font")
+spacing_top = -52
+spacing_bottom = -32
+
+[sub_resource type="FontVariation" id="HintFont"]
+base_font = ExtResource("1_font")
+spacing_top = -27
+spacing_bottom = -13
+
+[sub_resource type="FontVariation" id="SpeakerFont"]
+base_font = ExtResource("1_font")
+spacing_top = -46
+spacing_bottom = -24
+
+[node name="DialoguePanel" type="Control"]
+layout_mode = 1
+anchor_left = 0.0625
+anchor_top = 1.0
+anchor_right = 0.9375
+anchor_bottom = 1.0
+offset_top = -444.89893
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("3_panel")
+
+[node name="Artwork" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_dream")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Margin" type="Control" parent="."]
+layout_mode = 0
+mouse_filter = 2
+
+[node name="Content" type="VBoxContainer" parent="Margin"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Body" type="Label" parent="Margin/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.945, 0.933, 0.906, 1)
+theme_override_fonts/font = SubResource("OpeningFont")
+theme_override_font_sizes/font_size = 48
+theme_override_constants/line_spacing = 6
+autowrap_mode = 3
+script = ExtResource("2_typewriter")
+
+[node name="Hint" type="Label" parent="Margin/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.77, 0.79, 0.81, 1)
+theme_override_fonts/font = SubResource("HintFont")
+theme_override_font_sizes/font_size = 24
+text = "E / Space"
+horizontal_alignment = 2
+
+[node name="Speaker" type="Label" parent="."]
+layout_mode = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.145, 0.169, 0.196, 1)
+theme_override_fonts/font = SubResource("SpeakerFont")
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
