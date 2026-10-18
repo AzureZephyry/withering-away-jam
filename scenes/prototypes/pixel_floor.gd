@@ -41,4 +41,3 @@ func _draw() -> void:
 			for x in range(int(path.position.x), int(path.end.x), 16):
 				draw_rect(Rect2(x + 1, y + 1, 14, 14), Color("#9c9e8e"))
 				draw_rect(Rect2(x + 3, y + 3, 9, 1), Color("#b2b1a0"))
-
