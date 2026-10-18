@@ -6,11 +6,11 @@ extends Label
 @export var start_delay: float 
 
 func _ready():
-	await _type_out(new_text)
-	await _type_out(new_text2)
+	await type_out(new_text)
+	await type_out(new_text2)
 	hide()
 	
-func _type_out(line: String):
+func type_out(line: String):
 	text = ""
 	await get_tree().create_timer(start_delay).timeout
 	for i in line:

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cah67qrc30ruq"]
 
-[ext_resource type="Script" uid="uid://b1bxln4x1byhf" path="res://scenes/prototypes/pixel_floor.gd" id="1_floor"]
-[ext_resource type="Script" uid="uid://bgdlid2qa4c26" path="res://scenes/prototypes/pixel_prop.gd" id="2_prop"]
+[ext_resource type="Script" uid="uid://b1bxln4x1byhf" path="res://scripts/pixel_floor.gd" id="1_floor"]
+[ext_resource type="Script" uid="uid://bgdlid2qa4c26" path="res://scripts/pixel_prop.gd" id="2_prop"]
 
 [sub_resource type="RectangleShape2D" id="Rectangle_1"]
 size = Vector2(288, 16)
