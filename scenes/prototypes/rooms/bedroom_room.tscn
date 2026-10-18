@@ -1,19 +1,19 @@
-[gd_scene load_steps=14 format=3 uid="uid://cah67qrc30ruq"]
+[gd_scene load_steps=15 format=3 uid="uid://cah67qrc30ruq"]
 
 [ext_resource type="Script" uid="uid://b1bxln4x1byhf" path="res://scenes/prototypes/pixel_floor.gd" id="1_floor"]
 [ext_resource type="Script" uid="uid://bgdlid2qa4c26" path="res://scenes/prototypes/pixel_prop.gd" id="2_prop"]
 
 [sub_resource type="RectangleShape2D" id="Rectangle_1"]
-size = Vector2(384, 16)
+size = Vector2(512, 16)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_2"]
-size = Vector2(16, 184)
+size = Vector2(16, 352)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_3"]
-size = Vector2(16, 88)
+size = Vector2(16, 232)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_4"]
-size = Vector2(16, 16)
+size = Vector2(16, 40)
 
 [sub_resource type="RectangleShape2D" id="Rectangle_5"]
 size = Vector2(72, 104)
@@ -36,6 +36,9 @@ size = Vector2(24, 32)
 [sub_resource type="RectangleShape2D" id="Rectangle_11"]
 size = Vector2(24, 20)
 
+[sub_resource type="RectangleShape2D" id="DoorStopShape"]
+size = Vector2(16, 80)
+
 [node name="Bedroom" type="Node2D" unique_id=794978626]
 texture_filter = 1
 
@@ -46,13 +49,13 @@ texture_filter = 1
 position = Vector2(0, 0)
 script = ExtResource("1_floor")
 pattern = "WarmWood"
-extent = Vector2i(384, 216)
+extent = Vector2i(512, 384)
 
 [node name="FloorDetails" type="Node2D" parent="."]
 
 
 [node name="WovenRug" type="Node2D" parent="FloorDetails"]
-position = Vector2(144, 128)
+position = Vector2(184, 200)
 script = ExtResource("2_prop")
 kind = "Rug"
 extent = Vector2(144, 64)
@@ -65,43 +68,43 @@ position = Vector2(0, 0)
 
 [node name="Face" type="Polygon2D" parent="Walls/North"]
 position = Vector2(0, 0)
-polygon = PackedVector2Array(0, 0, 384, 0, 384, 16, 0, 16)
+polygon = PackedVector2Array(0, 0, 512, 0, 512, 16, 0, 16)
 color = Color(0.84706, 0.73333, 0.57255, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/North"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 380, 0, 380, 3, 0, 3)
+polygon = PackedVector2Array(0, 0, 508, 0, 508, 3, 0, 3)
 color = Color(0.9451, 0.86667, 0.72941, 1)
 
 [node name="Skirting" type="Polygon2D" parent="Walls/North"]
 position = Vector2(0, 12)
-polygon = PackedVector2Array(0, 0, 384, 0, 384, 4, 0, 4)
+polygon = PackedVector2Array(0, 0, 512, 0, 512, 4, 0, 4)
 color = Color(0.53333, 0.37647, 0.26667, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/North"]
-position = Vector2(192, 8)
+position = Vector2(256, 8)
 shape = SubResource("Rectangle_1")
 
 [node name="South" type="StaticBody2D" parent="Walls"]
-position = Vector2(0, 200)
+position = Vector2(0, 368)
 
 [node name="Face" type="Polygon2D" parent="Walls/South"]
 position = Vector2(0, 0)
-polygon = PackedVector2Array(0, 0, 384, 0, 384, 16, 0, 16)
+polygon = PackedVector2Array(0, 0, 512, 0, 512, 16, 0, 16)
 color = Color(0.84706, 0.73333, 0.57255, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/South"]
 position = Vector2(2, 2)
-polygon = PackedVector2Array(0, 0, 380, 0, 380, 3, 0, 3)
+polygon = PackedVector2Array(0, 0, 508, 0, 508, 3, 0, 3)
 color = Color(0.9451, 0.86667, 0.72941, 1)
 
 [node name="Skirting" type="Polygon2D" parent="Walls/South"]
 position = Vector2(0, 12)
-polygon = PackedVector2Array(0, 0, 384, 0, 384, 4, 0, 4)
+polygon = PackedVector2Array(0, 0, 512, 0, 512, 4, 0, 4)
 color = Color(0.53333, 0.37647, 0.26667, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/South"]
-position = Vector2(192, 8)
+position = Vector2(256, 8)
 shape = SubResource("Rectangle_1")
 
 [node name="West" type="StaticBody2D" parent="Walls"]
@@ -109,7 +112,7 @@ position = Vector2(0, 16)
 
 [node name="Face" type="Polygon2D" parent="Walls/West"]
 position = Vector2(0, 0)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 184, 0, 184)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 352, 0, 352)
 color = Color(0.84706, 0.73333, 0.57255, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/West"]
@@ -118,30 +121,30 @@ polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
 color = Color(0.9451, 0.86667, 0.72941, 1)
 
 [node name="Skirting" type="Polygon2D" parent="Walls/West"]
-position = Vector2(0, 180)
+position = Vector2(0, 348)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
 color = Color(0.53333, 0.37647, 0.26667, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/West"]
-position = Vector2(8, 92)
+position = Vector2(8, 176)
 shape = SubResource("Rectangle_2")
 
 [node name="SideSkirting" type="Polygon2D" parent="Walls/West"]
 position = Vector2(13, 0)
-polygon = PackedVector2Array(0, 0, 3, 0, 3, 184, 0, 184)
+polygon = PackedVector2Array(0, 0, 3, 0, 3, 352, 0, 352)
 color = Color(0.53333, 0.37647, 0.26667, 1)
 
 [node name="SideHighlight" type="Polygon2D" parent="Walls/West"]
 position = Vector2(2, 0)
-polygon = PackedVector2Array(0, 0, 2, 0, 2, 184, 0, 184)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 352, 0, 352)
 color = Color(0.9451, 0.86667, 0.72941, 1)
 
 [node name="EastUpper" type="StaticBody2D" parent="Walls"]
-position = Vector2(368, 16)
+position = Vector2(496, 16)
 
 [node name="Face" type="Polygon2D" parent="Walls/EastUpper"]
 position = Vector2(0, 0)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 88, 0, 88)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 232, 0, 232)
 color = Color(0.84706, 0.73333, 0.57255, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/EastUpper"]
@@ -150,30 +153,30 @@ polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
 color = Color(0.9451, 0.86667, 0.72941, 1)
 
 [node name="Skirting" type="Polygon2D" parent="Walls/EastUpper"]
-position = Vector2(0, 84)
+position = Vector2(0, 228)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
 color = Color(0.53333, 0.37647, 0.26667, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/EastUpper"]
-position = Vector2(8, 44)
+position = Vector2(8, 116)
 shape = SubResource("Rectangle_3")
 
 [node name="SideSkirting" type="Polygon2D" parent="Walls/EastUpper"]
 position = Vector2(13, 0)
-polygon = PackedVector2Array(0, 0, 3, 0, 3, 88, 0, 88)
+polygon = PackedVector2Array(0, 0, 3, 0, 3, 232, 0, 232)
 color = Color(0.53333, 0.37647, 0.26667, 1)
 
 [node name="SideHighlight" type="Polygon2D" parent="Walls/EastUpper"]
 position = Vector2(2, 0)
-polygon = PackedVector2Array(0, 0, 2, 0, 2, 88, 0, 88)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 232, 0, 232)
 color = Color(0.9451, 0.86667, 0.72941, 1)
 
 [node name="EastLower" type="StaticBody2D" parent="Walls"]
-position = Vector2(368, 184)
+position = Vector2(496, 328)
 
 [node name="Face" type="Polygon2D" parent="Walls/EastLower"]
 position = Vector2(0, 0)
-polygon = PackedVector2Array(0, 0, 16, 0, 16, 16, 0, 16)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 40, 0, 40)
 color = Color(0.84706, 0.73333, 0.57255, 1)
 
 [node name="Cap" type="Polygon2D" parent="Walls/EastLower"]
@@ -182,13 +185,21 @@ polygon = PackedVector2Array(0, 0, 12, 0, 12, 3, 0, 3)
 color = Color(0.9451, 0.86667, 0.72941, 1)
 
 [node name="Skirting" type="Polygon2D" parent="Walls/EastLower"]
-position = Vector2(0, 12)
+position = Vector2(0, 36)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
 color = Color(0.53333, 0.37647, 0.26667, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/EastLower"]
-position = Vector2(8, 8)
+position = Vector2(8, 20)
 shape = SubResource("Rectangle_4")
+
+[node name="DoorStop" type="StaticBody2D" parent="Walls"]
+position = Vector2(496, 248)
+metadata/temporary_boundary = "Closed placeholder doorway prevents leaving the room until transitions are authorized."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/DoorStop"]
+position = Vector2(8, 40)
+shape = SubResource("DoorStopShape")
 
 [node name="Props" type="Node2D" parent="." unique_id=1530482264]
 
@@ -218,7 +229,7 @@ position = Vector2(12, 12)
 shape = SubResource("Rectangle_6")
 
 [node name="Desk" type="StaticBody2D" parent="Props"]
-position = Vector2(224, 40)
+position = Vector2(352, 40)
 
 [node name="Visual" type="Node2D" parent="Props/Desk"]
 script = ExtResource("2_prop")
@@ -230,7 +241,7 @@ position = Vector2(36, 16)
 shape = SubResource("Rectangle_7")
 
 [node name="Chair" type="StaticBody2D" parent="Props"]
-position = Vector2(248, 88)
+position = Vector2(376, 128)
 
 [node name="Visual" type="Node2D" parent="Props/Chair"]
 script = ExtResource("2_prop")
@@ -254,7 +265,7 @@ position = Vector2(32, 12)
 shape = SubResource("Rectangle_8")
 
 [node name="Cabinet" type="StaticBody2D" parent="Props"]
-position = Vector2(320, 24)
+position = Vector2(448, 24)
 
 [node name="Visual" type="Node2D" parent="Props/Cabinet"]
 script = ExtResource("2_prop")
@@ -266,7 +277,7 @@ position = Vector2(24, 28)
 shape = SubResource("Rectangle_9")
 
 [node name="Plant" type="StaticBody2D" parent="Props"]
-position = Vector2(16, 168)
+position = Vector2(16, 336)
 
 [node name="Visual" type="Node2D" parent="Props/Plant"]
 script = ExtResource("2_prop")
@@ -278,7 +289,7 @@ position = Vector2(12, 16)
 shape = SubResource("Rectangle_10")
 
 [node name="BookCrate" type="StaticBody2D" parent="Props"]
-position = Vector2(104, 180)
+position = Vector2(104, 348)
 
 [node name="Visual" type="Node2D" parent="Props/BookCrate"]
 script = ExtResource("2_prop")
@@ -293,7 +304,7 @@ shape = SubResource("Rectangle_11")
 
 
 [node name="Window" type="Node2D" parent="Decoration"]
-position = Vector2(224, 6)
+position = Vector2(352, 6)
 script = ExtResource("2_prop")
 kind = "CurtainedWindow"
 extent = Vector2(72, 24)
@@ -305,7 +316,7 @@ kind = "Noticeboard"
 extent = Vector2(56, 20)
 
 [node name="Schedule" type="Node2D" parent="Decoration"]
-position = Vector2(208, 2)
+position = Vector2(336, 2)
 script = ExtResource("2_prop")
 kind = "Calendar"
 extent = Vector2(16, 22)
@@ -317,59 +328,59 @@ kind = "Picture"
 extent = Vector2(24, 20)
 
 [node name="DeskReferenceBooks" type="Node2D" parent="Decoration"]
-position = Vector2(300, 42)
+position = Vector2(428, 42)
 script = ExtResource("2_prop")
 kind = "BookStack"
 extent = Vector2(16, 20)
 
 [node name="Notebook" type="Polygon2D" parent="Decoration"]
-position = Vector2(192, 152)
+position = Vector2(256, 216)
 polygon = PackedVector2Array(0, 0, 12, 0, 12, 16, 0, 16)
 color = Color(0.89804, 0.83529, 0.6902, 1)
 
 [node name="NotebookBinding" type="Polygon2D" parent="Decoration"]
-position = Vector2(192, 152)
+position = Vector2(256, 216)
 polygon = PackedVector2Array(0, 0, 2, 0, 2, 16, 0, 16)
 color = Color(0.55686, 0.61176, 0.51765, 1)
 
 [node name="NotebookLine" type="Polygon2D" parent="Decoration"]
-position = Vector2(196, 158)
+position = Vector2(260, 222)
 polygon = PackedVector2Array(0, 0, 6, 0, 6, 1, 0, 1)
 color = Color(0.72549, 0.70588, 0.58039, 1)
 
 [node name="ShoesLeft" type="Polygon2D" parent="Decoration"]
-position = Vector2(304, 188)
+position = Vector2(432, 320)
 polygon = PackedVector2Array(0, 0, 9, 0, 9, 4, 0, 4)
 color = Color(0.47843, 0.36078, 0.28235, 1)
 
 [node name="ShoesRight" type="Polygon2D" parent="Decoration"]
-position = Vector2(316, 188)
+position = Vector2(444, 320)
 polygon = PackedVector2Array(0, 0, 9, 0, 9, 4, 0, 4)
 color = Color(0.47843, 0.36078, 0.28235, 1)
 
 [node name="DoorRightThreshold" type="Polygon2D" parent="Decoration"]
-position = Vector2(368, 104)
+position = Vector2(496, 248)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 80, 0, 80)
 color = Color(0.72549, 0.58039, 0.4, 1)
 
 [node name="DoorUpperFrame" type="Polygon2D" parent="Decoration"]
-position = Vector2(368, 100)
+position = Vector2(496, 244)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
 color = Color(0.53333, 0.37647, 0.26667, 1)
 
 [node name="DoorLowerFrame" type="Polygon2D" parent="Decoration"]
-position = Vector2(368, 184)
+position = Vector2(496, 328)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 4, 0, 4)
 color = Color(0.53333, 0.37647, 0.26667, 1)
 
 [node name="DoorThresholdInset" type="Polygon2D" parent="Decoration"]
-position = Vector2(380, 104)
+position = Vector2(508, 248)
 polygon = PackedVector2Array(0, 0, 2, 0, 2, 80, 0, 80)
 color = Color(0.47451, 0.36471, 0.26667, 1)
 
 [node name="DoorRight" type="Marker2D" parent="." unique_id=500307979]
-position = Vector2(384, 168)
+position = Vector2(512, 288)
 
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=197781062]
-position = Vector2(320, 168)
+position = Vector2(416, 288)
 
