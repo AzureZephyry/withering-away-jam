@@ -1,6 +1,5 @@
 @tool
 extends Node2D
-## Visual-only 16-pixel floor pattern for the temporary camera laboratory.
 
 @export_enum("Wood", "Tile", "Grass") var pattern: String = "Wood":
 	set(value):

@@ -4,9 +4,9 @@
 [ext_resource type="Shader" uid="uid://cfiswbwgbyg5t" path="res://scenes/UI/eyelidEffect.gdshader" id="2_vkbcg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vkbcg"]
+resource_local_to_scene = true
 shader = ExtResource("2_vkbcg")
-shader_parameter/open_amount = 0.0
-shader_parameter/eye_color = Color(0, 0, 0, 1)
+shader_parameter/open_amount = 0.50000002375
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=684125884]
 script = ExtResource("1_3hqs2")
@@ -21,4 +21,4 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0)

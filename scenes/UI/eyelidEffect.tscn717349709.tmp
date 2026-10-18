@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://d3det35ey18mj"]
+
+[ext_resource type="Script" uid="uid://c1qrhfwr4rvn6" path="res://scenes/UI/eyelid_effect.gd" id="1_3hqs2"]
+[ext_resource type="Shader" uid="uid://cfiswbwgbyg5t" path="res://scenes/UI/eyelidEffect.gdshader" id="2_vkbcg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkbcg"]
+shader = ExtResource("2_vkbcg")
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=684125884]
+script = ExtResource("1_3hqs2")
+start_closed = null
+close_time = null
+open_time = null
+closed_hold = null
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=414929041]
+material = SubResource("ShaderMaterial_vkbcg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
