@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/prototypes/rooms/bedroom_room.tscn" id="1_room"]
 [ext_resource type="PackedScene" uid="uid://b1aoc87u33jos" path="res://scenes/player.tscn" id="2_player"]
 [ext_resource type="Script" uid="uid://cbuuh60heihia" path="res://scripts/playerMovement.gd" id="3_movement"]
+
+[ext_resource type="Script" path="res://scripts/overworld_interaction.gd" id="4_interaction"]
+[ext_resource type="PackedScene" path="res://scenes/UI/overworld_overlay.tscn" id="5_overlay"]
 
 [node name="CameraLaboratory" type="Node2D"]
 texture_filter = 1
@@ -22,3 +25,8 @@ limit_top = 0
 limit_right = 512
 limit_bottom = 384
 position_smoothing_enabled = false
+
+[node name="OverworldInteraction" type="Node2D" parent="."]
+script = ExtResource("4_interaction")
+
+[node name="DialogueLayer" parent="OverworldInteraction" instance=ExtResource("5_overlay")]

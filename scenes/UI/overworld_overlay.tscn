@@ -1,0 +1,40 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/UI/dialogue_panel.tscn" id="1_panel"]
+[ext_resource type="FontFile" path="res://assets/fonts/Pixel handwriting_regular.ttf" id="2_font"]
+
+[sub_resource type="FontVariation" id="PromptFont"]
+base_font = ExtResource("2_font")
+spacing_top = -27
+spacing_bottom = -13
+
+[sub_resource type="StyleBoxFlat" id="PromptBox"]
+bg_color = Color(0.12, 0.15, 0.16, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.76, 0.72, 0.60, 1)
+content_margin_left = 10.0
+content_margin_right = 10.0
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+
+[node name="DialogueLayer" type="CanvasLayer"]
+layer = 2
+
+[node name="DialoguePanel" parent="." instance=ExtResource("1_panel")]
+visible = false
+texture_filter = 1
+
+[node name="Prompt" type="Label" parent="."]
+visible = false
+texture_filter = 1
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.96, 0.93, 0.84, 1)
+theme_override_fonts/font = SubResource("PromptFont")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("PromptBox")
+text = "E / Space"
+horizontal_alignment = 1
+vertical_alignment = 1
