@@ -1,0 +1,83 @@
+# GameState V1
+
+`GameState` is an Autoload for story progression and Boolean event flags during
+one running game. It survives scene changes. Closing and starting the game
+creates a fresh session with every registered flag set to `false`.
+
+It does not manage sanity, dialogue playback, scenes, inventory, quests, or
+save files. No existing story or interaction currently sets flags.
+
+## Register an event
+
+Add each approved, descriptive event name once to `REGISTERED_FLAGS` in
+`scripts/game_state.gd`. This is the only production registry. It is deliberately
+empty until the team approves real story events. Names are case-sensitive;
+flags are never created by reads or writes. Restart the game after editing the
+registry. Do not change `_flags` directly.
+
+The name `approved_event_id` below is a documentation placeholder, not a
+registered story event. Replace it with an approved name from the registry.
+
+```gdscript
+var accepted: bool = GameState.set_flag("approved_event_id", true)
+var value: Variant = GameState.get_flag("approved_event_id")
+if value == null:
+	return # Unknown name: fix the caller or obtain approval to register it.
+if value:
+	print("The registered event is true.")
+GameState.clear_flag("approved_event_id")
+```
+
+## API and validation
+
+| Operation | Result |
+| --- | --- |
+| `set_flag(name, value)` | `true` for an accepted Boolean assignment, including an unchanged value; otherwise `false`. |
+| `get_flag(name)` | A Boolean for a registered name; otherwise `null`. |
+| `clear_flag(name)` | Sets a registered flag to `false`; returns whether accepted. |
+| `reset_session()` | Resets all flags to `false`; returns nothing. |
+| `flag_changed(name, value)` | Emitted after an actual value change. |
+
+Names must be `String` values. `StringName`, numbers, `null`, and other types are
+rejected with a warning. Values must be actual Booleans: `0`, `1`, and `"true"`
+are not converted. Unknown reads warn and return `null`; invalid or unknown
+writes warn, return `false`, and leave every flag unchanged. Invalid reads also
+return `null`. Repeated assignments and clearing an already-false flag do not
+emit a signal. Flags can be set both ways; permanent milestones are a caller
+convention rather than a restriction imposed by GameState.
+
+## React to changes
+
+```gdscript
+func _ready() -> void:
+	GameState.flag_changed.connect(_on_flag_changed)
+
+func _on_flag_changed(flag_name: String, value: bool) -> void:
+	print(flag_name, ": ", value)
+```
+
+Connect scene-local listeners when needed and read the current value as well:
+signals describe changes, not the entire session history. On session reset,
+all values become false before notifications are emitted. Each flag that was
+true emits one `(name, false)` notification, in registry order. An already-false
+session emits none. Avoid changing flags from reset notifications unless that
+behavior is intentional.
+
+Call `GameState.reset_session()` when starting a fresh playthrough within the
+same application. Changing scenes or replaying a conversation does not reset it.
+
+Christan's future sanity code may read approved flags or listen to this signal.
+Keep any sanity rules in his system; GameState has no dependency on it.
+
+## Local setup and review
+
+Project Settings > Globals > Autoload must contain `GameState`, pointing to
+`res://scripts/game_state.gd`, with the singleton enabled. Godot 4.7.2 saves this
+registration as `GameState="*uid://c647p0ta1wljq"`, using the identity in
+`scripts/game_state.gd.uid`. Keep that UID file with the script.
+
+Run the normal opening with F6 on `scenes/Dream.tscn`, or F5. Check Remote >
+GameState: its `_flags` dictionary should be empty with the current registry.
+Run the Bedroom or Garden laboratory with F6 to check existing gameplay.
+Registered-flag behavior is validated using test-only identifiers in an isolated
+fixture; no test events or debug scene are added to the gameplay flow.
