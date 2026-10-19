@@ -133,18 +133,22 @@ func _open_dialogue() -> void:
 	_movement_was_processing = player.is_physics_processing()
 	player.set_physics_process(false)
 	player.velocity = Vector2.ZERO
-	player.get_node("AnimatedSprite2D").play("Idle")
+	player.get_node("AnimatedSprite2D").show_idle()
 	_present_line()
 	interaction_started.emit(active)
 	_position_dialogue()
 
 func _cache_visual_bounds() -> void:
 	var sprite: AnimatedSprite2D = player.get_node("AnimatedSprite2D")
-	for frame in range(sprite.sprite_frames.get_frame_count("Idle")):
-		var texture: Texture2D = sprite.sprite_frames.get_frame_texture("Idle", frame)
-		var bounds := Rect2(texture.get_image().get_used_rect())
-		bounds.position += sprite.offset - (texture.get_size() * 0.5 if sprite.centered else Vector2.ZERO)
-		_player_bounds = bounds if frame == 0 else _player_bounds.merge(bounds)
+	# Protect every idle pose, including breathing and directional changes.
+	for animation_name in sprite.sprite_frames.get_animation_names():
+		if not String(animation_name).begins_with("idle_"):
+			continue
+		for frame in range(sprite.sprite_frames.get_frame_count(animation_name)):
+			var texture: Texture2D = sprite.sprite_frames.get_frame_texture(animation_name, frame)
+			var bounds := Rect2(texture.get_image().get_used_rect())
+			bounds.position += sprite.offset - (texture.get_size() * 0.5 if sprite.centered else Vector2.ZERO)
+			_player_bounds = _player_bounds.merge(bounds) if _player_bounds.has_area() else bounds
 
 func _subject_rects() -> Array[Rect2]:
 	var sprite: AnimatedSprite2D = player.get_node("AnimatedSprite2D")

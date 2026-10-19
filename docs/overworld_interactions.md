@@ -17,9 +17,10 @@ its own sequence and input handler. Nothing here connects the opening to a room.
    Bounds are local to the visual node, not the interaction center. Include the
    full envelope of idle animation. The default visual path is the parent.
 
-The controller expects the current Player's `AnimatedSprite2D` and `Idle`
-animation. It pauses and restores physics processing without changing the
-movement script. Keep one controller per playable scene.
+The controller expects the current Player's `AnimatedSprite2D` with its
+`albert_animation.gd` helper. `show_idle()` keeps the last facing direction.
+Placement includes every frame of the `idle_` animations. The controller pauses
+and restores physics processing. Keep one controller per playable scene.
 
 ## Activation and repeats
 

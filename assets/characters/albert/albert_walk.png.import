@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ci8ji536m2m37"
-path="res://.godot/imported/Farmer_idle.png-047f2801623faa9387817f087887bc0d.ctex"
+uid="uid://dfytwnbvgf1y1"
+path="res://.godot/imported/albert_walk.png-6854f7c046d06ba5f2e762c162001eed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/test sprites/2x/Farmer_idle.png"
-dest_files=["res://.godot/imported/Farmer_idle.png-047f2801623faa9387817f087887bc0d.ctex"]
+source_file="res://assets/characters/albert/albert_walk.png"
+dest_files=["res://.godot/imported/albert_walk.png-6854f7c046d06ba5f2e762c162001eed.ctex"]
 
 [params]
 
