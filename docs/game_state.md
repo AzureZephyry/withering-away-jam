@@ -5,7 +5,7 @@ one running game. It survives scene changes. Closing and starting the game
 creates a fresh session with every registered flag set to `false`.
 
 It does not manage sanity, dialogue playback, scenes, inventory, quests, or
-save files. The local Bedroom introduction is the first story flag producer;
+save files. The published Bedroom introduction is the first story flag producer;
 environmental object completion still belongs to each loaded target.
 
 ## Register an event
@@ -30,7 +30,7 @@ GameState.clear_flag("approved_event_id")
 
 ## Bedroom introduction completion
 
-The locally implemented, unpublished `bedroom_intro_completed` flag means the
+The `bedroom_intro_completed` flag, published in `fad8a76`, means the
 whole Bedroom introduction finished, including the selected phone branch and
 the final reflection. `scripts/bedroom_intro.gd` writes it only after the last
 reflection is dismissed, immediately before returning exploration control.

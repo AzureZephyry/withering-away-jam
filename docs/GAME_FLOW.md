@@ -5,11 +5,12 @@
 
 ## Scope and evidence
 
-This guide describes the local Dream-to-Bedroom integration and existing room
-prototypes. The introduction is **implemented and accepted locally**: all 156
-automated checks passed, and the Project Lead granted manual acceptance on
-October 20, 2026. Git publication is still pending. The previous published runtime snapshot was
-`590184b`; its record remains in [Development history](DEVELOPMENT_HISTORY.md).
+This guide describes the **published** Dream-to-Bedroom integration and existing
+room prototypes at `eef63da`, the current confirmed main baseline. The introduction
+passed 156 automated checks, received Project Lead acceptance on October 20, 2026,
+and was published in `fad8a76`. Its later Dream signal repair was also manually
+accepted and published in `eef63da`. The earlier `590184b` snapshot remains a
+historical reference in [Development history](DEVELOPMENT_HISTORY.md).
 
 **Published** means present in the inspected main history. **Prototype** means an
 implemented experiment, not a complete chapter. **Planned** describes intended
@@ -235,8 +236,8 @@ this system. See [GameState V1](game_state.md) before introducing event callers.
 | Connection | Current status | Owner or required decision |
 | --- | --- | --- |
 | Black → eyes opening → Dream dialogue/effects | Existing opening retained | Opening sequence/controller |
-| Opening completion → playable Bedroom | Implemented locally; unpublished | Deferred handoff from opening controller |
-| Bedroom introduction → exploration | Implemented locally; unpublished | Story controller writes completion after final reflection |
+| Opening completion → playable Bedroom | Accepted and published in `fad8a76`; signal repair in `eef63da` | Deferred handoff from opening controller |
+| Bedroom introduction → exploration | Accepted and published in `fad8a76` | Story controller writes completion after final reflection |
 | Potential connections among existing room prototypes | **Undesigned or unimplemented; chapter travel order is not approved** | Agree on narrative order, entry/exit rules, and scene ownership first |
 | Room marker/door → destination | No scene router or travel behavior established | A marker or door visual is not a transition |
 | F6 → selected laboratory | Published editor test entry point | Developer chooses the standalone scene |
@@ -245,16 +246,16 @@ this system. See [GameState V1](game_state.md) before introducing event callers.
 
 ## Intended direction and narrative uncertainty
 
-**Project Lead context:** Albert begins his first day of college. Psychological
-deterioration, unsettling environments, and dreams are the developing narrative
-direction. Ali is assigned Scene 1 and integration toward playable Bedroom
-gameplay. This supports planning an opening-to-room handoff; it does not establish
-the full chapter's route or final dialogue.
+**Project Lead context:** Albert is a first-year college student facing
+perfectionism, expectations, and insecurity. His psychological deterioration is
+intended to develop gradually; he does not begin in a severely deteriorated state.
+Unsettling environments and dreams are part of the developing direction. Ali's
+area includes opening, UI, and relevant gameplay integration. The published
+Dream-to-Bedroom handoff does not establish the full chapter's route or final dialogue.
 
-**Previously proposed, not settled canon or implemented mechanics:** Albert
-initially appearing relatively stable; progressive deterioration reflected by
-dreams; a Garden representing his internal state; a Corpse Lily associated with
-intrusive criticism, self-blame, and corruption; links between dream experience
+**Previously proposed, not settled canon or implemented mechanics:** progressive
+deterioration reflected by dreams; a Garden representing his internal state;
+a Corpse Lily associated with intrusive criticism, self-blame, and corruption; links between dream experience
 and waking presentation; and multiple endings. The current Garden prototype and
 opening are not proof that these concepts have been implemented as a dynamic
 psychological system. Isabela and the team retain narrative decisions.
@@ -265,10 +266,11 @@ psychological system. Isabela and the team retain narrative decisions.
 
 The Project Lead approved this introduction's endpoint, playable destination,
 bedside arrival, whole-sequence lock, all branches, completion timing, and separate
-test entry. The local implementation passed automated validation and received
-Project Lead manual acceptance on October 20, 2026; Git publication is pending.
+test entry. The introduction passed automated validation, received Project Lead
+acceptance on October 20, 2026, and was published in `fad8a76`. Its accepted Dream
+signal repair is published in `eef63da`.
 
-| Requirement | Local implementation |
+| Requirement | Published implementation |
 | --- | --- |
 | Dream endpoint | Waking fade/black hold after the final Dream line; waking dialogue belongs to Bedroom |
 | Destination | Story wrapper instances the existing laboratory, keeping direct F6 exploration separate |
@@ -281,7 +283,8 @@ Project Lead manual acceptance on October 20, 2026; Git publication is pending.
 
 Spawn and visual tunables remain provisional implementation values; see
 [the architecture guide](PROJECT_STRUCTURE.md#story-bedroom-and-phone-components).
-This accepted integration remains local until Git publication is authorized and verified.
+The introduction and signal repair are accepted and published; future changes
+require their own review and authorization.
 
 ### Connected-chapter dependencies
 
@@ -304,7 +307,7 @@ These are integration dependencies, not authorization to implement them now.
 ## Flow validation guidance
 
 The current paths below can be tested now. These are procedures/expected behavior
-from the local source, not a record of newly executed tests.
+from published source, not a record of newly executed tests.
 
 | Current testable path | Focus |
 | --- | --- |
@@ -317,9 +320,10 @@ from the local source, not a record of newly executed tests.
 | Garden Lily | Automatic approach, no immediate reopening while nearby, and repetition after leaving/re-entering |
 | Dialogue close/cancellation | Restored movement/idle behavior, a shifted camera returning, finish outcome, and no double input action |
 
-**Validation status:** the local introduction passed all 156 automated checks and
-received Project Lead manual acceptance on October 20, 2026. Git publication is
-pending. The matrix above remains a regression guide; no tests were rerun for
+**Validation status:** the introduction passed 156 automated checks and received
+Project Lead acceptance on October 20, 2026 before publication in `fad8a76`.
+The accepted signal repair in `eef63da` passed 57 Dream and 144 Bedroom runtime
+checks. The matrix above remains a regression guide; no tests were rerun for
 this documentation update. Full chapter travel and Sanity remain future work;
 standalone laboratory success cannot establish them.
 

@@ -1,9 +1,9 @@
 # Withering Away
 
 Withering Away is the working title of a 2D psychological horror game being
-developed by six students for **Month of Horror #2: Withering Away**. The current
+developed by seven students for **Month of Horror #2: Withering Away**. The current
 repository contains a scripted Dream opening, playable environment prototypes,
-and shared gameplay foundations. The local Dream-to-Bedroom introduction connects
+and shared gameplay foundations. The published Dream-to-Bedroom introduction connects
 the opening to exploration; it is not yet a complete story chapter.
 
 The Project Lead's current narrative premise follows **Albert as he begins his
@@ -11,6 +11,25 @@ first day of college**, with psychological deterioration and dream imagery as
 the developing direction. The final title, full plot, and endings remain open.
 See [game flow and narrative status](docs/GAME_FLOW.md) for the boundary between
 the implemented sequence and proposed story concepts.
+
+## The Theme — Withering Away
+
+The official theme of [Month of Horror #2](https://itch.io/jam/month-of-horror-2)
+is **Withering Away**. It can describe harm that settles in unnoticed, like a
+parasite drawing vitality from its surroundings. As it grows stronger, what
+supports it begins to decay. The theme also makes room for natural decline and
+impermanence: things end, and renewal remains a possibility rather than a promise.
+
+Our developing interpretation follows Albert, a first-year college student
+dealing with perfectionism, expectations, and insecurity. His psychological
+deterioration should build gradually; he does not start the story already
+severely worn down. The Dream Garden and proposed Corpse Lily could give that
+slow decline a symbolic form. Their exact meaning, the plot, and the ending
+remain open. A complete Sanity system has not yet been confirmed as integrated into the published build.
+
+The jam's optional challenges explore the passage from autumn into winter,
+progressive decay, and a parasitic plant that thrives as other life fades.
+These are prompts to consider, not requirements or completed features.
 
 ## Technology
 
@@ -84,9 +103,12 @@ keeps Albert and the object clear, using a short camera pan when needed and feas
 
 ## Current implementation and publication status
 
-The Dream-to-Bedroom additions below are **implemented and accepted locally**.
-Automated validation passed all 156 checks, and the Project Lead granted manual
-acceptance on October 20, 2026. Git publication is still pending.
+The Dream-to-Bedroom introduction is **implemented, manually accepted, and
+published** in [`fad8a76`](https://github.com/AzureZephyry/withering-away-jam/commit/fad8a76a309a181799374afa4855480af971906e).
+Its original validation passed 156 checks, and the Project Lead accepted it on
+October 20, 2026. The subsequent Dream dialogue signal repair was also manually
+accepted and published in [`eef63da`](https://github.com/AzureZephyry/withering-away-jam/commit/eef63dadc673bf4a389c4ccf9e8d511e2d42fa47),
+the current confirmed main baseline.
 
 - **Initial Dream opening:** provisional dialogue, typewriter text, speaker names,
   eyelid animation, and glitch effects. Its waking fade hands off to the playable
@@ -110,7 +132,7 @@ acceptance on October 20, 2026. Git publication is still pending.
   for left-facing presentation on the sprite only. Selection follows input and
   actual movement; stopping preserves facing.
 - **GameState V1:** validated, session-based Boolean event flags through an
-  Autoload. The local `bedroom_intro_completed` flag records the entire story
+  Autoload. The `bedroom_intro_completed` flag records the entire story
   introduction only after its last reflection is dismissed. Choices have no
   lasting consequences. Sanity and persistent saves remain outside this system.
 
@@ -156,16 +178,21 @@ fonts, and audio placeholders. Use the structure guide for exact dependencies.
 
 ## Team responsibilities
 
-These are development areas, not a list of completed features.
+These are the seven members' confirmed development areas, not a list of completed features.
 
 | Team member | Area |
 | --- | --- |
-| Project Lead | Engineering coordination, Game State, and integration oversight |
-| Ali | Opening cinematic, Scene 1, and integration toward the playable Bedroom |
-| Christan | Environmental dialogue development and Sanity System |
-| Kayla | Environment and map development |
-| Isabela | Narrative, dialogue, original character artwork, and dialogue UI artwork |
+| Prince | Project Lead / System Integrator; engineering coordination and Game State |
+| Ali | Opening, UI, and relevant gameplay integration |
+| Christan | Environmental dialogue development and Sanity engineering |
 | Lawrence | Audio and sound |
+| Isabela | Visual art, original character artwork, dialogue UI, narrative, and dialogue |
+| Kayla | Visual art, environmental and map development |
+| Wayne | Visual art; specific assignments and deliverables unconfirmed |
+
+Wayne is our seventh member, contributing to visuals alongside Isabela and Kayla.
+His specific assets, assigned scenes, deliverables, and implementation status have
+not yet been confirmed.
 
 ## Contributing
 

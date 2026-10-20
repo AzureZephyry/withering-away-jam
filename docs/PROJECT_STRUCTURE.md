@@ -1,8 +1,9 @@
 # Project structure
 
-This guide maps the game implementation, including the completed Dream-to-Bedroom
-introduction. All 156 automated checks passed, and the Project Lead granted manual
-acceptance on October 20, 2026. Git publication is still pending. Start with the
+This guide maps the published game implementation at `eef63da`, including the
+Dream-to-Bedroom introduction (`fad8a76`) and accepted Dream signal repair
+(`eef63da`). The introduction passed 156 automated checks and received Project
+Lead acceptance on October 20, 2026. Start with the
 [README](../README.md) for setup and controls; use the system guides linked below
 for detailed APIs and authoring steps.
 
@@ -12,9 +13,9 @@ playable room experiments in `scenes/prototypes/`. Some visual helper scripts li
 beside those prototypes. The configured opening enters a story wrapper around
 the Bedroom laboratory; direct laboratory launches remain separate test entries.
 
-The earlier published-source snapshot was `590184b`; new introduction components
-below are local work, not a publication claim or an audit of other branches. For player-facing
-sequence order use [Game flow](GAME_FLOW.md); for intent and constraints use
+The earlier `590184b` snapshot remains historical evidence; the introduction
+components below are now published. This guide does not audit other branches.
+For player-facing sequence order use [Game flow](GAME_FLOW.md); for intent and constraints use
 [Design decisions](DESIGN_DECISIONS.md). [Team progress](TEAM_PROGRESS.md) owns the
 current status snapshot, and [Development history](DEVELOPMENT_HISTORY.md) owns
 the milestone record.
@@ -131,7 +132,7 @@ timings, and placeholder backgrounds are not final narrative or visual direction
 
 ## Story Bedroom and phone components
 
-The local [bedroom_story.tscn](../scenes/story/bedroom_story.tscn) root uses
+The published [bedroom_story.tscn](../scenes/story/bedroom_story.tscn) root uses
 [bedroom_intro.gd](../scripts/bedroom_intro.gd). Its `Laboratory` child instances
 the existing Bedroom laboratory without changing its saved defaults. `StoryLayer`
 is CanvasLayer 4 and contains the shared Reality DialoguePanel, PhoneConversation,
@@ -350,14 +351,14 @@ is not a successful interaction. The finish signal follows any camera restoratio
 the script.
 
 GameState stores Boolean event flags for one running application and survives
-scene changes. `REGISTERED_FLAGS` is the explicit production registry and is
-contains `bedroom_intro_completed` in the local introduction implementation.
+scene changes. `REGISTERED_FLAGS` is the explicit production registry and
+contains `bedroom_intro_completed` in the published introduction.
 Names and values are strictly validated; reads/writes never
 create an event implicitly. Unknown reads return `null`, invalid writes return
 `false`, and actual value changes emit `flag_changed`. `reset_session()` clears
 registered values; restarting the application creates a fresh session.
 
-The foundation is published; the first story producer is local and unpublished.
+The foundation and its first story producer are published.
 The story Bedroom writes completion after final reflection, while test context
 and environmental objects do not. GameState does not implement
 Sanity, dialogue playback, save/load, inventory, or quests. See
@@ -392,9 +393,12 @@ opening, not the environmental interaction overlay.
 
 `OpeningSequence` owns the ordered `STEPS` array and controls the centered Label,
 DialoguePanel, Eyelids, GlitchPlaceholder, and AwakeningFade nodes. The typewriter's
-`advance_requested` signals reach the sequence controller; its busy/completed
-states prevent advancement through a timed effect. The eyelid's `completed`
-signal allows the sequence to continue after opening the eyes.
+`advance_requested` signals reach the sequence controller; its `_ready()` connects
+the instanced panel body's `advance_requested` and `character_revealed` signals
+only when their intended callables are not already connected. Published repair
+`eef63da` therefore works with or without those saved scene connections. The
+controller's busy/completed states prevent advancement through a timed effect.
+The eyelid's `completed` signal allows the sequence to continue after opening the eyes.
 
 `event_cued`, `audio_cued`, and `character_revealed` expose sequence/audio hooks;
 they do not supply sound playback or a scene router. The typewriter converts the
@@ -505,19 +509,18 @@ Review required UID/resource identities and every affected shared consumer.
 
 ## Confirmed unfinished integration
 
-- The local opening-to-Bedroom introduction is implemented, validated, and accepted;
-  Git publication is pending. Dream backgrounds and final audio remain
-  placeholders/integration hooks.
+- The opening-to-Bedroom introduction and Dream signal repair are accepted and
+  published. Dream backgrounds and final audio remain placeholders/integration hooks.
 - Garden and School retain standalone entries. Door transitions between rooms
   are not implemented.
 - Environmental descriptions and the Garden conversation are prototype content.
   A general character/NPC cinematic interaction system remains separate planned
   work.
-- GameState has one local story completion event. Sanity mechanics and persistent
+- GameState has one published story completion event. Sanity mechanics and persistent
   save/load remain outside its current scope.
 - The music and sounds directories contain placeholder files, not finished audio
   integrations. Font licensing/redistribution permission still needs verification.
 
-These statements distinguish local integration from the earlier published
-snapshot; they do not audit other branches. Use [Game flow](GAME_FLOW.md) for prerequisites
+These statements describe the confirmed published implementation while preserving
+the earlier historical snapshot; they do not audit other branches. Use [Game flow](GAME_FLOW.md) for prerequisites
 and [Team progress](TEAM_PROGRESS.md) for ownership and review priorities.

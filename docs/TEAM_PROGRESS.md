@@ -7,18 +7,18 @@
 ## Delivery objective
 
 The immediate team objective is a coherent playable game-jam submission or chapter
-built from the existing foundations. The local introduction now connects Dream
+built from the existing foundations. The published introduction connects Dream
 to Bedroom exploration; the remaining rooms do not yet form a connected chapter.
 
 **Project Lead-reported deadline:** November 9, 2026. This date is attributed to
 the Project Lead and has not been independently verified against an organizer
 schedule in this snapshot.
 
-## Local introduction status — unpublished
+## Current introduction status — published
 
 The Project Lead approved implementation of Dream → Bedroom awakening → visual
 phone buzz/shake → reaction → centered family conversation → one of three branches
-→ reflection → exploration. The local files implement that sequence using the
+→ reflection → exploration. The published files implement that sequence using the
 existing Bedroom, Player, Reality panel, environmental system, and GameState.
 
 All three phone branches are present. `bedroom_intro_completed` records only the
@@ -26,11 +26,16 @@ last reflection dismissal in story context. The developer introduction test uses
 the same logic without reading/writing completion; ordinary Bedroom F6 remains
 exploration-only. Branch choice has no lasting gameplay consequence.
 
-**Status:** implementation completed locally; automated validation passed all 156
-checks. The Project Lead personally tested and accepted the checkpoint on
-October 20, 2026. Git publication is still pending. See [Game flow](GAME_FLOW.md)
-for the contract and verification procedures. Final phone-buzz audio, final Dream art, room travel,
-Sanity integration, and persistent saves remain outside the completed local scope.
+**Status:** implemented, manually accepted, and published. The introduction passed
+156 automated checks and received Project Lead acceptance on October 20, 2026;
+it was published in [`fad8a76`](https://github.com/AzureZephyry/withering-away-jam/commit/fad8a76a309a181799374afa4855480af971906e).
+The later Dream signal repair passed 57 Dream and 144 Bedroom runtime checks,
+received Project Lead F5 acceptance, and was published in
+[`eef63da`](https://github.com/AzureZephyry/withering-away-jam/commit/eef63dadc673bf4a389c4ccf9e8d511e2d42fa47),
+the current confirmed main baseline. These are prior validation results; no
+runtime tests were rerun for this documentation update. See [Game flow](GAME_FLOW.md)
+for the contract and regression procedures. Final phone-buzz audio, final Dream
+art, room travel, Sanity integration, and persistent saves remain unfinished.
 
 ## Earlier verified published snapshot
 
@@ -38,9 +43,8 @@ Sanity integration, and persistent saves remain outside the completed local scop
 `feat: add session-based game state management`.
 
 The main reference matched this baseline during that earlier documentation
-inspection. The table below is historical published evidence, not a statement
-that the local introduction has been published. That inspection covered main,
-its meaningful history,
+inspection. The table below records that earlier state and predates the now-published
+introduction described above. That inspection covered main and its meaningful history,
 the existing system guides, and the Project Lead's confirmed context/assignments.
 This is not a live status report on every teammate branch. Other branches were
 not audited for current functionality, acceptance, or integration readiness.
@@ -82,42 +86,43 @@ verified commit milestones belong in [Development history](DEVELOPMENT_HISTORY.m
 
 ## Confirmed responsibilities
 
-Assignments below come from the Project Lead. They do not prove completion or
-assign authorship to every file in a shared/integrated system.
+The current team has seven members. Assignments below come from the Project Lead;
+they do not prove completion or assign authorship to every file in a shared system.
 
-| Person | Confirmed responsibility | Evidence at the earlier published snapshot |
+| Person | Confirmed responsibility | Verified implementation and limits |
 | --- | --- | --- |
-| Project Lead | Engineering coordination, Game State Management, integration oversight | GameState V1 and the shared engineering foundations above are on main; future integration needs coordination |
-| Ali | Opening cinematic, Scene 1, integration toward playable Bedroom | Initial opening is on main; opening-to-room handoff is absent in the inspected runtime |
-| Christan | Environmental dialogue development and Sanity System | Published reusable environmental contract is available for his content; his current branch implementation/status was not verified |
-| Kayla | Environment and map development | Prototype rooms exist on main; her current deliverables and branch status were not verified |
-| Isabela | Narrative/dialogue, original character artwork, dialogue UI artwork | Original Albert sheets and Dream/Real panel artwork are integrated; complete/final narrative approval is not established |
+| Prince | Project Lead / System Integrator; engineering coordination, Game State Management, integration oversight | Shared foundations and the accepted introduction/repair are published; future integration needs coordination |
+| Ali | Opening, UI, and relevant gameplay integration | Opening/UI and the Bedroom handoff are published; assigned areas do not establish authorship of every integrated file |
+| Christan | Environmental dialogue development and Sanity engineering | Published reusable environmental contract is available for his content; his current branch implementation/status was not verified |
 | Lawrence | Audio and sound | Opening/typewriter expose audio hooks; main contains audio placeholder files, not finished audio integration; current delivery status is unverified |
+| Isabela | Visual art, original character artwork, dialogue UI, narrative, and dialogue | Original Albert sheets and Dream/Real panel artwork are integrated; complete/final narrative approval is not established |
+| Kayla | Visual art, environmental and map development | Prototype rooms exist on main; her current deliverables and branch status were not verified |
+| Wayne | Visual art alongside Isabela and Kayla | Seventh member; specific assets, assigned scenes, deliverables, and implementation status are unconfirmed |
 
 ## Current development areas
 
 | Area | Classification | Next evidence needed |
 | --- | --- | --- |
 | Existing laboratories and shared systems | Published prototypes/foundations | Validate affected scenes when their contracts change |
-| Dream → Bedroom introduction | Implemented, validated, and accepted locally on October 20, 2026; unpublished | Separate Git publication authorization and verification |
+| Dream → Bedroom introduction | Accepted and published in `fad8a76`; accepted signal repair published in `eef63da` | Preserve the verified flow and test affected paths when changing it |
 | Environmental descriptions beyond current examples | Assigned; additional progress unverified | Inspect Christan's actual content/interface and agree on scene ownership |
 | Sanity | Assigned; no integration in inspected main | Christan's actual contract, approved inputs/outputs and event meanings |
 | Environment/map expansion | Assigned; additional progress unverified | Kayla's confirmed deliverables and integration needs |
-| Story event registration | One local introduction-completion flag approved and registered | Additional events require approved meanings, producers, and consumers |
+| Story event registration | One published introduction-completion flag approved and registered | Additional events require approved meanings, producers, and consumers |
 | Connected room travel and chapter progression | Unresolved design/integration | Accepted room order, entry/exit behavior, and narrative boundaries |
 | Save/load | Deferred outside GameState V1 | Separate requirements/design before implementation |
 | Narrative proposals, final title/endings | Unresolved | Isabela/team decisions, not inference from prototypes |
-| Central documentation set | Earlier published baseline plus explicitly local introduction contracts, linked to specialized guides | Keep local, accepted, and published status distinct when maintaining affected documents |
+| Central documentation set | Published implementation contracts linked to specialized guides | Keep local, accepted, and published status distinct when maintaining affected documents |
 
-The central guides distinguish the earlier published baseline from the local
-introduction. Their presence alone does not establish acceptance or publication.
+The central guides distinguish published implementation from proposed work.
+Their presence alone does not establish new acceptance or publication.
 
 ## Integration dependencies and real constraints
 
-- **Chapter flow:** the local Dream handoff loads the story Bedroom; room markers
+- **Chapter flow:** the published Dream handoff loads the story Bedroom; room markers
   and doors still supply no travel logic. Later chapter connections need approved
   entry/travel rules and coordinated environment/narrative content.
-- **Story state:** one local introduction-completion flag is registered. Unknown
+- **Story state:** one published introduction-completion flag is registered. Unknown
   reads still return null and writes are rejected. Additional progression and
   Christan's Sanity interface need approved meanings and verified consumers.
 - **Dialogue ownership:** environmental content can reuse
@@ -143,8 +148,8 @@ teammate progress is not labeled a confirmed technical blocker.
 ## Current introduction review boundary
 
 The introduction is complete: all 156 automated checks passed, and the Project
-Lead manually tested and accepted it on October 20, 2026. Only Git publication
-review and authorization remain for this checkpoint.
+Lead manually tested and accepted it on October 20, 2026. Publication of the
+introduction (`fad8a76`) and its accepted signal repair (`eef63da`) is verified.
 
 The contract is recorded in [Game flow](GAME_FLOW.md#opening-to-bedroom-contract).
 The completed validation and manual acceptance covered:
@@ -163,9 +168,8 @@ The completed validation and manual acceptance covered:
 - No regression in F5 opening behavior or independent F6 laboratory entry points,
   movement, collisions, dialogue, or camera behavior.
 
-Git publication remains pending: review the staged implementation and relevant
-documentation, then obtain separate authorization before publishing. Verify
-publication before reporting it as published. Later chapter flow
+The checkpoint and repair are published; new changes still require their own
+review, acceptance, and publication authorization. Later chapter flow
 also depends on verified Christan/Kayla/Lawrence deliverables and approved narrative
 and state contracts; those assignments alone establish no current readiness.
 
@@ -176,8 +180,8 @@ a schedule. The Project Lead and responsible teammates must confirm it.
 
 1. Review this knowledge base, especially unresolved narrative/flow and ownership
    assumptions; keep status wording tied to the inspected source.
-2. Review the accepted introduction's staged implementation and documentation;
-   publish only after separate Git publication authorization.
+2. Preserve the accepted, published introduction and signal repair when planning
+   further chapter integration; test affected input, movement, and camera behavior.
 3. Agree with Isabela on accepted progression/content and with Christan on the
    environmental/Sanity interfaces; approve real GameState event IDs as needed.
 4. Coordinate Kayla's room deliverables and Lawrence's actual audio assets with

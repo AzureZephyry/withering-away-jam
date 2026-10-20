@@ -8,9 +8,10 @@
 
 This preserves approved constraints supplied by the Project Lead and decisions
 visible in the earlier published snapshot at `590184b`. D12 and related updates
-describe the completed local introduction: all 156 automated checks passed, and
-the Project Lead granted manual acceptance on October 20, 2026. Git publication
-is still pending. Implementation evidence is linked to
+describe the introduction accepted by the Project Lead on October 20, 2026,
+after 156 automated checks passed. It is published in `fad8a76`; its accepted
+Dream signal repair is published in `eef63da`, the current confirmed main baseline.
+Implementation evidence is linked to
 current files/guides and the verified [milestone history](DEVELOPMENT_HISTORY.md).
 A working implementation is not automatically final design approval.
 
@@ -45,7 +46,7 @@ scope; not a finalized story inferred from source.
 
 **Status:** Accepted project direction; narrative details unresolved.
 
-**Decision/context:** Withering Away is a working title for a six-student 2D
+**Decision/context:** Withering Away is a working title for a seven-student 2D
 psychological horror game for Month of Horror #2: Withering Away. The Project
 Lead's current premise follows Albert beginning college. Deterioration, dreams,
 and unsettling environments are developing themes, not a finalized plot contract.
@@ -172,7 +173,7 @@ periods for an unsupported ellipsis glyph while leaving source dialogue intact.
 must not consume multiple actions. Opening and environmental controllers own
 their respective progression, while reusing low-level presentation. The white
 Dream background, audio cues, and exact effect timing are not final assets.
-The local introduction supersedes the waking placeholder's dialogue role: the
+The published introduction supersedes the waking placeholder's dialogue role: the
 three waking lines now use the Reality panel over the actual Bedroom (D12).
 
 **Revisit:** Isabela's approved art/narrative changes and Lawrence's audio contract
@@ -271,7 +272,7 @@ centered and may cover Albert. This does not relax environmental subject framing
 and contract in `590184b`. Future producer/consumer interfaces remain unapproved.
 
 **Status:** Approved V1 design; foundation published in `590184b`. One story
-completion event is implemented locally under D12; persistence remains deferred.
+completion event is published under D12; persistence remains deferred.
 
 **Context/purpose:** Shared event state needs to survive scene changes without
 putting progression storage in a particular room or dialogue controller. Initial
@@ -281,7 +282,7 @@ scope is Boolean story/event flags, not a general gameplay manager.
 | --- | --- |
 | Central Godot Autoload | `GameState` resolves the script through its preserved UID; callers share the running session |
 | Session lifetime | Scene changes preserve flags; restarting the application creates defaults; explicit `reset_session()` resets within the same application |
-| Descriptive names in one explicit registry | Approved names live in `REGISTERED_FLAGS`; local introduction registers `bedroom_intro_completed` |
+| Descriptive names in one explicit registry | Approved names live in `REGISTERED_FLAGS`; published introduction registers `bedroom_intro_completed` |
 | False defaults; values can change both ways | Flags are Boolean and mutable true/false; permanent milestones are caller conventions |
 | Strict types and known identifiers | Actual String names and Boolean values are required; invalid/unknown identifiers warn; unknown reads return null, rejected writes return false |
 | No implicit registration | Reading/writing a new name never creates a flag |
@@ -295,7 +296,7 @@ Project Lead and verified in [game_state.gd](../scripts/game_state.gd). Explicit
 registration/validation makes unknown event use visible rather than silently
 creating state. It is not a decision about final event names or narrative outcomes.
 
-**Current integration/revisit:** The local Bedroom introduction sets its approved
+**Current integration/revisit:** The published Bedroom introduction sets its approved
 completion flag after the final reflection. Additional events still require
 approved meanings, producers, consumers, and reset rules. Do not write `_flags`
 directly or replace invalid-read null with
@@ -362,9 +363,10 @@ meaningful context or add speculative implementation status.
 phone placeholder acceptance. See [Game flow](GAME_FLOW.md#bedroom-introduction)
 and [implementation structure](PROJECT_STRUCTURE.md#story-bedroom-and-phone-components).
 
-**Status:** Implemented locally; automated validation passed all 156 checks.
-Project Lead manual acceptance was granted on October 20, 2026. Git publication
-is pending. Visual tunables remain provisional prototype values.
+**Status:** Implemented, accepted, and published in `fad8a76`. The original
+validation passed 156 checks, and Project Lead acceptance was granted on
+October 20, 2026. The subsequent Dream signal repair was manually accepted and
+published in `eef63da`. Visual tunables remain provisional prototype values.
 
 **Decision/context:** Keep Dream as the main scene, preserve its earlier narrative
 and effects, and defer its waking handoff into a story wrapper around the existing
@@ -398,15 +400,16 @@ no second copy of the narrative or branches.
 
 **Validation and acceptance:** Automated validation passed, including branch,
 input, movement, session, and laboratory checks. Project Lead manual acceptance
-was granted on October 20, 2026; Git publication remains pending. Final buzz audio
-is pending and uses an explicit integration cue meanwhile. Final chapter flow, saves, and general NPC systems
-are not part of this introduction.
+was granted on October 20, 2026; the introduction is published in `fad8a76`.
+The accepted repair in `eef63da` connects the Dream body signals at runtime,
+checking each intended callable first to avoid duplicate connections. Final buzz
+audio is pending and uses an explicit integration cue meanwhile. Final chapter
+flow, saves, and general NPC systems are not part of this introduction.
 
 ## Open decisions and deferred work
 
 | Question | Current status | Coordination required |
 | --- | --- | --- |
-| Opening → Bedroom publication | Implemented, validated, and accepted locally on October 20, 2026; Git publication pending | Project Lead with relevant scene/content owners |
 | First connected chapter boundaries and room order | Unresolved | Project Lead and narrative/environment owners |
 | Additional event identifiers and producer/consumer rules | One introduction flag approved; further events require agreement | Project Lead with relevant feature owners |
 | Sanity inputs, outputs, and event dependencies | Unverified interface; no current integration | Christan and Project Lead |
