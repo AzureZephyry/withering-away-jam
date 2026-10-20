@@ -176,3 +176,4 @@ free_on_finish = false
 [connection signal="character_revealed" from="Label" to="." method="_on_character_revealed"]
 [connection signal="advance_requested" from="DialoguePanel/Margin/Content/Body" to="." method="_on_advance_requested"]
 [connection signal="character_revealed" from="DialoguePanel/Margin/Content/Body" to="." method="_on_character_revealed"]
+[connection signal="sequence_finished" from="." to="." method="_on_sequence_finished"]

@@ -1,7 +1,8 @@
 # Environmental interaction prototype
 
 This system handles objects in the playable world. The cinematic opening keeps
-its own sequence and input handler. Nothing here connects the opening to a room.
+its own sequence and input handler. The story Bedroom introduction reuses the
+dialogue presentation, not this proximity-based conversation lifecycle.
 
 ## Scene setup
 
@@ -43,6 +44,24 @@ Entry-frame input, held keys, echoes and same-frame duplicate presses are ignore
 Movement resumes when dialogue closes; another interaction waits for camera
 restoration. `interaction_started` and `interaction_finished(target, completed)`
 are available for later scene-local hooks.
+
+## Scripted-story suspension
+
+`set_suspended(value: bool) -> bool` temporarily suspends environmental detection,
+prompts, placement updates, and input without changing target repeat state or
+Player physics. It returns `false` if asked to suspend while a conversation is
+open, closing, or still being placed. Finish that interaction before transferring
+ownership. A repeated assignment to the current suspension state is accepted.
+
+The Bedroom introduction saves the prior suspension state, suspends this
+controller, and owns its separate movement lock. On completion it restores the
+prior state. Resuming clears the selection and waits for E/Space and left mouse
+release, then applies a frame guard before activation. This prevents the final story
+dismissal from also activating the notebook or card.
+
+Keep one movement/input owner during a scripted sequence. Disabling Player physics
+alone does not suspend environmental activation. The ordinary F6 laboratories
+remain unsuspended unless another controller explicitly acquires this contract.
 
 ## Placement
 

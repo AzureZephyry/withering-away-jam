@@ -42,14 +42,22 @@ func _layout_artwork() -> void:
 	if not is_node_ready() or artwork.texture == null or size.x <= 0.0:
 		return
 	var source: Vector2 = artwork.texture.get_size()
-	var scale_factor: float = size.x / source.x
-	var artwork_height: float = source.y * scale_factor
+	var visible_area := Rect2(artwork.texture.get_image().get_used_rect())
+	if not visible_area.has_area():
+		return
+	var scale_factor: float = size.x / visible_area.size.x
+	var artwork_height: float = visible_area.size.y * scale_factor
 	if not is_equal_approx(size.y, artwork_height):
 		offset_top = offset_bottom - artwork_height
-	# Source-pixel safe areas measured from these PNG exports. Recheck if revised.
-	var body_rect := Rect2(96, 62, 646, 164) if world == World.DREAM else Rect2(28, 60, 725, 164)
-	var tab_rect := Rect2(58, 8, 154, 31) if world == World.DREAM else Rect2(24, 7, 158, 31)
-	$Margin.position = body_rect.position * scale_factor
+	# Keep the complete texture; transparent canvas does not occupy dialogue space.
+	artwork.anchor_right = 0.0
+	artwork.anchor_bottom = 0.0
+	artwork.position = -visible_area.position * scale_factor
+	artwork.size = source * scale_factor
+	# Safe areas in the approved 640 x 480 exports, before transparent padding.
+	var body_rect := Rect2(64, 346, 460, 82) if world == World.DREAM else Rect2(64, 344, 510, 84)
+	var tab_rect := Rect2(66, 313, 122, 28)
+	$Margin.position = (body_rect.position - visible_area.position) * scale_factor
 	$Margin.size = body_rect.size * scale_factor
-	speaker.position = tab_rect.position * scale_factor
+	speaker.position = (tab_rect.position - visible_area.position) * scale_factor
 	speaker.size = tab_rect.size * scale_factor
