@@ -34,6 +34,8 @@ var _camera_tween: Tween
 var _layout_transform: Transform2D
 var _layout_size: Vector2
 var placement_issue: String = ""
+var suspended: bool = false
+var _resume_waiting_for_release: bool = false
 
 const SUBJECT_PADDING: float = 8.0
 const FRAME_TIME: float = 0.25
@@ -47,12 +49,23 @@ func _ready() -> void:
 	_cache_visual_bounds()
 
 func _process(_delta: float) -> void:
+	if suspended:
+		return
 	if dialogue_open and not _layout_busy:
 		# Recheck only when the camera or logical viewport actually changes.
 		if not get_viewport().get_canvas_transform().is_equal_approx(_layout_transform) or get_viewport_rect().size != _layout_size:
 			_position_dialogue()
 
 func _physics_process(_delta: float) -> void:
+	if suspended:
+		prompt.hide()
+		return
+	if _resume_waiting_for_release:
+		prompt.hide()
+		if not Input.is_action_pressed(&"dialogue_advance") and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			_resume_waiting_for_release = false
+			_last_press_frame = Engine.get_process_frames() + 1
+		return
 	var candidates: Array[Interactable] = []
 	for node in get_tree().get_nodes_in_group("overworld_interactables"):
 		if player.get_parent().is_ancestor_of(node):
@@ -102,7 +115,11 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not event.pressed:
 		_held_keys.erase(key)
 		return
+	if suspended:
+		return
 	get_viewport().set_input_as_handled()
+	if _resume_waiting_for_release:
+		return
 	if event.echo or _held_keys.has(key):
 		return
 	_held_keys[key] = true
@@ -122,6 +139,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		_open_dialogue()
 
 func _open_dialogue() -> void:
+	if suspended or _resume_waiting_for_release:
+		return
 	active = _selected
 	active.begin()
 	panel.world = DialoguePanel.World.DREAM if active.presentation == Interactable.Presentation.DREAM else DialoguePanel.World.REAL
@@ -274,3 +293,19 @@ func _close_dialogue(success: bool = true) -> void:
 
 func _clear_held_keys() -> void:
 	_held_keys.clear()
+
+func set_suspended(value: bool) -> bool:
+	# Do not transfer movement/camera ownership during an active interaction.
+	if value and (dialogue_open or _closing or _layout_busy):
+		push_warning("Finish the environmental interaction before suspending it.")
+		return false
+	if suspended == value:
+		return true
+	suspended = value
+	_selected = null
+	prompt.hide()
+	_clear_held_keys()
+	_last_press_frame = Engine.get_process_frames() + 1
+	# A story's final held press must be released before exploration can react.
+	_resume_waiting_for_release = not value
+	return true

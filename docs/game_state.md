@@ -5,13 +5,13 @@ one running game. It survives scene changes. Closing and starting the game
 creates a fresh session with every registered flag set to `false`.
 
 It does not manage sanity, dialogue playback, scenes, inventory, quests, or
-save files. No existing story or interaction currently sets flags.
+save files. The local Bedroom introduction is the first story flag producer;
+environmental object completion still belongs to each loaded target.
 
 ## Register an event
 
 Add each approved, descriptive event name once to `REGISTERED_FLAGS` in
-`scripts/game_state.gd`. This is the only production registry. It is deliberately
-empty until the team approves real story events. Names are case-sensitive;
+`scripts/game_state.gd`. This is the only production registry. Names are case-sensitive;
 flags are never created by reads or writes. Restart the game after editing the
 registry. Do not change `_flags` directly.
 
@@ -27,6 +27,24 @@ if value:
 	print("The registered event is true.")
 GameState.clear_flag("approved_event_id")
 ```
+
+## Bedroom introduction completion
+
+The locally implemented, unpublished `bedroom_intro_completed` flag means the
+whole Bedroom introduction finished, including the selected phone branch and
+the final reflection. `scripts/bedroom_intro.gd` writes it only after the last
+reflection is dismissed, immediately before returning exploration control.
+
+Loading Bedroom, starting dialogue, opening/closing the phone, and selecting a
+response do not set it. Later story entry reads it and skips the introduction
+when true. The branch remains local to the sequence: there are no response flags,
+Sanity changes, relationship values, or saved consequences.
+
+The ordinary Bedroom F6 laboratory does not read or write this flag. The dedicated
+`scenes/tests/bedroom_intro_test.tscn` entry reruns the same introduction without
+reading or changing story completion. Restarting the application creates a fresh
+session. No New Game UI exists yet; a future in-process New Game action should
+call the existing `GameState.reset_session()` rather than bypassing the registry.
 
 ## API and validation
 
@@ -77,7 +95,8 @@ registration as `GameState="*uid://c647p0ta1wljq"`, using the identity in
 `scripts/game_state.gd.uid`. Keep that UID file with the script.
 
 Run the normal opening with F6 on `scenes/Dream.tscn`, or F5. Check Remote >
-GameState: its `_flags` dictionary should be empty with the current registry.
+GameState: `_flags` should contain `bedroom_intro_completed = false` before
+the introduction finishes, and `true` after its final reflection.
 Run the Bedroom or Garden laboratory with F6 to check existing gameplay.
 Registered-flag behavior is validated using test-only identifiers in an isolated
 fixture; no test events or debug scene are added to the gameplay flow.

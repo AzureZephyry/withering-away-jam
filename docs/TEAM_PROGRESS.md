@@ -7,20 +7,40 @@
 ## Delivery objective
 
 The immediate team objective is a coherent playable game-jam submission or chapter
-built from the existing foundations. The current opening and independent rooms
-do not yet meet that connected-playable objective.
+built from the existing foundations. The local introduction now connects Dream
+to Bedroom exploration; the remaining rooms do not yet form a connected chapter.
 
 **Project Lead-reported deadline:** November 9, 2026. This date is attributed to
 the Project Lead and has not been independently verified against an organizer
 schedule in this snapshot.
 
-## Last-verified snapshot
+## Local introduction status — unpublished
+
+The Project Lead approved implementation of Dream → Bedroom awakening → visual
+phone buzz/shake → reaction → centered family conversation → one of three branches
+→ reflection → exploration. The local files implement that sequence using the
+existing Bedroom, Player, Reality panel, environmental system, and GameState.
+
+All three phone branches are present. `bedroom_intro_completed` records only the
+last reflection dismissal in story context. The developer introduction test uses
+the same logic without reading/writing completion; ordinary Bedroom F6 remains
+exploration-only. Branch choice has no lasting gameplay consequence.
+
+**Status:** implementation completed locally; automated validation passed all 156
+checks. The Project Lead personally tested and accepted the checkpoint on
+October 20, 2026. Git publication is still pending. See [Game flow](GAME_FLOW.md)
+for the contract and verification procedures. Final phone-buzz audio, final Dream art, room travel,
+Sanity integration, and persistent saves remain outside the completed local scope.
+
+## Earlier verified published snapshot
 
 **Implementation verified at published commit:** `590184baf43a43410e7f6288258d1ef080d17967` —
 `feat: add session-based game state management`.
 
-The main reference was checked against the remote and matched this baseline during
-the documentation inspection. The scope is published main, its meaningful history,
+The main reference matched this baseline during that earlier documentation
+inspection. The table below is historical published evidence, not a statement
+that the local introduction has been published. That inspection covered main,
+its meaningful history,
 the existing system guides, and the Project Lead's confirmed context/assignments.
 This is not a live status report on every teammate branch. Other branches were
 not audited for current functionality, acceptance, or integration readiness.
@@ -44,7 +64,7 @@ Categories can apply together. An assigned responsibility is not completed work;
 an implemented branch is not necessarily accepted or published. No completion
 percentages are inferred.
 
-## Verified published work
+## Published work at that earlier snapshot
 
 | Area | What is available | Boundary |
 | --- | --- | --- |
@@ -65,7 +85,7 @@ verified commit milestones belong in [Development history](DEVELOPMENT_HISTORY.m
 Assignments below come from the Project Lead. They do not prove completion or
 assign authorship to every file in a shared/integrated system.
 
-| Person | Confirmed responsibility | What can be said from this inspection |
+| Person | Confirmed responsibility | Evidence at the earlier published snapshot |
 | --- | --- | --- |
 | Project Lead | Engineering coordination, Game State Management, integration oversight | GameState V1 and the shared engineering foundations above are on main; future integration needs coordination |
 | Ali | Opening cinematic, Scene 1, integration toward playable Bedroom | Initial opening is on main; opening-to-room handoff is absent in the inspected runtime |
@@ -79,30 +99,27 @@ assign authorship to every file in a shared/integrated system.
 | Area | Classification | Next evidence needed |
 | --- | --- | --- |
 | Existing laboratories and shared systems | Published prototypes/foundations | Validate affected scenes when their contracts change |
-| Opening → playable Bedroom | Assigned/planned; pending implementation/integration on main | Approved handoff behavior and Ali's verified implementation |
+| Dream → Bedroom introduction | Implemented, validated, and accepted locally on October 20, 2026; unpublished | Separate Git publication authorization and verification |
 | Environmental descriptions beyond current examples | Assigned; additional progress unverified | Inspect Christan's actual content/interface and agree on scene ownership |
 | Sanity | Assigned; no integration in inspected main | Christan's actual contract, approved inputs/outputs and event meanings |
 | Environment/map expansion | Assigned; additional progress unverified | Kayla's confirmed deliverables and integration needs |
-| Production story event registration | Pending team decisions | Approved descriptive IDs, setting/resetting owners, and consumers |
+| Story event registration | One local introduction-completion flag approved and registered | Additional events require approved meanings, producers, and consumers |
 | Connected room travel and chapter progression | Unresolved design/integration | Accepted room order, entry/exit behavior, and narrative boundaries |
 | Save/load | Deferred outside GameState V1 | Separate requirements/design before implementation |
 | Narrative proposals, final title/endings | Unresolved | Isabela/team decisions, not inference from prototypes |
-| Central documentation set | Six central guides describing the implementation verified at `590184b`, with links to the three specialized references | Maintain affected guides when meaningful accepted changes alter implementation, responsibilities, or decisions |
+| Central documentation set | Earlier published baseline plus explicitly local introduction contracts, linked to specialized guides | Keep local, accepted, and published status distinct when maintaining affected documents |
 
-The central guides describe project knowledge and continuity at the verified
-implementation baseline. Their presence does not establish new gameplay or the
-completion of pending integrations.
+The central guides distinguish the earlier published baseline from the local
+introduction. Their presence alone does not establish acceptance or publication.
 
 ## Integration dependencies and real constraints
 
-- **Chapter flow:** the opening emits completion but no scene loader consumes it.
-  Room markers and doors supply no travel logic. A connected chapter needs an
-  agreed handoff from Ali's scene work, Isabela's accepted narrative endpoint,
-  suitable environment content coordinated with Kayla, and approved entry/travel rules.
-- **Story state:** the registry is empty. Callers cannot safely use invented
-  event names; unknown reads return null and writes are rejected. Decide meanings
-  and ownership before connecting progression or Christan's Sanity implementation;
-  his actual consuming interface must be verified rather than assumed.
+- **Chapter flow:** the local Dream handoff loads the story Bedroom; room markers
+  and doors still supply no travel logic. Later chapter connections need approved
+  entry/travel rules and coordinated environment/narrative content.
+- **Story state:** one local introduction-completion flag is registered. Unknown
+  reads still return null and writes are rejected. Additional progression and
+  Christan's Sanity interface need approved meanings and verified consumers.
 - **Dialogue ownership:** environmental content can reuse
   [the published interaction contract](overworld_interactions.md). Future NPC
   cinematics require separate coordination with the opening/sequence owner.
@@ -112,8 +129,9 @@ completion of pending integrations.
 - **Shared assets:** changing the Player, font, panel, or typewriter affects
   multiple consumers. Preserve original art and test both the opening and labs
   relevant to the change.
-- **Assets/content:** Dream and waking views are placeholders, audio cues are not
-  playback, and font redistribution permission is unresolved. Confirm actual
+- **Assets/content:** Dream artwork and phone screenshots remain placeholders;
+  waking dialogue now appears over the real Bedroom. Audio cues are not playback,
+  and font redistribution permission is unresolved. Confirm actual
   artwork/content decisions and Lawrence's audio deliveries before integration.
   See [font permission](DESIGN_DECISIONS.md#d05--world-specific-supplied-dialogue-artwork-and-a-shared-typewriter)
   before public build distribution.
@@ -122,32 +140,32 @@ These are verified gaps, dependencies, or documented limits. No new runtime
 failure was reproduced during this documentation-only inspection. Unknown
 teammate progress is not labeled a confirmed technical blocker.
 
-## Proposed next integration milestone
+## Current introduction review boundary
 
-**Proposal:** connect the existing opening presentation to an approved playable
-Bedroom entry. This is a coordination objective, not an assertion that Ali has
-completed/committed the transition or authorization to implement it. Confirm owner
-readiness and implementation approval first.
+The introduction is complete: all 156 automated checks passed, and the Project
+Lead manually tested and accepted it on October 20, 2026. Only Git publication
+review and authorization remain for this checkpoint.
 
-The unresolved contract is recorded in
-[Game flow](GAME_FLOW.md#unresolved-opening-to-bedroom-contract). Proposed evidence
-for treating a future implementation as integration-ready is:
+The contract is recorded in [Game flow](GAME_FLOW.md#opening-to-bedroom-contract).
+The completed validation and manual acceptance covered:
 
-- An accepted Scene 1 endpoint, with narrative and technical responsibilities
-  coordinated rather than treating scene implementation as narrative approval.
-- The correct agreed playable destination and approved spawn/facing.
+- The existing Dream order/effects and approved waking handoff, with the three
+  waking lines appearing once over the playable Bedroom.
+- A valid bedside spawn with Albert visible, idle, and locked for the story.
 - Deliberate movement/input lock release and control handoff, with opening
   dialogue/effect cleanup and no competing input owners.
 - Correct camera initialization/framing and functional destination dialogue.
-- A decision on whether shared story events are needed; any required event IDs
-  are approved, registered, and written explicitly.
+- All three phone branches, reflections, centered artwork, keyboard/mouse choices,
+  and one-action-per-press boundaries.
+- Completion written only after final reflection in story context, re-entry
+  skipping completed introduction, and developer tests isolated from that state.
 - Actual Godot 4.7.2 runtime verification of the handoff and subsequent exploration.
 - No regression in F5 opening behavior or independent F6 laboratory entry points,
   movement, collisions, dialogue, or camera behavior.
-- Review of the implementation and relevant documentation before integration
-  into main; publication verified before reporting it as published.
 
-These are proposed acceptance criteria, not completed tests. Later chapter flow
+Git publication remains pending: review the staged implementation and relevant
+documentation, then obtain separate authorization before publishing. Verify
+publication before reporting it as published. Later chapter flow
 also depends on verified Christan/Kayla/Lawrence deliverables and approved narrative
 and state contracts; those assignments alone establish no current readiness.
 
@@ -158,8 +176,8 @@ a schedule. The Project Lead and responsible teammates must confirm it.
 
 1. Review this knowledge base, especially unresolved narrative/flow and ownership
    assumptions; keep status wording tied to the inspected source.
-2. Agree with Ali on the Scene 1 endpoint and opening-to-Bedroom entry contract,
-   then inspect/test the actual handoff implementation before integration.
+2. Review the accepted introduction's staged implementation and documentation;
+   publish only after separate Git publication authorization.
 3. Agree with Isabela on accepted progression/content and with Christan on the
    environmental/Sanity interfaces; approve real GameState event IDs as needed.
 4. Coordinate Kayla's room deliverables and Lawrence's actual audio assets with

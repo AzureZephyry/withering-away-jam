@@ -27,9 +27,6 @@ const STEPS: Array[Dictionary] = [
 	{"kind": "event", "id": &"garden_slowly_glitches"},
 	{"kind": "line", "presentation": "dream", "speaker": "???", "text": "I will love you…"},
 	{"kind": "event", "id": &"wake_0630"},
-	{"kind": "line", "presentation": "real", "speaker": "Albert", "text": "What…the…."},
-	{"kind": "line", "presentation": "real", "speaker": "Albert", "text": "sigh what was that weird dream..."},
-	{"kind": "line", "presentation": "real", "speaker": "Albert", "text": "It felt… more vivid than usual..?"},
 	{"kind": "event", "id": &"complete"},
 ]
 
@@ -41,7 +38,6 @@ const STEPS: Array[Dictionary] = [
 @export_range(0.2, 4.0, 0.05) var deterioration_tail_seconds: float = 2.0
 @export_range(0.1, 1.0, 0.05) var waking_fade_out_seconds: float = 0.45
 @export_range(0.05, 1.0, 0.05) var waking_black_hold_seconds: float = 0.20
-@export_range(0.1, 1.0, 0.05) var waking_fade_in_seconds: float = 0.35
 
 @onready var centered_text: Typewriter = $Label
 @onready var dialogue_panel: DialoguePanel = $DialoguePanel
@@ -153,20 +149,23 @@ func _run_event(event_id: StringName) -> void:
 			audio_cued.emit(&"solemn_music_stop")
 			audio_cued.emit(&"alarm_0630")
 			await get_tree().create_timer(waking_black_hold_seconds).timeout
-			# World changes under full black, independently of the speaker label.
-			$WhitePlaceholder.hide()
-			$WakeupPlaceholder.show()
-			dialogue_panel.world = DialoguePanel.World.REAL
-			phase = &"awakening_reveal"
-			await _fade_to(0.0, waking_fade_in_seconds)
-			awakening_fade.hide()
-			phase = &"awakening"
+			# Bedroom owns the reveal and waking dialogue after this black hold.
 		&"complete":
 			phase = &"complete"
 			is_complete = true
 			is_busy = false
-			# Temporary stable handoff; no final Bedroom or page-4 content.
 			sequence_finished.emit()
+
+func _on_sequence_finished() -> void:
+	# Let the awaited sequence callbacks unwind before replacing their scene.
+	_enter_bedroom.call_deferred()
+
+func _enter_bedroom() -> void:
+	if not is_inside_tree():
+		return
+	var error: Error = get_tree().change_scene_to_file("res://scenes/story/bedroom_story.tscn")
+	if error != OK:
+		push_error("Could not open the story Bedroom: %s" % error_string(error))
 
 func _play_glitch(second: bool) -> void:
 	$GlitchPlaceholder/Wash.show()

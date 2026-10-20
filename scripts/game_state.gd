@@ -3,8 +3,7 @@ extends Node
 
 signal flag_changed(flag_name: String, value: bool)
 
-# No production story events have been approved yet.
-const REGISTERED_FLAGS: Array[String] = []
+const REGISTERED_FLAGS: Array[String] = ["bedroom_intro_completed"]
 
 var _flags: Dictionary[String, bool] = {}
 

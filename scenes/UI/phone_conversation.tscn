@@ -1,0 +1,66 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/phone_conversation.gd" id="1_phone"]
+[ext_resource type="Texture2D" path="res://assets/ui/phone/prepared/phone_common_01_mama_greeting.png" id="2_first"]
+
+[sub_resource type="StyleBoxFlat" id="ChoiceBorder"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.84, 0.36, 1)
+anti_aliasing = false
+
+[node name="PhoneConversation" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_filter = 1
+mouse_filter = 2
+script = ExtResource("1_phone")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.32)
+
+[node name="PhoneCanvas" type="Control" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 72.0
+offset_right = 1040.0
+offset_bottom = 1160.0
+scale = Vector2(0.75, 0.75)
+mouse_filter = 2
+
+[node name="Artwork" type="TextureRect" parent="PhoneCanvas"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_first")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ChoiceOutline" type="Panel" parent="PhoneCanvas"]
+visible = false
+layout_mode = 0
+offset_left = 103.0
+offset_top = 716.0
+offset_right = 535.0
+offset_bottom = 774.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("ChoiceBorder")

@@ -2,9 +2,9 @@
 
 Withering Away is the working title of a 2D psychological horror game being
 developed by six students for **Month of Horror #2: Withering Away**. The current
-repository contains an initial scripted opening, playable environment prototypes,
-and shared gameplay foundations. It is still in development; the prototypes do
-not yet form a connected story chapter.
+repository contains a scripted Dream opening, playable environment prototypes,
+and shared gameplay foundations. The local Dream-to-Bedroom introduction connects
+the opening to exploration; it is not yet a complete story chapter.
 
 The Project Lead's current narrative premise follows **Albert as he begins his
 first day of college**, with psychological deterioration and dream imagery as
@@ -38,13 +38,18 @@ a claim that every resized window is forced to that aspect ratio.
    your copy, and open the project.
 3. Wait for Godot to finish importing resources before running a scene.
 4. Press **F5** to run the configured main scene,
-   [scenes/Dream.tscn](scenes/Dream.tscn). This runs the scripted opening, not a
-   playable room. Expect black first, then typing after a short delay. Focus the
-   running game window and use E/Space to reveal and advance lines. The white Dream
-   background and later waking-room view are intentional placeholders.
+   [scenes/Dream.tscn](scenes/Dream.tscn). Expect black first, then typing after a
+   short delay. E/Space reveals and advances Dream dialogue. The white Dream
+   background is a placeholder. The opening then enters the playable Bedroom:
+   waking dialogue, phone conversation, one choice, reflection, and exploration.
 5. To test a room, open one of the laboratory scenes below and press **F6** to
    run that scene. Opening a room resource alone does not provide the laboratory's
    player and camera setup.
+6. To test the Bedroom introduction without replaying Dream, open
+   [bedroom_intro_test.tscn](scenes/tests/bedroom_intro_test.tscn) and press F6.
+   It uses the actual story sequence without reading or writing its completion
+   flag. Rerun it to test another branch. The ordinary Bedroom laboratory below
+   still starts directly in exploration.
 
 | Standalone prototype | Scene to open | Current camera |
 | --- | --- | --- |
@@ -61,6 +66,10 @@ a claim that every resized window is forced to that aspect ratio.
 | Automatic environmental interaction | Enter its configured radius | Start dialogue without an activation key |
 | Dialogue is typing | E or Space | Reveal the current line |
 | Dialogue is fully revealed | E or Space | Advance; close after the final environmental line |
+| Bedroom introduction dialogue | E, Space, or left click | Reveal the current line, then advance on a distinct press |
+| Ordinary phone screen | E, Space, or left click anywhere | Advance one screen; the last branch screen waits for another press to close |
+| Phone choices | W/S or Up/Down | Highlight one of three responses |
+| Phone choices | Enter/Space, or click a response | Confirm once; E and clicks outside responses do not confirm |
 
 These use the Input Map actions `ui_left`, `ui_right`, `ui_up`, `ui_down`, and
 `dialogue_advance`. Release before pressing again: held keys and duplicate input
@@ -73,12 +82,21 @@ the card completes once per loaded scene instance, and the Garden's Corpse Lily
 starts automatically and repeats after leaving and returning. Dialogue placement
 keeps Albert and the object clear, using a short camera pan when needed and feasible.
 
-## Current published implementation
+## Current implementation and publication status
+
+The Dream-to-Bedroom additions below are **implemented and accepted locally**.
+Automated validation passed all 156 checks, and the Project Lead granted manual
+acceptance on October 20, 2026. Git publication is still pending.
 
 - **Initial Dream opening:** provisional dialogue, typewriter text, speaker names,
-  eyelid animation, glitch effects, and a waking-up placeholder. It does not yet
-  transition into the playable Bedroom. Backgrounds and audio integration remain
-  unfinished.
+  eyelid animation, and glitch effects. Its waking fade hands off to the playable
+  Bedroom. The three waking lines now belong to the Bedroom introduction.
+  Final Dream artwork and audio remain unfinished.
+- **Bedroom introduction:** Albert stands beside the bed while movement and
+  environmental interactions are locked. Reality dialogue leads into a brief
+  visual phone buzz, `!!!`, a centered prepared phone overlay, all three family
+  conversation branches, and branch-specific reflection. Exploration returns
+  after the final reflection. Final phone-buzz audio is still missing.
 - **Environment prototypes:** Bedroom, Garden, and School layouts with movement,
   collisions, and their own camera setups. The Bedroom includes notebook and card
   interactions; the Garden includes the Corpse Lily interaction prototype.
@@ -92,8 +110,9 @@ keeps Albert and the object clear, using a short camera pan when needed and feas
   for left-facing presentation on the sprite only. Selection follows input and
   actual movement; stopping preserves facing.
 - **GameState V1:** validated, session-based Boolean event flags through an
-  Autoload. The production event registry is currently empty; story progression
-  events and Sanity mechanics are not implemented by this foundation.
+  Autoload. The local `bedroom_intro_completed` flag records the entire story
+  introduction only after its last reflection is dismissed. Choices have no
+  lasting consequences. Sanity and persistent saves remain outside this system.
 
 ## Project navigation
 
@@ -193,8 +212,8 @@ internal edit. Avoid extra history entries that merely repeat a commit hash.
 
 ## Known limits
 
-There is no connected opening-to-Bedroom handoff or room-to-room travel yet.
-GameState has no registered story events; Sanity and persistent saves are outside
-its current implementation. Narrative content, final backgrounds, audio, and font
-redistribution permission still require follow-up. See [flow prerequisites](docs/GAME_FLOW.md#integration-prerequisites)
+Room-to-room travel, Sanity, and persistent saves are not implemented. The phone
+images are accepted temporary placeholders with differing visible widths. Final
+narrative content, Dream backgrounds, audio, and font redistribution permission
+still require follow-up. See [flow prerequisites](docs/GAME_FLOW.md#integration-prerequisites)
 and [the status snapshot](docs/TEAM_PROGRESS.md) before planning integration.

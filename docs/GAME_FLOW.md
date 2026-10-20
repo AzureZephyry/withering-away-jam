@@ -5,11 +5,11 @@
 
 ## Scope and evidence
 
-This describes published runtime behavior at `590184b`, verified from
-[project.godot](../project.godot), scenes, and their scripts. The narrative premise
-and proposed concepts below are supplied by the Project Lead; they are not all
-represented by gameplay code. No new runtime tests were performed for this
-documentation inspection.
+This guide describes the local Dream-to-Bedroom integration and existing room
+prototypes. The introduction is **implemented and accepted locally**: all 156
+automated checks passed, and the Project Lead granted manual acceptance on
+October 20, 2026. Git publication is still pending. The previous published runtime snapshot was
+`590184b`; its record remains in [Development history](DEVELOPMENT_HISTORY.md).
 
 **Published** means present in the inspected main history. **Prototype** means an
 implemented experiment, not a complete chapter. **Planned** describes intended
@@ -19,23 +19,28 @@ For milestone evidence, see [Development history](DEVELOPMENT_HISTORY.md).
 ## F5: the actual application flow
 
 The configured main scene is [scenes/Dream.tscn](../scenes/Dream.tscn).
-`GameState` is available as an Autoload, with an empty event registry. The scene's
+`GameState` is available as an Autoload. The scene's
 `OpeningSequence` Control runs [opening_sequence.gd](../scripts/opening_sequence.gd).
 There is no movable overworld Player in this scene.
 
 ### Execution overview
 
 ```text
-F5: Dream.tscn (one scene throughout)
+F5: Dream.tscn
     black text -> eyes opening -> Dream dialogue/effects
-    -> waking placeholder -> opening controller completes
-    -> no playable-room transition
+    -> waking fade to black -> playable Bedroom
+    -> waking lines -> buzz/shake -> !!! -> phone -> choice -> selected branch
+    -> reflection -> exploration
 
 F6: choose one independent test entry point
     Bedroom laboratory: camera_lab.tscn
     Garden laboratory:  garden_camera_lab.tscn
     School laboratory:  school_camera_lab.tscn
     These are separate runs, not connected room transitions.
+
+Developer F6 entry: tests/bedroom_intro_test.tscn
+    Actual Bedroom introduction -> reflection -> exploration
+    No story-completion reads or writes; rerun to test another branch.
 ```
 
 At startup, centered text and the dialogue panel are cleared, the black backdrop
@@ -57,14 +62,14 @@ without rewriting the draft dialogue.
 | `screen_glitches` | First individual glitch, immediately after “Top of everything” | Timed effect before “always ahead of everyone around you.” |
 | `glitch` | Second individual glitch, immediately after “always ahead of everyone around you.” | Timed effect before “Don't think I didn't see all of it.” |
 | `garden_slowly_glitches` | Gradual deterioration begins after “As long as you stay like this.” | Its onset is awaited; its tail continues behind “I will love you…” |
-| `wake_0630` | Fade to black; stop the deterioration tween, hide glitch visuals, swap backgrounds/skin under black, and fade into the waking placeholder | Clock reads 6:30 AM; the next three lines are Albert's waking reaction in the Real World panel |
-| `complete` | Set the opening controller's local `is_complete = true` and emit `sequence_finished` | No subsequent scene is loaded and no production GameState event is written; the placeholder remains the current scene |
+| `wake_0630` | Fade to black, stop deterioration, hide glitch visuals, emit waking/alarm cues, and briefly hold black | Bedroom owns the following reveal, 6:30 AM clock, and waking dialogue |
+| `complete` | Set local `is_complete`, emit `sequence_finished`, and defer scene replacement until the callback unwinds | Load the story Bedroom; Dream does not set introduction completion |
 
 The individual glitches are single smooth pulses. Their duration/intensity and
 the deterioration/fade timing are provisional settings, not finalized direction.
 The white view is a Dream artwork placeholder; it is not
-[garden_room.tscn](../scenes/prototypes/rooms/garden_room.tscn). Likewise the waking
-placeholder is not the playable Bedroom.
+[garden_room.tscn](../scenes/prototypes/rooms/garden_room.tscn). The old waking
+placeholder is no longer used for Albert's three waking lines.
 
 This completion state belongs only to `OpeningSequence`. It is not a shared
 GameState flag or a record that a production story event has occurred.
@@ -84,15 +89,66 @@ connected here. Revealing a whole line does not emit a burst of per-character
 typing sounds. Lawrence's future integration must use the agreed audio contract;
 a signal alone is not audible playback.
 
+## Bedroom introduction
+
+[bedroom_story.tscn](../scenes/story/bedroom_story.tscn) instances the existing
+laboratory. Its [bedroom_intro.gd](../scripts/bedroom_intro.gd) controller owns
+story progression, movement locking, and environmental suspension until the
+last reflection is dismissed. Albert stands beside the bed in his existing
+idle pose; the room, sprite, and collisions are reused.
+
+| Stage | Behavior |
+| --- | --- |
+| Arrival | Reveal Bedroom under a short fade with the 6:30 AM context |
+| Waking | Silver Reality panel: `What…the….`, `*sigh* what was that weird dream...`, `It felt… more vivid than usual..?` |
+| Buzz | Brief visual camera shake restores its original offset; `audio_cued("phone_buzz")` exposes the pending audio integration point |
+| Reaction | Albert's `!!!` uses the same silver panel; dismissal opens Screen 01 |
+| Phone | Prepared transparent PNGs appear instantly, centered above a subtle background dimmer |
+| Decision | Screen 04 selects one local branch |
+| Reflection | Phone/dimmer close; Albert's branch-specific Reality lines appear |
+| Finish | Final dismissal records story completion, then restores movement and interactions without moving Albert |
+
+E, Space, or left click reveal/advance Bedroom dialogue. A typing line reveals
+first; a distinct press advances. One event visits one stage only. Opening the
+phone cannot advance Screen 01; choice confirmation cannot advance its first
+branch screen; closing the phone cannot dismiss the reflection.
+
+### Phone screens and choices
+
+Ordinary screens accept E, Space, or left click anywhere in the viewport. There
+are no timers or backwards navigation. Common screens run **01 → 02 → 03 → 04**.
+
+Screen 04 starts with response 1 highlighted. W/S or Up/Down changes selection;
+Enter/Space confirms. Hover highlights a response, and clicking it confirms.
+E and clicks outside responses do not confirm. The outline and mouse regions
+share the prepared-image transform.
+
+| Response meaning | Phone screens | Albert's reflection |
+| --- | --- | --- |
+| `Thank you.` | 05 → 06 → 07 | `Okay, big day.` |
+| `Don't worry, I got this.` | 08 → 09 → 10 → 11 | `I got this.`, then a separate `...` |
+| `I'm a little nervous, ma.` | 12 → 13 → 14 → 15 → 16 | `...It's fine, it's just the first day.` |
+
+The final branch PNG waits for one additional advance input before closing.
+Placeholder image wording does not change this semantic mapping. The choice
+affects only this branch and reflection: no lasting flags, Sanity, relationships,
+endings, or save data change.
+
+All 16 canvases come from `assets/ui/phone/prepared/`, at 640 × 1088. One viewport
+center and uniform scale are used across screens. At 1280 × 960, the default 0.75
+scale displays 480 × 816; smaller viewports reduce the common scale to fit with
+16-pixel margins. Filtering is nearest. Accepted visible-width differences remain.
+
 ## F6: standalone exploration prototypes
 
-These are alternative test entry points, not destinations reached from F5. Open
+These remain independent exploration test entries. The story wrapper reuses
+Bedroom's laboratory, but running the laboratory itself does not start the story. Open
 the laboratory, not just its room resource, and press F6. Each laboratory supplies
 the shared Albert Player and a camera; room resources supply scenery/collisions.
 
 | Scene | Available experience | Current limits |
 | --- | --- | --- |
-| [camera_lab.tscn](../scenes/prototypes/camera_lab.tscn) | Walk through the Bedroom, collide with solid furniture/walls, inspect notebook/card; fixed room camera | Right door is closed; no transition or full waking gameplay sequence |
+| [camera_lab.tscn](../scenes/prototypes/camera_lab.tscn) | Walk through the Bedroom, collide with solid furniture/walls, inspect notebook/card; fixed room camera | Right door closed; direct entry skips the introduction and never writes its flag |
 | [garden_camera_lab.tscn](../scenes/prototypes/garden_camera_lab.tscn) | Explore the Garden with limited continuous camera follow, overhead fading, and automatic Corpse Lily dialogue | Conversation is temporary test content; no story-state effect or exit transition |
 | [school_camera_lab.tscn](../scenes/prototypes/school_camera_lab.tscn) | Explore the School with collisions and limited continuous camera follow | No environmental dialogue controller or complete School narrative progression attached |
 | [game.tscn](../scenes/game.tscn) | Earlier movement/camera sandbox with 4× dead-zone camera | Not the configured main scene or a connected chapter |
@@ -155,9 +211,18 @@ one-time behavior does not provide that integration.
 
 ## Runtime state lifetime
 
-`GameState` is an Autoload across scene changes within one application. Its explicit
-registry is currently empty, and no opening/interaction caller sets story flags.
-It cannot yet determine which narrative stage Albert has reached.
+`GameState` survives scene changes. Its `bedroom_intro_completed` flag defaults to
+false and becomes true only after the last story reflection is dismissed. Loading
+Bedroom, opening/closing the phone, or choosing a branch does not complete it.
+
+The story controller has `STORY`, `REENTRY`, and `DEVELOPER_TEST` contexts. Future
+transitions can call `configure_entry(context, entry_position)` before adding the
+instance to the tree, supplying a room-local entrance position. A completed
+story entry skips the introduction and explores from that entrance; an incomplete
+story entry runs it. Actual connected room travel is not implemented.
+
+Ordinary Bedroom F6 does not read/write story completion. The dedicated test
+context bypasses the flag without resetting it and runs the same introduction.
 
 Approved registered flags default to false; valid writes can set them either way.
 `reset_session()` returns them to false. A new application starts a new session.
@@ -167,10 +232,11 @@ this system. See [GameState V1](game_state.md) before introducing event callers.
 
 ## Transition inventory
 
-| Connection | Status at the inspected baseline | Owner or required decision |
+| Connection | Current status | Owner or required decision |
 | --- | --- | --- |
-| Black → eyes opening → Dream dialogue → waking placeholder | Published, inside the same opening scene | Opening sequence/controller |
-| Opening completion → playable Bedroom | **PLANNED; not implemented** | Ali's assigned integration, coordinated with the Project Lead |
+| Black → eyes opening → Dream dialogue/effects | Existing opening retained | Opening sequence/controller |
+| Opening completion → playable Bedroom | Implemented locally; unpublished | Deferred handoff from opening controller |
+| Bedroom introduction → exploration | Implemented locally; unpublished | Story controller writes completion after final reflection |
 | Potential connections among existing room prototypes | **Undesigned or unimplemented; chapter travel order is not approved** | Agree on narrative order, entry/exit rules, and scene ownership first |
 | Room marker/door → destination | No scene router or travel behavior established | A marker or door visual is not a transition |
 | F6 → selected laboratory | Published editor test entry point | Developer chooses the standalone scene |
@@ -195,31 +261,32 @@ psychological system. Isabela and the team retain narrative decisions.
 
 ## Integration prerequisites
 
-### Unresolved opening-to-Bedroom contract
+### Opening-to-Bedroom contract
 
-These questions are not settled by the existing laboratory defaults. Coordinate
-with the relevant owners; this table does not approve a destination or handoff.
+The Project Lead approved this introduction's endpoint, playable destination,
+bedside arrival, whole-sequence lock, all branches, completion timing, and separate
+test entry. The local implementation passed automated validation and received
+Project Lead manual acceptance on October 20, 2026; Git publication is pending.
 
-| Requirement | What still needs agreement |
+| Requirement | Local implementation |
 | --- | --- |
-| Final opening endpoint | Which accepted Scene 1 moment hands off, and whether the current placeholder ending remains; coordinate narrative with Isabela and scene behavior with Ali |
-| Destination playable scene | Which approved playable Bedroom scene should load; a room resource alone lacks the laboratory's Player/controller/camera setup |
-| Spawn | Approved position/facing and how entry data is supplied; the current F6 spawn is not automatically the story-entry contract |
-| Player control handoff | When input/movement locks end, when the destination becomes controllable, and how an advance press is prevented from acting twice |
-| Camera ownership | Which scene/controller owns the post-handoff camera and how its initial framing is established |
-| Dialogue cleanup | Who clears/hides the opening text, panels, effects, and input handlers before exploration |
-| Scene transition ownership | Who consumes `sequence_finished`, loads/replaces the scene, and handles the lifetime of the old scene |
-| GameState events | Whether the handoff needs shared events; if so, approve names, meanings, producers, and reset rules before registration/writes |
+| Dream endpoint | Waking fade/black hold after the final Dream line; waking dialogue belongs to Bedroom |
+| Destination | Story wrapper instances the existing laboratory, keeping direct F6 exploration separate |
+| Spawn | Room-local bedside position; future completed re-entry accepts an entrance position |
+| Control | One story input owner; release guards before environmental activation resumes |
+| Camera | Existing fixed Bedroom camera, with a brief restored-offset buzz shake |
+| Dialogue | Shared Reality presentation and typewriter; story owns progression |
+| Scene lifetime | Completion schedules the scene replacement after callbacks unwind |
+| State | One registered session-completion flag after final reflection; local-only choice |
 
-The [proposed milestone evidence](TEAM_PROGRESS.md#proposed-next-integration-milestone)
-describes how a future implementation could be reviewed. No such handoff has been
-verified on the current published baseline.
+Spawn and visual tunables remain provisional implementation values; see
+[the architecture guide](PROJECT_STRUCTURE.md#story-bedroom-and-phone-components).
+This accepted integration remains local until Git publication is authorized and verified.
 
 ### Connected-chapter dependencies
 
-- Agree on the accepted Scene 1 script, its endpoint, and the playable Bedroom's
-  entry state/spawn. Wire a deliberate handoff from opening completion; do not
-  silently replace the current main scene or assume the placeholder is a room.
+- Preserve the accepted introduction contract during chapter integration;
+  provisional content is not automatically final narrative.
 - Agree on room entry/exit behavior and chapter order before implementing travel.
   Preserve standalone laboratory testing while integrating scenes.
 - Approve descriptive production event names and their meanings before adding
@@ -237,31 +304,33 @@ These are integration dependencies, not authorization to implement them now.
 ## Flow validation guidance
 
 The current paths below can be tested now. These are procedures/expected behavior
-from the published source, not newly executed test results.
+from the local source, not a record of newly executed tests.
 
 | Current testable path | Focus |
 | --- | --- |
-| F5 Dream opening | Startup delay, reveal versus advance, cue order, waking placeholder, local completion without a room load |
-| F6 room laboratories | Eight-direction movement/animations, wall/furniture collisions, camera framing and limits |
+| F5 Dream → Bedroom | Dream cue order, safe handoff, bedside lock, one copy of waking lines, all branches, reflection, and exploration |
+| F6 room laboratories | Movement/animations, collisions, camera; Bedroom skips introduction without writing completion |
+| Developer introduction entry | Repeated branch testing using the same logic without story-state changes |
+| Phone and input boundaries | Keyboard/mouse choices, holds, resize alignment, final-screen dwell, and no event acting twice |
+| Session entry | Completion timing, completed re-entry skip, fresh-session reset |
 | Bedroom objects | Notebook keypress repeats; card stays completed for that loaded instance and resets on reload |
 | Garden Lily | Automatic approach, no immediate reopening while nearby, and repetition after leaving/re-entering |
 | Dialogue close/cancellation | Restored movement/idle behavior, a shifted camera returning, finish outcome, and no double input action |
 
-**Future acceptance requirements, not passed checks:** opening-to-playable-room
-transition, approved story-event progression, Sanity integration, and chapter
-transitions require implementations/contracts that are not present here. Test the
-complete connected path once those are approved and implemented; laboratory
-success cannot stand in for that evidence.
+**Validation status:** the local introduction passed all 156 automated checks and
+received Project Lead manual acceptance on October 20, 2026. Git publication is
+pending. The matrix above remains a regression guide; no tests were rerun for
+this documentation update. Full chapter travel and Sanity remain future work;
+standalone laboratory success cannot establish them.
 
 ## Unresolved flow questions
 
-1. What is the final Scene 1 ending and exact opening-to-Bedroom handoff contract?
-2. Which rooms and events form the first connected chapter, in what order?
-3. Which descriptions repeat locally, and which approved events must persist
+1. Which rooms and events form the rest of the first chapter, in what order?
+2. Which future descriptions repeat locally, and which approved events must persist
    across room changes? Should any be restored after quitting?
-4. What are the approved narrative event IDs and Sanity inputs/outputs?
-5. What owns future character/NPC cinematic input, Player locking, and camera use?
-6. Which narrative proposals, ending conditions, art, and audio cues are finalized?
+3. What are the additional approved event IDs and Sanity inputs/outputs?
+4. What owns future general character/NPC cinematic input, locking, and camera use?
+5. Which narrative proposals, ending conditions, final art, and audio are approved?
 
 Record approved answers in [Design decisions](DESIGN_DECISIONS.md), then update
 this flow only when the corresponding intent or implementation is confirmed.

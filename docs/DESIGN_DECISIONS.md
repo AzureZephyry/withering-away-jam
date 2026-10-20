@@ -7,7 +7,10 @@
 ## How to read this record
 
 This preserves approved constraints supplied by the Project Lead and decisions
-visible in published source at `590184b`. Implementation evidence is linked to
+visible in the earlier published snapshot at `590184b`. D12 and related updates
+describe the completed local introduction: all 156 automated checks passed, and
+the Project Lead granted manual acceptance on October 20, 2026. Git publication
+is still pending. Implementation evidence is linked to
 current files/guides and the verified [milestone history](DEVELOPMENT_HISTORY.md).
 A working implementation is not automatically final design approval.
 
@@ -24,7 +27,7 @@ owners.
 ### Invariants and tunable configuration
 
 Required behavior includes restoring Player control after dialogue, preserving
-single input ownership, keeping the panel clear of protected subjects, rejecting
+single input ownership, keeping environmental panels clear of protected subjects, rejecting
 unknown event identifiers, and separating story-state storage from Sanity rules.
 These constraints must survive ordinary content/configuration changes.
 
@@ -168,8 +171,9 @@ periods for an unsupported ellipsis glyph while leaving source dialogue intact.
 **Consequences:** E/Space reveals a line before advancing; held/duplicate input
 must not consume multiple actions. Opening and environmental controllers own
 their respective progression, while reusing low-level presentation. The white
-Dream background, waking placeholder, audio cues, and exact effect timing are not
-final assets or full scene integration.
+Dream background, audio cues, and exact effect timing are not final assets.
+The local introduction supersedes the waking placeholder's dialogue role: the
+three waking lines now use the Reality panel over the actual Bedroom (D12).
 
 **Revisit:** Isabela's approved art/narrative changes and Lawrence's audio contract
 may require new safe-area or signal checks. Font permission remains unresolved;
@@ -232,7 +236,7 @@ separately from opening. None of these rules currently write GameState events.
 visibility/raycast requirement needs an approved contract and relevant regression
 tests, not an implicit behavior change while adding content.
 
-## D08 — Dialogue must not hide Albert or the interacted object
+## D08 — Environmental dialogue must not hide Albert or the interacted object
 
 **Provenance:** Project Lead-confirmed visibility requirement; source/history in
 `0029fed`, `79247a2`, and `9987b51` verifies placement and updated Albert bounds.
@@ -258,13 +262,16 @@ or large art require review.
 **Revisit:** Any relaxation of subject visibility, different panel layout, or new
 camera support must be explicitly designed and tested with the art/UI owners.
 
+The approved story phone overlay in D12 is a separate presentation: it stays
+centered and may cover Albert. This does not relax environmental subject framing.
+
 ## D09 — GameState V1 is a strict session event registry
 
 **Provenance:** Project Lead-approved V1 choices; published script, UID, registration,
 and contract in `590184b`. Future producer/consumer interfaces remain unapproved.
 
-**Status:** Approved V1 design; implemented/published in `590184b`. Production
-story integration pending; persistence deferred.
+**Status:** Approved V1 design; foundation published in `590184b`. One story
+completion event is implemented locally under D12; persistence remains deferred.
 
 **Context/purpose:** Shared event state needs to survive scene changes without
 putting progression storage in a particular room or dialogue controller. Initial
@@ -274,7 +281,7 @@ scope is Boolean story/event flags, not a general gameplay manager.
 | --- | --- |
 | Central Godot Autoload | `GameState` resolves the script through its preserved UID; callers share the running session |
 | Session lifetime | Scene changes preserve flags; restarting the application creates defaults; explicit `reset_session()` resets within the same application |
-| Descriptive names in one explicit registry | Approved names live in `REGISTERED_FLAGS`; production registry remains empty until real events are agreed |
+| Descriptive names in one explicit registry | Approved names live in `REGISTERED_FLAGS`; local introduction registers `bedroom_intro_completed` |
 | False defaults; values can change both ways | Flags are Boolean and mutable true/false; permanent milestones are caller conventions |
 | Strict types and known identifiers | Actual String names and Boolean values are required; invalid/unknown identifiers warn; unknown reads return null, rejected writes return false |
 | No implicit registration | Reading/writing a new name never creates a flag |
@@ -288,9 +295,10 @@ Project Lead and verified in [game_state.gd](../scripts/game_state.gd). Explicit
 registration/validation makes unknown event use visible rather than silently
 creating state. It is not a decision about final event names or narrative outcomes.
 
-**Current integration/revisit:** No scene sets production flags. Approve the event
-meanings, producers, consumers, and reset rules before registering names and
-wiring systems. Do not write `_flags` directly or replace invalid-read null with
+**Current integration/revisit:** The local Bedroom introduction sets its approved
+completion flag after the final reflection. Additional events still require
+approved meanings, producers, consumers, and reset rules. Do not write `_flags`
+directly or replace invalid-read null with
 an assumed false. Use [game_state.md](game_state.md) for the API/examples, and
 agree on any persistence or Sanity contract separately.
 
@@ -348,13 +356,59 @@ reason (or state it is unknown), and explain required validation or migration
 consequences. Link the new evidence without creating a raw changelog. Do not erase
 meaningful context or add speculative implementation status.
 
+## D12 — One story owner for the Dream-to-Bedroom introduction
+
+**Provenance:** Project Lead-approved complete introduction contract and prepared
+phone placeholder acceptance. See [Game flow](GAME_FLOW.md#bedroom-introduction)
+and [implementation structure](PROJECT_STRUCTURE.md#story-bedroom-and-phone-components).
+
+**Status:** Implemented locally; automated validation passed all 156 checks.
+Project Lead manual acceptance was granted on October 20, 2026. Git publication
+is pending. Visual tunables remain provisional prototype values.
+
+**Decision/context:** Keep Dream as the main scene, preserve its earlier narrative
+and effects, and defer its waking handoff into a story wrapper around the existing
+Bedroom laboratory. Move the three waking lines to that actual room, without
+replaying them on the old waking placeholder. Albert stands beside the bed in
+his existing idle pose. No new awakening animation or room geometry is needed.
+
+One introduction controller owns input and movement through waking dialogue,
+brief buzz/shake, `!!!`, phone conversation, one choice, and reflection. It reuses
+Reality dialogue presentation and suspends environmental activation separately
+from the Player's physics lock. On final dismissal it restores prior state and
+requires input release before environmental interaction resumes.
+
+The phone uses all 16 prepared transparent 640 × 1088 PNGs with a common viewport
+center and uniform scale, instantaneous swaps, and a dimmer behind the artwork.
+It may cover Albert. Visible-width differences and conservative edges are accepted
+temporary-art limitations; no further normalization or regenerated artwork is
+authorized by this decision. Choice hit regions and outline share its transform.
+
+**State and entry boundaries:** `bedroom_intro_completed` means the entire story
+introduction, including final reflection, was dismissed. It is session-only and
+is not written at arrival, phone open/close, or selection. The chosen response
+changes only the local phone branch and reflection, with no Sanity, relationship,
+ending, or save effects. Completed story entry skips the introduction. Room travel
+remains separate future work.
+
+The ordinary Bedroom F6 laboratory remains exploration-only and does not write
+completion. A dedicated developer test scene instances the same story logic in
+an explicit context that neither reads nor writes story completion. It contains
+no second copy of the narrative or branches.
+
+**Validation and acceptance:** Automated validation passed, including branch,
+input, movement, session, and laboratory checks. Project Lead manual acceptance
+was granted on October 20, 2026; Git publication remains pending. Final buzz audio
+is pending and uses an explicit integration cue meanwhile. Final chapter flow, saves, and general NPC systems
+are not part of this introduction.
+
 ## Open decisions and deferred work
 
 | Question | Current status | Coordination required |
 | --- | --- | --- |
-| Exact opening → Bedroom handoff, spawn/control state, and scene lifetime | Planned connection; contract unresolved | Ali and Project Lead, with Isabela for narrative endpoint |
+| Opening → Bedroom publication | Implemented, validated, and accepted locally on October 20, 2026; Git publication pending | Project Lead with relevant scene/content owners |
 | First connected chapter boundaries and room order | Unresolved | Project Lead and narrative/environment owners |
-| Production event identifiers and producer/consumer rules | Pending approval; registry empty | Project Lead with relevant feature owners |
+| Additional event identifiers and producer/consumer rules | One introduction flag approved; further events require agreement | Project Lead with relevant feature owners |
 | Sanity inputs, outputs, and event dependencies | Unverified interface; no current integration | Christan and Project Lead |
 | General character/NPC cinematic presentation and input handoff | Separate planned responsibility; contract unresolved | Relevant cinematic/dialogue owners before integration |
 | Save storage and cross-launch persistence | Deferred outside V1 | Separate design/authorization |

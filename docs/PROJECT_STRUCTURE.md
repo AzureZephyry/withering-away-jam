@@ -1,17 +1,19 @@
 # Project structure
 
-This guide maps the published game implementation. Start with the
+This guide maps the game implementation, including the completed Dream-to-Bedroom
+introduction. All 156 automated checks passed, and the Project Lead granted manual
+acceptance on October 20, 2026. Git publication is still pending. Start with the
 [README](../README.md) for setup and controls; use the system guides linked below
 for detailed APIs and authoring steps.
 
 Godot scenes assemble nodes and reference scripts and resources. Shared behavior
 lives mainly in `scripts/`, artwork and animation resources in `assets/`, and
 playable room experiments in `scenes/prototypes/`. Some visual helper scripts live
-beside those prototypes. The configured opening and the playable laboratories
-are separate entry points.
+beside those prototypes. The configured opening enters a story wrapper around
+the Bedroom laboratory; direct laboratory launches remain separate test entries.
 
-The public-source baseline for this guide is `590184b`. Scene/script relationships
-below describe that implementation, not other team branches. For player-facing
+The earlier published-source snapshot was `590184b`; new introduction components
+below are local work, not a publication claim or an audit of other branches. For player-facing
 sequence order use [Game flow](GAME_FLOW.md); for intent and constraints use
 [Design decisions](DESIGN_DECISIONS.md). [Team progress](TEAM_PROGRESS.md) owns the
 current status snapshot, and [Development history](DEVELOPMENT_HISTORY.md) owns
@@ -39,6 +41,8 @@ assets/
   ui/dialogue/
 	dialogue_dream_world.png
 	dialogue_real_world.png
+  ui/phone/
+	prepared/                    # 16 transparent temporary phone PNGs + asset notes
   sprites/test sprites/          # Retained sample-art library
   music/                        # Placeholder file; no music tracks yet
   sounds/                       # Placeholder file; no sound clips yet
@@ -53,6 +57,11 @@ scenes/
 	eyelid_effect.gd
 	eyelidEffect.gdshader
 	dream_deterioration.gdshader
+	phone_conversation.tscn
+  story/
+	bedroom_story.tscn           # Instances Bedroom laboratory + story UI
+  tests/
+	bedroom_intro_test.tscn      # Same introduction, isolated completion context
   prototypes/
 	camera_lab.tscn              # Bedroom laboratory
 	garden_camera_lab.tscn
@@ -71,6 +80,8 @@ scripts/
   playerMovement.gd
   albert_animation.gd
   opening_sequence.gd
+  bedroom_intro.gd
+  phone_conversation.gd
   text_Type.gd
   dialogue_panel.gd
   overworld_interactable.gd
@@ -109,12 +120,55 @@ sequence of lines and events:
 1. Centered dialogue on black.
 2. Eyelids opening onto a white Dream background placeholder.
 3. Dream-themed dialogue, individual glitch cues, and gradual deterioration.
-4. A fade into a waking-room placeholder showing 6:30 AM, with Real World dialogue.
+4. A waking fade to black, followed by a deferred handoff to the playable Bedroom.
 
-The sequence ends by emitting `sequence_finished`. It does not load the playable
-Bedroom, and it has no overworld Player. Audio cue signals are integration points;
+The sequence ends by emitting `sequence_finished`; its local consumer defers
+loading the story Bedroom so awaited callbacks can unwind. Dream itself has no
+overworld Player. The Bedroom now owns the three waking lines and 6:30 AM clock.
+Audio cue signals are integration points;
 the current scene does not play finished music or alarm assets. The dialogue,
 timings, and placeholder backgrounds are not final narrative or visual direction.
+
+## Story Bedroom and phone components
+
+The local [bedroom_story.tscn](../scenes/story/bedroom_story.tscn) root uses
+[bedroom_intro.gd](../scripts/bedroom_intro.gd). Its `Laboratory` child instances
+the existing Bedroom laboratory without changing its saved defaults. `StoryLayer`
+is CanvasLayer 4 and contains the shared Reality DialoguePanel, PhoneConversation,
+clock, and arrival fade. This preserves the laboratory's room, Player, camera,
+and notebook/card targets.
+
+The story controller is the single input/progression owner during arrival,
+waking dialogue, buzz, reaction, phone, and reflection. It disables its panel
+body's independent key handler, saves Player physics state, calls
+`interactions.set_suspended(true)`, and restores both only after final reflection.
+Environmental input is not used to drive the scripted introduction.
+
+| Component | Responsibility and public entry |
+| --- | --- |
+| `bedroom_intro.gd` | `EntryContext.STORY`, `REENTRY`, or `DEVELOPER_TEST`; `configure_entry(context, entry_position)` before tree insertion; `introduction_finished(branch)` and `audio_cued(cue_id)` signals |
+| `phone_conversation.gd` | `open_conversation()`, `advance()`, choice navigation/confirmation and hit testing; `finished(branch)` emits after an additional input on the last screen |
+| `phone_conversation.tscn` | Full-viewport dimmer, centered 640 × 1088 PhoneCanvas, Artwork, and ChoiceOutline; no independent input owner |
+| `bedroom_intro_test.tscn` | Instances the same story scene with developer context, bypassing completion reads/writes; rerun with F6 for each branch |
+
+`configure_entry` takes room-local coordinates (the laboratory has an identity
+transform). Completed story entries skip the introduction and use the supplied
+entrance. No room router is added. The ordinary Bedroom F6 entry does not invoke
+the story controller or write completion.
+
+Current provisional defaults are bedside **(144, 176)**, future entrance fallback
+**(464, 304)**, arrival fade **0.35 s**, buzz shake **0.32 s** at strength **1.5**,
+and phone scale **0.75**. The camera offset is restored after shake. Phone layout
+uses a common viewport center and uniformly shrinks only when needed to fit
+16-pixel margins; it never compensates per-image silhouette widths. Dimmer alpha
+is **0.32**; the gold outline uses a **3-source-pixel** border and shared image-space
+hit regions. These are accepted prototype defaults; final production values remain tunable.
+
+The phone preloads all 16 transparent copies in `assets/ui/phone/prepared/`.
+Original opaque PNGs are preserved and unused by this overlay. Branch order and
+reflection text belong in [Game flow](GAME_FLOW.md#phone-screens-and-choices).
+The choice has no effect beyond that local sequence. Final phone-buzz audio is
+pending; the controller exposes an integration cue rather than generating audio.
 
 ## Playable scenes and room resources
 
@@ -297,13 +351,15 @@ the script.
 
 GameState stores Boolean event flags for one running application and survives
 scene changes. `REGISTERED_FLAGS` is the explicit production registry and is
-currently empty. Names and values are strictly validated; reads/writes never
+contains `bedroom_intro_completed` in the local introduction implementation.
+Names and values are strictly validated; reads/writes never
 create an event implicitly. Unknown reads return `null`, invalid writes return
 `false`, and actual value changes emit `flag_changed`. `reset_session()` clears
 registered values; restarting the application creates a fresh session.
 
-This is a published foundation, not implemented story progression. Existing
-opening and interaction scripts do not set flags. GameState does not implement
+The foundation is published; the first story producer is local and unpublished.
+The story Bedroom writes completion after final reflection, while test context
+and environmental objects do not. GameState does not implement
 Sanity, dialogue playback, save/load, inventory, or quests. See
 [GameState V1](game_state.md) for event registration and the full API contract.
 
@@ -372,8 +428,8 @@ and this compatibility behavior. Font licensing remains unresolved.
 | Reveal/advance overworld text | Controller reads `body.is_typing` → `reveal_line()`, or increments `line_index` and presents the next line, or closes the last line | The body's own key handler is disabled; layout/entry/held-key guards prevent duplicate actions |
 | Frame/restore dialogue | `_position_dialogue()` checks full artwork and subject bounds → chooses a clear edge or feasible pan → verifies actual result within limits → closing restores a shifted camera | Failed framing closes with `completed = false` and restores control; movement returns before any camera-return tween finishes |
 | Close/cancel dialogue | Target records success/failure → panel clears/hides → velocity zeroed and previous physics-processing state restored → camera returns if shifted → finish signal | Failed placement does not consume a one-time completion; leave/re-enter before retrying |
-| Use an approved state event | Add approved name to registry and restart → caller uses `set_flag`/`get_flag` → strict validation → stored Boolean; an actual change emits `flag_changed(name, value)` to connected listeners | This is an extension path; no production identifiers or scene callers exist yet; read current values as well as subscribing to future changes |
-| Run F5 | Main scene loads → opening initializes → short delay → `STEPS` lines/events → local `is_complete` → `sequence_finished` | No scene change or production GameState event is implemented at that signal |
+| Finish story introduction | Last reflection dismissed → registered completion set true → environmental suspension and prior Player physics restored → `introduction_finished(branch)` | Developer context never reads/writes the completion flag; choice remains local |
+| Run F5 | Dream initializes → `STEPS` lines/events → completion signal → deferred story Bedroom load → introduction → exploration | Waking dialogue occurs once in Bedroom; main scene setting remains Dream |
 
 The detailed interaction lifecycle and API remain in the specialized guides;
 these traces show where responsibilities meet.
@@ -449,18 +505,19 @@ Review required UID/resource identities and every affected shared consumer.
 
 ## Confirmed unfinished integration
 
-- The opening is a provisional sequence with placeholder backgrounds and audio
-  hooks. It does not enter a playable Bedroom or complete a connected chapter.
-- Bedroom, Garden, and School are standalone prototypes. Door transitions between
-  them are not implemented.
+- The local opening-to-Bedroom introduction is implemented, validated, and accepted;
+  Git publication is pending. Dream backgrounds and final audio remain
+  placeholders/integration hooks.
+- Garden and School retain standalone entries. Door transitions between rooms
+  are not implemented.
 - Environmental descriptions and the Garden conversation are prototype content.
   A general character/NPC cinematic interaction system remains separate planned
   work.
-- GameState has no registered production events or event-setting callers yet.
-  Sanity mechanics and persistent save/load are outside its current scope.
+- GameState has one local story completion event. Sanity mechanics and persistent
+  save/load remain outside its current scope.
 - The music and sounds directories contain placeholder files, not finished audio
   integrations. Font licensing/redistribution permission still needs verification.
 
-These statements describe this published implementation, not work that may exist
-on other team branches. Use [Game flow](GAME_FLOW.md) for transition prerequisites
+These statements distinguish local integration from the earlier published
+snapshot; they do not audit other branches. Use [Game flow](GAME_FLOW.md) for prerequisites
 and [Team progress](TEAM_PROGRESS.md) for ownership and review priorities.

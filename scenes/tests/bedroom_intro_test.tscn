@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b7b1x4i0simy"]
+
+[ext_resource type="PackedScene" path="res://scenes/story/bedroom_story.tscn" id="1_story"]
+
+[node name="BedroomIntroductionTest" unique_id=2119151965 instance=ExtResource("1_story")]
+entry_context = 2
+
+[node name="DialoguePanel" parent="StoryLayer" index="0"]
+layout_mode = 3
+
+[node name="Clock" parent="StoryLayer" index="2"]
+anchors_preset = -1
