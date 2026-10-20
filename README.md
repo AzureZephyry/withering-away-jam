@@ -114,6 +114,11 @@ fonts, and audio placeholders. Use the structure guide for exact dependencies.
 
 ### Continuity and coordination
 
+- **New contributor:** start with the [Git collaboration handbook](docs/GIT_WORKFLOW.md)
+  for setup, branches, committing, publishing a development branch, and reviewed integration.
+- **Existing contributor:** use the [existing-clone companion](docs/GIT_EXISTING_CONTRIBUTORS.md)
+  to inspect local work, preserve it, synchronize deliberately, and handle conflicts.
+  The parent handbook supplies the shared policies for both routes.
 - [Development history](docs/DEVELOPMENT_HISTORY.md) — meaningful published
   milestones and their verified commits.
 - [Team progress](docs/TEAM_PROGRESS.md) — verified status, responsibilities,
@@ -144,6 +149,11 @@ These are development areas, not a list of completed features.
 | Lawrence | Audio and sound |
 
 ## Contributing
+
+Use the [Git handbook](docs/GIT_WORKFLOW.md) as the detailed contributor reference;
+start with [existing-clone diagnosis](docs/GIT_EXISTING_CONTRIBUTORS.md) if you
+already have local work. Branch names do not permanently limit responsibilities;
+coordinate the current task and overlapping files before editing.
 
 Develop in your assigned branch, fetch updates before planning integration, and
 coordinate before editing another teammate's area or shared resources. Keep

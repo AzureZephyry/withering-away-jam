@@ -84,6 +84,8 @@ docs/
   DEVELOPMENT_HISTORY.md
   TEAM_PROGRESS.md
   DESIGN_DECISIONS.md
+  GIT_WORKFLOW.md
+  GIT_EXISTING_CONTRIBUTORS.md
   overworld_interactions.md
   albert_animation.md
   game_state.md
@@ -91,6 +93,10 @@ docs/
 
 The sample-art library is retained material, not an inventory of active game
 assets. Albert's active sheets are in `assets/characters/albert/`.
+
+Contributor procedures live in the [Git handbook](GIT_WORKFLOW.md), with
+[existing-clone synchronization and recovery](GIT_EXISTING_CONTRIBUTORS.md) as its
+companion. This guide remains the reference for actual game-file dependencies.
 
 ## Main entry point: Dream opening
 
