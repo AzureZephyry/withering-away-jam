@@ -54,6 +54,10 @@ var is_complete: bool = false
 var _instability_tween: Tween
 
 func _ready() -> void:
+	if not body_text.advance_requested.is_connected(_on_advance_requested):
+		body_text.advance_requested.connect(_on_advance_requested)
+	if not body_text.character_revealed.is_connected(_on_character_revealed):
+		body_text.character_revealed.connect(_on_character_revealed)
 	dialogue_panel.world = DialoguePanel.World.DREAM
 	_clear_text()
 	$BlackBackdrop.show()
