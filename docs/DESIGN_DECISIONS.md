@@ -406,13 +406,73 @@ checking each intended callable first to avoid duplicate connections. Final buzz
 audio is pending and uses an explicit integration cue meanwhile. Final chapter
 flow, saves, and general NPC systems are not part of this introduction.
 
+## D13 — Reversible Sanity with narrative-dependent environmental changes
+
+**Provenance:** Project Lead-approved Sanity design; the complete contract is in
+[Sanity design](SANITY_DESIGN.md).
+
+**Status:** Approved design; implementation and shared integration not established.
+Christan's separate development progress remains unverified.
+
+**Decision/context:** Use one integer deterioration score, initially 0 and bounded
+below by 0. Explicitly classified destabilizing/restorative/neutral decisions
+change it by +1/−1/0. Three playable stage bands lead to Game Over at 6; Level 3
+remains recoverable. There is no fourth visual stage or point-by-point art
+requirement. The existing first family phone conversation stays neutral.
+
+**Consequences:** There is no continuous drain, passive regeneration, fractional
+change, or separate streak system. Under Option C, the authoritative stage,
+presented environment, and narrative transition timing are distinct. Both
+deterioration and recovery visuals may wait for an approved narrative moment.
+Artists intend to provide full-map references and modular assets; three separate
+complete maps are not required. A shared layout with replaceable visuals is a
+possible approach, not an approved architecture.
+
+**Revisit:** Specific story mappings, visual triggers, asset specifications,
+Game Over presentation, and concrete interfaces require coordinated review.
+Proposed Garden/Lily symbolism remains unfinalized.
+
+## D14 — Session-only checkpoints, without disk persistence
+
+**Provenance:** Project Lead-approved checkpoint direction; see
+[checkpoint design](SANITY_DESIGN.md#session-only-checkpoints).
+
+**Status:** Approved design; implementation and restoration contract unresolved.
+
+**Decision/context:** Keep checkpoints in memory during the application session.
+Game Over retry should use the most recent applicable checkpoint. Closing the
+game loses checkpoint/story progress; a new launch starts at Dream, score 0,
+Level 1. No persistent disk save or Load Game system is included.
+
+**Consequences/revisit:** Restoration must keep location, Player, Sanity, story
+flags, and environmental presentation consistent. Locations, triggers, frequency,
+feedback, retry UI, the no-checkpoint case, and detailed restoration ownership
+remain unresolved. GameState V1 remains a Boolean registry, not a checkpoint or
+Sanity manager; no schema or combined manager is approved.
+
+## D15 — Compact Sanity HUD; reference mockup is not production art
+
+**Provenance:** Project Lead-approved HUD direction and asset-use boundary; see
+[HUD design](SANITY_DESIGN.md#sanity-hud-direction).
+
+**Status:** Top-right direction approved; concept/reference only, not implemented.
+
+**Decision/context:** Keep the HUD small, legible at 1280 × 960, compatible with
+pixel art and discrete changes, and clear across three stages without obstructing
+play. The discussed generated mockup is inspiration only, not approved final art
+or an authorized repository/game asset.
+
+**Consequences/revisit:** Artists need not reproduce it. Final treatment,
+indicators, dimensions, and exposure of the hidden score remain unresolved.
+No new artwork or HUD implementation is established by this decision.
+
 ## Open decisions and deferred work
 
 | Question | Current status | Coordination required |
 | --- | --- | --- |
 | First connected chapter boundaries and room order | Unresolved | Project Lead and narrative/environment owners |
 | Additional event identifiers and producer/consumer rules | One introduction flag approved; further events require agreement | Project Lead with relevant feature owners |
-| Sanity inputs, outputs, and event dependencies | Unverified interface; no current integration | Christan and Project Lead |
+| Specific Sanity decisions/events and engineering interfaces | Mechanics approved in D13; mappings and integration interface unverified | Christan, Project Lead, and narrative owners |
 | General character/NPC cinematic presentation and input handoff | Separate planned responsibility; contract unresolved | Relevant cinematic/dialogue owners before integration |
 | Save storage and cross-launch persistence | Deferred outside V1 | Separate design/authorization |
 | Final narrative, Garden symbolism, ending conditions, title | Proposed/unresolved as described in Game flow | Isabela and the team |

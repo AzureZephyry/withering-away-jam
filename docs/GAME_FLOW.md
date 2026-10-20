@@ -231,6 +231,30 @@ Changing scenes does not call reset automatically, and target-local one-time
 completion is separate from Autoload state. Save/load and Sanity are not part of
 this system. See [GameState V1](game_state.md) before introducing event callers.
 
+## Planned Sanity and retry flow
+
+This is **approved design, not an established runtime path**. Use
+[Sanity design](SANITY_DESIGN.md) as the full specification. Specific story
+decisions, event names, and checkpoint locations remain unresolved.
+
+An explicitly classified decision changes the shared deterioration score by
++1, −1, or 0, with a minimum of 0. The score determines one of three playable
+stages. Level 3 remains recoverable; reaching 6 instead triggers Game Over,
+not a fourth stage. The accepted first family phone branches stay Sanity-neutral,
+with their existing sequence and GameState behavior unchanged.
+
+Option C separates the current stage from the environment currently shown.
+An approved narrative moment may reveal deterioration or recovery during play,
+a transition, a Dream, or a return visit; crossing a score boundary need not
+immediately replace the visuals.
+
+Game Over retry is intended to restore the most recent applicable in-memory
+checkpoint. Snapshot/restoration details and the no-checkpoint case are unresolved.
+Closing the game discards checkpoint/story progress; the next launch begins at
+the Dream opening with score 0, Level 1. There is no persistent save or Load Game
+system in this design. Existing GameState V1 remains the Boolean event registry,
+not an implemented Sanity/checkpoint manager.
+
 ## Transition inventory
 
 | Connection | Current status | Owner or required decision |
@@ -241,7 +265,7 @@ this system. See [GameState V1](game_state.md) before introducing event callers.
 | Potential connections among existing room prototypes | **Undesigned or unimplemented; chapter travel order is not approved** | Agree on narrative order, entry/exit rules, and scene ownership first |
 | Room marker/door → destination | No scene router or travel behavior established | A marker or door visual is not a transition |
 | F6 → selected laboratory | Published editor test entry point | Developer chooses the standalone scene |
-| Registered event → Sanity response | Planned extension boundary, no current wiring | Approved event IDs and Christan's actual Sanity interface |
+| Classified decision/event → Sanity response | Approved mechanics; implementation/wiring not established | Specific story mappings and Christan's verified integration interface |
 | Session → persistent save | Deferred | Separate save/load design and authorization |
 
 ## Intended direction and narrative uncertainty
@@ -295,7 +319,8 @@ require their own review and authorization.
 - Approve descriptive production event names and their meanings before adding
   GameState callers; define who sets/resets each event and who consumes it.
 - Coordinate Christan's environmental content with the published interaction
-  contract, and define cinematic NPC/Sanity interfaces before connecting them.
+  contract. Review concrete Sanity interfaces against the approved design, and
+  define cinematic NPC interfaces before connecting them.
 - Integrate approved background artwork and Lawrence's actual audio resources;
   maintain Dream/Real world styling and correct reveal/advance behavior.
 - Test the connected path repeatedly, including restored controls/camera after
@@ -330,9 +355,11 @@ standalone laboratory success cannot establish them.
 ## Unresolved flow questions
 
 1. Which rooms and events form the rest of the first chapter, in what order?
-2. Which future descriptions repeat locally, and which approved events must persist
-   across room changes? Should any be restored after quitting?
-3. What are the additional approved event IDs and Sanity inputs/outputs?
+2. Which future descriptions repeat locally, and which approved events must survive
+   room changes or be restored on checkpoint retry? Cross-launch progress is
+   outside the approved session-only design.
+3. Which specific future decisions/events affect Sanity, and how will Christan's
+   concrete interface integrate them?
 4. What owns future general character/NPC cinematic input, locking, and camera use?
 5. Which narrative proposals, ending conditions, final art, and audio are approved?
 

@@ -136,6 +136,16 @@ the current confirmed main baseline.
   introduction only after its last reflection is dismissed. Choices have no
   lasting consequences. Sanity and persistent saves remain outside this system.
 
+## Approved Sanity design — integration unverified
+
+The approved direction uses one reversible integer deterioration score and three
+playable Sanity stages, with Game Over at the terminal threshold. Environmental
+changes follow narrative timing rather than necessarily appearing at each score
+boundary. Session-only checkpoint retry and a compact top-right HUD are also
+design directions; their implementation is not established. Christan's separate
+development progress remains unverified. The existing phone choices stay neutral.
+See [Sanity design](docs/SANITY_DESIGN.md) for the rules, art handoff, and unresolved details.
+
 ## Project navigation
 
 `scenes/` contains the opening, shared Player, and UI. `scenes/prototypes/`
@@ -239,8 +249,10 @@ internal edit. Avoid extra history entries that merely repeat a commit hash.
 
 ## Known limits
 
-Room-to-room travel, Sanity, and persistent saves are not implemented. The phone
-images are accepted temporary placeholders with differing visible widths. Final
-narrative content, Dream backgrounds, audio, and font redistribution permission
+Room-to-room travel and persistent saves are not implemented. The approved
+Sanity, session-checkpoint, and HUD directions are not yet confirmed integrated
+into the published build. The phone images are accepted temporary placeholders
+with differing visible widths. Final narrative content, Dream backgrounds,
+audio, and font redistribution permission
 still require follow-up. See [flow prerequisites](docs/GAME_FLOW.md#integration-prerequisites)
 and [the status snapshot](docs/TEAM_PROGRESS.md) before planning integration.

@@ -96,6 +96,7 @@ docs/
   DEVELOPMENT_HISTORY.md
   TEAM_PROGRESS.md
   DESIGN_DECISIONS.md
+  SANITY_DESIGN.md
   GIT_WORKFLOW.md
   GIT_EXISTING_CONTRIBUTORS.md
   overworld_interactions.md
@@ -109,6 +110,10 @@ assets. Albert's active sheets are in `assets/characters/albert/`.
 Contributor procedures live in the [Git handbook](GIT_WORKFLOW.md), with
 [existing-clone synchronization and recovery](GIT_EXISTING_CONTRIBUTORS.md) as its
 companion. This guide remains the reference for actual game-file dependencies.
+
+[Sanity design](SANITY_DESIGN.md) is the primary approved design reference for
+Sanity, environmental transformation timing, session-only checkpoints, and HUD
+direction. It does not establish new source files or an implemented architecture.
 
 ## Main entry point: Dream opening
 

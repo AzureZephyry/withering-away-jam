@@ -106,7 +106,9 @@ they do not prove completion or assign authorship to every file in a shared syst
 | Existing laboratories and shared systems | Published prototypes/foundations | Validate affected scenes when their contracts change |
 | Dream → Bedroom introduction | Accepted and published in `fad8a76`; accepted signal repair published in `eef63da` | Preserve the verified flow and test affected paths when changing it |
 | Environmental descriptions beyond current examples | Assigned; additional progress unverified | Inspect Christan's actual content/interface and agree on scene ownership |
-| Sanity | Assigned; no integration in inspected main | Christan's actual contract, approved inputs/outputs and event meanings |
+| Sanity | Approved design; implementation/shared integration not established; separate development unverified | Christan's verified interface and narrative-approved decision/event mappings |
+| Session-only checkpoint retry | Approved design; implementation not established | Locations, activation, retry behavior, and restoration ownership |
+| Sanity HUD | Compact top-right direction approved; mockup is concept/reference only, not production art or implementation | Final visual treatment, indicators, dimensions, and score visibility |
 | Environment/map expansion | Assigned; additional progress unverified | Kayla's confirmed deliverables and integration needs |
 | Story event registration | One published introduction-completion flag approved and registered | Additional events require approved meanings, producers, and consumers |
 | Connected room travel and chapter progression | Unresolved design/integration | Accepted room order, entry/exit behavior, and narrative boundaries |
@@ -114,8 +116,14 @@ they do not prove completion or assign authorship to every file in a shared syst
 | Narrative proposals, final title/endings | Unresolved | Isabela/team decisions, not inference from prototypes |
 | Central documentation set | Published implementation contracts linked to specialized guides | Keep local, accepted, and published status distinct when maintaining affected documents |
 
-The central guides distinguish published implementation from proposed work.
-Their presence alone does not establish new acceptance or publication.
+[Sanity design](SANITY_DESIGN.md) records the newly approved mechanics,
+narrative-dependent visual timing, session-only checkpoints, and HUD direction.
+Design approval does not establish implementation or integration. Isabela, Kayla,
+and Wayne form the visual team; full-map references and modular assets are intended
+as workload permits, without assigning unconfirmed deliverables.
+
+The central guides distinguish published implementation from approved design and
+proposed work. Their presence alone does not establish implementation or publication.
 
 ## Integration dependencies and real constraints
 
@@ -123,8 +131,9 @@ Their presence alone does not establish new acceptance or publication.
   and doors still supply no travel logic. Later chapter connections need approved
   entry/travel rules and coordinated environment/narrative content.
 - **Story state:** one published introduction-completion flag is registered. Unknown
-  reads still return null and writes are rejected. Additional progression and
-  Christan's Sanity interface need approved meanings and verified consumers.
+  reads still return null and writes are rejected. Specific Sanity-affecting
+  decisions/events and Christan's concrete interface still need coordinated review
+  and verified consumers against the approved design.
 - **Dialogue ownership:** environmental content can reuse
   [the published interaction contract](overworld_interactions.md). Future NPC
   cinematics require separate coordination with the opening/sequence owner.
