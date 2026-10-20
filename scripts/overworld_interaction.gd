@@ -161,7 +161,7 @@ func _subject_rects() -> Array[Rect2]:
 		active.screen_bounds().grow(SUBJECT_PADDING)]
 
 func _set_panel_edge(at_top: bool) -> void:
-	var height: float = panel.artwork.size.y
+	var height: float = panel.size.y
 	var anchor: float = 0.0 if at_top else 1.0
 	panel.anchor_top = anchor
 	panel.anchor_bottom = anchor
@@ -218,7 +218,7 @@ func _position_dialogue() -> void:
 	var shift := Vector2(INF, INF)
 	for index in range(edges.size()):
 		_set_panel_edge(edges[index])
-		var rect: Rect2 = panel.artwork.get_global_rect()
+		var rect: Rect2 = panel.get_global_rect()
 		var candidate: Vector2 = Vector2.ZERO if _fits(rect, subjects) else _framing_shift(rect, edges[index], subjects)
 		if candidate.length_squared() < shift.length_squared():
 			chosen = index
@@ -234,7 +234,7 @@ func _position_dialogue() -> void:
 			await _camera_tween.finished
 			_camera.force_update_scroll()
 	# Check the real result, including limits, rather than trusting the planned pan.
-	if chosen < 0 or not _fits(panel.artwork.get_global_rect(), _subject_rects()):
+	if chosen < 0 or not _fits(panel.get_global_rect(), _subject_rects()):
 		placement_issue = "No safe top/bottom dialogue framing within the current viewport and camera limits."
 		push_warning(placement_issue)
 		_close_dialogue(false)
