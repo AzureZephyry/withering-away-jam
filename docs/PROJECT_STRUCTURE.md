@@ -1,8 +1,8 @@
 # Project structure
 
-This guide maps the published game implementation at `eef63da`, including the
-Dream-to-Bedroom introduction (`fad8a76`) and accepted Dream signal repair
-(`eef63da`). The introduction passed 156 automated checks and received Project
+This guide maps the game implementation, including the accepted first playable
+Sanity integration, Dream-to-Bedroom introduction (`fad8a76`), and accepted Dream
+signal repair (`eef63da`). The introduction passed 156 automated checks and received Project
 Lead acceptance on October 20, 2026. Start with the
 [README](../README.md) for setup and controls; use the system guides linked below
 for detailed APIs and authoring steps.
@@ -39,6 +39,7 @@ assets/
 	albert_frames.tres
   fonts/
 	Pixel handwriting_regular.ttf
+  ui/sanity/                    # Isabela's seven combined HUD PNGs + import metadata
   ui/dialogue/
 	dialogue_dream_world.png
 	dialogue_real_world.png
@@ -59,10 +60,13 @@ scenes/
 	eyelidEffect.gdshader
 	dream_deterioration.gdshader
 	phone_conversation.tscn
+	sanity_hud.tscn
   story/
 	bedroom_story.tscn           # Instances Bedroom laboratory + story UI
   tests/
 	bedroom_intro_test.tscn      # Same introduction, isolated completion context
+	sanity_tests.gd             # Focused Godot-native tests + required .gd.uid
+	sanity_tests.tscn
   prototypes/
 	camera_lab.tscn              # Bedroom laboratory
 	garden_camera_lab.tscn
@@ -90,6 +94,8 @@ scripts/
   garden_lily_interaction.gd
   game_state.gd
   game_state.gd.uid
+  sanity_state.gd               # Separate session-only score service + .gd.uid
+  sanity_hud.gd                 # Combined texture and adaptive corner display + .gd.uid
 docs/
   PROJECT_STRUCTURE.md
   GAME_FLOW.md
@@ -113,7 +119,9 @@ companion. This guide remains the reference for actual game-file dependencies.
 
 [Sanity design](SANITY_DESIGN.md) is the primary approved design reference for
 Sanity, environmental transformation timing, session-only checkpoints, and HUD
-direction. It does not establish new source files or an implemented architecture.
+direction. The first playable Sanity integration is implemented, automatically
+validated, and Project Lead-accepted. Each laboratory owns one HUD; the story
+wrapper reuses Bedroom's instance.
 
 ## Main entry point: Dream opening
 
@@ -173,7 +181,8 @@ hit regions. These are accepted prototype defaults; final production values rema
 The phone preloads all 16 transparent copies in `assets/ui/phone/prepared/`.
 Original opaque PNGs are preserved and unused by this overlay. Branch order and
 reflection text belong in [Game flow](GAME_FLOW.md#phone-screens-and-choices).
-The choice has no effect beyond that local sequence. Final phone-buzz audio is
+The Sanity integration adds +1 at Option 3 commitment; Options 1/2 remain
+neutral. Its existing narrative/completion behavior is unchanged. Final phone-buzz audio is
 pending; the controller exposes an integration cue rather than generating audio.
 
 ## Playable scenes and room resources
@@ -368,6 +377,28 @@ The story Bedroom writes completion after final reflection, while test context
 and environmental objects do not. GameState does not implement
 Sanity, dialogue playback, save/load, inventory, or quests. See
 [GameState V1](game_state.md) for event registration and the full API contract.
+
+## Sanity service and adaptive HUD
+
+[sanity_state.gd](../scripts/sanity_state.gd) is the separate SanityState Autoload;
+its .gd.uid identifies the project registration. It owns one validated integer
+score, derived playable stages, failure notification, and explicit session reset.
+GameState remains the Boolean-only story registry and has no dependency on it.
+
+[SanityHUD](../scenes/UI/sanity_hud.tscn) uses
+[sanity_hud.gd](../scripts/sanity_hud.gd) and Isabela's seven textures in
+assets/ui/sanity/. One instance belongs to each laboratory. The story Bedroom
+inherits its laboratory's HUD; Dream has none. Dialogue panels join the
+dialogue_panels group; visibility/rectangle signals let the HUD follow actual
+top/bottom dialogue placement without changing input, text layout, or cameras.
+
+The phone's choice_committed(branch) signal reaches the Bedroom story controller;
+a per-conversation guard applies +1 for branch 3 only. Existing completion timing
+remains unchanged. The [focused test entry](../scenes/tests/sanity_tests.tscn) uses
+[sanity_tests.gd](../scenes/tests/sanity_tests.gd). See
+[Sanity design](SANITY_DESIGN.md) for exact APIs, assets, signals, and limitations.
+Environment switching, manifestations, full failure presentation, and checkpoints
+are not supplied by these files.
 
 ## Dialogue, UI, and presentation resources
 

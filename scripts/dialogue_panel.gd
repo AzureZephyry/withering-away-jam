@@ -25,6 +25,7 @@ const REAL_ART = preload("res://assets/ui/dialogue/dialogue_real_world.png")
 @onready var speaker: Label = $Speaker
 
 func _ready() -> void:
+	add_to_group("dialogue_panels")
 	resized.connect(_layout_artwork)
 	speaker.text = speaker_name
 	_apply_world()

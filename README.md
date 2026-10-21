@@ -108,7 +108,7 @@ published** in [`fad8a76`](https://github.com/AzureZephyry/withering-away-jam/co
 Its original validation passed 156 checks, and the Project Lead accepted it on
 October 20, 2026. The subsequent Dream dialogue signal repair was also manually
 accepted and published in [`eef63da`](https://github.com/AzureZephyry/withering-away-jam/commit/eef63dadc673bf4a389c4ccf9e8d511e2d42fa47),
-the current confirmed main baseline.
+the published Dream signal-repair baseline.
 
 - **Initial Dream opening:** provisional dialogue, typewriter text, speaker names,
   eyelid animation, and glitch effects. Its waking fade hands off to the playable
@@ -133,18 +133,18 @@ the current confirmed main baseline.
   actual movement; stopping preserves facing.
 - **GameState V1:** validated, session-based Boolean event flags through an
   Autoload. The `bedroom_intro_completed` flag records the entire story
-  introduction only after its last reflection is dismissed. Choices have no
-  lasting consequences. Sanity and persistent saves remain outside this system.
+  introduction only after its last reflection is dismissed. Sanity stays separate;
+  the phone Option 3 consequence belongs to SanityState, not Boolean flags.
 
-## Approved Sanity design — integration unverified
+## Sanity — first playable integration
 
-The approved direction uses one reversible integer deterioration score and three
-playable Sanity stages, with Game Over at the terminal threshold. Environmental
-changes follow narrative timing rather than necessarily appearing at each score
-boundary. Session-only checkpoint retry and a compact top-right HUD are also
-design directions; their implementation is not established. Christan's separate
-development progress remains unverified. The existing phone choices stay neutral.
-See [Sanity design](docs/SANITY_DESIGN.md) for the rules, art handoff, and unresolved details.
+SanityState, Isabela's combined HUD, and the first phone consequence are implemented,
+automatically validated, and accepted by the Project Lead after manual playtesting.
+Option 3 adds
+one deterioration point; Options 1/2 remain neutral. Environmental transformations,
+psychological text, and session-only retry remain planned. Prince oversees current
+Sanity engineering; Christan is temporarily helping Lawrence with audio.
+See [Sanity design](docs/SANITY_DESIGN.md) for the rules, API, artwork, and limits.
 
 ## Project navigation
 
@@ -192,9 +192,9 @@ These are the seven members' confirmed development areas, not a list of complete
 
 | Team member | Area |
 | --- | --- |
-| Prince | Project Lead / System Integrator; engineering coordination and Game State |
+| Prince | Project Lead / System Integrator; gameplay, Sanity engineering, and Game State |
 | Ali | Opening, UI, and relevant gameplay integration |
-| Christan | Environmental dialogue development and Sanity engineering |
+| Christan | Environmental dialogue; temporarily assisting Lawrence with audio |
 | Lawrence | Audio and sound |
 | Isabela | Visual art, original character artwork, dialogue UI, narrative, and dialogue |
 | Kayla | Visual art, environmental and map development |
@@ -249,9 +249,10 @@ internal edit. Avoid extra history entries that merely repeat a commit hash.
 
 ## Known limits
 
-Room-to-room travel and persistent saves are not implemented. The approved
-Sanity, session-checkpoint, and HUD directions are not yet confirmed integrated
-into the published build. The phone images are accepted temporary placeholders
+Room-to-room travel and persistent saves are not implemented. Sanity's foundation,
+HUD, and first phone consequence work; full Game Over presentation, environmental
+transformations, psychological text, session checkpoints/retry, and additional
+story consequences remain unimplemented. The zero-bar HUD artwork is temporary. The phone images are accepted temporary placeholders
 with differing visible widths. Final narrative content, Dream backgrounds,
 audio, and font redistribution permission
 still require follow-up. See [flow prerequisites](docs/GAME_FLOW.md#integration-prerequisites)
