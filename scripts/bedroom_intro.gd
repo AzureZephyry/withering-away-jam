@@ -50,6 +50,7 @@ var _held_keys: Dictionary = {}
 var _mouse_held: bool = false
 var _last_input_frame: int = -1
 var _arrival_tween: Tween
+var _phone_decision_applied: bool = false
 
 func configure_entry(context: EntryContext, entry_position: Vector2) -> void:
 	# Future room transitions configure the instance before adding it to the tree.
@@ -205,6 +206,12 @@ func _begin_buzz() -> void:
 	_buzz_elapsed = 0.0
 	# Final buzz audio can connect here; no substitute audio is generated.
 	audio_cued.emit(&"phone_buzz")
+
+func _on_phone_choice_committed(branch: int) -> void:
+	if stage != &"phone" or _phone_decision_applied or branch < 1 or branch > REFLECTIONS.size():
+		return
+	_phone_decision_applied = true
+	SanityState.apply_effect(1 if branch == 3 else 0)
 
 func _on_phone_finished(branch: int) -> void:
 	if stage != &"phone":

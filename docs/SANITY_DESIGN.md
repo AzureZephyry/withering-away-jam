@@ -5,210 +5,281 @@
 
 ## Scope and status
 
-This is the primary reference for the Project Lead-approved Sanity design for
-the currently untitled psychological horror game. Withering Away is the working
-title and the jam theme. These are design decisions, not evidence of a completed
-Sanity implementation.
+This is the primary Sanity reference for the currently untitled psychological
+horror game. Withering Away remains the working title and jam theme.
 
-| Area | Current status |
+| Area | Status |
 | --- | --- |
-| Score, three stages, recovery, and failure threshold | Approved design; implementation and shared integration not established |
-| Narrative-dependent environmental transformations | Approved direction; exact triggers, timing, and asset specifications unresolved |
-| Session-only checkpoint retry | Approved design; locations, restoration contract, and implementation unresolved |
-| Sanity HUD | Approved compact top-right direction; mockup is concept/reference only, not implemented or approved production art |
-| GameState V1 and first family phone conversation | Existing published functionality; preserved without new Sanity effects |
-| Christan's separate Sanity development | Current implementation, interface, and integration status unverified |
+| Integer deterioration, stages, recovery, failure, reset | Implemented and Project Lead-accepted; focused automated validation passed |
+| Combined HUD and first phone consequence | Implemented and Project Lead-accepted |
+| Narrative-dependent environmental transformations | Approved design; not implemented |
+| Psychological text manifestations | Approved future direction; wording, triggers, timing, and intensity unresolved; not implemented |
+| Session-only checkpoints and fixed-score retry | Approved design; not implemented |
+| GameState V1 | Existing published Boolean registry, unchanged by Sanity implementation |
 
-The technical target remains Godot 4.7.2 with GDScript. This document approves no
-new scripts, nodes, Autoloads, APIs, or concrete checkpoint schema. Architecture
-requires a separate implementation review with the relevant owners.
+Prince directly oversees gameplay mechanics, Sanity engineering, and integration.
+Christan is temporarily assisting Lawrence with audio; do not assume a separate
+current Sanity implementation by Christan. Isabela supplies the HUD artwork.
+Isabela, Kayla, and Wayne contribute visuals; Wayne's specific deliveries remain
+unconfirmed. Ali retains opening/UI integration responsibilities.
 
-## Score and stages
+The target is Godot 4.7.2 and GDScript. This checkpoint introduces no environmental
+switching, checkpoint storage, retry UI, New Game coordinator, or persistent saves.
 
-Use one underlying **integer deterioration score**, initially **0**, with a
-minimum of **0**. Higher values mean greater deterioration.
+## Score, playable stages, and HUD mapping
 
-| Stage | Name | Deterioration score | Meaning |
+Use one integer deterioration score, initially 0, bounded from 0 to 6.
+Stage and bars are derived, never independently mutable counters.
+
+| Score | State | Bars remaining | Combined texture |
 | --- | --- | --- | --- |
-| Level 1 | Sane | 0–1 | Albert is relatively psychologically stable |
-| Level 2 | Moderately Sane | 2–3 | Albert experiences noticeable psychological deterioration |
-| Level 3 | Insane | 4–5 | The most severely deteriorated playable stage |
-| Game Over | Failure state | 6 | Terminal deterioration threshold |
+| 0 | Level 1 — Sane | 6 | sanity_06.png |
+| 1 | Level 1 — Sane | 5 | sanity_05.png |
+| 2 | Level 2 — Moderately Sane | 4 | sanity_04.png |
+| 3 | Level 2 — Moderately Sane | 3 | sanity_03.png |
+| 4 | Level 3 — Insane | 2 | sanity_02.png |
+| 5 | Level 3 — Insane | 1 | sanity_01.png |
+| 6 | Game Over | 0 | sanity_00.png |
 
-These are fictional gameplay labels, **not clinical diagnoses**. Game Over is a
-failure state, not a fourth Sanity stage or a fourth environmental transformation.
-Level 3 remains playable and recoverable. Only three major visual states are
-required; movement within a band does not require another visual variant.
+The labels describe fictional gameplay states, not clinical diagnoses.
+Game Over is not a fourth playable level or a fourth environmental transformation.
+Level 3 remains playable and recoverable. There are three major stage appearances,
+with seven bar-count images; no separate portrait-switching system is needed.
 
 ### Discrete, reversible decisions
 
-| Explicitly classified decision/event | Change to the same score |
+- Explicitly approved destabilizing decision: +1.
+- Explicitly approved restorative decision: −1, stopping at 0.
+- Neutral decision: 0.
+
+Both directions affect the same accumulated value. There is no time-based drain,
+passive regeneration, fractional change, or positive/negative streak counter.
+For example: **0 → 1 → 2 → 3 → 2 → 1 → 0**.
+**5 → 4** stays Level 3; **4 → 3** restores Level 2; **2 → 1** restores Level 1.
+**5 → 6** enters Game Over. Ordinary effects are rejected after failure until
+an explicit reset or a future authorized restoration.
+
+Numeric consequences are hidden before a choice is committed. The HUD communicates
+bars afterward; the raw deterioration number is not displayed by this implementation.
+Not every dialogue choice or environmental interaction affects Sanity.
+
+## Session service and API
+
+[sanity_state.gd](../scripts/sanity_state.gd) is the separate SanityState Autoload.
+Its required UID sidecar accompanies the script. The project registration uses
+that UID. It survives ordinary scene changes and starts at 0 on a new application.
+There is no file storage and no automatic reset when Dream or a room loads.
+
+| API | Contract |
 | --- | --- |
-| Relevant negative or destabilizing decision | +1 |
-| Relevant positive or restorative decision | −1, stopping at 0 |
-| Neutral decision | 0 |
+| get_score() -> int | Read authoritative deterioration |
+| get_stage() -> Stage | SANE, MODERATELY_SANE, or INSANE at scores 0–5; NONE at failure |
+| is_failed() -> bool | True exactly at score 6 |
+| apply_effect(effect: Variant) -> bool | Accept only actual integers −1, 0, +1; reject incompatible values and ordinary effects after failure |
+| reset_session() -> bool | Explicitly return to 0 / SANE / non-failed |
 
-Changes are discrete and decision/event-driven. There is no continuous or
-time-based drain, passive regeneration, fractional change, or separate positive
-and negative streak counter. Both directions use the accumulated integer value.
-Intra-stage progression is hidden; whether the final HUD exposes the integer
-remains unresolved.
+The internal score is not exported and has no public arbitrary-score setter.
+Callers use the methods rather than changing internal fields. Floats, Booleans,
+strings, unsupported integers, and other incompatible values are rejected without
+mutation. Neutral effects and recovery at zero are accepted without numerical
+change notifications. Mutation requests during a notification batch are rejected,
+including reset requests, so callbacks cannot interrupt the announced transition.
 
-For example: **0 → 1 → 2 → 3 → 2 → 1 → 0**. One restorative decision reverses
-one point, not necessarily a whole stage. At Level 3:
+### Notifications and order
 
-- **4 → 5 → 6:** two destabilizing decisions lead to Game Over.
-- **5 → 4:** one restorative decision leaves Albert in Level 3.
-- **4 → 3:** one restorative decision returns Albert to Level 2.
-- A restorative decision at **0** leaves the score at **0**.
+All authoritative values are updated before callbacks run.
 
-### Story decision boundaries
+1. score_changed(previous: int, current: int) after an actual numerical change.
+2. stage_changed(previous: Stage, current: Stage) if entering a different playable
+   stage. Failure uses NONE internally and does not emit a fourth-level change.
+3. game_over() when entering failure, once per entry.
 
-Only decisions/events explicitly classified by narrative and gameplay design
-affect the score. Not every dialogue option has a Sanity consequence. Specific
-future choices, event identifiers, and their mapping remain unapproved.
+Examples: 1 → 2 emits score then stage; 2 → 3 emits score only; 4 → 3 emits score
+then stage; 5 → 6 emits score then failure. Reset from failure emits score 6 → 0
+then stage NONE → SANE. Reset within Level 1 emits only a score change if needed;
+reset at 0 emits nothing. Reset clears failure and allows a later failure entry.
+Consumers query current state during initialization, then subscribe to changes.
 
-**All three branches of the accepted first family phone conversation remain
-Sanity-neutral.** Their existing local branch/reflection behavior and GameState
-completion behavior stay unchanged. Do not retroactively attach consequences.
-See the existing [phone flow](GAME_FLOW.md#phone-screens-and-choices).
+GameState V1 remains the published Boolean story/event flag registry. SanityState
+neither stores those flags nor resets them. No general manager or event bus is
+introduced. Coordinating an eventual New Game action remains separate work.
 
-### Game Over
+## First consequential family phone choice
 
-Reaching **6** triggers Game Over; scores **4–5** do not. Exact presentation,
-narrative dialogue/consequences, animations, audio, transitions, and any
-relationship to an ending remain unresolved. This threshold does not establish
-an ending or authorize new narrative content.
+The first implementation supersedes the earlier all-neutral phone decision.
 
-## Environmental presentation
+| Visible option | Established response meaning | Effect |
+| --- | --- | --- |
+| 1 | Thank you. | Neutral, 0 |
+| 2 | Don't worry, I got this. | Neutral, 0 |
+| 3 | I'm a little nervous, ma. | Destabilizing, +1 |
 
-The visual team—**Isabela, Kayla, and Wayne**—will provide environmental artwork
-and stage variants as workload permits. These directions are thematic guidance,
-not finalized asset specifications or a claim that the artwork exists:
+The existing phone maps selected_choice + 1 to branch identity; branch 3 starts
+at Screen 12. Prepared screenshot wording does not redefine the established
+branch meanings. Dialogue, choices, phone screens, and reflections are unchanged.
 
-| Stage | Visual direction |
+[phone_conversation.gd](../scripts/phone_conversation.gd) emits
+choice_committed(branch: int) only after committing a choice and switching away
+from the choice screen. The [Bedroom story controller](../scripts/bedroom_intro.gd)
+owns the consequence and guards it once per conversation occurrence. Highlighting,
+typing, ordinary advances, branch completion, and GameState notifications do not
+apply it. There is no generalized global decision-occurrence registry.
+
+On a fresh run, Option 3 gives **0 → 1**, **six → five bars**, and remains Level 1.
+The existing bedroom_intro_completed flag is still written only after the final
+reflection. Completed story re-entry skips the phone and cannot repeat its effect.
+The dedicated introduction test entry uses the real Sanity consequence but still
+bypasses story-completion reads/writes; restart that test for a fresh session.
+
+No other narrative or environmental consequence is introduced. In particular,
+the Garden Lily's repeatable test conversation stays neutral.
+
+## Combined HUD artwork and lifecycle
+
+Isabela's seven complete images live at these exact paths:
+
+- res://assets/ui/sanity/sanity_06.png
+- res://assets/ui/sanity/sanity_05.png
+- res://assets/ui/sanity/sanity_04.png
+- res://assets/ui/sanity/sanity_03.png
+- res://assets/ui/sanity/sanity_02.png
+- res://assets/ui/sanity/sanity_01.png
+- res://assets/ui/sanity/sanity_00.png
+
+The bar is on the left and Albert's portrait on the right in the normal stage
+images. Each is one combined PNG; never split or independently reposition them.
+Filename numbers mean bars remaining: **visible_bars = 6 − deterioration_score**.
+
+The reusable [sanity_hud.tscn](../scenes/UI/sanity_hud.tscn) and
+[sanity_hud.gd](../scripts/sanity_hud.gd) select one texture directly from the
+current score, including on scene entry, recovery, and failure. One instance is
+authored in each Bedroom, Garden, and School laboratory. The story Bedroom
+inherits its laboratory HUD; it does not add another. Dream has no gameplay HUD.
+Scene replacement frees the departing HUD and the next one reads session state.
+
+The HUD is screen-space CanvasLayer 3. It ignores mouse input, uses nearest
+filtering, and fits the entire image without cropping or stretching. At 1280 × 960,
+the default slot is 426 × 136 with 24-pixel viewport margins; smaller widths
+shrink the slot proportionally. Normal 213 × 43 images display at 2× within it.
+The story fade and phone dimmer are above this layer; the HUD remains visible
+during the phone choice with the same dimming as the room.
+
+### Temporary Game Over image
+
+sanity_00.png is Isabela's explicitly approved unfinished placeholder. It is
+1016 × 322, compared with 213 × 43 for the other images. Its alpha is 223–255,
+with a visibly baked checkerboard/background; the normal images have transparency.
+It is fitted to the same slot with its own aspect ratio, without modifying pixels.
+Its temporary floral/text failure design is used as supplied; no assumption is
+made about a final Game Over portrait or reproduction of an earlier mockup.
+A replacement at the same path will be fitted the same way. The artist should
+confirm final canvas size, transparency, and appearance when delivering it.
+
+### Dialogue-aware placement and feedback
+
+| Actually displayed dialogue | Combined HUD corner |
 | --- | --- |
-| Level 1 | Generally healthy, recognizable, stable surroundings; subtle unease may remain |
-| Level 2 | Noticeable deterioration; possible wilting vegetation, altered atmosphere, or stronger unsettling details |
-| Level 3 | Strong deterioration; possible parasitic imagery, decay, and oppressive atmosphere |
+| None | Upper-right |
+| Bottom | Upper-right |
+| Top | Lower-right |
 
-Garden/Dream symbolism and the Corpse Lily's meaning still require approved
-narrative decisions. Proposed symbolism is not finalized canon. Different rooms
-need not transform identically.
+The shared dialogue panel joins the dialogue_panels group. Each scene-local HUD
+binds to the existing panels after scene initialization, using their visibility
+and rectangle-change signals. It checks the actual visible panel rectangle,
+including camera-aware environmental placement and Bedroom story dialogue.
+Changes are coalesced; unrelated UI events do not move it. Closing dialogue
+returns the HUD to the upper-right. Dynamically introduced panel lifecycles would
+need a separate review; no universal dialogue manager is added.
 
-### Option C: narrative-dependent transformations
+Corner changes briefly fade out, reposition the whole component, then fade in
+(0.10 seconds each direction by default). A score change switches the image
+immediately and adds one dark modulation pulse, returning over 0.24 seconds.
+Stage transitions and failure use a deeper 0.42-second pulse. No flashing loop,
+new shader, generated visual asset, input block, or camera effect is introduced.
+The Project Lead accepted the current gameplay presentation; timing and sizing
+remain tunable through future approved changes.
 
-**Option C — Narrative-Dependent Environmental Transformations** is approved.
-A score crossing does not require the environment to change immediately.
-Keep three concepts distinct:
+## Environmental transformations — approved, not implemented
 
-1. Albert's authoritative current Sanity stage, derived from the score.
-2. The environment's currently presented visual state.
-3. The narrative timing of a visual transition.
+Only three major environmental states are required. Isabela, Kayla, and Wayne
+intend to supply full-map visual references plus individual modular assets as
+workload permits. References communicate composition; they are not automatically
+playable maps, and three complete replacement maps are not required.
 
-A transformation may be witnessed during gameplay, occur during a scene
-transition, appear through a Dream reveal, or become visible on a return visit.
-The same rule applies to recovery. Environmental presentation should eventually
-reflect the appropriate state within its approved narrative context. Exact
-triggers and timing remain unresolved; a delayed visual change does not delay
-the authoritative score/stage change.
+Level 1 is generally healthy/recognizable/stable with possible subtle unease.
+Level 2 may show wilting, altered atmosphere, and noticeable deterioration.
+Level 3 may show stronger decay, parasitic imagery, and oppressive atmosphere.
+These are thematic directions, not final asset specifications or narrative canon.
+Garden/Lily symbolism still needs narrative approval.
 
-### Art handoff and integration
+Option C — Narrative-Dependent Environmental Transformations remains approved.
+Authoritative Sanity, current environmental presentation, and narrative transition
+timing are distinct. Deterioration and recovery visuals may change during play,
+scene transitions, Dream reveals, or return visits rather than immediately on
+crossing a score band. Presentation should eventually match its approved context.
+Exact triggers remain unresolved; not every room must transform identically.
 
-Artists intend to supply **both full-map visual references and individual modular
-environmental assets**. A full-map reference communicates composition; it is not
-automatically a complete playable map. Three separate complete maps are not a
-delivery requirement.
+A shared layout with stage-specific visual components is a possible approach,
+not a delivered transformation engine. Preserve collisions, camera limits,
+interactables, and visual review of uncertain placements when integrating assets.
 
-A shared layout with replaceable or stage-specific visuals is a **possible
-engineering approach**, not an approved implementation architecture. Integration
-may involve sprite placement, environmental layers, object alignment,
-stage-specific appearance and visibility, and visual checks for each stage.
-Verify uncertain placements through visual review rather than assuming them.
-Preserve appropriate collisions, camera boundaries, and existing Bedroom,
-Garden, and School behavior.
+## Future session-only checkpoints and retry
 
-No specific per-room asset assignment or completed deliverable is established
-here. Wayne's specific deliverables remain unconfirmed. Coordinate actual asset
-handoff and scene ownership before implementation.
+Checkpoints remain planned in-memory state, discarded when the application closes.
+A fresh launch starts at Dream, score 0, Level 1. There is no disk save or Load Game.
 
-## Session-only checkpoints
+The newly approved retry rule supersedes restoring the checkpoint's old score:
+retry rewinds narrative progress and post-checkpoint decisions, restores appropriate
+interaction completion and environmental presentation, and sets deterioration
+to **exactly 4**, **two bars**, **Level 3**. Decisions after the checkpoint can
+be played again. Mandatory penalties must not create an unavoidable immediate
+Game Over loop; recovery or a different meaningful decision must be possible.
 
-Checkpoints are **temporary, in-memory state for the current application
-session**. After Game Over, the intended retry returns to the most recent
-applicable checkpoint. Locations, activation conditions, and frequency are not
-yet decided; no checkpoint implementation is established by this design.
+Locations, activation conditions/frequency, applicability, activation feedback,
+retry UI, the no-checkpoint case, and the detailed restoration contract remain
+unresolved. Scene/location and Player position also need consistent restoration.
+No checkpoint storage, respawn, restoration API, or retry UI is implemented here.
 
-Closing the game discards checkpoint information and story/session progress.
-The next application launch begins again at the **Dream opening**, with score
-**0**, **Level 1**. This scope includes neither persistent disk saves nor a
-Load Game system.
+## Deferred manifestations and asset boundaries
 
-### Restoration responsibilities
+Chaotic/intrusive on-screen text and narrative visual disturbances are approved
+future directions. Their wording, intensity, triggers, and timing remain unresolved.
+No such text, effect system, or new narrative content is implemented.
 
-A checkpoint must restore a consistent playable state. Conceptually relevant
-information may include scene/location, Player position, deterioration score and
-corresponding stage, necessary story progression, relevant session event flags,
-and state needed for consistent environmental presentation. Because visual
-transitions can be delayed, score alone may not describe the currently displayed
-environment.
+The earlier generated HUD mockup remains concept/reference only and is not
+imported. This implementation uses Isabela's supplied images and accepted updated
+direction. Preserve original art; do not generate, crop, recolor, or replace
+production artwork without explicit approval. Respect the jam's restrictions on
+generated production assets.
 
-Exact snapshot structure, state ownership, and restoration order/responsibilities
-require engineering review. This is not a concrete save schema or API.
+Failure currently provides the terminal state, notification, and zero-bar image.
+It does not add a Game Over menu, scene handoff, gameplay pause, or retry controls.
+The final failure presentation still requires its own approved integration.
 
-### Boundary with existing GameState V1
+## Validation and manual review
 
-[GameState V1](game_state.md) is the already published session-based Boolean
-story/event flag registry. It is not the new Sanity or checkpoint manager.
-Sanity calculations and checkpoint restoration are not established parts of its
-current contract. Do not silently combine these responsibilities into a general
-manager or invent event names. Any interface with existing flags needs explicit
-coordination and review.
+The focused Godot-native test entry is
+[sanity_tests.tscn](../scenes/tests/sanity_tests.tscn), driven by
+[sanity_tests.gd](../scenes/tests/sanity_tests.gd). Run it headlessly from the project
+with Godot 4.7.2. Add -- --fresh-session-probe for the independent initial-state check.
 
-### Unresolved checkpoint details
+Coverage includes boundaries/recovery, invalid effects, notification order/state,
+failure/reset, actual texture selection, scene lifetime, adaptive panel placement,
+phone branches and duplicate input, normal Dream handoff, and environmental
+interaction regressions. The accepted implementation previously passed 163
+Godot-native checks plus 2 fresh-process checks; Godot scene/script validation reported 17 scenes and
+21 scripts with no errors or warnings, and 170 documentation links/anchors passed.
+Those are previously reported results, not claims of a new run.
 
-- Locations, activation triggers, and frequency.
-- Visual/audio activation feedback and exact retry UI.
-- Game Over before any checkpoint exists.
-- Which checkpoint is applicable in each narrative context.
-- Detailed restoration behavior, snapshot ownership, and coordination with flags
-  and environmental presentation.
+The Project Lead has since manually accepted the Dream-to-Bedroom sequence, all
+three phone choices and Option 3's consequence, adaptive Garden HUD placement,
+and relevant interactions, reporting no unusual gameplay behavior. The temporary
+zero-bar asset still needs its final artist delivery and review.
 
-## Sanity HUD direction
-
-The intended HUD is a small element in the **top-right of the gameplay screen**.
-It should be legible at **1280 × 960**, distinguish the three Sanity stages,
-support discrete changes, minimally obstruct gameplay, and fit the pixel-art
-psychological horror presentation and original team-created artwork.
-
-The discussed generated mockup is **CONCEPT / VISUAL REFERENCE ONLY**. It is not
-implemented in Godot, approved production artwork, or an authorized final HUD
-asset. No reference image is added by this documentation. Adding it to the game
-or repository requires separate approval. Artists may use it for inspiration
-without reproducing it. Respect the jam's restrictions on generated production
-assets; see the [project theme and jam reference](../README.md#the-theme--withering-away).
-
-Final visual treatment, indicators, dimensions, and whether to display the hidden
-integer score remain unresolved. No specific HUD-art assignment is established.
-
-## Responsibilities and remaining review
-
-Prince coordinates design/integration as Project Lead. Christan owns the
-Sanity-related engineering area; his separate progress must be verified before
-planning integration. Isabela contributes narrative and visual decisions, with
-Kayla and Wayne contributing visuals. Ali's opening/UI integration and Lawrence's
-audio responsibilities require coordination where affected; this design does
-not transfer their systems or prove new deliveries. See
-[confirmed responsibilities](TEAM_PROGRESS.md#confirmed-responsibilities).
-
-Before implementation, resolve specific story classifications, the concrete
-Sanity/checkpoint interfaces, narrative visual triggers, actual art handoffs,
-Game Over/retry presentation, and final HUD details. Preserve the accepted
-Dream-to-Bedroom sequence, neutral phone branches, existing GameState behavior,
-and standalone room behavior while reviewing those interfaces.
-
-Future implementation validation should cover every score boundary in both
-directions, the lower bound, Level 3 recovery, failure at 6, neutral choices,
-narrative-timed deterioration/recovery visuals, consistent checkpoint retry,
-and a fresh launch at Dream/0/Level 1. These are **future test requirements**, not
-completed runtime results for the newly designed systems.
+For regression review, launch F5 from a fresh game: complete Dream, reach the phone,
+choose Option 3, and check six → five bars while Level 1 portrait remains.
+Finish the reflection and explore. Repeat fresh launches for Options 1/2: both
+keep six bars. Run Garden with F6 and approach the Lily from north and south to
+check opposite dialogue/HUD corners and restoration after closing. Inspect the
+corner fade, dark pulse, readability, and temporary failure artwork separately
+using controlled test state; no extra story consequences or debug controls are added.

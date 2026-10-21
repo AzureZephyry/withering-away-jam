@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/sanity_hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" path="res://assets/ui/sanity/sanity_06.png" id="2_initial"]
+
+[node name="SanityHUD" type="CanvasLayer" groups=["sanity_hud"]]
+layer = 3
+script = ExtResource("1_hud")
+
+[node name="Screen" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Frame" type="Control" parent="Screen"]
+layout_mode = 0
+offset_left = 830.0
+offset_top = 24.0
+offset_right = 1256.0
+offset_bottom = 160.0
+mouse_filter = 2
+
+[node name="Artwork" type="TextureRect" parent="Screen/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture_filter = 1
+texture = ExtResource("2_initial")
+expand_mode = 1
+stretch_mode = 5

@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" path="res://scenes/UI/overworld_overlay.tscn" id="5_dialogue"]
 [ext_resource type="Script" path="res://scripts/overworld_interactable.gd" id="6_target"]
 
+[ext_resource type="PackedScene" path="res://scenes/UI/sanity_hud.tscn" id="hud_sanity"]
+
 [sub_resource type="Animation" id="LilyReset"]
 length = 0.001
 tracks/0/type = "value"
@@ -81,3 +83,5 @@ lines = PackedStringArray("You came back.", "What... is this thing?", "You don't
 speakers = PackedStringArray("???", "Albert", "???")
 visual_path = NodePath("..")
 visual_bounds = Rect2(-56, -73, 112, 106)
+
+[node name="SanityHUD" parent="." instance=ExtResource("hud_sanity")]

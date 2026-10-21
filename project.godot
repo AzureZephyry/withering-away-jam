@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameState="*uid://c647p0ta1wljq"
+SanityState="*uid://c1pt6dx37nwp7"
 
 [display]
 

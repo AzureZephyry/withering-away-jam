@@ -132,8 +132,9 @@ share the prepared-image transform.
 
 The final branch PNG waits for one additional advance input before closing.
 Placeholder image wording does not change this semantic mapping. The choice
-affects only this branch and reflection: no lasting flags, Sanity, relationships,
-endings, or save data change.
+keeps its existing branch/reflection and completion behavior. The Sanity
+integration adds +1 only when Option 3 is committed; Options 1/2 stay neutral.
+No response flags, relationship, ending, or persistent save consequences are added.
 
 All 16 canvases come from `assets/ui/phone/prepared/`, at 640 × 1088. One viewport
 center and uniform scale are used across screens. At 1280 × 960, the default 0.75
@@ -231,17 +232,18 @@ Changing scenes does not call reset automatically, and target-local one-time
 completion is separate from Autoload state. Save/load and Sanity are not part of
 this system. See [GameState V1](game_state.md) before introducing event callers.
 
-## Planned Sanity and retry flow
+## Sanity integration and planned retry flow
 
-This is **approved design, not an established runtime path**. Use
-[Sanity design](SANITY_DESIGN.md) as the full specification. Specific story
-decisions, event names, and checkpoint locations remain unresolved.
+The Sanity foundation, combined HUD, and phone Option 3 consequence are now
+**implemented, automatically validated, and Project Lead-accepted**.
+Environmental transformations and retry remain planned. Use
+[Sanity design](SANITY_DESIGN.md) for the current API and full specification.
 
 An explicitly classified decision changes the shared deterioration score by
 +1, −1, or 0, with a minimum of 0. The score determines one of three playable
 stages. Level 3 remains recoverable; reaching 6 instead triggers Game Over,
-not a fourth stage. The accepted first family phone branches stay Sanity-neutral,
-with their existing sequence and GameState behavior unchanged.
+not a fourth stage. Phone Options 1/2 remain neutral; Option 3 now adds +1.
+Its existing narrative sequence and GameState completion behavior are unchanged.
 
 Option C separates the current stage from the environment currently shown.
 An approved narrative moment may reveal deterioration or recovery during play,
@@ -249,7 +251,9 @@ a transition, a Dream, or a return visit; crossing a score boundary need not
 immediately replace the visuals.
 
 Game Over retry is intended to restore the most recent applicable in-memory
-checkpoint. Snapshot/restoration details and the no-checkpoint case are unresolved.
+checkpoint, rewinding later decisions and restoring deterioration to exactly 4
+(two bars, Level 3). Mandatory penalties must not create an unavoidable death loop.
+Snapshot/restoration details and the no-checkpoint case remain unresolved.
 Closing the game discards checkpoint/story progress; the next launch begins at
 the Dream opening with score 0, Level 1. There is no persistent save or Load Game
 system in this design. Existing GameState V1 remains the Boolean event registry,
@@ -265,7 +269,7 @@ not an implemented Sanity/checkpoint manager.
 | Potential connections among existing room prototypes | **Undesigned or unimplemented; chapter travel order is not approved** | Agree on narrative order, entry/exit rules, and scene ownership first |
 | Room marker/door → destination | No scene router or travel behavior established | A marker or door visual is not a transition |
 | F6 → selected laboratory | Published editor test entry point | Developer chooses the standalone scene |
-| Classified decision/event → Sanity response | Approved mechanics; implementation/wiring not established | Specific story mappings and Christan's verified integration interface |
+| Classified decision/event → Sanity response | Implemented and Project Lead-accepted phone Option 3 integration | Prince oversees Sanity; further outcomes require approval |
 | Session → persistent save | Deferred | Separate save/load design and authorization |
 
 ## Intended direction and narrative uncertainty
@@ -318,9 +322,9 @@ require their own review and authorization.
   Preserve standalone laboratory testing while integrating scenes.
 - Approve descriptive production event names and their meanings before adding
   GameState callers; define who sets/resets each event and who consumes it.
-- Coordinate Christan's environmental content with the published interaction
-  contract. Review concrete Sanity interfaces against the approved design, and
-  define cinematic NPC interfaces before connecting them.
+- Coordinate environmental content with the published interaction contract.
+  Prince oversees current Sanity integration; Christan is temporarily helping
+  Lawrence with audio. Define cinematic NPC interfaces before connecting them.
 - Integrate approved background artwork and Lawrence's actual audio resources;
   maintain Dream/Real world styling and correct reveal/advance behavior.
 - Test the connected path repeatedly, including restored controls/camera after
@@ -349,8 +353,10 @@ from published source, not a record of newly executed tests.
 Project Lead acceptance on October 20, 2026 before publication in `fad8a76`.
 The accepted signal repair in `eef63da` passed 57 Dream and 144 Bedroom runtime
 checks. The matrix above remains a regression guide; no tests were rerun for
-this documentation update. Full chapter travel and Sanity remain future work;
-standalone laboratory success cannot establish them.
+that documentation update. Full chapter travel remains future work. Sanity's
+focused tests previously passed 163 checks plus 2 fresh-process checks; the Project
+Lead has now manually accepted the relevant Dream, phone, HUD, and interaction flow;
+see [Sanity validation](SANITY_DESIGN.md#validation-and-manual-review).
 
 ## Unresolved flow questions
 
@@ -358,8 +364,8 @@ standalone laboratory success cannot establish them.
 2. Which future descriptions repeat locally, and which approved events must survive
    room changes or be restored on checkpoint retry? Cross-launch progress is
    outside the approved session-only design.
-3. Which specific future decisions/events affect Sanity, and how will Christan's
-   concrete interface integrate them?
+3. Which additional decisions/events affect Sanity, beyond the accepted phone
+   Option 3 integration, and when should their outcomes commit?
 4. What owns future general character/NPC cinematic input, locking, and camera use?
 5. Which narrative proposals, ending conditions, final art, and audio are approved?
 

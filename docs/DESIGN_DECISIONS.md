@@ -10,7 +10,7 @@ This preserves approved constraints supplied by the Project Lead and decisions
 visible in the earlier published snapshot at `590184b`. D12 and related updates
 describe the introduction accepted by the Project Lead on October 20, 2026,
 after 156 automated checks passed. It is published in `fad8a76`; its accepted
-Dream signal repair is published in `eef63da`, the current confirmed main baseline.
+Dream signal repair is published in `eef63da`, the earlier runtime repair baseline.
 Implementation evidence is linked to
 current files/guides and the verified [milestone history](DEVELOPMENT_HISTORY.md).
 A working implementation is not automatically final design approval.
@@ -289,7 +289,7 @@ scope is Boolean story/event flags, not a general gameplay manager.
 | Notifications for actual changes | `flag_changed(name, value)` emits after changes; assigning the same value emits nothing |
 | Consistent session reset | All values become false before reset notifications; previously true entries notify in registry order |
 | No save/load in V1 | Quitting does not persist state; save behavior needs a separate approved design |
-| Sanity stays separate | Christan owns Sanity mechanics; that system may consume agreed flags/signals without moving its rules into GameState |
+| Sanity stays separate | Sanity may consume agreed flags/signals without moving its rules into GameState; current Sanity engineering is overseen by Prince |
 
 **Rationale and constraints:** These are approved V1 boundaries supplied by the
 Project Lead and verified in [game_state.gd](../scripts/game_state.gd). Explicit
@@ -303,11 +303,10 @@ directly or replace invalid-read null with
 an assumed false. Use [game_state.md](game_state.md) for the API/examples, and
 agree on any persistence or Sanity contract separately.
 
-GameState exposes approved shared story-event information. Christan's future
-Sanity implementation may read registered events or subscribe to suitable change
-signals, but GameState must not calculate Sanity, implement psychological effects,
-or invent Sanity event identifiers. The actual integration interface remains
-unresolved until coordinated and approved; no such consumption is wired on main.
+GameState exposes approved shared story-event information. Sanity may read
+registered events or suitable signals, but GameState must not calculate Sanity,
+implement psychological effects, or invent event identifiers. The local phone
+consequence is a direct story-controller call, not a GameState consumer.
 
 ## D10 — Preserve resource identities and shared consumers
 
@@ -393,6 +392,11 @@ changes only the local phone branch and reflection, with no Sanity, relationship
 ending, or save effects. Completed story entry skips the introduction. Room travel
 remains separate future work.
 
+The original all-neutral phone consequence decision above is **superseded by
+the accepted Sanity integration**: Options 1/2 stay neutral; Option 3 adds +1
+on commitment. Narrative and completion semantics remain unchanged; see
+[the current contract](SANITY_DESIGN.md#first-consequential-family-phone-choice).
+
 The ordinary Bedroom F6 laboratory remains exploration-only and does not write
 completion. A dedicated developer test scene instances the same story logic in
 an explicit context that neither reads nor writes story completion. It contains
@@ -411,14 +415,16 @@ flow, saves, and general NPC systems are not part of this introduction.
 **Provenance:** Project Lead-approved Sanity design; the complete contract is in
 [Sanity design](SANITY_DESIGN.md).
 
-**Status:** Approved design; implementation and shared integration not established.
-Christan's separate development progress remains unverified.
+**Status:** Approved design; foundation/HUD/phone integration implemented and tested
+and Project Lead-accepted after manual playtesting. Prince oversees current Sanity
+engineering; Christan is temporarily assisting Lawrence with audio.
 
 **Decision/context:** Use one integer deterioration score, initially 0 and bounded
 below by 0. Explicitly classified destabilizing/restorative/neutral decisions
 change it by +1/−1/0. Three playable stage bands lead to Game Over at 6; Level 3
 remains recoverable. There is no fourth visual stage or point-by-point art
-requirement. The existing first family phone conversation stays neutral.
+requirement. The original all-neutral phone rule is superseded: only
+Option 3 adds +1, as recorded in the current Sanity specification.
 
 **Consequences:** There is no continuous drain, passive regeneration, fractional
 change, or separate streak system. Under Option C, the authoritative stage,
@@ -435,7 +441,7 @@ Proposed Garden/Lily symbolism remains unfinalized.
 ## D14 — Session-only checkpoints, without disk persistence
 
 **Provenance:** Project Lead-approved checkpoint direction; see
-[checkpoint design](SANITY_DESIGN.md#session-only-checkpoints).
+[checkpoint design](SANITY_DESIGN.md#future-session-only-checkpoints-and-retry).
 
 **Status:** Approved design; implementation and restoration contract unresolved.
 
@@ -447,15 +453,22 @@ Level 1. No persistent disk save or Load Game system is included.
 **Consequences/revisit:** Restoration must keep location, Player, Sanity, story
 flags, and environmental presentation consistent. Locations, triggers, frequency,
 feedback, retry UI, the no-checkpoint case, and detailed restoration ownership
-remain unresolved. GameState V1 remains a Boolean registry, not a checkpoint or
-Sanity manager; no schema or combined manager is approved.
+remain unresolved. The approved future retry rewinds post-checkpoint decisions
+and relevant interaction completion, restores environmental presentation, and sets
+deterioration to exactly 4 (two bars, Level 3), rather than restoring the old score.
+Checkpoint placement must allow recovery or a meaningful alternative before
+mandatory penalties can cause an unavoidable repeated failure. None of this retry
+behavior is implemented. GameState V1 remains a Boolean registry, not a checkpoint
+or Sanity manager; no schema or combined manager is approved.
 
 ## D15 — Compact Sanity HUD; reference mockup is not production art
 
 **Provenance:** Project Lead-approved HUD direction and asset-use boundary; see
-[HUD design](SANITY_DESIGN.md#sanity-hud-direction).
+[HUD design](SANITY_DESIGN.md#combined-hud-artwork-and-lifecycle).
 
-**Status:** Top-right direction approved; concept/reference only, not implemented.
+**Status:** Earlier reference-only direction superseded by Isabela's seven combined
+images and the implemented adaptive HUD, accepted by the Project Lead.
+The unfinished sanity_00.png is explicitly approved as a temporary placeholder.
 
 **Decision/context:** Keep the HUD small, legible at 1280 × 960, compatible with
 pixel art and discrete changes, and clear across three stages without obstructing
@@ -464,7 +477,9 @@ or an authorized repository/game asset.
 
 **Consequences/revisit:** Artists need not reproduce it. Final treatment,
 indicators, dimensions, and exposure of the hidden score remain unresolved.
-No new artwork or HUD implementation is established by this decision.
+These were the original unresolved details. The accepted implementation
+uses Isabela's supplied artwork; see [HUD lifecycle](SANITY_DESIGN.md#combined-hud-artwork-and-lifecycle)
+for the newly approved mapping, placement, and temporary asset limits.
 
 ## Open decisions and deferred work
 
@@ -472,7 +487,7 @@ No new artwork or HUD implementation is established by this decision.
 | --- | --- | --- |
 | First connected chapter boundaries and room order | Unresolved | Project Lead and narrative/environment owners |
 | Additional event identifiers and producer/consumer rules | One introduction flag approved; further events require agreement | Project Lead with relevant feature owners |
-| Specific Sanity decisions/events and engineering interfaces | Mechanics approved in D13; mappings and integration interface unverified | Christan, Project Lead, and narrative owners |
+| Additional Sanity outcomes and integration | Foundation/HUD/phone Option 3 accepted; further mappings unapproved | Prince and narrative owners |
 | General character/NPC cinematic presentation and input handoff | Separate planned responsibility; contract unresolved | Relevant cinematic/dialogue owners before integration |
 | Save storage and cross-launch persistence | Deferred outside V1 | Separate design/authorization |
 | Final narrative, Garden symbolism, ending conditions, title | Proposed/unresolved as described in Game flow | Isabela and the team |

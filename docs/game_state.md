@@ -38,7 +38,9 @@ reflection is dismissed, immediately before returning exploration control.
 Loading Bedroom, starting dialogue, opening/closing the phone, and selecting a
 response do not set it. Later story entry reads it and skips the introduction
 when true. The branch remains local to the sequence: there are no response flags,
-Sanity changes, relationship values, or saved consequences.
+relationship values or saved consequences. The local Sanity integration now
+adds +1 for Option 3 only through the story controller; Options 1/2 stay neutral.
+GameState still records only whole-introduction completion.
 
 The ordinary Bedroom F6 laboratory does not read or write this flag. The dedicated
 `scenes/tests/bedroom_intro_test.tscn` entry reruns the same introduction without

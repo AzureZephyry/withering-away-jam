@@ -24,7 +24,8 @@ existing Bedroom, Player, Reality panel, environmental system, and GameState.
 All three phone branches are present. `bedroom_intro_completed` records only the
 last reflection dismissal in story context. The developer introduction test uses
 the same logic without reading/writing completion; ordinary Bedroom F6 remains
-exploration-only. Branch choice has no lasting gameplay consequence.
+exploration-only. The accepted Sanity extension now adds +1 for Option 3 only;
+Options 1/2 stay neutral, with story completion behavior unchanged.
 
 **Status:** implemented, manually accepted, and published. The introduction passed
 156 automated checks and received Project Lead acceptance on October 20, 2026;
@@ -32,10 +33,11 @@ it was published in [`fad8a76`](https://github.com/AzureZephyry/withering-away-j
 The later Dream signal repair passed 57 Dream and 144 Bedroom runtime checks,
 received Project Lead F5 acceptance, and was published in
 [`eef63da`](https://github.com/AzureZephyry/withering-away-jam/commit/eef63dadc673bf4a389c4ccf9e8d511e2d42fa47),
-the current confirmed main baseline. These are prior validation results; no
+the published Dream signal-repair baseline. These are prior validation results; no
 runtime tests were rerun for this documentation update. See [Game flow](GAME_FLOW.md)
 for the contract and regression procedures. Final phone-buzz audio, final Dream
-art, room travel, Sanity integration, and persistent saves remain unfinished.
+art, room travel, and persistent saves remain unfinished. Sanity's first playable
+integration is implemented and manually accepted; later Sanity features remain planned.
 
 ## Earlier verified published snapshot
 
@@ -91,9 +93,9 @@ they do not prove completion or assign authorship to every file in a shared syst
 
 | Person | Confirmed responsibility | Verified implementation and limits |
 | --- | --- | --- |
-| Prince | Project Lead / System Integrator; engineering coordination, Game State Management, integration oversight | Shared foundations and the accepted introduction/repair are published; future integration needs coordination |
+| Prince | Project Lead / System Integrator; gameplay, Sanity engineering, Game State Management, integration oversight | Shared foundations and the accepted introduction/repair are published; future integration needs coordination |
 | Ali | Opening, UI, and relevant gameplay integration | Opening/UI and the Bedroom handoff are published; assigned areas do not establish authorship of every integrated file |
-| Christan | Environmental dialogue development and Sanity engineering | Published reusable environmental contract is available for his content; his current branch implementation/status was not verified |
+| Christan | Environmental dialogue; temporarily assisting Lawrence with audio | Current Sanity engineering is overseen by Prince; do not assume an independent current Sanity implementation |
 | Lawrence | Audio and sound | Opening/typewriter expose audio hooks; main contains audio placeholder files, not finished audio integration; current delivery status is unverified |
 | Isabela | Visual art, original character artwork, dialogue UI, narrative, and dialogue | Original Albert sheets and Dream/Real panel artwork are integrated; complete/final narrative approval is not established |
 | Kayla | Visual art, environmental and map development | Prototype rooms exist on main; her current deliverables and branch status were not verified |
@@ -106,9 +108,9 @@ they do not prove completion or assign authorship to every file in a shared syst
 | Existing laboratories and shared systems | Published prototypes/foundations | Validate affected scenes when their contracts change |
 | Dream → Bedroom introduction | Accepted and published in `fad8a76`; accepted signal repair published in `eef63da` | Preserve the verified flow and test affected paths when changing it |
 | Environmental descriptions beyond current examples | Assigned; additional progress unverified | Inspect Christan's actual content/interface and agree on scene ownership |
-| Sanity | Approved design; implementation/shared integration not established; separate development unverified | Christan's verified interface and narrative-approved decision/event mappings |
+| Sanity | Foundation and first phone consequence implemented, automatically validated, and Project Lead-accepted | Further outcomes need separate approval |
 | Session-only checkpoint retry | Approved design; implementation not established | Locations, activation, retry behavior, and restoration ownership |
-| Sanity HUD | Compact top-right direction approved; mockup is concept/reference only, not production art or implementation | Final visual treatment, indicators, dimensions, and score visibility |
+| Sanity HUD | Isabela's seven combined images integrated and Project Lead-accepted, with adaptive corners and dark pulse | sanity_00.png remains an approved unfinished placeholder; final delivery/review pending |
 | Environment/map expansion | Assigned; additional progress unverified | Kayla's confirmed deliverables and integration needs |
 | Story event registration | One published introduction-completion flag approved and registered | Additional events require approved meanings, producers, and consumers |
 | Connected room travel and chapter progression | Unresolved design/integration | Accepted room order, entry/exit behavior, and narrative boundaries |
@@ -118,9 +120,18 @@ they do not prove completion or assign authorship to every file in a shared syst
 
 [Sanity design](SANITY_DESIGN.md) records the newly approved mechanics,
 narrative-dependent visual timing, session-only checkpoints, and HUD direction.
-Design approval does not establish implementation or integration. Isabela, Kayla,
-and Wayne form the visual team; full-map references and modular assets are intended
+The foundation, HUD, and first phone consequence are implemented and manually
+accepted; environmental transformations, psychological text, and session retry
+remain unimplemented. Isabela supplied the seven HUD images. Isabela, Kayla, and
+Wayne form the visual team; environmental references/modular assets remain intended
 as workload permits, without assigning unconfirmed deliverables.
+
+Previously reported validation passed 163 Godot-native checks, 2 fresh-process
+checks, Godot scene/script validation on 17 scenes/21 scripts with no errors or warnings, and 170
+documentation links/anchors. The Project Lead subsequently tested Dream-to-Bedroom,
+all phone options and Option 3's consequence, adaptive Garden HUD placement, and
+relevant interactions, reporting no unusual gameplay behavior. These are accepted
+prior results, not newly executed tests recorded by this status update.
 
 The central guides distinguish published implementation from approved design and
 proposed work. Their presence alone does not establish implementation or publication.
@@ -131,9 +142,9 @@ proposed work. Their presence alone does not establish implementation or publica
   and doors still supply no travel logic. Later chapter connections need approved
   entry/travel rules and coordinated environment/narrative content.
 - **Story state:** one published introduction-completion flag is registered. Unknown
-  reads still return null and writes are rejected. Specific Sanity-affecting
-  decisions/events and Christan's concrete interface still need coordinated review
-  and verified consumers against the approved design.
+  reads still return null and writes are rejected. Sanity remains separate:
+  the local phone Option 3 consequence adds +1 without changing completion flags.
+  Further outcomes require coordinated review with Prince and narrative owners.
 - **Dialogue ownership:** environmental content can reuse
   [the published interaction contract](overworld_interactions.md). Future NPC
   cinematics require separate coordination with the opening/sequence owner.
@@ -191,8 +202,8 @@ a schedule. The Project Lead and responsible teammates must confirm it.
    assumptions; keep status wording tied to the inspected source.
 2. Preserve the accepted, published introduction and signal repair when planning
    further chapter integration; test affected input, movement, and camera behavior.
-3. Agree with Isabela on accepted progression/content and with Christan on the
-   environmental/Sanity interfaces; approve real GameState event IDs as needed.
+3. Agree with Isabela on progression/content and with Prince on further Sanity
+   integration; approve real GameState event IDs as needed.
 4. Coordinate Kayla's room deliverables and Lawrence's actual audio assets with
    that flow. Resolve font permission and final placeholder replacements.
 5. Once connections exist, validate the complete path, including control/camera

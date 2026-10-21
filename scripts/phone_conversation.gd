@@ -1,6 +1,7 @@
 extends Control
 
 signal finished(branch: int)
+signal choice_committed(branch: int)
 
 const CANVAS_SIZE := Vector2(640.0, 1088.0)
 const VIEWPORT_PADDING := 16.0
@@ -88,6 +89,7 @@ func confirm_selection() -> void:
 	branch = selected_choice + 1
 	current_screen = BRANCH_START[selected_choice]
 	_show_screen()
+	choice_committed.emit(branch)
 
 func hover_choice(viewport_position: Vector2) -> void:
 	if not is_choosing():
