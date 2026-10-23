@@ -10,6 +10,11 @@ This reconstructs meaningful changes reachable from published main at
 and relevant diffs were inspected. The order below follows ancestry, not guessed
 milestone dates. A merge's side-branch commits are identified explicitly.
 
+The original sections through GameState V1 retain that historical scope. The
+later milestone entries below extend the inspected published history through
+`863678e92e27e59450b8ebf2d11b950d2d91c546`. Current status and unimplemented plans
+belong in [Team progress](TEAM_PROGRESS.md) and [Game flow](GAME_FLOW.md).
+
 Git establishes what was saved and integrated. It does not establish every design
 discussion, runtime test, or original contribution's author. Team responsibilities
 come from the Project Lead's confirmed assignments, not guesses from filenames or
@@ -47,6 +52,12 @@ this documentation refinement.
 | 12 | [79247a2](https://github.com/AzureZephyry/withering-away-jam/commit/79247a2640a16fa2256add1795432944cfb57166) | Reusable environmental interactions, overlay, and refined Bedroom objects/interactions |
 | 13 | [9987b51](https://github.com/AzureZephyry/withering-away-jam/commit/9987b51c66d5084832ca8fd949c9a6d8b74b3292) | Official Albert sheets/frames, directional animation helper, shared Player/controller integration, placeholder cleanup |
 | 14 | [590184b](https://github.com/AzureZephyry/withering-away-jam/commit/590184baf43a43410e7f6288258d1ef080d17967) | Session GameState script, UID, public Autoload registration, and technical guide |
+| 15 | [ca082b7](https://github.com/AzureZephyry/withering-away-jam/commit/ca082b7bbc43ce548a0abee194aea3a916db437b) | Final Dream/Reality dialogue artwork and visible-artwork placement correction |
+| 16 | [fad8a76](https://github.com/AzureZephyry/withering-away-jam/commit/fad8a76a309a181799374afa4855480af971906e) | Connected Dream-to-Bedroom introduction, prepared phone choices/reflections, story completion and test entry |
+| 17 | [eef63da](https://github.com/AzureZephyry/withering-away-jam/commit/eef63dadc673bf4a389c4ccf9e8d511e2d42fa47) | Guarded runtime Dream dialogue signal connections |
+| 18 | [37ecf9a](https://github.com/AzureZephyry/withering-away-jam/commit/37ecf9a7871851c1b69f6c7b3138bc5a6043b07a) | Public game-theme interpretation, seven-member roster and current milestone documentation |
+| 19 | [e847d19](https://github.com/AzureZephyry/withering-away-jam/commit/e847d1976bba27a7a0f24d7fb34fd32feb615ad2) | Approved Sanity design and future session-checkpoint rules; design publication, not implementation |
+| 20 | [863678e](https://github.com/AzureZephyry/withering-away-jam/commit/863678e92e27e59450b8ebf2d11b950d2d91c546) | First playable Sanity foundation, adaptive combined HUD, tests and first consequential phone choice |
 
 The small intermediate `5daf819` commit added placeholder files under fonts,
 music, and sounds; it did not establish finished audio/font integration. It is
@@ -208,6 +219,83 @@ interaction remained functional. These reports do not establish an implemented
 story progression or Sanity system. The underlying historical test artifacts were
 not independently inspected or recreated in this documentation refinement.
 
+## Later published milestones
+
+The dates below are verified Git commit dates with the recorded +08:00 offset.
+They do not establish when every design discussion or manual test occurred.
+Initial environmental interaction capabilities remain recorded in milestones
+11–12 above; the later integration reuses that foundation rather than replacing it.
+
+### Final dialogue artwork — October 20, 2026
+
+`ca082b7` changed the two supplied Dream/Reality PNGs and the shared panel and
+environmental placement scripts: four files. Visible artwork near the bottom of
+the 640 × 480 canvases now defines occupied dialogue space; transparent padding
+does not falsely prevent safe framing. The artwork was accepted before publication.
+
+### Connected introduction and Dream input repair — October 20, 2026
+
+`fad8a76` published 50 files connecting the opening to the existing playable
+Bedroom, waking dialogue, phone branches, final reflections, and exploration.
+It included 16 prepared transparent phone PNGs and their sidecars, story/phone
+components and UIDs, a developer introduction entry, and public documentation.
+The registered `bedroom_intro_completed` flag is written only after final reflection.
+The Project Lead accepted the introduction on October 20 after 156 reported
+automated checks. The Bedroom door still did not provide onward travel.
+
+`eef63da` changed only `scripts/opening_sequence.gd`: four guarded connection lines
+for the Dream body's advance and character-reveal signals. The runtime connections
+tolerate missing saved hookups and avoid duplicates. Reported validation passed
+57 Dream and 144 Bedroom runtime checks, followed by Project Lead F5 acceptance.
+These are historical test/acceptance records, not tests rerun for this document.
+
+### Theme, team and Sanity design — October 20–21, 2026
+
+`37ecf9a` updated six public guides on October 20 with the official jam theme,
+developing interpretation, seven-member team including Wayne in visuals, and
+verified milestone statuses. It did not finalize the game's title or story.
+
+`e847d19` published the Sanity design and related guides on October 21. It recorded
+integer deterioration, reversible stages, terminal failure, narrative-dependent
+environmental presentation and future session-only retry. Design documentation
+did not supply those runtime systems. Later approved rules and implementation
+supersede the original all-neutral phone choice and reference-only HUD directions;
+their history is retained in [Design decisions](DESIGN_DECISIONS.md).
+
+### First playable Sanity integration — October 21, 2026
+
+`863678e` published 37 files: 15 modified and 22 added. It introduced the separate
+SanityState service, combined adaptive HUD, seven supplied HUD PNGs and matching
+sidecars, native tests and UIDs, the public Autoload registration, phone consequence
+integration, scene instances, and accurate supporting documentation. Isabela's
+unfinished zero-bar image was explicitly accepted for temporary use.
+
+Options 1/2 remain neutral; Option 3 commits +1 once through the Bedroom controller.
+GameState stays Boolean-only. Higher stages, recovery and failure exist at the
+service level; this sole production consequence limits normal story scores to 0/1.
+The Project Lead accepted the Dream-to-Bedroom sequence, phone options/consequence,
+adaptive Garden HUD placement, and relevant interactions before publication.
+
+Publication validation of the public candidate passed 163 Godot-native checks,
+2 fresh-process checks, and 330 documentation links/anchors. Earlier reported
+scene/script validation covered 17 scenes and 21 scripts without errors or warnings.
+These are historical results. No full Game Over presentation, checkpoint/retry,
+environmental transformations, psychological text or further consequences were
+implemented by this milestone.
+
+## Current planning context — not a published gameplay milestone
+
+The Project Lead now confirms **Chapter 1 — Year One** as the minimum narrative
+scope. Isabela is revising the proposed screenplay; no finalized revised chapter
+flow is verified as integrated. Bedroom is the connected story endpoint. Garden
+and School Interior remain laboratories; School Exterior is a required environment
+without a dedicated integrated scene in the inspected repository. Roads and the
+family house remain future locations. This context does not establish off-repository
+delivery status, an approved chapter route, or new production assignments. Use
+[Game flow](GAME_FLOW.md#intended-direction-and-narrative-uncertainty) for the current
+confirmed character/context and draft boundary. No date is inferred for the
+underlying planning discussions.
+
 ## Historical gaps and future maintenance
 
 - Detailed motivations not represented by source, guides, or confirmed project
@@ -218,8 +306,9 @@ not independently inspected or recreated in this documentation refinement.
 - Narrative proposals and role assignments are context, not proof of implemented
   endings, transitions, Sanity mechanics, or finished audio.
 - Work outside the inspected main history is not claimed as published here.
-- This documentation records the implementation and history verified at
-  `590184b`; it does not represent a new gameplay milestone.
+- The original sections retain their `590184b` historical scope; appended entries
+  cover later verified published milestones through `863678e`. This documentation
+  synchronization is not a new gameplay milestone.
 
 Add a history entry when an accepted, published change materially helps future
 developers understand the project. Preserve superseded decisions with evidence,

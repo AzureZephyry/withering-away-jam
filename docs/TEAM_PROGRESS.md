@@ -6,9 +6,11 @@
 
 ## Delivery objective
 
-The immediate team objective is a coherent playable game-jam submission or chapter
-built from the existing foundations. The published introduction connects Dream
-to Bedroom exploration; the remaining rooms do not yet form a connected chapter.
+The minimum intended story scope is **Chapter 1 — Year One**. The published
+introduction connects Dream to Bedroom exploration; there is no implemented
+continuation beyond that endpoint. Garden and School Interior remain separate
+laboratories, not connected chapter progression. Isabela is revising the proposed
+screenplay; a finalized revision and approved later scene flow are not yet verified.
 
 **Project Lead-reported deadline:** November 9, 2026. This date is attributed to
 the Project Lead and has not been independently verified against an organizer
@@ -38,6 +40,28 @@ runtime tests were rerun for this documentation update. See [Game flow](GAME_FLO
 for the contract and regression procedures. Final phone-buzz audio, final Dream
 art, room travel, and persistent saves remain unfinished. Sanity's first playable
 integration is implemented and manually accepted; later Sanity features remain planned.
+
+## First playable Sanity integration — published
+
+Published commit:
+[`863678e92e27e59450b8ebf2d11b950d2d91c546`](https://github.com/AzureZephyry/withering-away-jam/commit/863678e92e27e59450b8ebf2d11b950d2d91c546)
+— `feat: integrate sanity system and adaptive HUD`.
+
+The separate SanityState service provides integer deterioration, three playable
+stages, recovery, failure notification, and explicit reset. Isabela's seven supplied
+HUD images are integrated with adaptive dialogue-aware corners and short visual
+feedback. Phone Options 1/2 remain neutral; Option 3 adds +1 exactly once. It is the
+only consequential production choice, so normal story play reaches score 0 or 1.
+Higher stages/failure are available in the service/tests, not yet the story route.
+
+The Project Lead manually accepted Dream-to-Bedroom, all phone options and Option
+3's consequence, adaptive Garden HUD placement, and relevant interactions, reporting
+no unusual gameplay behavior. Publication validation reran **163 Godot-native
+checks and 2 fresh-process checks**, and verified **330 documentation links/anchors**
+against the public candidate. These are historical publication results, not tests
+newly executed for this documentation update. Full failure presentation,
+checkpoints/retry, transformations, psychological text, and further story
+consequences remain unimplemented; sanity_00.png remains temporary.
 
 ## Earlier verified published snapshot
 
@@ -108,20 +132,20 @@ they do not prove completion or assign authorship to every file in a shared syst
 | Existing laboratories and shared systems | Published prototypes/foundations | Validate affected scenes when their contracts change |
 | Dream → Bedroom introduction | Accepted and published in `fad8a76`; accepted signal repair published in `eef63da` | Preserve the verified flow and test affected paths when changing it |
 | Environmental descriptions beyond current examples | Assigned; additional progress unverified | Inspect Christan's actual content/interface and agree on scene ownership |
-| Sanity | Foundation and first phone consequence implemented, automatically validated, and Project Lead-accepted | Further outcomes need separate approval |
+| Sanity | Foundation/HUD and first phone consequence accepted and published in `863678e` | Further outcomes need separate approval; current story score is only 0 or 1 |
 | Session-only checkpoint retry | Approved design; implementation not established | Locations, activation, retry behavior, and restoration ownership |
 | Sanity HUD | Isabela's seven combined images integrated and Project Lead-accepted, with adaptive corners and dark pulse | sanity_00.png remains an approved unfinished placeholder; final delivery/review pending |
-| Environment/map expansion | Assigned; additional progress unverified | Kayla's confirmed deliverables and integration needs |
+| Environment/map expansion | Bedroom story room plus independent Garden and School Interior prototypes; School Exterior required but not integrated | Confirm actual visual-team deliveries and intended scene use, including off-repository progress |
 | Story event registration | One published introduction-completion flag approved and registered | Additional events require approved meanings, producers, and consumers |
 | Connected room travel and chapter progression | Unresolved design/integration | Accepted room order, entry/exit behavior, and narrative boundaries |
 | Save/load | Deferred outside GameState V1 | Separate requirements/design before implementation |
-| Narrative proposals, final title/endings | Unresolved | Isabela/team decisions, not inference from prototypes |
+| Chapter 1 — Year One narrative, final title/endings | Minimum chapter scope confirmed; screenplay under revision, final flow/content unresolved | Isabela's revised script and team approval; no draft NPC/event/ending promoted into canon |
 | Central documentation set | Published implementation contracts linked to specialized guides | Keep local, accepted, and published status distinct when maintaining affected documents |
 
 [Sanity design](SANITY_DESIGN.md) records the newly approved mechanics,
 narrative-dependent visual timing, session-only checkpoints, and HUD direction.
-The foundation, HUD, and first phone consequence are implemented and manually
-accepted; environmental transformations, psychological text, and session retry
+The foundation, HUD, and first phone consequence are accepted and published;
+environmental transformations, psychological text, and session retry
 remain unimplemented. Isabela supplied the seven HUD images. Isabela, Kayla, and
 Wayne form the visual team; environmental references/modular assets remain intended
 as workload permits, without assigning unconfirmed deliverables.
@@ -141,6 +165,12 @@ proposed work. Their presence alone does not establish implementation or publica
 - **Chapter flow:** the published Dream handoff loads the story Bedroom; room markers
   and doors still supply no travel logic. Later chapter connections need approved
   entry/travel rules and coordinated environment/narrative content.
+- **Narrative revision:** Isabela's revised Chapter 1 screenplay and approved OW/VN
+  sequence are pending verification. The earlier proposal is not finalized canon.
+- **Environment deliveries:** the existing School Interior is not the required
+  School Exterior. No dedicated exterior scene/final art, road scene, or family-house
+  scene was found in the repository. This does not establish off-repository completion
+  or create new assignments for Isabela, Kayla, or Wayne.
 - **Story state:** one published introduction-completion flag is registered. Unknown
   reads still return null and writes are rejected. Sanity remains separate:
   the local phone Option 3 consequence adds +1 without changing completion flags.
@@ -160,6 +190,8 @@ proposed work. Their presence alone does not establish implementation or publica
   artwork/content decisions and Lawrence's audio deliveries before integration.
   See [font permission](DESIGN_DECISIONS.md#d05--world-specific-supplied-dialogue-artwork-and-a-shared-typewriter)
   before public build distribution.
+- **Later mechanics:** complete Game Over presentation and session checkpoint/retry
+  need separate approved implementation; their design is not evidence of delivery.
 
 These are verified gaps, dependencies, or documented limits. No new runtime
 failure was reproduced during this documentation-only inspection. Unknown

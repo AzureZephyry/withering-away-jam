@@ -8,10 +8,16 @@
 This is the primary Sanity reference for the currently untitled psychological
 horror game. Withering Away remains the working title and jam theme.
 
+The first playable integration is **published** in
+[`863678e`](https://github.com/AzureZephyry/withering-away-jam/commit/863678e92e27e59450b8ebf2d11b950d2d91c546),
+after automated validation and the Project Lead's accepted manual playtest.
+This covers the foundation, adaptive combined HUD, and initial phone consequence;
+it does not mark the deferred features below complete.
+
 | Area | Status |
 | --- | --- |
-| Integer deterioration, stages, recovery, failure, reset | Implemented and Project Lead-accepted; focused automated validation passed |
-| Combined HUD and first phone consequence | Implemented and Project Lead-accepted |
+| Integer deterioration, stages, recovery, failure, reset | Published and Project Lead-accepted; focused automated validation passed |
+| Combined HUD and first phone consequence | Published and Project Lead-accepted |
 | Narrative-dependent environmental transformations | Approved design; not implemented |
 | Psychological text manifestations | Approved future direction; wording, triggers, timing, and intensity unresolved; not implemented |
 | Session-only checkpoints and fixed-score retry | Approved design; not implemented |
@@ -133,6 +139,9 @@ bypasses story-completion reads/writes; restart that test for a fresh session.
 
 No other narrative or environmental consequence is introduced. In particular,
 the Garden Lily's repeatable test conversation stays neutral.
+Normal story play therefore reaches only score 0 or 1. Higher stages, recovery,
+and terminal failure exist at the system level and in tests, without additional
+production choices making them naturally reachable yet.
 
 ## Combined HUD artwork and lifecycle
 
@@ -267,9 +276,11 @@ Coverage includes boundaries/recovery, invalid effects, notification order/state
 failure/reset, actual texture selection, scene lifetime, adaptive panel placement,
 phone branches and duplicate input, normal Dream handoff, and environmental
 interaction regressions. The accepted implementation previously passed 163
-Godot-native checks plus 2 fresh-process checks; Godot scene/script validation reported 17 scenes and
-21 scripts with no errors or warnings, and 170 documentation links/anchors passed.
-Those are previously reported results, not claims of a new run.
+Godot-native checks plus 2 fresh-process checks; Godot scene/script validation
+reported 17 scenes and 21 scripts with no errors or warnings, alongside an earlier
+170-link/anchor check. Publication validation of the public candidate reran the
+163 checks and 2 fresh-process checks and verified 330 documentation links/anchors.
+These are historical results, not gameplay tests rerun for this documentation update.
 
 The Project Lead has since manually accepted the Dream-to-Bedroom sequence, all
 three phone choices and Option 3's consequence, adaptive Garden HUD placement,

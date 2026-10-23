@@ -5,8 +5,9 @@
 
 ## Scope and evidence
 
-This guide describes the **published** Dream-to-Bedroom integration and existing
-room prototypes at `eef63da`, the current confirmed main baseline. The introduction
+This guide describes the **published** implementation through `863678e`
+(`feat: integrate sanity system and adaptive HUD`), verified on main during the
+October 23, 2026 audit. The introduction
 passed 156 automated checks, received Project Lead acceptance on October 20, 2026,
 and was published in `fad8a76`. Its later Dream signal repair was also manually
 accepted and published in `eef63da`. The earlier `590184b` snapshot remains a
@@ -20,7 +21,7 @@ For milestone evidence, see [Development history](DEVELOPMENT_HISTORY.md).
 ## F5: the actual application flow
 
 The configured main scene is [scenes/Dream.tscn](../scenes/Dream.tscn).
-`GameState` is available as an Autoload. The scene's
+`GameState` and `SanityState` are available as separate Autoloads. The scene's
 `OpeningSequence` Control runs [opening_sequence.gd](../scripts/opening_sequence.gd).
 There is no movable overworld Player in this scene.
 
@@ -32,11 +33,12 @@ F5: Dream.tscn
     -> waking fade to black -> playable Bedroom
     -> waking lines -> buzz/shake -> !!! -> phone -> choice -> selected branch
     -> reflection -> exploration
+    Endpoint: Bedroom exploration; no implemented onward story transition.
 
 F6: choose one independent test entry point
     Bedroom laboratory: camera_lab.tscn
     Garden laboratory:  garden_camera_lab.tscn
-    School laboratory:  school_camera_lab.tscn
+    School Interior:    school_camera_lab.tscn
     These are separate runs, not connected room transitions.
 
 Developer F6 entry: tests/bedroom_intro_test.tscn
@@ -152,7 +154,7 @@ the shared Albert Player and a camera; room resources supply scenery/collisions.
 | --- | --- | --- |
 | [camera_lab.tscn](../scenes/prototypes/camera_lab.tscn) | Walk through the Bedroom, collide with solid furniture/walls, inspect notebook/card; fixed room camera | Right door closed; direct entry skips the introduction and never writes its flag |
 | [garden_camera_lab.tscn](../scenes/prototypes/garden_camera_lab.tscn) | Explore the Garden with limited continuous camera follow, overhead fading, and automatic Corpse Lily dialogue | Conversation is temporary test content; no story-state effect or exit transition |
-| [school_camera_lab.tscn](../scenes/prototypes/school_camera_lab.tscn) | Explore the School with collisions and limited continuous camera follow | No environmental dialogue controller or complete School narrative progression attached |
+| [school_camera_lab.tscn](../scenes/prototypes/school_camera_lab.tscn) | Explore the School Interior with classrooms, library, lobby/study areas, collisions, and bounded continuous follow | No environmental dialogue controller or connected School story progression; not the required School Exterior |
 | [game.tscn](../scenes/game.tscn) | Earlier movement/camera sandbox with 4× dead-zone camera | Not the configured main scene or a connected chapter |
 
 Move with WASD/arrows. The active controller preserves speed 150 and normalized
@@ -235,7 +237,7 @@ this system. See [GameState V1](game_state.md) before introducing event callers.
 ## Sanity integration and planned retry flow
 
 The Sanity foundation, combined HUD, and phone Option 3 consequence are now
-**implemented, automatically validated, and Project Lead-accepted**.
+**implemented, validated, Project Lead-accepted, and published in `863678e`**.
 Environmental transformations and retry remain planned. Use
 [Sanity design](SANITY_DESIGN.md) for the current API and full specification.
 
@@ -244,6 +246,12 @@ An explicitly classified decision changes the shared deterioration score by
 stages. Level 3 remains recoverable; reaching 6 instead triggers Game Over,
 not a fourth stage. Phone Options 1/2 remain neutral; Option 3 now adds +1.
 Its existing narrative sequence and GameState completion behavior are unchanged.
+
+This is the only consequential production choice. Normal story play reaches
+score 0 or 1; recovery, higher stages, and failure are implemented in the service
+and exercised by tests, without further story choices making them reachable yet.
+Failure currently supplies state, notification, and the temporary zero-bar HUD,
+not a complete Game Over presentation, gameplay pause, or scene transition.
 
 Option C separates the current stage from the environment currently shown.
 An approved narrative moment may reveal deterioration or recovery during play,
@@ -269,24 +277,61 @@ not an implemented Sanity/checkpoint manager.
 | Potential connections among existing room prototypes | **Undesigned or unimplemented; chapter travel order is not approved** | Agree on narrative order, entry/exit rules, and scene ownership first |
 | Room marker/door → destination | No scene router or travel behavior established | A marker or door visual is not a transition |
 | F6 → selected laboratory | Published editor test entry point | Developer chooses the standalone scene |
-| Classified decision/event → Sanity response | Implemented and Project Lead-accepted phone Option 3 integration | Prince oversees Sanity; further outcomes require approval |
+| Classified decision/event → Sanity response | Accepted phone Option 3 integration published in `863678e` | Prince oversees Sanity; further outcomes require approval |
 | Session → persistent save | Deferred | Separate save/load design and authorization |
 
 ## Intended direction and narrative uncertainty
 
-**Project Lead context:** Albert is a first-year college student facing
-perfectionism, expectations, and insecurity. His psychological deterioration is
-intended to develop gradually; he does not begin in a severely deteriorated state.
-Unsettling environments and dreams are part of the developing direction. Ali's
-area includes opening, UI, and relevant gameplay integration. The published
-Dream-to-Bedroom handoff does not establish the full chapter's route or final dialogue.
+The confirmed minimum objective is **Chapter 1 — Year One**. Its revised scene
+flow awaits team approval; the published introduction is not a complete chapter.
 
-**Previously proposed, not settled canon or implemented mechanics:** progressive
-deterioration reflected by dreams; a Garden representing his internal state;
-a Corpse Lily associated with intrusive criticism, self-blame, and corruption; links between dream experience
-and waking presentation; and multiple endings. The current Garden prototype and
-opening are not proof that these concepts have been implemented as a dynamic
-psychological system. Isabela and the team retain narrative decisions.
+**Confirmed protagonist:** Albert James Dimapilis, 18, is a first-year BSCS student
+in a Philippine setting. A former valedictorian and top student from a small town,
+he carries pressure to succeed. He values quiet study places, routine, academic
+achievement, and personal status; he fears failure, judgment, crowded environments,
+and falling behind. His deterioration should develop gradually rather than
+starting at its most severe level. These are approved character facts, not a claim
+that every detail is already conveyed in the implemented dialogue.
+
+**Confirmed horror direction:** Dream Garden, Corpse Lily, intrusive thoughts,
+psychological temptation, academic/family expectations, roots, spores, parasites,
+decay, withering, and Sanity-dependent environmental/perceptual horror. The last
+of these remains planned rather than a delivered transformation system.
+
+**Narrative secret for implementation coordination:** the mysterious opening
+voice is intended to be the Corpse Lily. Its player-facing speaker remains `???`.
+This does not finalize the Lily's symbolism or wider supernatural explanation.
+
+**Draft boundary:** Isabela is correcting/revising the earlier proposed chapter
+screenplay. No finalized revision was found in the inspected repository. Its
+suggested NPCs, relationships, academic events, dialogue, climax, and ending are
+not approved canon. Do not use that proposal as the official route or confirmed
+cast. Multiple endings and detailed Garden symbolism also remain unresolved.
+
+### Confirmed locations versus implemented maps
+
+| Location | Current repository status |
+| --- | --- |
+| Bedroom | Implemented story room; normal progression ends in exploration here |
+| Dream Garden | Independent playable laboratory with temporary Corpse Lily dialogue; Dream's opening still reveals white |
+| School Interior | Independent prototype with classrooms, library, lobby/study areas; not School Exterior |
+| School Exterior | Confirmed required story environment; no dedicated implemented scene or final environment artwork found |
+| Roads and family house | Future locations discussed; no integrated scenes found |
+
+Absence from the repository does not establish whether off-repository artist work
+is complete. Confirm deliveries and approved scene use with the team.
+
+### Overworld and Visual Novel presentation
+
+**OW** covers player exploration, object inspection, NPC proximity interactions,
+and eventual map navigation. **VN** covers scripted conversations, important
+choices, limited backgrounds, audio cues, fades, and short effects. Reuse existing
+idle/walk artwork and lightweight presentation rather than requiring extra sitting,
+writing, sleeping, phone-holding, or other minor-action animations.
+
+The current components support environmental conversations and specific scripted
+sequences. Map navigation, a general branching dialogue framework, and a complete
+NPC cinematic system are not supplied merely by adopting these presentation forms.
 
 ## Integration prerequisites
 

@@ -46,7 +46,7 @@ The ordinary Bedroom F6 laboratory does not read or write this flag. The dedicat
 `scenes/tests/bedroom_intro_test.tscn` entry reruns the same introduction without
 reading or changing story completion. Restarting the application creates a fresh
 session. No New Game UI exists yet; a future in-process New Game action should
-call the existing `GameState.reset_session()` rather than bypassing the registry.
+coordinate both session services rather than bypassing their public APIs.
 
 ## API and validation
 
@@ -83,11 +83,17 @@ true emits one `(name, false)` notification, in registry order. An already-false
 session emits none. Avoid changing flags from reset notifications unless that
 behavior is intentional.
 
-Call `GameState.reset_session()` when starting a fresh playthrough within the
-same application. Changing scenes or replaying a conversation does not reset it.
+For a fresh playthrough within the same application, a future New Game coordinator
+must reset Boolean flags with `GameState.reset_session()` and deterioration with
+`SanityState.reset_session()`. Neither service resets automatically on scene change
+or conversation replay. A future checkpoint/retry coordinator must respect both
+services and relevant room-local state under the approved restoration rules;
+GameState remains Boolean-only. No complete New Game or checkpoint/retry
+coordinator exists yet.
 
-Christan's future sanity code may read approved flags or listen to this signal.
-Keep any sanity rules in his system; GameState has no dependency on it.
+Prince currently oversees gameplay mechanics and Sanity. `SanityState` is a
+separate session service; GameState has no dependency on it and stores no Sanity
+score. Approved consumers may read registered flags or subscribe to this signal.
 
 ## Local setup and review
 

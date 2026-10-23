@@ -51,6 +51,27 @@ psychological horror game for Month of Horror #2: Withering Away. The Project
 Lead's current premise follows Albert beginning college. Deterioration, dreams,
 and unsettling environments are developing themes, not a finalized plot contract.
 
+The minimum story objective is **Chapter 1 — Year One**. The confirmed protagonist
+is **Albert James Dimapilis**, 18, a first-year BSCS student in a Philippine setting,
+formerly a small-town valedictorian/top student under pressure to succeed. His
+routine, academic identity/status, quiet study spaces, and fears of failure,
+judgment, crowds, and falling behind guide characterization. Dream Garden and
+Corpse Lily are confirmed horror concepts; their wider symbolism and supernatural
+interpretation remain unresolved. See [the narrative boundary](GAME_FLOW.md#intended-direction-and-narrative-uncertainty)
+for the approved context and the spoiler-sensitive implementation detail.
+
+Isabela is revising the earlier proposed chapter screenplay. No finalized revision
+or approved full chapter route is established in the repository. Draft NPCs,
+relationships, events, dialogue, climax, and ending must not be treated as canon.
+Bedroom is implemented; Garden and School Interior are independent prototypes.
+School Exterior is required but not integrated; roads/house remain future locations.
+
+Use resource-conscious **OW** exploration/inspection/proximity interaction and
+**VN** scripted dialogue/choices, backgrounds, cues, fades, and short effects.
+Do not require new sitting, writing, sleeping, phone-holding, or other minor-action
+animations solely for these narrative moments. This constraint does not establish
+a general branching or NPC cinematic framework as implemented.
+
 **Reasoning and consequences:** This is supplied project context rather than a
 decision recoverable from a gameplay diff. It guides tone but does not authorize
 developers to invent story, endings, or psychological mechanics. Garden/Lily
@@ -177,13 +198,14 @@ The published introduction supersedes the waking placeholder's dialogue role: th
 three waking lines now use the Reality panel over the actual Bedroom (D12).
 
 **Revisit:** Isabela's approved art/narrative changes and Lawrence's audio contract
-may require new safe-area or signal checks. Font permission remains unresolved;
-do not assume its inclusion establishes redistribution rights. This concerns
+may require new safe-area or signal checks. The embedded metadata in
 [Pixel handwriting_regular.ttf](../assets/fonts/Pixel%20handwriting_regular.ttf)
-and is an asset-provenance uncertainty, not proof of infringement. Verify the
-documented license or permission with the actual rights holder before public
-build distribution. No license is asserted and no font replacement is authorized
-by this record.
+identifies the family as Pixel handwriting, Regular, and includes a `CC BY-SA 4.0`
+license label. Its copyright field is only `(c)`; original author/source attribution
+and redistribution verification remain incomplete. Record that evidence without
+claiming compliance is resolved or treating uncertainty as proof of infringement.
+Confirm provenance and applicable attribution before public build distribution.
+No font replacement is authorized by this record.
 
 ## D06 — Environmental-object interactions remain scene-local
 
@@ -387,10 +409,12 @@ authorized by this decision. Choice hit regions and outline share its transform.
 
 **State and entry boundaries:** `bedroom_intro_completed` means the entire story
 introduction, including final reflection, was dismissed. It is session-only and
-is not written at arrival, phone open/close, or selection. The chosen response
-changes only the local phone branch and reflection, with no Sanity, relationship,
-ending, or save effects. Completed story entry skips the introduction. Room travel
-remains separate future work.
+is not written at arrival, phone open/close, or selection. Completed story entry
+skips the introduction. Room travel remains separate future work.
+
+**Historical consequence rule — superseded:** the original introduction changed
+only the local phone branch/reflection, with no Sanity, relationship, ending, or
+save effects. This describes that earlier decision, not the current phone effect.
 
 The original all-neutral phone consequence decision above is **superseded by
 the accepted Sanity integration**: Options 1/2 stay neutral; Option 3 adds +1
@@ -415,9 +439,9 @@ flow, saves, and general NPC systems are not part of this introduction.
 **Provenance:** Project Lead-approved Sanity design; the complete contract is in
 [Sanity design](SANITY_DESIGN.md).
 
-**Status:** Approved design; foundation/HUD/phone integration implemented and tested
-and Project Lead-accepted after manual playtesting. Prince oversees current Sanity
-engineering; Christan is temporarily assisting Lawrence with audio.
+**Status:** Approved design; foundation/HUD/phone integration tested, Project
+Lead-accepted after manual playtesting, and published in `863678e`. Prince oversees
+current Sanity engineering; Christan is temporarily assisting Lawrence with audio.
 
 **Decision/context:** Use one integer deterioration score, initially 0 and bounded
 below by 0. Explicitly classified destabilizing/restorative/neutral decisions
@@ -485,7 +509,7 @@ for the newly approved mapping, placement, and temporary asset limits.
 
 | Question | Current status | Coordination required |
 | --- | --- | --- |
-| First connected chapter boundaries and room order | Unresolved | Project Lead and narrative/environment owners |
+| Chapter 1 — Year One scene order and endpoint | Minimum chapter scope confirmed; detailed flow unresolved pending narrative revision | Project Lead and narrative/environment owners |
 | Additional event identifiers and producer/consumer rules | One introduction flag approved; further events require agreement | Project Lead with relevant feature owners |
 | Additional Sanity outcomes and integration | Foundation/HUD/phone Option 3 accepted; further mappings unapproved | Prince and narrative owners |
 | General character/NPC cinematic presentation and input handoff | Separate planned responsibility; contract unresolved | Relevant cinematic/dialogue owners before integration |

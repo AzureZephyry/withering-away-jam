@@ -23,7 +23,8 @@ the milestone record.
 Scenes are saved node hierarchies; instances reuse those hierarchies and may attach
 scripts or override properties in the hosting scene. Resources such as SpriteFrames,
 textures, fonts, shapes, and shaders are referenced by scenes/scripts. `GameState`
-is the shared Autoload; cameras and environmental controllers remain scene-local.
+and `SanityState` are separate public gameplay Autoloads; cameras, environmental
+controllers, and HUD instances remain scene-local.
 
 ## Directory map
 
@@ -44,7 +45,7 @@ assets/
 	dialogue_dream_world.png
 	dialogue_real_world.png
   ui/phone/
-	prepared/                    # 16 transparent temporary phone PNGs + asset notes
+	prepared/                    # 16 transparent temporary phone PNGs + import metadata
   sprites/test sprites/          # Retained sample-art library
   music/                        # Placeholder file; no music tracks yet
   sounds/                       # Placeholder file; no sound clips yet
@@ -197,7 +198,7 @@ does not reproduce the complete playable setup.
 | --- | --- | --- |
 | [camera_lab.tscn](../scenes/prototypes/camera_lab.tscn) | [bedroom_room.tscn](../scenes/prototypes/rooms/bedroom_room.tscn) | Refined Bedroom prototype, fixed 2.5× camera, notebook/card interactions |
 | [garden_camera_lab.tscn](../scenes/prototypes/garden_camera_lab.tscn) | [garden_room.tscn](../scenes/prototypes/rooms/garden_room.tscn) | Dream Garden prototype, continuous-follow 2.5× camera with room limits, Corpse Lily interaction |
-| [school_camera_lab.tscn](../scenes/prototypes/school_camera_lab.tscn) | [school_room.tscn](../scenes/prototypes/rooms/school_room.tscn) | School environment prototype, continuous-follow 2.5× camera with room limits |
+| [school_camera_lab.tscn](../scenes/prototypes/school_camera_lab.tscn) | [school_room.tscn](../scenes/prototypes/rooms/school_room.tscn) | School Interior prototype, continuous-follow 2.5× camera with room limits |
 
 **Bedroom:** the Camera2D is a sibling of Player, framing the 512 × 384 room.
 `OverworldInteraction` owns the dialogue overlay. The room uses
@@ -216,10 +217,16 @@ groups when they cover Albert. The laboratory adds the Corpse Lily interaction
 target and its visual idle animation to the room instance. Dialogue starts on
 approach and becomes available again after leaving and re-entering the radius.
 
-**School:** Camera2D is under Player, with limits covering 1600 × 896. Its drag
+**School Interior:** Camera2D is under Player, with limits covering 1600 × 896. Its drag
 margins and position smoothing are disabled: this is currently continuous follow,
 not a dead-zone camera. The room uses `pixel_floor.gd` and `pixel_prop.gd`. The
 laboratory has no environmental interaction controller attached.
+
+This room contains classrooms, a library, and lobby/study areas. It is not the
+confirmed School Exterior. No dedicated School Exterior scene/final environment
+artwork, road scene, or family-house scene was found in the inspected repository.
+Off-repository production requires team confirmation. Only Bedroom is reached
+from the normal Dream story route; room-to-room travel remains unimplemented.
 
 [scenes/game.tscn](../scenes/game.tscn) is an older movement/camera sandbox, not the
 startup scene. It uses the shared Player, a 4× camera with horizontal and vertical
@@ -237,6 +244,7 @@ CameraLaboratory (Bedroom)
   Camera2D                      # Fixed, sibling of Player
   OverworldInteraction           # overworld_interaction.gd
     DialogueLayer               # Instanced overworld overlay
+  SanityHUD                     # Combined display, CanvasLayer 3
 
 DreamGardenLaboratory            # garden_lily_interaction.gd adapter/controller
   Garden                        # Instanced room
@@ -245,11 +253,13 @@ DreamGardenLaboratory            # garden_lily_interaction.gd adapter/controller
     Camera2D                    # Follow with limits
   DialogueLayer                 # Instanced overworld overlay
   LilyIdle                      # AnimationPlayer, visual bob only
+  SanityHUD                     # Combined display, CanvasLayer 3
 
 SchoolCameraLaboratory
   School                        # Instanced room
   Player                        # Shared scene + playerMovement.gd
     Camera2D                    # Follow with limits
+  SanityHUD                     # Combined display, CanvasLayer 3
 ```
 
 The Bedroom controller's default `player_path` is `../Player`; the Garden root

@@ -6,9 +6,11 @@ repository contains a scripted Dream opening, playable environment prototypes,
 and shared gameplay foundations. The published Dream-to-Bedroom introduction connects
 the opening to exploration; it is not yet a complete story chapter.
 
-The Project Lead's current narrative premise follows **Albert as he begins his
-first day of college**, with psychological deterioration and dream imagery as
-the developing direction. The final title, full plot, and endings remain open.
+Our minimum intended story scope is **Chapter 1 — Year One**, following
+**Albert James Dimapilis as he begins college**. The connected implementation
+currently ends in Bedroom exploration. Isabela is revising the proposed chapter
+screenplay; its final scene order, dialogue, and ending are not yet approved or
+integrated. The game's final title remains open.
 See [game flow and narrative status](docs/GAME_FLOW.md) for the boundary between
 the implemented sequence and proposed story concepts.
 
@@ -23,9 +25,10 @@ impermanence: things end, and renewal remains a possibility rather than a promis
 Our developing interpretation follows Albert, a first-year college student
 dealing with perfectionism, expectations, and insecurity. His psychological
 deterioration should build gradually; he does not start the story already
-severely worn down. The Dream Garden and proposed Corpse Lily could give that
-slow decline a symbolic form. Their exact meaning, the plot, and the ending
-remain open. A complete Sanity system has not yet been confirmed as integrated into the published build.
+severely worn down. The Dream Garden and Corpse Lily are confirmed parts of the
+horror direction; their exact symbolism, supernatural interpretation, plot, and
+ending remain open. The Sanity foundation, adaptive HUD, and initial phone
+consequence are published; full Game Over handling and checkpoints are unfinished.
 
 The jam's optional challenges explore the passage from autumn into winter,
 progressive decay, and a parasitic plant that thrives as other life fades.
@@ -74,7 +77,7 @@ a claim that every resized window is forced to that aspect ratio.
 | --- | --- | --- |
 | Bedroom | [camera_lab.tscn](scenes/prototypes/camera_lab.tscn) | Fixed room view, 2.5× zoom |
 | Dream Garden | [garden_camera_lab.tscn](scenes/prototypes/garden_camera_lab.tscn) | Continuous follow with room limits, 2.5× zoom |
-| School | [school_camera_lab.tscn](scenes/prototypes/school_camera_lab.tscn) | Continuous follow with room limits, 2.5× zoom |
+| School Interior | [school_camera_lab.tscn](scenes/prototypes/school_camera_lab.tscn) | Continuous follow with room limits, 2.5× zoom |
 
 ## Controls
 
@@ -119,7 +122,7 @@ the published Dream signal-repair baseline.
   visual phone buzz, `!!!`, a centered prepared phone overlay, all three family
   conversation branches, and branch-specific reflection. Exploration returns
   after the final reflection. Final phone-buzz audio is still missing.
-- **Environment prototypes:** Bedroom, Garden, and School layouts with movement,
+- **Environment prototypes:** Bedroom, Garden, and School Interior layouts with movement,
   collisions, and their own camera setups. The Bedroom includes notebook and card
   interactions; the Garden includes the Corpse Lily interaction prototype.
 - **Environmental interactions:** reusable object configuration and a scene-local
@@ -139,11 +142,13 @@ the published Dream signal-repair baseline.
 ## Sanity — first playable integration
 
 SanityState, Isabela's combined HUD, and the first phone consequence are implemented,
-automatically validated, and accepted by the Project Lead after manual playtesting.
-Option 3 adds
-one deterioration point; Options 1/2 remain neutral. Environmental transformations,
-psychological text, and session-only retry remain planned. Prince oversees current
-Sanity engineering; Christan is temporarily helping Lawrence with audio.
+validated, manually accepted, and published in
+[`863678e`](https://github.com/AzureZephyry/withering-away-jam/commit/863678e92e27e59450b8ebf2d11b950d2d91c546).
+Option 3 adds one deterioration point once; Options 1/2 remain neutral. Normal
+story play currently reaches only score 0 or 1; higher stages and failure exist
+at the system level. Environmental transformations, psychological text, and
+session-only retry remain planned. Prince oversees current Sanity engineering;
+Christan is temporarily helping Lawrence with audio.
 See [Sanity design](docs/SANITY_DESIGN.md) for the rules, API, artwork, and limits.
 
 ## Project navigation
@@ -249,10 +254,17 @@ internal edit. Avoid extra history entries that merely repeat a commit hash.
 
 ## Known limits
 
+There is no story continuation beyond Bedroom exploration. Garden and School
+Interior are independent laboratories. School Exterior is a confirmed required
+environment without a dedicated scene or final artwork in the inspected repository;
+roads and the family house are future locations, not integrated maps. Off-repository
+production status still needs team confirmation.
+
 Room-to-room travel and persistent saves are not implemented. Sanity's foundation,
 HUD, and first phone consequence work; full Game Over presentation, environmental
 transformations, psychological text, session checkpoints/retry, and additional
-story consequences remain unimplemented. The zero-bar HUD artwork is temporary. The phone images are accepted temporary placeholders
+story consequences remain unimplemented. The zero-bar HUD artwork is temporary.
+The phone images are accepted temporary placeholders
 with differing visible widths. Final narrative content, Dream backgrounds,
 audio, and font redistribution permission
 still require follow-up. See [flow prerequisites](docs/GAME_FLOW.md#integration-prerequisites)
