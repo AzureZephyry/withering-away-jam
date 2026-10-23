@@ -17,6 +17,8 @@ dialogue presentation, not this proximity-based conversation lifecycle.
 6. Set `visual_path` and `visual_bounds` around the complete visible object.
    Bounds are local to the visual node, not the interaction center. Include the
    full envelope of idle animation. The default visual path is the parent.
+7. Optionally set `focus_texture` to a replaceable item illustration. With no texture,
+   the same overlay uses ordinary dialogue without an illustration or dimmer.
 
 The controller expects the current Player's `AnimatedSprite2D` with its
 `albert_animation.gd` helper. `show_idle()` keeps the last facing direction.
@@ -77,20 +79,48 @@ An impossible layout cancels with a warning and restores control rather than
 covering a subject. Large objects, new player art, viewport sizes and different
 camera setups need their own placement review.
 
+## Object Focus
+
+The accepted local Scene 02 extension is automatically validated and manually
+accepted; publication is pending. The shared overlay now instances
+`scenes/UI/object_focus_overlay.tscn` behind DialoguePanel. Its visual-only
+`scripts/object_focus_presenter.gd` reads the active target's optional
+`focus_texture: Texture2D` when an interaction starts, but shows only when the
+actual dialogue panel becomes visible. This avoids artwork appearing during
+camera placement. The panel's hide immediately hides the illustration/dimmer;
+finish and target removal clear its references. The controller also cancels
+safely if the active target leaves the scene and restores its movement/camera state.
+
+The presenter uses nontransparent image bounds for display without changing the
+source artwork. It preserves aspect ratio and nearest filtering, using integer
+enlargement where it fits. The artwork's center X is half the entire viewport
+width; its vertical slot changes with top/bottom dialogue placement and reserves
+adaptive Sanity HUD clearance. It does not shift into a middle-left column.
+If the texture is missing, empty, fully transparent, or there is no usable space,
+ordinary dialogue remains available without Object Focus artwork.
+
+Input, typewriter progression, movement locks, camera placement, and completion
+remain with the environmental controller. The presenter writes no GameState or
+Sanity values and does not implement inventory. Scene 02 separately listens for
+successful required completions; repeat inspection does not duplicate progress.
+
 ## Current examples
 
 - `scenes/prototypes/garden_camera_lab.tscn`: Lily, automatic/re-entry, Dream skin,
   radius 84. `garden_lily_interaction.gd` is a compatibility adapter preserving
   the existing script reference. Garden scenery and idle animation are retained.
 - `scenes/prototypes/camera_lab.tscn`: Bedroom, fixed camera. The notebook on the
-  desk is manual/keypress, radius 92, Real skin. The card on the lower-left dresser
-  is manual/one-time, radius 76, Real skin. All new text is placeholder description.
+  desk is manual/keypress, radius 92, Reality skin. The Student ID on the lower-left
+  dresser is manual/keypress, radius 76; the medal is manual/keypress, radius 72.
+  All three use Object Focus and replaceable placeholder illustrations. The story
+  wrapper adds objectives/markers and a separate door decision; the laboratory
+  itself does not write preparation flags. The descriptions remain provisional.
 
 Run either laboratory with F6, not the project's main opening. In the Bedroom,
 approach the desk from its right/front side or the dresser from above. Follow the
-E/Space prompt. Complete the notebook twice without leaving; complete the card,
-then leave and return to confirm it stays unavailable until the next run. In the
-Garden, approach the large central Lily, finish its three lines, remain nearby,
+E/Space prompt. Complete each Bedroom object twice without leaving; all remain
+available. For the story objectives and door gate, run F5 or the story wrapper,
+not the exploration-only laboratory. In the Garden, approach the large central Lily, finish its three lines, remain nearby,
 then leave its radius and return. Approach from several sides to compare panel
 placement and the temporary pan. Neither laboratory implements room transitions.
 

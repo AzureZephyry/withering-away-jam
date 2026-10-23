@@ -12,6 +12,7 @@ enum Presentation { DREAM, REAL }
 @export var presentation: Presentation = Presentation.REAL
 @export var lines: PackedStringArray = []
 @export var speakers: PackedStringArray = []
+@export var focus_texture: Texture2D
 @export_node_path("Node2D") var visual_path: NodePath = ^".."
 # Include the full movement envelope of any animated artwork.
 @export var visual_bounds: Rect2 = Rect2(0, 0, 32, 32)

@@ -1,0 +1,14 @@
+[gd_scene format=3]
+
+[node name="ObjectiveMarker" type="Node2D"]
+visible = false
+z_index = 2
+texture_filter = 1
+
+[node name="Outline" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -3, 4, 0, 0, 3, -4, 0)
+color = Color(0.16, 0.21, 0.23, 1)
+
+[node name="Diamond" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -2, 3, 0, 0, 2, -3, 0)
+color = Color(0.95, 0.87, 0.65, 1)

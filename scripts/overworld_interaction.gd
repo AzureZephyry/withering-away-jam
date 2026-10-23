@@ -142,6 +142,7 @@ func _open_dialogue() -> void:
 	if suspended or _resume_waiting_for_release:
 		return
 	active = _selected
+	active.tree_exiting.connect(_on_active_target_exiting, CONNECT_ONE_SHOT)
 	active.begin()
 	panel.world = DialoguePanel.World.DREAM if active.presentation == Interactable.Presentation.DREAM else DialoguePanel.World.REAL
 	prompt.hide()
@@ -155,6 +156,8 @@ func _open_dialogue() -> void:
 	player.get_node("AnimatedSprite2D").show_idle()
 	_present_line()
 	interaction_started.emit(active)
+	if not dialogue_open or not is_instance_valid(active):
+		return
 	_position_dialogue()
 
 func _cache_visual_bounds() -> void:
@@ -251,6 +254,8 @@ func _position_dialogue() -> void:
 			_camera_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 			_camera_tween.tween_property(_camera, "position", local_target, FRAME_TIME)
 			await _camera_tween.finished
+			if not dialogue_open or not is_instance_valid(active):
+				return
 			_camera.force_update_scroll()
 	# Check the real result, including limits, rather than trusting the planned pan.
 	if chosen < 0 or not _fits(panel.get_global_rect(), _subject_rects()):
@@ -269,9 +274,13 @@ func _present_line() -> void:
 	body.present_line(active.lines[line_index])
 
 func _close_dialogue(success: bool = true) -> void:
+	if _closing or not dialogue_open:
+		return
 	_closing = true
 	var finished: Interactable = active
 	if is_instance_valid(finished):
+		if finished.tree_exiting.is_connected(_on_active_target_exiting):
+			finished.tree_exiting.disconnect(_on_active_target_exiting)
 		finished.finish(success)
 	active = null
 	body.clear_line()
@@ -289,7 +298,19 @@ func _close_dialogue(success: bool = true) -> void:
 		_camera_shifted = false
 	_closing = false
 	_last_press_frame = Engine.get_process_frames() + 1
-	interaction_finished.emit(finished, success)
+	interaction_finished.emit(finished if is_instance_valid(finished) else null, success)
+
+func _on_active_target_exiting() -> void:
+	_close_dialogue(false)
+
+func _exit_tree() -> void:
+	if is_instance_valid(_camera_tween):
+		_camera_tween.kill()
+	if _camera_shifted and is_instance_valid(_camera):
+		_camera.position = _camera_home
+	if (dialogue_open or _closing) and is_instance_valid(player):
+		player.velocity = Vector2.ZERO
+		player.set_physics_process(_movement_was_processing)
 
 func _clear_held_keys() -> void:
 	_held_keys.clear()

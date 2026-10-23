@@ -3,7 +3,12 @@ extends Node
 
 signal flag_changed(flag_name: String, value: bool)
 
-const REGISTERED_FLAGS: Array[String] = ["bedroom_intro_completed"]
+const REGISTERED_FLAGS: Array[String] = [
+	"bedroom_intro_completed",
+	"bedroom_schedule_checked",
+	"bedroom_id_checked",
+	"bedroom_medal_checked",
+]
 
 var _flags: Dictionary[String, bool] = {}
 

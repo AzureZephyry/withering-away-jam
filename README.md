@@ -8,7 +8,8 @@ the opening to exploration; it is not yet a complete story chapter.
 
 Our minimum intended story scope is **Chapter 1 — Year One**, following
 **Albert James Dimapilis as he begins college**. The connected implementation
-currently ends in Bedroom exploration. Isabela is revising the proposed chapter
+now reaches an accepted local Scene 02 endpoint in the Bedroom; publication of
+that extension is pending. Isabela is revising the proposed chapter
 screenplay; its final scene order, dialogue, and ending are not yet approved or
 integrated. The game's final title remains open.
 See [game flow and narrative status](docs/GAME_FLOW.md) for the boundary between
@@ -100,11 +101,20 @@ skip an entire transition.
 
 Player movement pauses during environmental dialogue and resumes after closing.
 Repeat rules belong to each object: the Bedroom notebook can repeat while nearby,
-the card completes once per loaded scene instance, and the Garden's Corpse Lily
+the Student ID and graduation medal are also repeatable, and the Garden's Corpse Lily
 starts automatically and repeats after leaving and returning. Dialogue placement
 keeps Albert and the object clear, using a short camera pan when needed and feasible.
 
 ## Current implementation and publication status
+
+**Scene 02 — First Morning:** implemented locally, automatically validated, and
+manually accepted by the Project Lead; Git publication is pending. The story
+Bedroom now includes three required inspections in any order, Object Focus
+illustrations, a preparation checklist, and markers for unfinished objectives.
+After preparation, the right door offers Yes / Not Yet; Yes reaches a temporary
+development endpoint. Return to Bedroom preserves session progress and Sanity.
+Scene 03 and an actual School Exterior transition are not implemented.
+See [the Scene 02 flow](docs/GAME_FLOW.md#scene-02--first-morning) for details.
 
 The Dream-to-Bedroom introduction is **implemented, manually accepted, and
 published** in [`fad8a76`](https://github.com/AzureZephyry/withering-away-jam/commit/fad8a76a309a181799374afa4855480af971906e).
@@ -123,8 +133,9 @@ the published Dream signal-repair baseline.
   conversation branches, and branch-specific reflection. Exploration returns
   after the final reflection. Final phone-buzz audio is still missing.
 - **Environment prototypes:** Bedroom, Garden, and School Interior layouts with movement,
-  collisions, and their own camera setups. The Bedroom includes notebook and card
-  interactions; the Garden includes the Corpse Lily interaction prototype.
+  collisions, and their own camera setups. The Bedroom includes repeatable notebook,
+  Student ID, and graduation medal inspections with replaceable placeholder
+  illustrations; the Garden includes the Corpse Lily interaction prototype.
 - **Environmental interactions:** reusable object configuration and a scene-local
   controller support automatic proximity triggers, manual E/Space activation,
   keypress/re-entry/one-time repeat rules, movement locking/restoration, and
@@ -137,7 +148,9 @@ the published Dream signal-repair baseline.
 - **GameState V1:** validated, session-based Boolean event flags through an
   Autoload. The `bedroom_intro_completed` flag records the entire story
   introduction only after its last reflection is dismissed. Sanity stays separate;
-  the phone Option 3 consequence belongs to SanityState, not Boolean flags.
+  the phone Option 3 consequence belongs to SanityState, not Boolean flags. The
+  accepted local Scene 02 extension adds three preparation flags, written only
+  after successful object interactions.
 
 ## Sanity — first playable integration
 
@@ -254,7 +267,8 @@ internal edit. Avoid extra history entries that merely repeat a commit hash.
 
 ## Known limits
 
-There is no story continuation beyond Bedroom exploration. Garden and School
+The accepted local story stops at a temporary Scene 02 development endpoint;
+there is no connected Scene 03. Garden and School
 Interior are independent laboratories. School Exterior is a confirmed required
 environment without a dedicated scene or final artwork in the inspected repository;
 roads and the family house are future locations, not integrated maps. Off-repository

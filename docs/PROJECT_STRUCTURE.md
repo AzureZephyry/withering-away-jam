@@ -15,7 +15,8 @@ the Bedroom laboratory; direct laboratory launches remain separate test entries.
 
 The earlier `590184b` snapshot remains historical evidence; the introduction
 components below are now published. This guide does not audit other branches.
-For player-facing sequence order use [Game flow](GAME_FLOW.md); for intent and constraints use
+The accepted local Scene 02 additions below await publication and do not replace
+that published baseline. For player-facing sequence order use [Game flow](GAME_FLOW.md); for intent and constraints use
 [Design decisions](DESIGN_DECISIONS.md). [Team progress](TEAM_PROGRESS.md) owns the
 current status snapshot, and [Development history](DEVELOPMENT_HISTORY.md) owns
 the milestone record.
@@ -38,6 +39,7 @@ assets/
 	albert_idle.png
 	albert_walk.png
 	albert_frames.tres
+  placeholders/scene02/         # Four replaceable SVGs + import metadata
   fonts/
 	Pixel handwriting_regular.ttf
   ui/sanity/                    # Isabela's seven combined HUD PNGs + import metadata
@@ -56,6 +58,9 @@ scenes/
   UI/
 	dialogue_panel.tscn
 	overworld_overlay.tscn
+	object_focus_overlay.tscn    # Visual-only item illustration and dimmer
+	bedroom_scene02_overlay.tscn # Checklist, door decision and temporary endpoint
+	objective_marker.tscn       # Reusable pixel diamond; no input/collision
 	eyelidEffect.tscn
 	eyelid_effect.gd
 	eyelidEffect.gdshader
@@ -68,6 +73,8 @@ scenes/
 	bedroom_intro_test.tscn      # Same introduction, isolated completion context
 	sanity_tests.gd             # Focused Godot-native tests + required .gd.uid
 	sanity_tests.tscn
+	scene02_tests.gd            # Scene 02/Object Focus checks + .gd.uid
+	scene02_tests.tscn
   prototypes/
 	camera_lab.tscn              # Bedroom laboratory
 	garden_camera_lab.tscn
@@ -87,6 +94,8 @@ scripts/
   albert_animation.gd
   opening_sequence.gd
   bedroom_intro.gd
+  bedroom_scene02.gd            # Story-only preparation and departure + .gd.uid
+  object_focus_presenter.gd     # Visual-only layout/lifecycle + .gd.uid
   phone_conversation.gd
   text_Type.gd
   dialogue_panel.gd
@@ -186,6 +195,39 @@ The Sanity integration adds +1 at Option 3 commitment; Options 1/2 remain
 neutral. Its existing narrative/completion behavior is unchanged. Final phone-buzz audio is
 pending; the controller exposes an integration cue rather than generating audio.
 
+### Scene 02 components — accepted locally, publication pending
+
+[bedroom_scene02.gd](../scripts/bedroom_scene02.gd) belongs to the story wrapper's
+`Scene02` child, instanced from
+[bedroom_scene02_overlay.tscn](../scenes/UI/bedroom_scene02_overlay.tscn). It waits
+for the introduction's exploration handoff, listens for successful required
+interactions, writes the three preparation flags, and owns the checklist and
+Bedroom-specific door decision. Yes reaches a temporary endpoint; Return to
+Bedroom preserves session state. No School Exterior or Scene 03 is loaded.
+
+The room supplies repeatable notebook, Student ID, and medal targets plus four
+instances of [objective_marker.tscn](../scenes/UI/objective_marker.tscn). The first
+three guide incomplete inspections; the door marker appears after all three.
+Markers hide during scripted/modal presentation and do not own interaction input.
+The medal visual adds no collision. Existing furniture and doorway collision remain.
+
+[object_focus_overlay.tscn](../scenes/UI/object_focus_overlay.tscn) sits behind
+dialogue in the shared environmental overlay and uses
+[object_focus_presenter.gd](../scripts/object_focus_presenter.gd). It observes
+interaction and actual panel visibility, handles transparent padding and dimming,
+and fits artwork centered at half viewport width, vertically clear of dialogue
+and the Sanity HUD. It owns no input, movement, flags, Sanity or completion.
+Missing artwork falls back to ordinary dialogue.
+
+`assets/placeholders/scene02/` contains `planner_focus.svg`, `student_id_focus.svg`,
+`graduation_medal_focus.svg`, and the small room sprite `graduation_medal_prop.svg`,
+each with a matching `.import` sidecar. These are replaceable temporary drawings.
+[scene02_tests.tscn](../scenes/tests/scene02_tests.tscn) runs
+[scene02_tests.gd](../scenes/tests/scene02_tests.gd), which reuses the Sanity test
+harness. Keep both new scripts' and the test script's `.gd.uid` files.
+See [Scene 02 flow](GAME_FLOW.md#scene-02--first-morning) and
+[Object Focus](overworld_interactions.md#object-focus) for the detailed contracts.
+
 ## Playable scenes and room resources
 
 Open a laboratory and use F6 for movement testing. Each laboratory instances
@@ -196,7 +238,7 @@ does not reproduce the complete playable setup.
 
 | Laboratory | Room resource | Current responsibility |
 | --- | --- | --- |
-| [camera_lab.tscn](../scenes/prototypes/camera_lab.tscn) | [bedroom_room.tscn](../scenes/prototypes/rooms/bedroom_room.tscn) | Refined Bedroom prototype, fixed 2.5× camera, notebook/card interactions |
+| [camera_lab.tscn](../scenes/prototypes/camera_lab.tscn) | [bedroom_room.tscn](../scenes/prototypes/rooms/bedroom_room.tscn) | Refined Bedroom prototype, fixed 2.5× camera, repeatable notebook/ID/medal inspections |
 | [garden_camera_lab.tscn](../scenes/prototypes/garden_camera_lab.tscn) | [garden_room.tscn](../scenes/prototypes/rooms/garden_room.tscn) | Dream Garden prototype, continuous-follow 2.5× camera with room limits, Corpse Lily interaction |
 | [school_camera_lab.tscn](../scenes/prototypes/school_camera_lab.tscn) | [school_room.tscn](../scenes/prototypes/rooms/school_room.tscn) | School Interior prototype, continuous-follow 2.5× camera with room limits |
 
@@ -206,8 +248,8 @@ does not reproduce the complete playable setup.
 [pixel_prop.gd](../scenes/prototypes/pixel_prop.gd), and
 [bedroom_prop.gd](../scenes/prototypes/bedroom_prop.gd) for temporary drawings;
 collision shapes are authored in the scene. Its right door is a closed placeholder,
-not a room transition. The desk notebook is manual/repeatable; the dresser card
-is manual/one-time for that loaded scene instance.
+not a room transition. The notebook, Student ID and medal are manual/keypress
+repeatable. Only the story wrapper adds preparation objectives and door decisions.
 
 **Garden:** Camera2D is under Player and has limits covering 2048 × 1152.
 [garden_ground.gd](../scenes/prototypes/garden_ground.gd) and
@@ -344,7 +386,8 @@ testing.
 the shared controller to preserve the Garden scene's existing script reference.
 It is not a second dialogue implementation. One-time interaction completion is
 stored on the loaded target, not in GameState or a save file. Controller signals
-provide scene-local start/finish hooks, but no story flags are wired to them yet.
+provide scene-local start/finish hooks. Scene 02 now consumes successful finishes
+for its three preparation flags; the shared controller itself writes no flags.
 
 The opening cinematic keeps its own sequence/input owner. Future character/NPC
 cinematic interactions are a distinct planned responsibility; sharing panel and
@@ -376,15 +419,17 @@ the script.
 
 GameState stores Boolean event flags for one running application and survives
 scene changes. `REGISTERED_FLAGS` is the explicit production registry and
-contains `bedroom_intro_completed` in the published introduction.
+contains the published `bedroom_intro_completed` and the accepted local
+`bedroom_schedule_checked`, `bedroom_id_checked`, and `bedroom_medal_checked`.
 Names and values are strictly validated; reads/writes never
 create an event implicitly. Unknown reads return `null`, invalid writes return
 `false`, and actual value changes emit `flag_changed`. `reset_session()` clears
 registered values; restarting the application creates a fresh session.
 
 The foundation and its first story producer are published.
-The story Bedroom writes completion after final reflection, while test context
-and environmental objects do not. GameState does not implement
+The introduction writes completion after final reflection; developer context
+bypasses that flag. The separate Scene 02 controller writes preparation only after
+a matching successful environmental interaction. GameState does not implement
 Sanity, dialogue playback, save/load, inventory, or quests. See
 [GameState V1](game_state.md) for event registration and the full API contract.
 
@@ -562,11 +607,12 @@ Review required UID/resource identities and every affected shared consumer.
 - Environmental descriptions and the Garden conversation are prototype content.
   A general character/NPC cinematic interaction system remains separate planned
   work.
-- GameState has one published story completion event. Sanity mechanics and persistent
+- GameState has one published introduction event and three accepted local Scene 02
+  preparation events. Sanity mechanics and persistent
   save/load remain outside its current scope.
 - The music and sounds directories contain placeholder files, not finished audio
   integrations. Font licensing/redistribution permission still needs verification.
 
-These statements describe the confirmed published implementation while preserving
+These statements distinguish the published baseline and accepted local Scene 02 while preserving
 the earlier historical snapshot; they do not audit other branches. Use [Game flow](GAME_FLOW.md) for prerequisites
 and [Team progress](TEAM_PROGRESS.md) for ownership and review priorities.

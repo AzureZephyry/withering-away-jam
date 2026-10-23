@@ -505,12 +505,36 @@ These were the original unresolved details. The accepted implementation
 uses Isabela's supplied artwork; see [HUD lifecycle](SANITY_DESIGN.md#combined-hud-artwork-and-lifecycle)
 for the newly approved mapping, placement, and temporary asset limits.
 
+## D16 — Scene 02 preparation, repeat inspection and Object Focus
+
+**Provenance/status:** Project Lead-approved Scene 02 Option B+ and refinement,
+implemented locally, automatically validated and manually accepted; publication
+pending. See [the flow](GAME_FLOW.md#scene-02--first-morning).
+
+**Decision/context:** Require successful notebook, Student ID and graduation medal
+inspections in any order before departure. Keep all three repeatable; successful
+completion updates session flags/markers once without making objects unavailable.
+Student ID's former one-time rule is superseded. Objective checklist and diamond
+markers guide exploration; E/Space proximity prompts retain their separate role.
+
+Object Focus is a reusable visual-only companion to environmental dialogue. Its
+artwork stays horizontally centered in the whole viewport and adapts vertically
+to dialogue/HUD clearance, replacing the earlier middle-left trial. Input,
+movement, completion, Sanity and story progression stay with their existing owners.
+Illustrations and medal artwork are replaceable placeholders, not final artist assets.
+
+**Boundary/revisit:** The closed physical door remains. Its Bedroom-specific Yes /
+Not Yet decision leads only to a temporary endpoint with Return to Bedroom. No
+Scene 03 or School Exterior loads; physical Bedroom NPCs, lateness consequences,
+new Sanity effects and final artwork are deferred. Future real transitions require
+separate approval; Isabela retains narrative approval authority.
+
 ## Open decisions and deferred work
 
 | Question | Current status | Coordination required |
 | --- | --- | --- |
 | Chapter 1 — Year One scene order and endpoint | Minimum chapter scope confirmed; detailed flow unresolved pending narrative revision | Project Lead and narrative/environment owners |
-| Additional event identifiers and producer/consumer rules | One introduction flag approved; further events require agreement | Project Lead with relevant feature owners |
+| Additional event identifiers and producer/consumer rules | Introduction flag plus three accepted local preparation flags; further events require agreement | Project Lead with relevant feature owners |
 | Additional Sanity outcomes and integration | Foundation/HUD/phone Option 3 accepted; further mappings unapproved | Prince and narrative owners |
 | General character/NPC cinematic presentation and input handoff | Separate planned responsibility; contract unresolved | Relevant cinematic/dialogue owners before integration |
 | Save storage and cross-launch persistence | Deferred outside V1 | Separate design/authorization |

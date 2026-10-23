@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://scenes/UI/dialogue_panel.tscn" id="1_panel"]
 [ext_resource type="FontFile" path="res://assets/fonts/Pixel handwriting_regular.ttf" id="2_font"]
+[ext_resource type="PackedScene" path="res://scenes/UI/object_focus_overlay.tscn" id="3_focus"]
 
 [sub_resource type="FontVariation" id="PromptFont"]
 base_font = ExtResource("2_font")
@@ -22,6 +23,8 @@ content_margin_bottom = 6.0
 
 [node name="DialogueLayer" type="CanvasLayer"]
 layer = 2
+
+[node name="ObjectFocus" parent="." instance=ExtResource("3_focus")]
 
 [node name="DialoguePanel" parent="." instance=ExtResource("1_panel")]
 visible = false

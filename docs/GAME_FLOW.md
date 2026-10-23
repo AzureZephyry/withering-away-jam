@@ -18,6 +18,10 @@ implemented experiment, not a complete chapter. **Planned** describes intended
 integration; **proposed/unresolved** describes choices that still need agreement.
 For milestone evidence, see [Development history](DEVELOPMENT_HISTORY.md).
 
+The Scene 02 extension below is implemented locally, automatically validated, and
+manually accepted by the Project Lead. Publication is pending; the published
+baseline above remains distinct from this accepted candidate.
+
 ## F5: the actual application flow
 
 The configured main scene is [scenes/Dream.tscn](../scenes/Dream.tscn).
@@ -32,8 +36,9 @@ F5: Dream.tscn
     black text -> eyes opening -> Dream dialogue/effects
     -> waking fade to black -> playable Bedroom
     -> waking lines -> buzz/shake -> !!! -> phone -> choice -> selected branch
-    -> reflection -> exploration
-    Endpoint: Bedroom exploration; no implemented onward story transition.
+    -> reflection -> Bedroom exploration -> three required object inspections
+    -> right door decision -> temporary Scene 02 endpoint -> optional Return to Bedroom
+    No connected Scene 03 or School Exterior transition.
 
 F6: choose one independent test entry point
     Bedroom laboratory: camera_lab.tscn
@@ -143,6 +148,45 @@ center and uniform scale are used across screens. At 1280 × 960, the default 0.
 scale displays 480 × 816; smaller viewports reduce the common scale to fit with
 16-pixel margins. Filtering is nearest. Accepted visible-width differences remain.
 
+## Scene 02 — First Morning
+
+The story wrapper's [bedroom_scene02.gd](../scripts/bedroom_scene02.gd) takes over
+objectives after the introduction releases exploration. It does not replace the
+introduction, environmental controller, or shared Player. The initial objective
+is **Get ready for your first day.** Its checklist requires the study
+planner/notebook, Student ID, and graduation medal, in any order.
+
+Only a matching successful `interaction_finished(target, true)` completes an
+inspection. Starting, partly reading, cancelling, or failing placement does not.
+The session flags are `bedroom_schedule_checked`, `bedroom_id_checked`, and
+`bedroom_medal_checked`; `bedroom_intro_completed` still means final introduction
+reflection dismissal. Reinspection is allowed and does not duplicate completion.
+
+Small diamond markers identify unfinished required objects, then disappear on
+completion without disabling those objects. Scripted/modal presentation hides
+the markers and objective UI. The ordinary E/Space proximity prompt is separate.
+Object Focus displays replaceable item illustrations above or below Reality
+dialogue, centered horizontally in the entire viewport and fitted clear of the
+dialogue and adaptive Sanity HUD. It owns visuals only; see
+[Object Focus](overworld_interactions.md#object-focus).
+
+After all three inspections, the checklist collapses to **Head out for school.**
+The door becomes the marked destination. Near the right door, E/Space shows:
+
+- Before completion: **Finish getting ready before leaving.**
+- After completion: **Would you like to leave your dorm?**, with **Yes / Not Yet**.
+
+Not Yet is selected initially and returns to exploration. W/S or Up/Down selects;
+a fresh E/Space/Enter reveals typing first, then confirms on a later press.
+Buttons also support clicking. Yes fades to a clearly temporary development
+endpoint. **Return to Bedroom** resumes the same room without resetting the
+introduction, three preparation flags, or Sanity. The physical door collision
+remains closed; this is not a checkpoint, room router, or School Exterior load.
+
+Same-session story re-entry also preserves preparation. Fresh application sessions
+start with all four GameState flags false. No lateness, physical Bedroom NPCs,
+additional Sanity consequences, Scene 03, or new narrative sequence is introduced.
+
 ## F6: standalone exploration prototypes
 
 These remain independent exploration test entries. The story wrapper reuses
@@ -152,7 +196,7 @@ the shared Albert Player and a camera; room resources supply scenery/collisions.
 
 | Scene | Available experience | Current limits |
 | --- | --- | --- |
-| [camera_lab.tscn](../scenes/prototypes/camera_lab.tscn) | Walk through the Bedroom, collide with solid furniture/walls, inspect notebook/card; fixed room camera | Right door closed; direct entry skips the introduction and never writes its flag |
+| [camera_lab.tscn](../scenes/prototypes/camera_lab.tscn) | Walk through the Bedroom, collide with solid furniture/walls, inspect notebook/Student ID/medal with Object Focus; fixed room camera | Right door closed; direct entry skips the introduction and never writes its flag |
 | [garden_camera_lab.tscn](../scenes/prototypes/garden_camera_lab.tscn) | Explore the Garden with limited continuous camera follow, overhead fading, and automatic Corpse Lily dialogue | Conversation is temporary test content; no story-state effect or exit transition |
 | [school_camera_lab.tscn](../scenes/prototypes/school_camera_lab.tscn) | Explore the School Interior with classrooms, library, lobby/study areas, collisions, and bounded continuous follow | No environmental dialogue controller or connected School story progression; not the required School Exterior |
 | [game.tscn](../scenes/game.tscn) | Earlier movement/camera sandbox with 4× dead-zone camera | Not the configured main scene or a connected chapter |
@@ -195,23 +239,25 @@ contract and trigger/repeat matrix are in
 `interaction_started` is emitted before placement is guaranteed. Consumers must
 not infer success from that signal alone. Impossible placement does not consume
 successful one-time completion; leave the radius and return before retrying.
-The controller currently writes no GameState flags.
+The shared controller writes no GameState flags. The story-only Scene 02 listener
+records its three approved preparation flags after matching successful completion.
 
 ### Current repetition examples
 
 | Object | Activation and presentation | After successful completion |
 | --- | --- | --- |
-| Bedroom desk notebook | Manual, radius 92, Real World panel | Keypress repeat: E/Space can start it again while Albert stays nearby |
-| Bedroom dresser card | Manual, radius 76, Real World panel | One-time: unavailable for that loaded instance, including after leaving/re-entering |
+| Bedroom desk notebook | Manual, radius 92, Real World panel + Object Focus | Keypress repeat; story reinspection uses the completed schedule response |
+| Bedroom Student ID | Manual, radius 76, Real World panel + Object Focus | Keypress repeat; story preparation completion remains idempotent |
+| Bedroom graduation medal | Manual, radius 72, Real World panel + Object Focus | Keypress repeat; story preparation completion remains idempotent |
 | Garden Corpse Lily | Automatic, radius 84, Dream World panel | Re-entry: staying nearby does not reopen it; leave and return to repeat |
 
 These lines are development descriptions/conversation, not finalized story.
 Restarting/reloading the scene recreates these target-local completion states.
 There is no persistent or cross-scene completion record for them yet.
 
-GameState does not automatically record object examination. Future story-linked
-interactions must explicitly register and write approved events; target-local
-one-time behavior does not provide that integration.
+GameState does not automatically record object examination. Scene 02 explicitly
+connects its approved targets to preparation flags; target-local one-time behavior
+does not provide that integration for other scenes.
 
 ## Runtime state lifetime
 
@@ -275,7 +321,8 @@ not an implemented Sanity/checkpoint manager.
 | Opening completion → playable Bedroom | Accepted and published in `fad8a76`; signal repair in `eef63da` | Deferred handoff from opening controller |
 | Bedroom introduction → exploration | Accepted and published in `fad8a76` | Story controller writes completion after final reflection |
 | Potential connections among existing room prototypes | **Undesigned or unimplemented; chapter travel order is not approved** | Agree on narrative order, entry/exit rules, and scene ownership first |
-| Room marker/door → destination | No scene router or travel behavior established | A marker or door visual is not a transition |
+| Scene 02 preparation → Bedroom door | Accepted locally; Yes reaches a temporary endpoint, Not Yet resumes exploration | Bedroom-specific controller; physical doorway remains closed |
+| Bedroom → Scene 03 / School Exterior | Not implemented | Requires separately approved destination and transition |
 | F6 → selected laboratory | Published editor test entry point | Developer chooses the standalone scene |
 | Classified decision/event → Sanity response | Accepted phone Option 3 integration published in `863678e` | Prince oversees Sanity; further outcomes require approval |
 | Session → persistent save | Deferred | Separate save/load design and authorization |
@@ -312,7 +359,7 @@ cast. Multiple endings and detailed Garden symbolism also remain unresolved.
 
 | Location | Current repository status |
 | --- | --- |
-| Bedroom | Implemented story room; normal progression ends in exploration here |
+| Bedroom | Implemented story room; accepted local Scene 02 ends at a temporary development endpoint, with Return to Bedroom |
 | Dream Garden | Independent playable laboratory with temporary Corpse Lily dialogue; Dream's opening still reveals white |
 | School Interior | Independent prototype with classrooms, library, lobby/study areas; not School Exterior |
 | School Exterior | Confirmed required story environment; no dedicated implemented scene or final environment artwork found |
@@ -381,7 +428,7 @@ These are integration dependencies, not authorization to implement them now.
 ## Flow validation guidance
 
 The current paths below can be tested now. These are procedures/expected behavior
-from published source, not a record of newly executed tests.
+from published source and the accepted local Scene 02 candidate, not a record of newly executed tests.
 
 | Current testable path | Focus |
 | --- | --- |
@@ -390,7 +437,8 @@ from published source, not a record of newly executed tests.
 | Developer introduction entry | Repeated branch testing using the same logic without story-state changes |
 | Phone and input boundaries | Keyboard/mouse choices, holds, resize alignment, final-screen dwell, and no event acting twice |
 | Session entry | Completion timing, completed re-entry skip, fresh-session reset |
-| Bedroom objects | Notebook keypress repeats; card stays completed for that loaded instance and resets on reload |
+| Bedroom objects | All three repeat; success-only preparation flags, any order, markers, centered Object Focus and HUD clearance |
+| Scene 02 door | Early reminder, Yes / Not Yet, temporary endpoint, Return to Bedroom, and retained session progress |
 | Garden Lily | Automatic approach, no immediate reopening while nearby, and repetition after leaving/re-entering |
 | Dialogue close/cancellation | Restored movement/idle behavior, a shifted camera returning, finish outcome, and no double input action |
 

@@ -5,6 +5,11 @@
 
 [ext_resource type="Script" path="res://scenes/prototypes/bedroom_prop.gd" id="3_bedroom"]
 [ext_resource type="Script" path="res://scripts/overworld_interactable.gd" id="4_interactable"]
+[ext_resource type="Texture2D" path="res://assets/placeholders/scene02/planner_focus.svg" id="5_planner"]
+[ext_resource type="Texture2D" path="res://assets/placeholders/scene02/student_id_focus.svg" id="6_id"]
+[ext_resource type="Texture2D" path="res://assets/placeholders/scene02/graduation_medal_focus.svg" id="7_medal_focus"]
+[ext_resource type="Texture2D" path="res://assets/placeholders/scene02/graduation_medal_prop.svg" id="8_medal_prop"]
+[ext_resource type="PackedScene" path="res://scenes/UI/objective_marker.tscn" id="9_marker"]
 
 [sub_resource type="RectangleShape2D" id="Rectangle_1"]
 size = Vector2(512, 16)
@@ -453,16 +458,19 @@ extent = Vector2(20, 14)
 position = Vector2(10, 7)
 script = ExtResource("4_interactable")
 radius = 76.0
-repeat_mode = 2
-lines = PackedStringArray("A small card tucked beside the folded clothes.")
+repeat_mode = 0
+lines = PackedStringArray("Albert James Dimapilis.", "Bachelor of Science in Computer Science.", "First year.", "Sounds official.")
+speakers = PackedStringArray("Albert", "Albert", "Albert", "Albert")
+focus_texture = ExtResource("6_id")
 visual_bounds = Rect2(0, 0, 20, 14)
 
 [node name="Interaction" type="Node2D" parent="Decoration/Notebook"]
 position = Vector2(6, 8)
 script = ExtResource("4_interactable")
 radius = 92.0
-lines = PackedStringArray("A notebook filled with study notes.", "There is still room on the next page.")
+lines = PackedStringArray("New semester. New schedule.", "Shouldn't be too different.")
 speakers = PackedStringArray("Albert", "Albert")
+focus_texture = ExtResource("5_planner")
 visual_bounds = Rect2(0, 0, 12, 16)
 
 [node name="ClosedDoorPanel" type="Polygon2D" parent="Decoration"]
@@ -474,4 +482,33 @@ color = Color(0.48, 0.39, 0.30, 1)
 position = Vector2(2, 34)
 polygon = PackedVector2Array(0, 0, 3, 0, 3, 5, 0, 5)
 color = Color(0.82, 0.72, 0.49, 1)
+
+[node name="GraduationMedal" type="Node2D" parent="Decoration"]
+position = Vector2(176, 8)
+
+[node name="Visual" type="Sprite2D" parent="Decoration/GraduationMedal"]
+texture = ExtResource("8_medal_prop")
+centered = false
+
+[node name="Interaction" type="Node2D" parent="Decoration/GraduationMedal"]
+position = Vector2(10, 12)
+script = ExtResource("4_interactable")
+radius = 72.0
+lines = PackedStringArray("I could've left this at home.", "Whatever.")
+speakers = PackedStringArray("Albert", "Albert")
+focus_texture = ExtResource("7_medal_focus")
+visual_path = NodePath("../Visual")
+visual_bounds = Rect2(0, 0, 20, 24)
+
+[node name="ObjectiveMarker" parent="Decoration/Notebook" instance=ExtResource("9_marker")]
+position = Vector2(6, -6)
+
+[node name="ObjectiveMarker" parent="Props/Dresser/Card" instance=ExtResource("9_marker")]
+position = Vector2(10, -6)
+
+[node name="ObjectiveMarker" parent="Decoration/GraduationMedal" instance=ExtResource("9_marker")]
+position = Vector2(10, -4)
+
+[node name="ObjectiveMarker" parent="Decoration/ClosedDoorPanel" instance=ExtResource("9_marker")]
+position = Vector2(6, -6)
 

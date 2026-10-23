@@ -7,8 +7,10 @@
 ## Delivery objective
 
 The minimum intended story scope is **Chapter 1 — Year One**. The published
-introduction connects Dream to Bedroom exploration; there is no implemented
-continuation beyond that endpoint. Garden and School Interior remain separate
+introduction connects Dream to Bedroom exploration; there is no published
+continuation beyond that endpoint. The accepted local Scene 02 extension now
+reaches a temporary development endpoint; its publication is pending. Garden and
+School Interior remain separate
 laboratories, not connected chapter progression. Isabela is revising the proposed
 screenplay; a finalized revision and approved later scene flow are not yet verified.
 
@@ -62,6 +64,29 @@ against the public candidate. These are historical publication results, not test
 newly executed for this documentation update. Full failure presentation,
 checkpoints/retry, transformations, psychological text, and further story
 consequences remain unimplemented; sanity_00.png remains temporary.
+
+## Scene 02 — First Morning: accepted locally, publication pending
+
+The Project Lead manually playtested and accepted both the implementation and
+refinement. The story Bedroom now requires successful notebook, Student ID, and
+graduation medal inspections in any order, with a checklist and diamond markers.
+Object Focus artwork is centered horizontally and adapts vertically to Reality
+dialogue and HUD clearance. All three inspections remain repeatable. The gated
+door offers Yes / Not Yet and a temporary endpoint with Return to Bedroom;
+session flags and Sanity are preserved. Scene 03 is not connected.
+
+Reported refinement validation passed **849 Scene 02 checks**, **163 existing
+Dream/phone/Sanity checks**, and **2 fresh-session checks**, all without failures.
+Reported project lint covered **21 scenes and 24 scripts**, with no errors or
+warnings. Responsive UI checks covered 1280 × 960, 960 × 720, and 1600 × 900;
+live visual checks were at 1280 × 960. These are historical refinement results,
+not fresh tests claimed by this documentation update. Manual acceptance is
+separate evidence; it does not mean this unpublished milestone is on main yet.
+
+The item illustrations and medal representation are replaceable placeholders.
+No new final artist/audio deliveries or physical Bedroom NPCs are claimed.
+See [Scene 02 flow](GAME_FLOW.md#scene-02--first-morning) for the implemented
+boundary and [Object Focus](overworld_interactions.md#object-focus) for ownership.
 
 ## Earlier verified published snapshot
 
@@ -136,8 +161,8 @@ they do not prove completion or assign authorship to every file in a shared syst
 | Session-only checkpoint retry | Approved design; implementation not established | Locations, activation, retry behavior, and restoration ownership |
 | Sanity HUD | Isabela's seven combined images integrated and Project Lead-accepted, with adaptive corners and dark pulse | sanity_00.png remains an approved unfinished placeholder; final delivery/review pending |
 | Environment/map expansion | Bedroom story room plus independent Garden and School Interior prototypes; School Exterior required but not integrated | Confirm actual visual-team deliveries and intended scene use, including off-repository progress |
-| Story event registration | One published introduction-completion flag approved and registered | Additional events require approved meanings, producers, and consumers |
-| Connected room travel and chapter progression | Unresolved design/integration | Accepted room order, entry/exit behavior, and narrative boundaries |
+| Story event registration | One published introduction-completion flag; accepted local Scene 02 adds three success-only preparation flags | Further events require approved meanings, producers, and consumers |
+| Connected room travel and chapter progression | Scene 02 accepted locally through a temporary endpoint; Scene 03 and actual travel unimplemented | Approve the next destination, entry/exit behavior, and narrative boundaries |
 | Save/load | Deferred outside GameState V1 | Separate requirements/design before implementation |
 | Chapter 1 — Year One narrative, final title/endings | Minimum chapter scope confirmed; screenplay under revision, final flow/content unresolved | Isabela's revised script and team approval; no draft NPC/event/ending promoted into canon |
 | Central documentation set | Published implementation contracts linked to specialized guides | Keep local, accepted, and published status distinct when maintaining affected documents |
@@ -171,7 +196,8 @@ proposed work. Their presence alone does not establish implementation or publica
   School Exterior. No dedicated exterior scene/final art, road scene, or family-house
   scene was found in the repository. This does not establish off-repository completion
   or create new assignments for Isabela, Kayla, or Wayne.
-- **Story state:** one published introduction-completion flag is registered. Unknown
+- **Story state:** one published introduction-completion flag and three accepted
+  local preparation flags have distinct meanings. Unknown
   reads still return null and writes are rejected. Sanity remains separate:
   the local phone Option 3 consequence adds +1 without changing completion flags.
   Further outcomes require coordinated review with Prince and narrative owners.

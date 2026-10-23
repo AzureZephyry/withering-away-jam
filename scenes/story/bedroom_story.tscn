@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" path="res://scenes/UI/dialogue_panel.tscn" id="3_dialogue"]
 [ext_resource type="PackedScene" path="res://scenes/UI/phone_conversation.tscn" id="4_phone"]
 [ext_resource type="FontFile" path="res://assets/fonts/Pixel handwriting_regular.ttf" id="5_font"]
+[ext_resource type="PackedScene" path="res://scenes/UI/bedroom_scene02_overlay.tscn" id="6_scene02"]
 
 [node name="BedroomStory" type="Node2D"]
 texture_filter = 1
@@ -43,6 +44,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Scene02" parent="." instance=ExtResource("6_scene02")]
 
 [connection signal="finished" from="StoryLayer/PhoneConversation" to="." method="_on_phone_finished"]
 [connection signal="choice_committed" from="StoryLayer/PhoneConversation" to="." method="_on_phone_choice_committed"]

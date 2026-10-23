@@ -287,7 +287,8 @@ implemented by this milestone.
 
 The Project Lead now confirms **Chapter 1 — Year One** as the minimum narrative
 scope. Isabela is revising the proposed screenplay; no finalized revised chapter
-flow is verified as integrated. Bedroom is the connected story endpoint. Garden
+flow is verified as integrated. The published route ends in Bedroom exploration;
+the accepted local Scene 02 extension below reaches a temporary endpoint. Garden
 and School Interior remain laboratories; School Exterior is a required environment
 without a dedicated integrated scene in the inspected repository. Roads and the
 family house remain future locations. This context does not establish off-repository
@@ -295,6 +296,26 @@ delivery status, an approved chapter route, or new production assignments. Use
 [Game flow](GAME_FLOW.md#intended-direction-and-narrative-uncertainty) for the current
 confirmed character/context and draft boundary. No date is inferred for the
 underlying planning discussions.
+
+## Scene 02 — First Morning and refinement: accepted locally, unpublished
+
+The Project Lead manually accepted the implementation and refinement. Three
+required inspections (notebook, Student ID, graduation medal) complete in any
+order only after successful environmental dialogue. All remain repeatable.
+The story-only controller records separate session flags, shows a preparation
+checklist and diamond markers, and gates the right door's Yes / Not Yet decision.
+Yes reaches a temporary endpoint; Return to Bedroom preserves flags and Sanity.
+Object Focus adds centered, vertically adaptive, visual-only item illustrations
+with dialogue/HUD clearance. Item drawings remain replaceable placeholders.
+
+Historical refinement validation reported 849 Scene 02 checks, 163 existing
+Dream/phone/Sanity checks, and 2 fresh-session checks, all passing; lint covered
+21 scenes/24 scripts without errors or warnings. Responsive UI checks covered
+1280 × 960, 960 × 720 and 1600 × 900, with live visuals at 1280 × 960. These are
+reported historical results, separate from Project Lead manual acceptance.
+No publication commit is recorded for this local milestone. Scene 03, School
+Exterior travel, physical Bedroom NPCs and new Sanity consequences are not added.
+See [the actual flow](GAME_FLOW.md#scene-02--first-morning).
 
 ## Historical gaps and future maintenance
 

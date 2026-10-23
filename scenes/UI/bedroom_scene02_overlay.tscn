@@ -1,0 +1,270 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/bedroom_scene02.gd" id="1_flow"]
+[ext_resource type="FontFile" path="res://assets/fonts/Pixel handwriting_regular.ttf" id="2_font"]
+[ext_resource type="PackedScene" path="res://scenes/UI/dialogue_panel.tscn" id="3_dialogue"]
+
+[sub_resource type="FontVariation" id="ObjectiveFont"]
+base_font = ExtResource("2_font")
+spacing_top = -36
+spacing_bottom = -18
+
+[sub_resource type="StyleBoxFlat" id="ObjectiveBox"]
+bg_color = Color(0.12, 0.15, 0.16, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.76, 0.72, 0.60, 1)
+content_margin_left = 14.0
+content_margin_right = 14.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+
+[sub_resource type="FontVariation" id="HintFont"]
+base_font = ExtResource("2_font")
+spacing_top = -27
+spacing_bottom = -13
+
+[sub_resource type="StyleBoxFlat" id="ChecklistBox"]
+bg_color = Color(0.12, 0.15, 0.16, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.87, 0.65, 1)
+
+[sub_resource type="StyleBoxFlat" id="ChoiceBox"]
+bg_color = Color(0.86, 0.88, 0.89, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.45, 0.49, 1)
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="SelectedBox"]
+bg_color = Color(0.96, 0.96, 0.92, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.19, 0.27, 0.31, 1)
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+
+[node name="Scene02" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_flow")
+
+[node name="Screen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Objective" type="Label" parent="Screen"]
+visible = false
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 384.0
+offset_bottom = 218.0
+texture_filter = 1
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.96, 0.93, 0.84, 1)
+theme_override_fonts/font = SubResource("ObjectiveFont")
+theme_override_font_sizes/font_size = 32
+theme_override_constants/line_spacing = 4
+theme_override_styles/normal = SubResource("ObjectiveBox")
+text = "Get ready for your first day."
+vertical_alignment = 1
+
+[node name="ScheduleCheck" type="Panel" parent="Screen/Objective"]
+layout_mode = 0
+offset_right = 12.0
+offset_bottom = 12.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("ChecklistBox")
+
+[node name="Fill" type="ColorRect" parent="Screen/Objective/ScheduleCheck"]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.95, 0.87, 0.65, 1)
+
+[node name="IDCheck" type="Panel" parent="Screen/Objective"]
+layout_mode = 0
+offset_right = 12.0
+offset_bottom = 12.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("ChecklistBox")
+
+[node name="Fill" type="ColorRect" parent="Screen/Objective/IDCheck"]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.95, 0.87, 0.65, 1)
+
+[node name="MedalCheck" type="Panel" parent="Screen/Objective"]
+layout_mode = 0
+offset_right = 12.0
+offset_bottom = 12.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("ChecklistBox")
+
+[node name="Fill" type="ColorRect" parent="Screen/Objective/MedalCheck"]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.95, 0.87, 0.65, 1)
+
+[node name="DoorPrompt" type="Label" parent="Screen"]
+visible = false
+layout_mode = 0
+texture_filter = 1
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.96, 0.93, 0.84, 1)
+theme_override_fonts/font = SubResource("HintFont")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("ObjectiveBox")
+text = "E / Space"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DoorPanel" parent="Screen" instance=ExtResource("3_dialogue")]
+visible = false
+texture_filter = 1
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 40.0
+offset_bottom = 318.0
+world = 1
+
+[node name="Choices" type="HBoxContainer" parent="Screen/DoorPanel"]
+visible = false
+layout_mode = 0
+offset_left = 320.0
+offset_top = 158.0
+offset_right = 800.0
+offset_bottom = 206.0
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="Yes" type="Button" parent="Screen/DoorPanel/Choices"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_colors/font_color = Color(0.15, 0.18, 0.21, 1)
+theme_override_colors/font_hover_color = Color(0.15, 0.18, 0.21, 1)
+theme_override_colors/font_pressed_color = Color(0.15, 0.18, 0.21, 1)
+theme_override_fonts/font = SubResource("ObjectiveFont")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("ChoiceBox")
+theme_override_styles/hover = SubResource("ChoiceBox")
+theme_override_styles/pressed = SubResource("SelectedBox")
+theme_override_styles/focus = SubResource("SelectedBox")
+text = "Yes"
+
+[node name="NotYet" type="Button" parent="Screen/DoorPanel/Choices"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_colors/font_color = Color(0.15, 0.18, 0.21, 1)
+theme_override_colors/font_hover_color = Color(0.15, 0.18, 0.21, 1)
+theme_override_colors/font_pressed_color = Color(0.15, 0.18, 0.21, 1)
+theme_override_fonts/font = SubResource("ObjectiveFont")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("ChoiceBox")
+theme_override_styles/hover = SubResource("ChoiceBox")
+theme_override_styles/pressed = SubResource("SelectedBox")
+theme_override_styles/focus = SubResource("SelectedBox")
+text = "Not Yet"
+
+[node name="Fade" type="ColorRect" parent="Screen"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Endpoint" type="Control" parent="Screen"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Screen/Endpoint"]
+layout_mode = 1
+anchor_left = 0.15
+anchor_top = 0.35
+anchor_right = 0.85
+anchor_bottom = 0.45
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.94, 0.93, 0.88, 1)
+theme_override_fonts/font = SubResource("ObjectiveFont")
+theme_override_font_sizes/font_size = 40
+text = "End of current playable content"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Note" type="Label" parent="Screen/Endpoint"]
+layout_mode = 1
+anchor_left = 0.15
+anchor_top = 0.46
+anchor_right = 0.85
+anchor_bottom = 0.53
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.72, 0.75, 0.77, 1)
+theme_override_fonts/font = SubResource("HintFont")
+theme_override_font_sizes/font_size = 24
+text = "Temporary Scene 02 endpoint. Scene 03 is not connected."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ReturnButton" type="Button" parent="Screen/Endpoint"]
+layout_mode = 1
+anchor_left = 0.35
+anchor_top = 0.59
+anchor_right = 0.65
+anchor_bottom = 0.67
+focus_mode = 0
+theme_override_colors/font_color = Color(0.15, 0.18, 0.21, 1)
+theme_override_colors/font_hover_color = Color(0.15, 0.18, 0.21, 1)
+theme_override_colors/font_pressed_color = Color(0.15, 0.18, 0.21, 1)
+theme_override_fonts/font = SubResource("ObjectiveFont")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("ChoiceBox")
+theme_override_styles/hover = SubResource("SelectedBox")
+theme_override_styles/pressed = SubResource("SelectedBox")
+text = "Return to Bedroom"

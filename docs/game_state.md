@@ -6,7 +6,8 @@ creates a fresh session with every registered flag set to `false`.
 
 It does not manage sanity, dialogue playback, scenes, inventory, quests, or
 save files. The published Bedroom introduction is the first story flag producer;
-environmental object completion still belongs to each loaded target.
+environmental repeat state still belongs to each loaded target. The accepted local
+Scene 02 controller additionally records three approved preparation flags.
 
 ## Register an event
 
@@ -40,13 +41,34 @@ response do not set it. Later story entry reads it and skips the introduction
 when true. The branch remains local to the sequence: there are no response flags,
 relationship values or saved consequences. The local Sanity integration now
 adds +1 for Option 3 only through the story controller; Options 1/2 stay neutral.
-GameState still records only whole-introduction completion.
+The introduction still records only whole-introduction completion; Scene 02
+preparation has its own separate flags below.
 
 The ordinary Bedroom F6 laboratory does not read or write this flag. The dedicated
 `scenes/tests/bedroom_intro_test.tscn` entry reruns the same introduction without
 reading or changing story completion. Restarting the application creates a fresh
 session. No New Game UI exists yet; a future in-process New Game action should
 coordinate both session services rather than bypassing their public APIs.
+
+## Scene 02 preparation — accepted locally, publication pending
+
+The three Boolean flags are `bedroom_schedule_checked`, `bedroom_id_checked`, and
+`bedroom_medal_checked`. They mean the notebook, Student ID, and graduation medal
+respectively finished successful inspection. `scripts/bedroom_scene02.gd` writes
+only the matching flag after `interaction_finished(target, true)`; starting,
+partial reading, cancellation, or failed framing does not complete a requirement.
+
+All three are required in any order before the Bedroom door offers departure.
+Repeat inspection stays available without duplicating progress. The controller
+also reads current values for same-session re-entry and Return to Bedroom from
+the temporary endpoint. Neither action resets flags or Sanity. There is no extra
+door-completion flag, inventory, lateness consequence, or checkpoint API.
+
+Like introduction completion, these flags survive scene changes within the running
+application and default to false in a fresh session. `reset_session()` clears all
+four registered flags; future reset/restoration coordination still has to account
+for the independent SanityState service and room-local state. The shared
+environmental controller and Object Focus presenter do not write these flags.
 
 ## API and validation
 
