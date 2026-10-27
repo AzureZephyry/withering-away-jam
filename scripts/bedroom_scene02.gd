@@ -22,6 +22,7 @@ const FIRST_NOTEBOOK_LINES: PackedStringArray = [
 const REPEAT_NOTEBOOK_LINES: PackedStringArray = ["I already checked it."]
 const DOOR_RADIUS: float = 72.0
 const FADE_SECONDS: float = 0.35
+const SCHOOL_EXTERIOR_SCENE: String = "res://scenes/story/school_exterior_story.tscn"
 
 @onready var introduction: Introduction = get_parent()
 @onready var interactions: InteractionController = get_node("../Laboratory/OverworldInteraction")
@@ -252,16 +253,19 @@ func _complete_scene() -> void:
 	fade.show()
 	_fade_tween = create_tween()
 	_fade_tween.tween_property(fade, "color:a", 1.0, FADE_SECONDS)
-	_fade_tween.tween_callback(_show_endpoint)
-	# Scene 03 can replace the temporary endpoint behind this handoff later.
+	_fade_tween.tween_callback(_depart_to_school)
 	scene_completed.emit()
 
-func _show_endpoint() -> void:
+func _depart_to_school() -> void:
 	if mode != &"ending":
 		return
-	mode = &"endpoint"
-	endpoint.show()
-	_begin_input_barrier()
+	mode = &"departing"
+	await get_tree().process_frame
+	var error: Error = get_tree().change_scene_to_file(SCHOOL_EXTERIOR_SCENE)
+	if error != OK:
+		fade.hide()
+		_close_door()
+		push_error("Could not load School Exterior: " + error_string(error))
 
 func _return_to_bedroom() -> void:
 	if mode != &"endpoint" or _wait_for_release:

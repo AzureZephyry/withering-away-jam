@@ -5,9 +5,9 @@
 
 ## Scope and evidence
 
-This guide describes the **published** implementation through `863678e`
-(`feat: integrate sanity system and adaptive HUD`), verified on main during the
-October 23, 2026 audit. The introduction
+This guide covers the published Scene 02 milestone (`b40ab47`) and the accepted
+School Exterior release. The earlier `863678e` Sanity baseline was verified on
+main during the October 23, 2026 audit. The introduction
 passed 156 automated checks, received Project Lead acceptance on October 20, 2026,
 and was published in `fad8a76`. Its later Dream signal repair was also manually
 accepted and published in `eef63da`. The earlier `590184b` snapshot remains a
@@ -18,11 +18,26 @@ implemented experiment, not a complete chapter. **Planned** describes intended
 integration; **proposed/unresolved** describes choices that still need agreement.
 For milestone evidence, see [Development history](DEVELOPMENT_HISTORY.md).
 
-The Scene 02 extension below is implemented locally, automatically validated, and
-manually accepted by the Project Lead. Publication is pending; the published
-baseline above remains distinct from this accepted candidate.
+Scene 02 was published in `b40ab47`. The accepted handoff now connects Bedroom
+departure to School Exterior free exploration. The 1.1475× environment and Level 1
+atmosphere have passed Project Lead visual review. Scene 03 narrative is not
+implemented.
 
 ## F5: the actual application flow
+
+The shared [GameClock](../scripts/game_clock.gd) is a separate session-only
+Autoload: it begins at 06:30, advances one game minute every real second,
+wraps after 24 hours and survives scene changes and dialogue. Explicit
+`set_time(hour, minute)` overrides resume normal ticking; ordinary transitions do
+not reset it. Only School Exterior currently uses its seven-phase atmospheric
+lighting. It triggers no story events or Sanity changes and does not replace
+scripted alarm text. This implementation is runtime-validated and manually
+accepted; see the
+[School prototype guide](SCHOOL_EXTERIOR_PROTOTYPE.md#session-clock-and-atmosphere).
+The Time HUD is instanced in both Bedroom and School laboratories. The Bedroom
+story keeps it hidden until exploration begins; its scripted wake-up alarm label
+and introduction remain separate. School also instances the existing adaptive
+Sanity HUD. Neither display resets the shared clock during departure.
 
 The configured main scene is [scenes/Dream.tscn](../scenes/Dream.tscn).
 `GameState` and `SanityState` are available as separate Autoloads. The scene's
@@ -37,13 +52,14 @@ F5: Dream.tscn
     -> waking fade to black -> playable Bedroom
     -> waking lines -> buzz/shake -> !!! -> phone -> choice -> selected branch
     -> reflection -> Bedroom exploration -> three required object inspections
-    -> right door decision -> temporary Scene 02 endpoint -> optional Return to Bedroom
-    No connected Scene 03 or School Exterior transition.
+    -> right door Yes -> fade -> School Exterior sidewalk arrival -> free exploration
+    Scene 03 narrative is not implemented.
 
 F6: choose one independent test entry point
     Bedroom laboratory: camera_lab.tscn
     Garden laboratory:  garden_camera_lab.tscn
     School Interior:    school_camera_lab.tscn
+    School Exterior:    school_exterior_lab.tscn (original laboratory spawn)
     These are separate runs, not connected room transitions.
 
 Developer F6 entry: tests/bedroom_intro_test.tscn
@@ -178,10 +194,15 @@ The door becomes the marked destination. Near the right door, E/Space shows:
 
 Not Yet is selected initially and returns to exploration. W/S or Up/Down selects;
 a fresh E/Space/Enter reveals typing first, then confirms on a later press.
-Buttons also support clicking. Yes fades to a clearly temporary development
-endpoint. **Return to Bedroom** resumes the same room without resetting the
-introduction, three preparation flags, or Sanity. The physical door collision
-remains closed; this is not a checkpoint, room router, or School Exterior load.
+Buttons also support clicking. Yes locks further departure input, fades to black,
+and loads [school_exterior_story.tscn](../scenes/story/school_exterior_story.tscn).
+That wrapper instances the existing exterior laboratory, places Albert at
+`SchoolArrivalSpawn` `(183.6, 1484.865)` on the lower-left outside sidewalk, updates
+the bounded camera under black, and fades in before restoring movement. The
+introduction/preparation flags and Sanity Autoload state survive the handoff.
+The Bedroom endpoint and Return to Bedroom UI are not carried into School. The
+physical Bedroom door collision remains closed; this is a scene change, not a
+physical opening or a save checkpoint.
 
 Same-session story re-entry also preserves preparation. Fresh application sessions
 start with all four GameState flags false. No lateness, physical Bedroom NPCs,
@@ -199,6 +220,7 @@ the shared Albert Player and a camera; room resources supply scenery/collisions.
 | [camera_lab.tscn](../scenes/prototypes/camera_lab.tscn) | Walk through the Bedroom, collide with solid furniture/walls, inspect notebook/Student ID/medal with Object Focus; fixed room camera | Right door closed; direct entry skips the introduction and never writes its flag |
 | [garden_camera_lab.tscn](../scenes/prototypes/garden_camera_lab.tscn) | Explore the Garden with limited continuous camera follow, overhead fading, and automatic Corpse Lily dialogue | Conversation is temporary test content; no story-state effect or exit transition |
 | [school_camera_lab.tscn](../scenes/prototypes/school_camera_lab.tscn) | Explore the School Interior with classrooms, library, lobby/study areas, collisions, and bounded continuous follow | No environmental dialogue controller or connected School story progression; not the required School Exterior |
+| [school_exterior_lab.tscn](../scenes/prototypes/school_exterior_lab.tscn) | Explore Wayne's complete School Exterior with editable collisions, foreground objects and bounded 2× follow | Original F6 testing spawn; the local story wrapper supplies sidewalk arrival after Bedroom departure; no Scene 03 narrative; see the [prototype guide](SCHOOL_EXTERIOR_PROTOTYPE.md) |
 | [game.tscn](../scenes/game.tscn) | Earlier movement/camera sandbox with 4× dead-zone camera | Not the configured main scene or a connected chapter |
 
 Move with WASD/arrows. The active controller preserves speed 150 and normalized
@@ -321,8 +343,8 @@ not an implemented Sanity/checkpoint manager.
 | Opening completion → playable Bedroom | Accepted and published in `fad8a76`; signal repair in `eef63da` | Deferred handoff from opening controller |
 | Bedroom introduction → exploration | Accepted and published in `fad8a76` | Story controller writes completion after final reflection |
 | Potential connections among existing room prototypes | **Undesigned or unimplemented; chapter travel order is not approved** | Agree on narrative order, entry/exit rules, and scene ownership first |
-| Scene 02 preparation → Bedroom door | Accepted locally; Yes reaches a temporary endpoint, Not Yet resumes exploration | Bedroom-specific controller; physical doorway remains closed |
-| Bedroom → Scene 03 / School Exterior | Not implemented | Requires separately approved destination and transition |
+| Scene 02 preparation → Bedroom door | Accepted preparation/choice behavior retained; manually accepted local Yes handoff reaches School Exterior | Bedroom-specific controller; Not Yet resumes exploration and the physical doorway remains closed |
+| Bedroom → School Exterior free exploration | Implemented and manually accepted | Thin story wrapper reuses the existing laboratory and named exterior sidewalk marker; no Scene 03 narrative |
 | F6 → selected laboratory | Published editor test entry point | Developer chooses the standalone scene |
 | Classified decision/event → Sanity response | Accepted phone Option 3 integration published in `863678e` | Prince oversees Sanity; further outcomes require approval |
 | Session → persistent save | Deferred | Separate save/load design and authorization |
@@ -359,10 +381,10 @@ cast. Multiple endings and detailed Garden symbolism also remain unresolved.
 
 | Location | Current repository status |
 | --- | --- |
-| Bedroom | Implemented story room; accepted local Scene 02 ends at a temporary development endpoint, with Return to Bedroom |
+| Bedroom | Implemented story room; local Scene 02 Yes departure continues to School Exterior free exploration through the manually accepted handoff |
 | Dream Garden | Independent playable laboratory with temporary Corpse Lily dialogue; Dream's opening still reveals white |
 | School Interior | Independent prototype with classrooms, library, lobby/study areas; not School Exterior |
-| School Exterior | Confirmed required story environment; no dedicated implemented scene or final environment artwork found |
+| School Exterior | Existing standalone prototype plus local Bedroom-to-sidewalk handoff; corrected perimeter collision and foreground separation retained; Scene 03 narrative remains unimplemented |
 | Roads and family house | Future locations discussed; no integrated scenes found |
 
 Absence from the repository does not establish whether off-repository artist work
@@ -428,7 +450,7 @@ These are integration dependencies, not authorization to implement them now.
 ## Flow validation guidance
 
 The current paths below can be tested now. These are procedures/expected behavior
-from published source and the accepted local Scene 02 candidate, not a record of newly executed tests.
+from published source and accepted gameplay milestones, not a record of newly executed tests.
 
 | Current testable path | Focus |
 | --- | --- |
@@ -438,7 +460,7 @@ from published source and the accepted local Scene 02 candidate, not a record of
 | Phone and input boundaries | Keyboard/mouse choices, holds, resize alignment, final-screen dwell, and no event acting twice |
 | Session entry | Completion timing, completed re-entry skip, fresh-session reset |
 | Bedroom objects | All three repeat; success-only preparation flags, any order, markers, centered Object Focus and HUD clearance |
-| Scene 02 door | Early reminder, Yes / Not Yet, temporary endpoint, Return to Bedroom, and retained session progress |
+| Scene 02 door | Early reminder, Yes / Not Yet, School arrival after fade, duplicate-input protection and retained session progress; the local handoff has focused runtime coverage |
 | Garden Lily | Automatic approach, no immediate reopening while nearby, and repetition after leaving/re-entering |
 | Dialogue close/cancellation | Restored movement/idle behavior, a shifted camera returning, finish outcome, and no double input action |
 

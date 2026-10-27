@@ -1,0 +1,443 @@
+{
+  "canvas": [
+    1455,
+    1467
+  ],
+  "reference": "school_full_map.png",
+  "mask": "school_occlusion_mask.png",
+  "mask_encoding": "alpha byte = object ID, zero = static background; no color artwork generated",
+  "regions": [
+    {
+      "name": "Tree01",
+      "source": "foliage/tree.png",
+      "x": 124,
+      "y": 340,
+      "w": 30,
+      "h": 96,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 1,
+      "fade_enabled": true,
+      "opaque_base_from_y": 423
+    },
+    {
+      "name": "Tree02",
+      "source": "foliage/tree.png",
+      "x": 220,
+      "y": 340,
+      "w": 30,
+      "h": 96,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 2,
+      "fade_enabled": true,
+      "opaque_base_from_y": 423
+    },
+    {
+      "name": "Tree03",
+      "source": "foliage/tree.png",
+      "x": 372,
+      "y": 340,
+      "w": 30,
+      "h": 96,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 3,
+      "fade_enabled": true,
+      "opaque_base_from_y": 423
+    },
+    {
+      "name": "Tree04",
+      "source": "foliage/tree.png",
+      "x": 670,
+      "y": 468,
+      "w": 30,
+      "h": 96,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 4,
+      "fade_enabled": true,
+      "opaque_base_from_y": 551
+    },
+    {
+      "name": "Tree05",
+      "source": "foliage/tree.png",
+      "x": 819,
+      "y": 468,
+      "w": 30,
+      "h": 96,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 5,
+      "fade_enabled": true,
+      "opaque_base_from_y": 551
+    },
+    {
+      "name": "Tree06",
+      "source": "foliage/tree.png",
+      "x": 971,
+      "y": 468,
+      "w": 30,
+      "h": 96,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 6,
+      "fade_enabled": true,
+      "opaque_base_from_y": 551
+    },
+    {
+      "name": "Tree07",
+      "source": "foliage/tree.png",
+      "x": 1123,
+      "y": 468,
+      "w": 30,
+      "h": 96,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 7,
+      "fade_enabled": true,
+      "opaque_base_from_y": 551
+    },
+    {
+      "name": "Tree08",
+      "source": "foliage/tree.png",
+      "x": 1275,
+      "y": 468,
+      "w": 30,
+      "h": 96,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 8,
+      "fade_enabled": true,
+      "opaque_base_from_y": 551
+    },
+    {
+      "name": "Tree09",
+      "source": "foliage/tree.png",
+      "x": 124,
+      "y": 622,
+      "w": 30,
+      "h": 96,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 9,
+      "fade_enabled": true,
+      "opaque_base_from_y": 705
+    },
+    {
+      "name": "Tree10",
+      "source": "foliage/tree.png",
+      "x": 220,
+      "y": 622,
+      "w": 30,
+      "h": 96,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 10,
+      "fade_enabled": true,
+      "opaque_base_from_y": 705
+    },
+    {
+      "name": "Tree11",
+      "source": "foliage/tree.png",
+      "x": 372,
+      "y": 622,
+      "w": 30,
+      "h": 96,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 11,
+      "fade_enabled": true,
+      "opaque_base_from_y": 705
+    },
+    {
+      "name": "Tree12",
+      "source": "foliage/tree.png",
+      "x": 468,
+      "y": 622,
+      "w": 30,
+      "h": 96,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 12,
+      "fade_enabled": true,
+      "opaque_base_from_y": 705
+    },
+    {
+      "name": "Tree13",
+      "source": "foliage/tree.png",
+      "x": 468,
+      "y": 340,
+      "w": 30,
+      "h": 96,
+      "rejected_pixels": 36,
+      "partial": true,
+      "id": 13,
+      "fade_enabled": true,
+      "opaque_base_from_y": 423
+    },
+    {
+      "name": "RearLamp01",
+      "source": "props/lamp_back.png",
+      "x": 65,
+      "y": 81,
+      "w": 10,
+      "h": 79,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 14,
+      "fade_enabled": true,
+      "opaque_base_from_y": 154
+    },
+    {
+      "name": "RearLamp02",
+      "source": "props/lamp_back.png",
+      "x": 263,
+      "y": 81,
+      "w": 10,
+      "h": 79,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 15,
+      "fade_enabled": true,
+      "opaque_base_from_y": 154
+    },
+    {
+      "name": "RearLamp03",
+      "source": "props/lamp_back.png",
+      "x": 461,
+      "y": 81,
+      "w": 10,
+      "h": 79,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 16,
+      "fade_enabled": true,
+      "opaque_base_from_y": 154
+    },
+    {
+      "name": "RearLamp04",
+      "source": "props/lamp_back.png",
+      "x": 745,
+      "y": 81,
+      "w": 10,
+      "h": 79,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 17,
+      "fade_enabled": true,
+      "opaque_base_from_y": 154
+    },
+    {
+      "name": "RearLamp05",
+      "source": "props/lamp_back.png",
+      "x": 943,
+      "y": 81,
+      "w": 10,
+      "h": 79,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 18,
+      "fade_enabled": true,
+      "opaque_base_from_y": 154
+    },
+    {
+      "name": "RearLamp06",
+      "source": "props/lamp_back.png",
+      "x": 1141,
+      "y": 81,
+      "w": 10,
+      "h": 79,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 19,
+      "fade_enabled": true,
+      "opaque_base_from_y": 154
+    },
+    {
+      "name": "RearLamp07",
+      "source": "props/lamp_back.png",
+      "x": 1339,
+      "y": 81,
+      "w": 10,
+      "h": 79,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 20,
+      "fade_enabled": true,
+      "opaque_base_from_y": 154
+    },
+    {
+      "name": "FrontLamp01",
+      "source": "props/lamp_front.png",
+      "x": 63,
+      "y": 1226,
+      "w": 11,
+      "h": 82,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 21,
+      "fade_enabled": true,
+      "opaque_base_from_y": 1301
+    },
+    {
+      "name": "FrontLamp02",
+      "source": "props/lamp_front.png",
+      "x": 261,
+      "y": 1226,
+      "w": 11,
+      "h": 82,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 22,
+      "fade_enabled": true,
+      "opaque_base_from_y": 1301
+    },
+    {
+      "name": "FrontLamp03",
+      "source": "props/lamp_front.png",
+      "x": 459,
+      "y": 1226,
+      "w": 11,
+      "h": 82,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 23,
+      "fade_enabled": false,
+      "fade_limitation": "Lamp overlaps shed; underlying foreground pixels are not independently separated."
+    },
+    {
+      "name": "FrontLamp04",
+      "source": "props/lamp_front.png",
+      "x": 743,
+      "y": 1226,
+      "w": 11,
+      "h": 82,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 24,
+      "fade_enabled": true,
+      "opaque_base_from_y": 1301
+    },
+    {
+      "name": "FrontLamp05",
+      "source": "props/lamp_front.png",
+      "x": 941,
+      "y": 1226,
+      "w": 11,
+      "h": 82,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 25,
+      "fade_enabled": true,
+      "opaque_base_from_y": 1301
+    },
+    {
+      "name": "FrontLamp06",
+      "source": "props/lamp_front.png",
+      "x": 1139,
+      "y": 1226,
+      "w": 11,
+      "h": 82,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 26,
+      "fade_enabled": true,
+      "opaque_base_from_y": 1301
+    },
+    {
+      "name": "FrontLamp07",
+      "source": "props/lamp_front.png",
+      "x": 1337,
+      "y": 1226,
+      "w": 11,
+      "h": 82,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 27,
+      "fade_enabled": true,
+      "opaque_base_from_y": 1301
+    },
+    {
+      "name": "Gatehouse01",
+      "source": "structures/guardhouse.png",
+      "x": 511,
+      "y": 163,
+      "w": 33,
+      "h": 47,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 28,
+      "fade_enabled": false,
+      "fade_limitation": "Whole gatehouse remains opaque."
+    },
+    {
+      "name": "Gatehouse02",
+      "source": "structures/guardhouse.png",
+      "x": 511,
+      "y": 1229,
+      "w": 33,
+      "h": 47,
+      "rejected_pixels": 0,
+      "partial": false,
+      "id": 29,
+      "fade_enabled": false,
+      "fade_limitation": "Whole gatehouse remains opaque."
+    },
+    {
+      "name": "WaitingShed",
+      "source": "structures/waiting_shed.png",
+      "x": 436,
+      "y": 1060,
+      "w": 52,
+      "h": 185,
+      "rejected_pixels": 157,
+      "partial": true,
+      "id": 30,
+      "fade_enabled": true,
+      "opaque_base_from_y": 1225
+    }
+  ],
+  "underlay": {
+    "file": "school_occlusion_underlay.png",
+    "method": "Verified artist-layer pixels only, limited to fadeable mask pixels. No source artwork overwritten.",
+    "sources": [
+      {
+        "file": "ground/school_ground_paths_base.png",
+        "position": [
+          0,
+          0
+        ]
+      },
+      {
+        "file": "props/school_placed_props_and_rear_boundary.png",
+        "position": [
+          0,
+          0
+        ],
+        "use": "Tree underlays only"
+      },
+      {
+        "file": "structures/building_02.png",
+        "position": [
+          680,
+          218
+        ]
+      },
+      {
+        "file": "structures/background_building_03.png",
+        "position": [
+          0,
+          769
+        ]
+      },
+      {
+        "file": "foreground/outer_wall.png",
+        "position": [
+          0,
+          1238
+        ]
+      }
+    ]
+  }
+}

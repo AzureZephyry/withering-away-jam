@@ -1,0 +1,71 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/time_hud.gd" id="1_hud"]
+[ext_resource type="FontFile" path="res://assets/fonts/Pixel handwriting_regular.ttf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="TimePanel"]
+bg_color = Color(0.075, 0.095, 0.13, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.56, 0.60, 0.62, 1)
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="FontVariation" id="TimeFont"]
+base_font = ExtResource("2_font")
+spacing_top = -60
+spacing_bottom = -24
+
+[node name="TimeHUD" type="CanvasLayer" groups=["time_hud"]]
+layer = 3
+script = ExtResource("1_hud")
+
+[node name="Screen" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture_filter = 1
+
+[node name="Frame" type="Panel" parent="Screen"]
+offset_right = 210.0
+offset_bottom = 56.0
+mouse_filter = 2
+modulate = Color(1, 1, 1, 0)
+theme_override_styles/panel = SubResource("TimePanel")
+
+[node name="Readout" type="Control" parent="Screen/Frame"]
+clip_contents = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 6.0
+offset_right = -12.0
+offset_bottom = -2.0
+mouse_filter = 2
+
+[node name="Previous" type="Label" parent="Screen/Frame/Readout"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.96, 0.93, 0.83, 1)
+theme_override_fonts/font = SubResource("TimeFont")
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Current" type="Label" parent="Screen/Frame/Readout"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.96, 0.93, 0.83, 1)
+theme_override_fonts/font = SubResource("TimeFont")
+theme_override_font_sizes/font_size = 48
+text = "6:30 AM"
+horizontal_alignment = 1
+vertical_alignment = 1

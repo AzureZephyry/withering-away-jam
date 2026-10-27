@@ -81,8 +81,8 @@ camera setups need their own placement review.
 
 ## Object Focus
 
-The accepted local Scene 02 extension is automatically validated and manually
-accepted; publication is pending. The shared overlay now instances
+The Scene 02 extension was automatically validated, manually accepted and
+published in `b40ab47`. The shared overlay now instances
 `scenes/UI/object_focus_overlay.tscn` behind DialoguePanel. Its visual-only
 `scripts/object_focus_presenter.gd` reads the active target's optional
 `focus_texture: Texture2D` when an interaction starts, but shows only when the

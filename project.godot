@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 
 GameState="*uid://c647p0ta1wljq"
 SanityState="*uid://c1pt6dx37nwp7"
+GameClock="*res://scripts/game_clock.gd"
 
 [display]
 

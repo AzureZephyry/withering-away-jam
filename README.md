@@ -8,8 +8,8 @@ the opening to exploration; it is not yet a complete story chapter.
 
 Our minimum intended story scope is **Chapter 1 — Year One**, following
 **Albert James Dimapilis as he begins college**. The connected implementation
-now reaches an accepted local Scene 02 endpoint in the Bedroom; publication of
-that extension is pending. Isabela is revising the proposed chapter
+now continues through Scene 02 preparation and Bedroom departure into the
+accepted School Exterior environment. Scene 03 narrative remains unimplemented. Isabela is revising the proposed chapter
 screenplay; its final scene order, dialogue, and ending are not yet approved or
 integrated. The game's final title remains open.
 See [game flow and narrative status](docs/GAME_FLOW.md) for the boundary between
@@ -79,6 +79,13 @@ a claim that every resized window is forced to that aspect ratio.
 | Bedroom | [camera_lab.tscn](scenes/prototypes/camera_lab.tscn) | Fixed room view, 2.5× zoom |
 | Dream Garden | [garden_camera_lab.tscn](scenes/prototypes/garden_camera_lab.tscn) | Continuous follow with room limits, 2.5× zoom |
 | School Interior | [school_camera_lab.tscn](scenes/prototypes/school_camera_lab.tscn) | Continuous follow with room limits, 2.5× zoom |
+| School Exterior (Level 1 prototype) | [school_exterior_lab.tscn](scenes/prototypes/school_exterior_lab.tscn) | Continuous follow with map limits, 2× zoom |
+
+The [School Exterior prototype guide](docs/SCHOOL_EXTERIOR_PROTOTYPE.md) covers
+Wayne's map, 99 editable barriers, foreground fading, 93 dynamic shadow groups,
+continuous fog and seven-phase lighting. Bedroom departure reaches its exterior
+sidewalk; the environment has passed Project Lead visual acceptance. This is
+free exploration, without Scene 03 NPCs, dialogue or objectives.
 
 ## Controls
 
@@ -107,13 +114,19 @@ keeps Albert and the object clear, using a short camera pan when needed and feas
 
 ## Current implementation and publication status
 
-**Scene 02 — First Morning:** implemented locally, automatically validated, and
-manually accepted by the Project Lead; Git publication is pending. The story
-Bedroom now includes three required inspections in any order, Object Focus
+**Scene 02 — First Morning:** accepted and published in `b40ab47`. The story
+Bedroom includes three required inspections in any order, Object Focus
 illustrations, a preparation checklist, and markers for unfinished objectives.
-After preparation, the right door offers Yes / Not Yet; Yes reaches a temporary
-development endpoint. Return to Bedroom preserves session progress and Sanity.
-Scene 03 and an actual School Exterior transition are not implemented.
+The accepted School Exterior integration extends the door's Yes / Not Yet choice:
+Yes fades to the lower-left exterior sidewalk; Not Yet resumes Bedroom
+exploration. Preparation flags and Sanity survive departure.
+
+The shared session-only GameClock starts at 06:30, advances one game minute per
+real second and loops every 24 hours. Explicit story-time overrides resume normal
+ticking. The Time HUD is available in Bedroom and School exploration; School
+uses Morning, Noon, Afternoon, Sunset, Evening, Night and Dawn atmosphere.
+[School Exterior](docs/SCHOOL_EXTERIOR_PROTOTYPE.md) documents the lights,
+shadows, fog, camera, spawn and development previews.
 See [the Scene 02 flow](docs/GAME_FLOW.md#scene-02--first-morning) for details.
 
 The Dream-to-Bedroom introduction is **implemented, manually accepted, and
@@ -149,7 +162,7 @@ the published Dream signal-repair baseline.
   Autoload. The `bedroom_intro_completed` flag records the entire story
   introduction only after its last reflection is dismissed. Sanity stays separate;
   the phone Option 3 consequence belongs to SanityState, not Boolean flags. The
-  accepted local Scene 02 extension adds three preparation flags, written only
+  published Scene 02 extension adds three preparation flags, written only
   after successful object interactions.
 
 ## Sanity — first playable integration
@@ -216,11 +229,13 @@ These are the seven members' confirmed development areas, not a list of complete
 | Lawrence | Audio and sound |
 | Isabela | Visual art, original character artwork, dialogue UI, narrative, and dialogue |
 | Kayla | Visual art, environmental and map development |
-| Wayne | Visual art; specific assignments and deliverables unconfirmed |
+| Wayne | Environmental pixel art; School Exterior artwork delivered and integrated |
 
 Wayne is our seventh member, contributing to visuals alongside Isabela and Kayla.
-His specific assets, assigned scenes, deliverables, and implementation status have
-not yet been confirmed.
+His School Exterior ZIP and editable Krita sources have been received. The
+[organized PNG library](assets/environments/school_exterior/README.md) supplies the
+accepted exterior. The complete map remains the visual authority; separate
+exports need not reproduce its entire layer composition.
 
 ## Contributing
 
@@ -267,14 +282,11 @@ internal edit. Avoid extra history entries that merely repeat a commit hash.
 
 ## Known limits
 
-The accepted local story stops at a temporary Scene 02 development endpoint;
-there is no connected Scene 03. Garden and School
-Interior are independent laboratories. School Exterior is a confirmed required
-environment without a dedicated scene or final artwork in the inspected repository;
-roads and the family house are future locations, not integrated maps. Off-repository
-production status still needs team confirmation.
-
-Room-to-room travel and persistent saves are not implemented. Sanity's foundation,
+The connected story currently ends in School Exterior free exploration after
+Bedroom preparation and departure. Scene 03 narrative, NPCs and objectives are
+not implemented. Garden and School Interior remain independent laboratories;
+roads and the family house remain future locations. General room routing and
+persistent saves are not implemented. Sanity's foundation,
 HUD, and first phone consequence work; full Game Over presentation, environmental
 transformations, psychological text, session checkpoints/retry, and additional
 story consequences remain unimplemented. The zero-bar HUD artwork is temporary.

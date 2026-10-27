@@ -474,34 +474,24 @@ func _test_scene02_door() -> void:
 	_key(KEY_E)
 	_key(KEY_ENTER)
 	_key(KEY_SPACE, true)
-	await get_tree().create_timer(0.5).timeout
-	_check(flow.mode == &"endpoint" and flow.endpoint.visible, "Yes fades to temporary endpoint")
-	_check(flow.endpoint_count == 1 and completion["count"] == 1, "duplicate confirmation produces one scene completion")
-	_check(get_tree().current_scene == story, "temporary endpoint does not load School or Scene 03")
-	_check(not player.is_physics_processing() and story.interactions.suspended and not flow.objective.visible, "endpoint retains exclusive control")
-	_check(GameState.get_flag("bedroom_intro_completed") and flow.preparations_complete() and SanityState.get_score() == 1, "endpoint preserves introduction, all preparations and Sanity")
-	_check(_marker_states(flow) == [false, false, false] and not flow.exit_objective_marker.visible, "endpoint hides all objective markers")
+	await get_tree().create_timer(0.9).timeout
+	var school: Node = get_tree().current_scene
+	_check(school.scene_file_path == "res://scenes/story/school_exterior_story.tscn", "Yes fades into School Exterior")
+	_check(completion["count"] == 1, "duplicate confirmation produces one scene completion")
+	if school.scene_file_path != "res://scenes/story/school_exterior_story.tscn":
+		return
+	var arrival_player: CharacterBody2D = school.get_node("Laboratory/Player")
+	_check(arrival_player.global_position == school.get_node("SchoolArrivalSpawn").global_position, "story uses named sidewalk arrival marker")
+	_check(not school.arrival_active and arrival_player.is_physics_processing(), "arrival fade restores movement")
+	for flag_name: String in ["bedroom_intro_completed", "bedroom_schedule_checked", "bedroom_id_checked", "bedroom_medal_checked"]:
+		_check(GameState.get_flag(flag_name), "departure preserves " + flag_name)
+	_check(SanityState.get_score() == 1, "departure preserves Sanity score")
+	_check(not is_instance_valid(story) and school.find_children("Endpoint", "Control", true, false).is_empty(), "old Bedroom and Return to Bedroom endpoint are absent")
+	_check(school.find_children("*", "CharacterBody2D", true, false).size() == 1 and school.find_children("*", "Camera2D", true, false).size() == 1, "one Player and one camera after departure")
 	_key(KEY_ENTER, true)
 	await get_tree().process_frame
-	_check(flow.mode == &"endpoint", "held confirmation cannot immediately return from endpoint")
+	_check(get_tree().current_scene == school, "held confirmation cannot trigger another transition")
 	await _release_confirm_keys()
-	var return_button: Button = flow.get_node("Screen/Endpoint/ReturnButton")
-	_check(return_button.visible and return_button.text == "Return to Bedroom", "endpoint exposes development return action")
-	await _door_press(KEY_ENTER)
-	await get_tree().create_timer(0.4).timeout
-	_check(flow.mode == &"exploration" and not flow.endpoint.visible, "fresh endpoint confirmation returns to exploration")
-	_check(player.is_physics_processing() and not story.interactions.suspended, "return restores movement and environmental interactions")
-	_check(not story.phone.visible and story.stage == &"exploration", "return does not replay phone introduction")
-	_check(GameState.get_flag("bedroom_intro_completed") and flow.preparations_complete() and SanityState.get_score() == 1, "return preserves all preparation flags and Sanity")
-	_check(flow.objective.visible and flow.objective.text == "Head out for school.", "return restores correct objective")
-	_check(flow.exit_objective_marker.visible and _marker_states(flow) == [false, false, false], "return restores only the departure marker")
-	_check(camera.position.is_equal_approx(camera_home) and camera.zoom == Vector2(2.5, 2.5), "door and endpoint preserve fixed camera")
-	await get_tree().create_timer(0.25).timeout
-	_check(not laboratory.get_node("SanityHUD").at_bottom, "return restores HUD upper-right")
-	_check(flow.endpoint_count == 1 and completion["count"] == 1, "return cannot duplicate completion")
-	var stop: CollisionShape2D = laboratory.get_node("Bedroom/Walls/DoorStop/CollisionShape2D")
-	var stop_shape: RectangleShape2D = stop.shape as RectangleShape2D
-	_check(not stop.disabled and stop_shape != null and stop_shape.size == Vector2(16, 80), "temporary endpoint keeps original DoorStop collision")
 
 func _stop_walk_input() -> void:
 	for action: StringName in [&"ui_left", &"ui_right", &"ui_up", &"ui_down"]:

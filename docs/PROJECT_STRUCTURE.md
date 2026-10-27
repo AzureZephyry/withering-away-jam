@@ -15,8 +15,8 @@ the Bedroom laboratory; direct laboratory launches remain separate test entries.
 
 The earlier `590184b` snapshot remains historical evidence; the introduction
 components below are now published. This guide does not audit other branches.
-The accepted local Scene 02 additions below await publication and do not replace
-that published baseline. For player-facing sequence order use [Game flow](GAME_FLOW.md); for intent and constraints use
+Scene 02 was published in `b40ab47`; this release adds its accepted School
+Exterior handoff and atmospheric systems. For player-facing sequence order use [Game flow](GAME_FLOW.md); for intent and constraints use
 [Design decisions](DESIGN_DECISIONS.md). [Team progress](TEAM_PROGRESS.md) owns the
 current status snapshot, and [Development history](DEVELOPMENT_HISTORY.md) owns
 the milestone record.
@@ -26,6 +26,12 @@ scripts or override properties in the hosting scene. Resources such as SpriteFra
 textures, fonts, shapes, and shaders are referenced by scenes/scripts. `GameState`
 and `SanityState` are separate public gameplay Autoloads; cameras, environmental
 controllers, and HUD instances remain scene-local.
+
+The shared `GameClock` Autoload is a third, independent session service. It owns
+only repeating time of day; it does not own story flags or Sanity. The existing
+School room reads it for seven-phase atmosphere through its scene-local lighting
+controller. This addition is runtime-validated and manually accepted. See [School atmosphere](SCHOOL_EXTERIOR_PROTOTYPE.md#session-clock-and-atmosphere)
+for timing, light locations and development preview controls.
 
 ## Directory map
 
@@ -48,7 +54,7 @@ assets/
 	dialogue_real_world.png
   ui/phone/
 	prepared/                    # 16 transparent temporary phone PNGs + import metadata
-  sprites/test sprites/          # Retained sample-art library
+  environments/school_exterior/ # Wayne's runtime PNG library + manifest
   music/                        # Placeholder file; no music tracks yet
   sounds/                       # Placeholder file; no sound clips yet
 scenes/
@@ -59,8 +65,9 @@ scenes/
 	dialogue_panel.tscn
 	overworld_overlay.tscn
 	object_focus_overlay.tscn    # Visual-only item illustration and dimmer
-	bedroom_scene02_overlay.tscn # Checklist, door decision and temporary endpoint
+	bedroom_scene02_overlay.tscn # Checklist, door decision and departure fade
 	objective_marker.tscn       # Reusable pixel diamond; no input/collision
+	time_hud.tscn               # Adaptive time panel in Bedroom and School gameplay
 	eyelidEffect.tscn
 	eyelid_effect.gd
 	eyelidEffect.gdshader
@@ -69,6 +76,7 @@ scenes/
 	sanity_hud.tscn
   story/
 	bedroom_story.tscn           # Instances Bedroom laboratory + story UI
+	school_exterior_story.tscn  # Thin wrapper: existing School lab + sidewalk arrival
   tests/
 	bedroom_intro_test.tscn      # Same introduction, isolated completion context
 	sanity_tests.gd             # Focused Godot-native tests + required .gd.uid
@@ -79,6 +87,8 @@ scenes/
 	camera_lab.tscn              # Bedroom laboratory
 	garden_camera_lab.tscn
 	school_camera_lab.tscn
+	school_shadow_prototype.tscn # 93 campus casters and a source-pixel ground mask
+	school_ground_fog.tscn       # Eight localized ground-mist regions
 	pixel_floor.gd
 	pixel_prop.gd
 	bedroom_prop.gd
@@ -95,6 +105,12 @@ scripts/
   opening_sequence.gd
   bedroom_intro.gd
   bedroom_scene02.gd            # Story-only preparation and departure + .gd.uid
+  school_exterior_arrival.gd    # Marker placement, camera update and reveal + .gd.uid
+  game_clock.gd                 # Session-only 24-hour clock Autoload + .gd.uid
+  time_hud.gd                   # Read-only clock display and safe placement + .gd.uid
+  school_exterior_lighting.gd   # Seven-phase School atmosphere + .gd.uid
+  school_sun_shadows.gd         # Shared campus sun, projection and culling + .gd.uid
+  environment_fog.gd            # Clock-driven ground mist and override blends + .gd.uid
   object_focus_presenter.gd     # Visual-only layout/lifecycle + .gd.uid
   phone_conversation.gd
   text_Type.gd
@@ -106,6 +122,8 @@ scripts/
   game_state.gd.uid
   sanity_state.gd               # Separate session-only score service + .gd.uid
   sanity_hud.gd                 # Combined texture and adaptive corner display + .gd.uid
+shaders/
+  ground_fog.gdshader           # Procedural mist using an existing ground mask + .gdshader.uid
 docs/
   PROJECT_STRUCTURE.md
   GAME_FLOW.md
@@ -120,8 +138,17 @@ docs/
   game_state.md
 ```
 
-The sample-art library is retained material, not an inventory of active game
-assets. Albert's active sheets are in `assets/characters/albert/`.
+The unused sample-character library is removed after dependency checks and
+verified external recovery archival. Albert's
+active sheets remain unchanged in `assets/characters/albert/`.
+
+[School Exterior artwork](../assets/environments/school_exterior/README.md)
+documents Wayne's corrected delivery, original-name mapping, source-only
+references and technical compositing data. The complete map remains authoritative
+when partial exports differ. The original ZIP and two
+Krita projects are preserved outside the game repository. The separate
+[School Exterior prototype guide](SCHOOL_EXTERIOR_PROTOTYPE.md) describes the
+accepted integration using the complete map, without adding Scene 03 narrative.
 
 Contributor procedures live in the [Git handbook](GIT_WORKFLOW.md), with
 [existing-clone synchronization and recovery](GIT_EXISTING_CONTRIBUTORS.md) as its
@@ -195,15 +222,19 @@ The Sanity integration adds +1 at Option 3 commitment; Options 1/2 remain
 neutral. Its existing narrative/completion behavior is unchanged. Final phone-buzz audio is
 pending; the controller exposes an integration cue rather than generating audio.
 
-### Scene 02 components — accepted locally, publication pending
+### Scene 02 components and School departure
 
 [bedroom_scene02.gd](../scripts/bedroom_scene02.gd) belongs to the story wrapper's
 `Scene02` child, instanced from
 [bedroom_scene02_overlay.tscn](../scenes/UI/bedroom_scene02_overlay.tscn). It waits
 for the introduction's exploration handoff, listens for successful required
 interactions, writes the three preparation flags, and owns the checklist and
-Bedroom-specific door decision. Yes reaches a temporary endpoint; Return to
-Bedroom preserves session state. No School Exterior or Scene 03 is loaded.
+Bedroom-specific door decision. The accepted Yes handoff fades into
+[school_exterior_story.tscn](../scenes/story/school_exterior_story.tscn), manually accepted. Its [arrival script](../scripts/school_exterior_arrival.gd)
+uses a named outside-sidewalk marker and fades in before restoring control.
+The wrapper instances the unchanged School laboratory; it does not copy map
+geometry or add a second Player/camera. Autoload flags and Sanity survive.
+Not Yet remains Bedroom exploration; Scene 03 narrative is not implemented.
 
 The room supplies repeatable notebook, Student ID, and medal targets plus four
 instances of [objective_marker.tscn](../scenes/UI/objective_marker.tscn). The first
@@ -241,6 +272,7 @@ does not reproduce the complete playable setup.
 | [camera_lab.tscn](../scenes/prototypes/camera_lab.tscn) | [bedroom_room.tscn](../scenes/prototypes/rooms/bedroom_room.tscn) | Refined Bedroom prototype, fixed 2.5× camera, repeatable notebook/ID/medal inspections |
 | [garden_camera_lab.tscn](../scenes/prototypes/garden_camera_lab.tscn) | [garden_room.tscn](../scenes/prototypes/rooms/garden_room.tscn) | Dream Garden prototype, continuous-follow 2.5× camera with room limits, Corpse Lily interaction |
 | [school_camera_lab.tscn](../scenes/prototypes/school_camera_lab.tscn) | [school_room.tscn](../scenes/prototypes/rooms/school_room.tscn) | School Interior prototype, continuous-follow 2.5× camera with room limits |
+| [school_exterior_lab.tscn](../scenes/prototypes/school_exterior_lab.tscn) | [school_exterior_room.tscn](../scenes/prototypes/rooms/school_exterior_room.tscn) | Local School Exterior, 1.1475× environment, original 2× Albert sprite, bounded 2× camera, 99 unit-scale physics barriers and 33 sorted foreground groups (29 fadeable); manually accepted |
 
 **Bedroom:** the Camera2D is a sibling of Player, framing the 512 × 384 room.
 `OverworldInteraction` owns the dialogue overlay. The room uses
@@ -265,10 +297,14 @@ not a dead-zone camera. The room uses `pixel_floor.gd` and `pixel_prop.gd`. The
 laboratory has no environmental interaction controller attached.
 
 This room contains classrooms, a library, and lobby/study areas. It is not the
-confirmed School Exterior. No dedicated School Exterior scene/final environment
-artwork, road scene, or family-house scene was found in the inspected repository.
-Off-repository production requires team confirmation. Only Bedroom is reached
-from the normal Dream story route; room-to-room travel remains unimplemented.
+confirmed School Exterior. The separate exterior laboratory now uses Wayne's
+1455 × 1467 source map enlarged to 1669.6125 × 1683.3825 world units, a scene-local
+unscaled 14 × 10 Player-foot collision shape,
+and masked foreground sprites sampling the original map. See its
+[guide](SCHOOL_EXTERIOR_PROTOTYPE.md) for hierarchy, editable barriers and limitations.
+No separate road or family-house story scene has been added. The normal Dream
+route reaches Bedroom and then School Exterior after preparation and departure;
+a general room-routing system remains unimplemented.
 
 [scenes/game.tscn](../scenes/game.tscn) is an older movement/camera sandbox, not the
 startup scene. It uses the shared Player, a 4× camera with horizontal and vertical
@@ -607,12 +643,12 @@ Review required UID/resource identities and every affected shared consumer.
 - Environmental descriptions and the Garden conversation are prototype content.
   A general character/NPC cinematic interaction system remains separate planned
   work.
-- GameState has one published introduction event and three accepted local Scene 02
+- GameState has one published introduction event and three Scene 02
   preparation events. Sanity mechanics and persistent
   save/load remain outside its current scope.
 - The music and sounds directories contain placeholder files, not finished audio
   integrations. Font licensing/redistribution permission still needs verification.
 
-These statements distinguish the published baseline and accepted local Scene 02 while preserving
+These statements describe the accepted implementation while preserving
 the earlier historical snapshot; they do not audit other branches. Use [Game flow](GAME_FLOW.md) for prerequisites
 and [Team progress](TEAM_PROGRESS.md) for ownership and review priorities.

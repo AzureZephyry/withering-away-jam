@@ -1,0 +1,24 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/prototypes/school_exterior_lab.tscn" id="1_exterior"]
+[ext_resource type="Script" path="res://scripts/school_exterior_arrival.gd" id="2_arrival"]
+
+[node name="SchoolExteriorStory" type="Node2D"]
+script = ExtResource("2_arrival")
+
+[node name="Laboratory" parent="." instance=ExtResource("1_exterior")]
+
+[node name="SchoolArrivalSpawn" type="Marker2D" parent="."]
+position = Vector2(183.6, 1484.865)
+
+[node name="ArrivalLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Fade" type="ColorRect" parent="ArrivalLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

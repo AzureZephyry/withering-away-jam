@@ -64,7 +64,8 @@ Isabela is revising the earlier proposed chapter screenplay. No finalized revisi
 or approved full chapter route is established in the repository. Draft NPCs,
 relationships, events, dialogue, climax, and ending must not be treated as canon.
 Bedroom is implemented; Garden and School Interior are independent prototypes.
-School Exterior is required but not integrated; roads/house remain future locations.
+School Exterior supports accepted free exploration after Bedroom departure; its
+Scene 03 narrative remains unimplemented. Roads/house remain future locations.
 
 Use resource-conscious **OW** exploration/inspection/proximity interaction and
 **VN** scripted dialogue/choices, backgrounds, cues, fades, and short effects.
@@ -508,8 +509,8 @@ for the newly approved mapping, placement, and temporary asset limits.
 ## D16 — Scene 02 preparation, repeat inspection and Object Focus
 
 **Provenance/status:** Project Lead-approved Scene 02 Option B+ and refinement,
-implemented locally, automatically validated and manually accepted; publication
-pending. See [the flow](GAME_FLOW.md#scene-02--first-morning).
+implemented, automatically validated, manually accepted and published in
+`b40ab47`. See [the flow](GAME_FLOW.md#scene-02--first-morning).
 
 **Decision/context:** Require successful notebook, Student ID and graduation medal
 inspections in any order before departure. Keep all three repeatable; successful
@@ -524,10 +525,12 @@ movement, completion, Sanity and story progression stay with their existing owne
 Illustrations and medal artwork are replaceable placeholders, not final artist assets.
 
 **Boundary/revisit:** The closed physical door remains. Its Bedroom-specific Yes /
-Not Yet decision leads only to a temporary endpoint with Return to Bedroom. No
-Scene 03 or School Exterior loads; physical Bedroom NPCs, lateness consequences,
-new Sanity effects and final artwork are deferred. Future real transitions require
-separate approval; Isabela retains narrative approval authority.
+Not Yet decision now leads to the accepted School Exterior handoff when Yes is
+confirmed; Not Yet resumes Bedroom exploration. This supersedes the initial
+temporary endpoint. Scene 03 narrative, physical Bedroom NPCs, lateness
+consequences and new Sanity effects remain deferred. Isabela retains narrative
+approval authority. The independent GameClock controls atmosphere, not story
+progression; see the [School guide](SCHOOL_EXTERIOR_PROTOTYPE.md).
 
 ## Open decisions and deferred work
 

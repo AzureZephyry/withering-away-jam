@@ -69,6 +69,7 @@ func _ready() -> void:
 	var run_intro: bool = entry_context == EntryContext.DEVELOPER_TEST
 	if not run_intro:
 		run_intro = GameState.get_flag(COMPLETION_FLAG) == false
+	$Laboratory/TimeHUD.set_gameplay_active(not run_intro)
 	if not run_intro:
 		player.position = entrance_position
 		clock.hide()
@@ -231,6 +232,7 @@ func _finish_introduction() -> void:
 	clock.hide()
 	stage = &"exploration"
 	introduction_active = false
+	$Laboratory/TimeHUD.set_gameplay_active(true)
 	camera.offset = _camera_offset
 	player.velocity = Vector2.ZERO
 	interactions.set_suspended(_interactions_were_suspended)

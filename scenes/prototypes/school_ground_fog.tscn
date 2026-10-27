@@ -1,0 +1,21 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/environment_fog.gd" id="1_fog"]
+[ext_resource type="Shader" path="res://shaders/ground_fog.gdshader" id="2_fog"]
+
+[sub_resource type="ShaderMaterial" id="FogMaterial"]
+resource_local_to_scene = true
+shader = ExtResource("2_fog")
+
+[node name="GroundFog" type="Node2D"]
+scale = Vector2(1.1475, 1.1475)
+z_index = -9
+material = SubResource("FogMaterial")
+script = ExtResource("1_fog")
+warm_lamp_paths = Array[NodePath]([NodePath("../Lighting/Streetlights/FrontLamp02"), NodePath("../Lighting/Streetlights/FrontLamp04"), NodePath("../Lighting/Streetlights/FrontLamp06"), NodePath("../Lighting/Streetlights/RearLamp04"), NodePath("../Lighting/Streetlights/RearLamp06")])
+density_pockets = PackedVector4Array(315, 485, 235, 125, 315, 670, 230, 105, 1045, 563, 355, 75, 540, 930, 95, 190, 1050, 934, 370, 80, 270, 1313, 285, 100, 1070, 1315, 395, 100, 965, 145, 440, 80)
+pocket_strengths = PackedFloat32Array(0.9, 0.85, 0.75, 0.55, 0.55, 0.7, 0.7, 0.6)
+
+[node name="GroundField" type="Polygon2D" parent="."]
+use_parent_material = true
+polygon = PackedVector2Array(0, 0, 1455, 0, 1455, 1467, 0, 1467)

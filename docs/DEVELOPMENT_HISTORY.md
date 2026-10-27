@@ -287,17 +287,17 @@ implemented by this milestone.
 
 The Project Lead now confirms **Chapter 1 — Year One** as the minimum narrative
 scope. Isabela is revising the proposed screenplay; no finalized revised chapter
-flow is verified as integrated. The published route ends in Bedroom exploration;
-the accepted local Scene 02 extension below reaches a temporary endpoint. Garden
-and School Interior remain laboratories; School Exterior is a required environment
-without a dedicated integrated scene in the inspected repository. Roads and the
+flow is verified as integrated. At the earlier audit, the published route ended
+in Bedroom exploration and the accepted Scene 02 extension used a temporary
+endpoint. Garden and School Interior were laboratories; School Exterior had no
+dedicated integrated scene at that time. Roads and the
 family house remain future locations. This context does not establish off-repository
 delivery status, an approved chapter route, or new production assignments. Use
 [Game flow](GAME_FLOW.md#intended-direction-and-narrative-uncertainty) for the current
 confirmed character/context and draft boundary. No date is inferred for the
 underlying planning discussions.
 
-## Scene 02 — First Morning and refinement: accepted locally, unpublished
+## Scene 02 — First Morning and refinement: published in `b40ab47`
 
 The Project Lead manually accepted the implementation and refinement. Three
 required inspections (notebook, Student ID, graduation medal) complete in any
@@ -313,9 +313,22 @@ Dream/phone/Sanity checks, and 2 fresh-session checks, all passing; lint covered
 21 scenes/24 scripts without errors or warnings. Responsive UI checks covered
 1280 × 960, 960 × 720 and 1600 × 900, with live visuals at 1280 × 960. These are
 reported historical results, separate from Project Lead manual acceptance.
-No publication commit is recorded for this local milestone. Scene 03, School
-Exterior travel, physical Bedroom NPCs and new Sanity consequences are not added.
+The milestone was published as `b40ab47a93959dc8efee5e27e14e34675a547861`. Its
+temporary endpoint was the boundary at that publication; the later School
+Exterior handoff below supersedes it without replacing Scene 02 preparation.
 See [the actual flow](GAME_FLOW.md#scene-02--first-morning).
+
+## School Exterior and Level 1 atmosphere — accepted release
+
+Bedroom departure now reaches Wayne's School Exterior on the lower-left outside
+sidewalk. The 1.1475× environment keeps Albert at 2×, a bounded 2× camera and 99
+editable barriers. Foreground fading includes the exposed antennas. A shared
+session-only GameClock drives seven atmospheric phases, Time HUD, lamps, selected
+room/canteen/guardhouse lighting, eight headlights including the north-facing
+white car, 93 dynamic shadow groups and a continuous ground fog field. The
+Project Lead accepted the environment visually. Scene 03 narrative, NPCs and
+new Sanity consequences are outside this release. See the
+[School guide](SCHOOL_EXTERIOR_PROTOTYPE.md) for implementation and limitations.
 
 ## Historical gaps and future maintenance
 

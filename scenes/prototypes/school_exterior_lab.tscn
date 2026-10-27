@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cforly7k6klsg"]
+
+[ext_resource type="PackedScene" path="res://scenes/prototypes/rooms/school_exterior_room.tscn" id="1_room"]
+[ext_resource type="PackedScene" uid="uid://b1aoc87u33jos" path="res://scenes/player.tscn" id="2_player"]
+[ext_resource type="Script" uid="uid://cbuuh60heihia" path="res://scripts/playerMovement.gd" id="3_movement"]
+[ext_resource type="Script" uid="uid://c8dwnym56ae8u" path="res://scenes/prototypes/school_exterior_occlusion.gd" id="4_occlusion"]
+[ext_resource type="Texture2D" uid="uid://ds2nox7naaxmg" path="res://assets/environments/school_exterior/composite/school_occlusion_mask.png" id="5_mask"]
+[ext_resource type="PackedScene" path="res://scenes/UI/time_hud.tscn" id="6_time_hud"]
+[ext_resource type="PackedScene" path="res://scenes/UI/sanity_hud.tscn" id="7_sanity_hud"]
+
+[sub_resource type="RectangleShape2D" id="SchoolFeet"]
+size = Vector2(14, 10)
+
+[node name="SchoolExteriorLaboratory" type="Node2D" unique_id=471497556]
+y_sort_enabled = true
+texture_filter = 1
+script = ExtResource("4_occlusion")
+occlusion_mask = ExtResource("5_mask")
+
+[node name="SchoolExterior" parent="." unique_id=728673616 instance=ExtResource("1_room")]
+
+[node name="Player" parent="." unique_id=787839317 instance=ExtResource("2_player")]
+position = Vector2(671.2875, 1365.525)
+script = ExtResource("3_movement")
+
+[node name="CollisionShape2D" parent="Player" index="1"]
+position = Vector2(0, -5)
+shape = SubResource("SchoolFeet")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1470963746]
+zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = 0
+limit_right = 1669
+limit_bottom = 1683
+
+[node name="TimeHUD" parent="." unique_id=2081364671 instance=ExtResource("6_time_hud")]
+
+[node name="SanityHUD" parent="." unique_id=1452487610 instance=ExtResource("7_sanity_hud")]
+
+[editable path="Player"]

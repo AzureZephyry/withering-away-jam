@@ -44,6 +44,7 @@ The Player no longer uses the 2x Farmer idle/walk sheets or the embedded
 placeholder animations. Those two sheets and their import files were removed
 after checking references. The unused root-level `player.gd` platformer controller
 and its UID were also removed; `scripts/playerMovement.gd` is the active controller.
-The rest of the sample-art library is retained for the team. No character files
-needed moving: PNGs and frames stay together, behavior stays in `scripts/`, and
-the shared Player stays in `scenes/`.
+The remaining unused sample-character library is removed after path/UID
+dependency checks and verified external backup.
+Albert's PNGs and frames remain together, behavior stays in `scripts/`, and the
+shared Player stays in `scenes/`. No active character resource was moved or changed.

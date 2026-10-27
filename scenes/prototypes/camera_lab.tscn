@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://scenes/UI/overworld_overlay.tscn" id="5_overlay"]
 
 [ext_resource type="PackedScene" path="res://scenes/UI/sanity_hud.tscn" id="hud_sanity"]
+[ext_resource type="PackedScene" path="res://scenes/UI/time_hud.tscn" id="hud_time"]
 
 [node name="CameraLaboratory" type="Node2D"]
 texture_filter = 1
@@ -34,3 +35,5 @@ script = ExtResource("4_interaction")
 [node name="DialogueLayer" parent="OverworldInteraction" instance=ExtResource("5_overlay")]
 
 [node name="SanityHUD" parent="." instance=ExtResource("hud_sanity")]
+
+[node name="TimeHUD" parent="." instance=ExtResource("hud_time")]

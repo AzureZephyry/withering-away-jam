@@ -26,8 +26,8 @@ it does not mark the deferred features below complete.
 Prince directly oversees gameplay mechanics, Sanity engineering, and integration.
 Christan is temporarily assisting Lawrence with audio; do not assume a separate
 current Sanity implementation by Christan. Isabela supplies the HUD artwork.
-Isabela, Kayla, and Wayne contribute visuals; Wayne's specific deliveries remain
-unconfirmed. Ali retains opening/UI integration responsibilities.
+Isabela, Kayla, and Wayne contribute visuals; Wayne's School Exterior artwork
+is now integrated. The atmospheric clock does not alter Sanity. Ali retains opening/UI integration responsibilities.
 
 The target is Godot 4.7.2 and GDScript. This checkpoint introduces no environmental
 switching, checkpoint storage, retry UI, New Game coordinator, or persistent saves.

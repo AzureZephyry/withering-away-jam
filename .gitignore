@@ -1,3 +1,16 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Local development configuration and incoming source deliveries
+/.codex/
+/.claude/
+/.agents/
+/AGENTS.md
+/CLAUDE.md
+/GODOT_AI.md
+/.mcp.json
+/.cursor/mcp.json
+/.vscode/mcp.json
+/addons/godot_forge/
+/_asset_inbox/

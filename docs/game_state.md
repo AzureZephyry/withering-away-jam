@@ -50,7 +50,7 @@ reading or changing story completion. Restarting the application creates a fresh
 session. No New Game UI exists yet; a future in-process New Game action should
 coordinate both session services rather than bypassing their public APIs.
 
-## Scene 02 preparation — accepted locally, publication pending
+## Scene 02 preparation
 
 The three Boolean flags are `bedroom_schedule_checked`, `bedroom_id_checked`, and
 `bedroom_medal_checked`. They mean the notebook, Student ID, and graduation medal
@@ -60,8 +60,9 @@ partial reading, cancellation, or failed framing does not complete a requirement
 
 All three are required in any order before the Bedroom door offers departure.
 Repeat inspection stays available without duplicating progress. The controller
-also reads current values for same-session re-entry and Return to Bedroom from
-the temporary endpoint. Neither action resets flags or Sanity. There is no extra
+also reads current values for same-session re-entry. The accepted Bedroom-to-School
+departure preserves these flags, Sanity and the independent GameClock. Ordinary
+scene changes reset none of these session services. There is no extra
 door-completion flag, inventory, lateness consequence, or checkpoint API.
 
 Like introduction completion, these flags survive scene changes within the running
