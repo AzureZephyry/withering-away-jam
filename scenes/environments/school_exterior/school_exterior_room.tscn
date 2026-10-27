@@ -13,8 +13,8 @@
 
 [ext_resource type="Texture2D" path="res://assets/environments/school_exterior/lighting/headlight_beam.png" id="9_headlight_beam"]
 
-[ext_resource type="PackedScene" path="res://scenes/prototypes/school_shadow_prototype.tscn" id="10_sun_shadows"]
-[ext_resource type="PackedScene" path="res://scenes/prototypes/school_ground_fog.tscn" id="11_fog"]
+[ext_resource type="PackedScene" path="res://scenes/environments/school_exterior/school_sun_shadows.tscn" id="10_sun_shadows"]
+[ext_resource type="PackedScene" path="res://scenes/environments/school_exterior/school_ground_fog.tscn" id="11_fog"]
 [ext_resource type="Texture2D" path="res://assets/environments/school_exterior/composite/school_antenna_mask.png" id="12_antennas"]
 [ext_resource type="Texture2D" path="res://assets/environments/school_exterior/composite/school_antenna_underlay.png" id="13_antenna_underlay"]
 [ext_resource type="Shader" path="res://shaders/school_interior_light.gdshader" id="14_interior"]

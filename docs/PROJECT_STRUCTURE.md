@@ -9,9 +9,11 @@ for detailed APIs and authoring steps.
 
 Godot scenes assemble nodes and reference scripts and resources. Shared behavior
 lives mainly in `scripts/`, artwork and animation resources in `assets/`, and
-playable room experiments in `scenes/prototypes/`. Some visual helper scripts live
-beside those prototypes. The configured opening enters a story wrapper around
-the Bedroom laboratory; direct laboratory launches remain separate test entries.
+production hosts in `scenes/gameplay/`. Their maps/rendering resources live in
+`scenes/environments/`; independent Garden and School Interior experiments remain
+in `scenes/prototypes/` beside their drawing helpers. Story wrappers instance the
+production hosts, which also remain runnable with F6. Existing `Laboratory` node
+names are preserved because scripts use those NodePaths.
 
 The earlier `590184b` snapshot remains historical evidence; the introduction
 components below are now published. This guide does not audit other branches.
@@ -30,8 +32,17 @@ controllers, and HUD instances remain scene-local.
 The shared `GameClock` Autoload is a third, independent session service. It owns
 only repeating time of day; it does not own story flags or Sanity. The existing
 School room reads it for seven-phase atmosphere through its scene-local lighting
-controller. This addition is runtime-validated and manually accepted. See [School atmosphere](SCHOOL_EXTERIOR_PROTOTYPE.md#session-clock-and-atmosphere)
+controller. This addition is runtime-validated and manually accepted. See [School atmosphere](SCHOOL_EXTERIOR.md#session-clock-and-atmosphere)
 for timing, light locations and development preview controls.
+
+
+The production scene organization preserves scene UIDs, node identifiers, Player/camera behavior and
+the existing School rendering geometry. The hidden old Dream wake-up placeholder
+and Scene 02 Return endpoint are removed; the active white Dream-art placeholder,
+real Bedroom introduction, door recovery and School handoff remain. Historical
+milestone records retain their original filenames. Raw phone originals and import
+sidecars are recoverably archived outside the runtime project under the sibling
+artwork-source archive's `phone-originals/2026-10-27/` directory.
 
 ## Directory map
 
@@ -41,101 +52,67 @@ sidecars are omitted from the tree.
 ```text
 project.godot
 assets/
-  characters/albert/
-	albert_idle.png
-	albert_walk.png
-	albert_frames.tres
-  placeholders/scene02/         # Four replaceable SVGs + import metadata
-  fonts/
-	Pixel handwriting_regular.ttf
-  ui/sanity/                    # Isabela's seven combined HUD PNGs + import metadata
-  ui/dialogue/
-	dialogue_dream_world.png
-	dialogue_real_world.png
-  ui/phone/
-	prepared/                    # 16 transparent temporary phone PNGs + import metadata
-  environments/school_exterior/ # Wayne's runtime PNG library + manifest
-  music/                        # Placeholder file; no music tracks yet
-  sounds/                       # Placeholder file; no sound clips yet
+  characters/albert/              # Original sprite sheets and SpriteFrames
+  environments/school_exterior/   # Composite, masks, source variants and lights
+    composite/  foliage/  foreground/  ground/
+    lighting/   props/    structures/  vehicles/
+  fonts/                          # Existing font and import metadata, unchanged
+  placeholders/scene02/           # Four active SVGs + imports
+  ui/
+    dialogue/                     # Dream and Reality final artwork
+    phone/prepared/               # 16 runtime PNGs + imports and preparation guide
+    sanity/                       # Seven PNGs + imports; zero-state AtlasTexture
+  music/  sounds/                 # Future audio markers; no audio tracks yet
 scenes/
-  Dream.tscn
-  game.tscn
-  player.tscn
-  UI/
-	dialogue_panel.tscn
-	overworld_overlay.tscn
-	object_focus_overlay.tscn    # Visual-only item illustration and dimmer
-	bedroom_scene02_overlay.tscn # Checklist, door decision and departure fade
-	objective_marker.tscn       # Reusable pixel diamond; no input/collision
-	time_hud.tscn               # Adaptive time panel in Bedroom and School gameplay
-	eyelidEffect.tscn
-	eyelid_effect.gd
-	eyelidEffect.gdshader
-	dream_deterioration.gdshader
-	phone_conversation.tscn
-	sanity_hud.tscn
+  player.tscn                     # Shared actor
+  game.tscn                       # Historical movement/camera sandbox
   story/
-	bedroom_story.tscn           # Instances Bedroom laboratory + story UI
-	school_exterior_story.tscn  # Thin wrapper: existing School lab + sidewalk arrival
-  tests/
-	bedroom_intro_test.tscn      # Same introduction, isolated completion context
-	sanity_tests.gd             # Focused Godot-native tests + required .gd.uid
-	sanity_tests.tscn
-	scene02_tests.gd            # Scene 02/Object Focus checks + .gd.uid
-	scene02_tests.tscn
+    dream_story.tscn              # Configured main scene
+    bedroom_story.tscn            # Introduction + Scene 02 wrapper
+    school_exterior_story.tscn    # Sidewalk arrival wrapper
+  gameplay/
+    bedroom_playable.tscn         # Standalone F6 exploration + fixed camera
+    school_exterior_playable.tscn # Standalone F6 campus + atmosphere/HUDs
+  environments/
+    bedroom_room.tscn
+    school_exterior/
+      school_exterior_room.tscn
+      school_sun_shadows.tscn     # 93 caster groups and receiver mask
+      school_ground_fog.tscn      # One continuous field; eight density controls
+      school_exterior_occlusion.gd + .gd.uid
+  UI/
+    dialogue_panel.tscn           # Shared presentation, not a conversation owner
+    overworld_overlay.tscn
+    object_focus_overlay.tscn
+    bedroom_scene02_overlay.tscn  # Checklist, door decision and departure fade
+    objective_marker.tscn
+    time_hud.tscn  sanity_hud.tscn
+    phone_conversation.tscn
+    eyelid_effect.tscn  eyelid_effect.gd  eyelid_effect.gdshader
+    dream_deterioration.gdshader
   prototypes/
-	camera_lab.tscn              # Bedroom laboratory
-	garden_camera_lab.tscn
-	school_camera_lab.tscn
-	school_shadow_prototype.tscn # 93 campus casters and a source-pixel ground mask
-	school_ground_fog.tscn       # Eight localized ground-mist regions
-	pixel_floor.gd
-	pixel_prop.gd
-	bedroom_prop.gd
-	garden_ground.gd
-	garden_prop.gd
-	garden_overhang.gd
-	rooms/
-	  bedroom_room.tscn
-	  garden_room.tscn
-	  school_room.tscn
-scripts/
-  playerMovement.gd
-  albert_animation.gd
-  opening_sequence.gd
-  bedroom_intro.gd
-  bedroom_scene02.gd            # Story-only preparation and departure + .gd.uid
-  school_exterior_arrival.gd    # Marker placement, camera update and reveal + .gd.uid
-  game_clock.gd                 # Session-only 24-hour clock Autoload + .gd.uid
-  time_hud.gd                   # Read-only clock display and safe placement + .gd.uid
-  school_exterior_lighting.gd   # Seven-phase School atmosphere + .gd.uid
-  school_sun_shadows.gd         # Shared campus sun, projection and culling + .gd.uid
-  environment_fog.gd            # Clock-driven ground mist and override blends + .gd.uid
-  object_focus_presenter.gd     # Visual-only layout/lifecycle + .gd.uid
-  phone_conversation.gd
-  text_Type.gd
-  dialogue_panel.gd
-  overworld_interactable.gd
-  overworld_interaction.gd
-  garden_lily_interaction.gd
-  game_state.gd
-  game_state.gd.uid
-  sanity_state.gd               # Separate session-only score service + .gd.uid
-  sanity_hud.gd                 # Combined texture and adaptive corner display + .gd.uid
-shaders/
-  ground_fog.gdshader           # Procedural mist using an existing ground mask + .gdshader.uid
-docs/
-  PROJECT_STRUCTURE.md
-  GAME_FLOW.md
-  DEVELOPMENT_HISTORY.md
-  TEAM_PROGRESS.md
-  DESIGN_DECISIONS.md
-  SANITY_DESIGN.md
-  GIT_WORKFLOW.md
-  GIT_EXISTING_CONTRIBUTORS.md
-  overworld_interactions.md
-  albert_animation.md
-  game_state.md
+    garden_camera_lab.tscn  school_camera_lab.tscn
+    bedroom_prop.gd  pixel_floor.gd  pixel_prop.gd
+    garden_ground.gd  garden_prop.gd  garden_overhang.gd
+    rooms/garden_room.tscn  rooms/school_room.tscn
+  tests/
+    bedroom_intro_test.tscn
+    sanity_tests.gd  sanity_tests.tscn
+    scene02_tests.gd  scene02_tests.tscn
+scripts/                          # Shared/feature scripts + UID sidecars
+  player_movement.gd  albert_animation.gd
+  opening_sequence.gd  bedroom_intro.gd  bedroom_scene02.gd
+  school_exterior_arrival.gd
+  text_type.gd  dialogue_panel.gd  phone_conversation.gd
+  overworld_interactable.gd  overworld_interaction.gd
+  garden_lily_interaction.gd  object_focus_presenter.gd
+  game_state.gd  sanity_state.gd  game_clock.gd
+  sanity_hud.gd  time_hud.gd
+  school_exterior_lighting.gd  school_sun_shadows.gd  environment_fog.gd
+shaders/                          # Six world shaders + UID sidecars
+docs/                             # Current guides, decisions and retained history
+  SCHOOL_EXTERIOR.md
+  art/school_exterior_asset_manifest.tsv
 ```
 
 The unused sample-character library is removed after dependency checks and
@@ -147,7 +124,7 @@ documents Wayne's corrected delivery, original-name mapping, source-only
 references and technical compositing data. The complete map remains authoritative
 when partial exports differ. The original ZIP and two
 Krita projects are preserved outside the game repository. The separate
-[School Exterior prototype guide](SCHOOL_EXTERIOR_PROTOTYPE.md) describes the
+[School Exterior guide](SCHOOL_EXTERIOR.md) describes the
 accepted integration using the complete map, without adding Scene 03 narrative.
 
 Contributor procedures live in the [Git handbook](GIT_WORKFLOW.md), with
@@ -163,7 +140,7 @@ wrapper reuses Bedroom's instance.
 ## Main entry point: Dream opening
 
 [project.godot](../project.godot) configures
-[scenes/Dream.tscn](../scenes/Dream.tscn) as the main scene. F5 runs this scene.
+[scenes/story/dream_story.tscn](../scenes/story/dream_story.tscn) as the main scene. F5 runs this scene.
 Its `OpeningSequence` Control uses
 [opening_sequence.gd](../scripts/opening_sequence.gd) to advance a provisional
 sequence of lines and events:
@@ -184,9 +161,9 @@ timings, and placeholder backgrounds are not final narrative or visual direction
 
 The published [bedroom_story.tscn](../scenes/story/bedroom_story.tscn) root uses
 [bedroom_intro.gd](../scripts/bedroom_intro.gd). Its `Laboratory` child instances
-the existing Bedroom laboratory without changing its saved defaults. `StoryLayer`
+the existing Bedroom playable scene without changing its saved defaults. `StoryLayer`
 is CanvasLayer 4 and contains the shared Reality DialoguePanel, PhoneConversation,
-clock, and arrival fade. This preserves the laboratory's room, Player, camera,
+clock, and arrival fade. This preserves the playable scene's room, Player, camera,
 and notebook/card targets.
 
 The story controller is the single input/progression owner during arrival,
@@ -232,7 +209,7 @@ interactions, writes the three preparation flags, and owns the checklist and
 Bedroom-specific door decision. The accepted Yes handoff fades into
 [school_exterior_story.tscn](../scenes/story/school_exterior_story.tscn), manually accepted. Its [arrival script](../scripts/school_exterior_arrival.gd)
 uses a named outside-sidewalk marker and fades in before restoring control.
-The wrapper instances the unchanged School laboratory; it does not copy map
+The wrapper instances the same School playable scene; it does not copy map
 geometry or add a second Player/camera. Autoload flags and Sanity survive.
 Not Yet remains Bedroom exploration; Scene 03 narrative is not implemented.
 
@@ -269,10 +246,10 @@ does not reproduce the complete playable setup.
 
 | Laboratory | Room resource | Current responsibility |
 | --- | --- | --- |
-| [camera_lab.tscn](../scenes/prototypes/camera_lab.tscn) | [bedroom_room.tscn](../scenes/prototypes/rooms/bedroom_room.tscn) | Refined Bedroom prototype, fixed 2.5× camera, repeatable notebook/ID/medal inspections |
+| [bedroom_playable.tscn](../scenes/gameplay/bedroom_playable.tscn) | [bedroom_room.tscn](../scenes/environments/bedroom_room.tscn) | Refined Bedroom prototype, fixed 2.5× camera, repeatable notebook/ID/medal inspections |
 | [garden_camera_lab.tscn](../scenes/prototypes/garden_camera_lab.tscn) | [garden_room.tscn](../scenes/prototypes/rooms/garden_room.tscn) | Dream Garden prototype, continuous-follow 2.5× camera with room limits, Corpse Lily interaction |
 | [school_camera_lab.tscn](../scenes/prototypes/school_camera_lab.tscn) | [school_room.tscn](../scenes/prototypes/rooms/school_room.tscn) | School Interior prototype, continuous-follow 2.5× camera with room limits |
-| [school_exterior_lab.tscn](../scenes/prototypes/school_exterior_lab.tscn) | [school_exterior_room.tscn](../scenes/prototypes/rooms/school_exterior_room.tscn) | Local School Exterior, 1.1475× environment, original 2× Albert sprite, bounded 2× camera, 99 unit-scale physics barriers and 33 sorted foreground groups (29 fadeable); manually accepted |
+| [school_exterior_playable.tscn](../scenes/gameplay/school_exterior_playable.tscn) | [school_exterior_room.tscn](../scenes/environments/school_exterior/school_exterior_room.tscn) | Local School Exterior, 1.1475× environment, original 2× Albert sprite, bounded 2× camera, 99 unit-scale physics barriers and 33 sorted foreground groups (29 fadeable); manually accepted |
 
 **Bedroom:** the Camera2D is a sibling of Player, framing the 512 × 384 room.
 `OverworldInteraction` owns the dialogue overlay. The room uses
@@ -297,11 +274,11 @@ not a dead-zone camera. The room uses `pixel_floor.gd` and `pixel_prop.gd`. The
 laboratory has no environmental interaction controller attached.
 
 This room contains classrooms, a library, and lobby/study areas. It is not the
-confirmed School Exterior. The separate exterior laboratory now uses Wayne's
+confirmed School Exterior. The separate exterior playable scene now uses Wayne's
 1455 × 1467 source map enlarged to 1669.6125 × 1683.3825 world units, a scene-local
 unscaled 14 × 10 Player-foot collision shape,
 and masked foreground sprites sampling the original map. See its
-[guide](SCHOOL_EXTERIOR_PROTOTYPE.md) for hierarchy, editable barriers and limitations.
+[guide](SCHOOL_EXTERIOR.md) for hierarchy, editable barriers and limitations.
 No separate road or family-house story scene has been added. The normal Dream
 route reaches Bedroom and then School Exterior after preparation and departure;
 a general room-routing system remains unimplemented.
@@ -318,7 +295,7 @@ The following omits decorative children but preserves the ownership relationship
 ```text
 CameraLaboratory (Bedroom)
   Bedroom                       # Instanced room; targets live inside it
-  Player                        # Shared scene + playerMovement.gd
+  Player                        # Shared scene + player_movement.gd
   Camera2D                      # Fixed, sibling of Player
   OverworldInteraction           # overworld_interaction.gd
     DialogueLayer               # Instanced overworld overlay
@@ -327,7 +304,7 @@ CameraLaboratory (Bedroom)
 DreamGardenLaboratory            # garden_lily_interaction.gd adapter/controller
   Garden                        # Instanced room
     Props/CorpseLily/Interaction # Target added by the laboratory
-  Player                        # Shared scene + playerMovement.gd
+  Player                        # Shared scene + player_movement.gd
     Camera2D                    # Follow with limits
   DialogueLayer                 # Instanced overworld overlay
   LilyIdle                      # AnimationPlayer, visual bob only
@@ -335,7 +312,7 @@ DreamGardenLaboratory            # garden_lily_interaction.gd adapter/controller
 
 SchoolCameraLaboratory
   School                        # Instanced room
-  Player                        # Shared scene + playerMovement.gd
+  Player                        # Shared scene + player_movement.gd
     Camera2D                    # Follow with limits
   SanityHUD                     # Combined display, CanvasLayer 3
 ```
@@ -351,7 +328,7 @@ School currently has no DialogueLayer/controller pair.
 | [player.tscn](../scenes/player.tscn) | CharacterBody2D, AnimatedSprite2D, CollisionShape2D | Reusable actor structure and visuals; movement is attached by hosts |
 | [dialogue_panel.tscn](../scenes/UI/dialogue_panel.tscn) | Control, Artwork, Speaker, Margin/Content/Body and Hint | Shared presentation, panel script, font, typewriter; not a conversation owner |
 | [overworld_overlay.tscn](../scenes/UI/overworld_overlay.tscn) | CanvasLayer `DialogueLayer`, DialoguePanel, Prompt | Reusable environmental overlay; controller paths depend on these names |
-| [eyelidEffect.tscn](../scenes/UI/eyelidEffect.tscn) | CanvasLayer, ColorRect with ShaderMaterial | Eyelid script/shader; opening instances it with its own sequence timing |
+| [eyelid_effect.tscn](../scenes/UI/eyelid_effect.tscn) | CanvasLayer, ColorRect with ShaderMaterial | Eyelid script/shader; opening instances it with its own sequence timing |
 
 Walls/furniture use StaticBody2D and authored collision shapes in room scenes;
 procedural visual drawing does not create those collision shapes. Spawn and door
@@ -363,7 +340,7 @@ markers do not themselves move a Player or switch scenes.
 `AnimatedSprite2D`, and a 24 × 40 rectangular collision shape at `(0, -20)`.
 The Player root has no movement script saved in the shared scene; the hosting
 game/laboratory scenes attach
-[scripts/playerMovement.gd](../scripts/playerMovement.gd) to their Player instance.
+[scripts/player_movement.gd](../scripts/player_movement.gd) to their Player instance.
 
 The controller uses the `ui_left`, `ui_right`, `ui_up`, and `ui_down` Input Map
 actions for WASD and arrows. It moves at 150 units per second with normalized
@@ -505,13 +482,13 @@ floral) and [dialogue_real_world.png](../assets/ui/dialogue/dialogue_real_world.
 The panel, opening text, and overworld prompt use the committed
 [Pixel handwriting_regular.ttf](../assets/fonts/Pixel%20handwriting_regular.ttf).
 FontVariation resources adjust spacing for its metrics.
-[text_Type.gd](../scripts/text_Type.gd) handles character reveal and line signals.
+[text_type.gd](../scripts/text_type.gd) handles character reveal and line signals.
 The opening owns its sequence advancement; the overworld controller handles
 advancement for its panel and disables the body's independent input handler.
 
-[eyelidEffect.tscn](../scenes/UI/eyelidEffect.tscn) combines
+[eyelid_effect.tscn](../scenes/UI/eyelid_effect.tscn) combines
 [eyelid_effect.gd](../scenes/UI/eyelid_effect.gd) with
-[eyelidEffect.gdshader](../scenes/UI/eyelidEffect.gdshader) for the opening's wake-up
+[eyelid_effect.gdshader](../scenes/UI/eyelid_effect.gdshader) for the opening's wake-up
 animation. [dream_deterioration.gdshader](../scenes/UI/dream_deterioration.gdshader)
 supplies the gradual Dream glitch effect. These effects belong to the scripted
 opening, not the environmental interaction overlay.
@@ -539,12 +516,12 @@ and this compatibility behavior. Font licensing remains unresolved.
   `assets/characters/albert/albert_frames.tres` → `albert_idle.png` and
   `albert_walk.png` in the same asset directory. The attached
   `scripts/albert_animation.gd` selects those animations.
-- **Bedroom interaction:** `scenes/prototypes/rooms/bedroom_room.tscn` supplies
+- **Bedroom interaction:** `scenes/environments/bedroom_room.tscn` supplies
   targets using `scripts/overworld_interactable.gd`; the hosting
-  `scenes/prototypes/camera_lab.tscn` supplies the controller using
+  `scenes/gameplay/bedroom_playable.tscn` supplies the controller using
   `scripts/overworld_interaction.gd` → `scenes/UI/overworld_overlay.tscn` →
   `scenes/UI/dialogue_panel.tscn` → panel script, typewriter, font, and world skin.
-- **Opening presentation:** `scenes/Dream.tscn` → attached
+- **Opening presentation:** `scenes/story/dream_story.tscn` → attached
   `scripts/opening_sequence.gd` → scene-local dialogue and eyelid nodes. The
   scene instances the shared panel and eyelid scenes; the controller sequences
   their behavior without using the overworld controller.
@@ -594,11 +571,11 @@ regression checks; changing a number does not waive a behavioral constraint.
 
 | Current configuration | Where it lives | Checks needed when tuning |
 | --- | --- | --- |
-| Movement speed 150 | `scripts/playerMovement.gd` | Both input schemes, normalized diagonals, collisions, animation response, and all hosting scenes |
+| Movement speed 150 | `scripts/player_movement.gd` | Both input schemes, normalized diagonals, collisions, animation response, and all hosting scenes |
 | Laboratory zoom 2.5×; older sandbox zoom 4×; scene-specific camera position/limits | The respective laboratory or game scene | Framing, edge/corner travel, fixed/follow behavior, and safe dialogue placement |
 | Idle 3 fps; walk 8 fps | `assets/characters/albert/albert_frames.tres` | All directions, turn continuity, stopping, and interaction idle behavior |
 | Lily radius 84; notebook 92; card 76 | Garden laboratory target; Bedroom room targets | Approach/re-entry behavior, navigation access, and eligible-target selection |
-| Typewriter interval 0.1 seconds; framing tween 0.25 seconds | `scripts/text_Type.gd`; `scripts/overworld_interaction.gd` | Reveal/advance input ownership, layout busy periods, and movement/camera restoration |
+| Typewriter interval 0.1 seconds; framing tween 0.25 seconds | `scripts/text_type.gd`; `scripts/overworld_interaction.gd` | Reveal/advance input ownership, layout busy periods, and movement/camera restoration |
 
 Sprite scale/offset, collision geometry, text spacing, and prototype effect timings
 are also current configuration. Changes require the relevant owner review and

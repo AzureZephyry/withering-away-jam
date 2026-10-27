@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="PackedScene" path="res://scenes/prototypes/school_exterior_lab.tscn" id="1_exterior"]
+[ext_resource type="PackedScene" path="res://scenes/gameplay/school_exterior_playable.tscn" id="1_exterior"]
 [ext_resource type="Script" path="res://scripts/school_exterior_arrival.gd" id="2_arrival"]
 
 [node name="SchoolExteriorStory" type="Node2D"]

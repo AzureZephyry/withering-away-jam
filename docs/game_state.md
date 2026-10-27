@@ -125,7 +125,7 @@ Project Settings > Globals > Autoload must contain `GameState`, pointing to
 registration as `GameState="*uid://c647p0ta1wljq"`, using the identity in
 `scripts/game_state.gd.uid`. Keep that UID file with the script.
 
-Run the normal opening with F6 on `scenes/Dream.tscn`, or F5. Check Remote >
+Run the normal opening with F6 on `scenes/story/dream_story.tscn`, or F5. Check Remote >
 GameState: `_flags` should contain `bedroom_intro_completed = false` before
 the introduction finishes, and `true` after its final reflection.
 Run the Bedroom or Garden laboratory with F6 to check existing gameplay.

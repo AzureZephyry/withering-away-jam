@@ -109,7 +109,7 @@ successful required completions; repeat inspection does not duplicate progress.
 - `scenes/prototypes/garden_camera_lab.tscn`: Lily, automatic/re-entry, Dream skin,
   radius 84. `garden_lily_interaction.gd` is a compatibility adapter preserving
   the existing script reference. Garden scenery and idle animation are retained.
-- `scenes/prototypes/camera_lab.tscn`: Bedroom, fixed camera. The notebook on the
+- `scenes/gameplay/bedroom_playable.tscn`: Bedroom, fixed camera. The notebook on the
   desk is manual/keypress, radius 92, Reality skin. The Student ID on the lower-left
   dresser is manual/keypress, radius 76; the medal is manual/keypress, radius 72.
   All three use Object Focus and replaceable placeholder illustrations. The story

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dcmji66t7ii8d"]
 
 [ext_resource type="FontFile" uid="uid://bw7pav7rmjw8v" path="res://assets/fonts/Pixel handwriting_regular.ttf" id="1_font"]
-[ext_resource type="Script" uid="uid://c1f2fv8k5p3g4" path="res://scripts/text_Type.gd" id="2_typewriter"]
+[ext_resource type="Script" uid="uid://c1f2fv8k5p3g4" path="res://scripts/text_type.gd" id="2_typewriter"]
 [ext_resource type="Script" path="res://scripts/opening_sequence.gd" id="3_sequence"]
-[ext_resource type="PackedScene" uid="uid://d3det35ey18mj" path="res://scenes/UI/eyelidEffect.tscn" id="4_eyelids"]
+[ext_resource type="PackedScene" uid="uid://d3det35ey18mj" path="res://scenes/UI/eyelid_effect.tscn" id="4_eyelids"]
 [ext_resource type="PackedScene" path="res://scenes/UI/dialogue_panel.tscn" id="5_panel"]
 
 [ext_resource type="Shader" path="res://scenes/UI/dream_deterioration.gdshader" id="6_deterioration"]
@@ -37,33 +37,6 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 1)
 metadata/placeholder = "Missing Dream Garden character-interaction artwork. Not the Real World UI theme."
-
-[node name="WakeupPlaceholder" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.23, 0.28, 0.34, 1)
-metadata/placeholder = "Temporary 6:30 AM bedroom awakening handoff; final bedroom staging is not integrated."
-
-[node name="Clock" type="Label" parent="WakeupPlaceholder"]
-layout_mode = 1
-anchor_left = 0.2
-anchor_top = 0.1
-anchor_right = 0.8
-anchor_bottom = 0.4
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_fonts/font = SubResource("OpeningFont")
-theme_override_font_sizes/font_size = 72
-text = "6:30 AM"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="BlackBackdrop" type="ColorRect" parent="." unique_id=614097138]
 layout_mode = 1
@@ -163,7 +136,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
-metadata/temporary_handoff = "Fade to the existing 6:30 AM waking-room placeholder; final Bedroom staging remains separate."
 
 
 [node name="Eyelids" parent="." instance=ExtResource("4_eyelids")]

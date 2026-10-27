@@ -7,7 +7,7 @@ const Introduction = preload("res://scripts/bedroom_intro.gd")
 const InteractionController = preload("res://scripts/overworld_interaction.gd")
 const Interactable = preload("res://scripts/overworld_interactable.gd")
 const DialoguePanel = preload("res://scripts/dialogue_panel.gd")
-const Typewriter = preload("res://scripts/text_Type.gd")
+const Typewriter = preload("res://scripts/text_type.gd")
 const SCHEDULE_FLAG: String = "bedroom_schedule_checked"
 const PREPARATION_FLAGS: Array[String] = [SCHEDULE_FLAG, "bedroom_id_checked", "bedroom_medal_checked"]
 const PREPARATION_LABELS: Array[String] = [
@@ -47,7 +47,6 @@ const SCHOOL_EXTERIOR_SCENE: String = "res://scenes/story/school_exterior_story.
 @onready var yes_button: Button = $Screen/DoorPanel/Choices/Yes
 @onready var not_yet_button: Button = $Screen/DoorPanel/Choices/NotYet
 @onready var fade: ColorRect = $Screen/Fade
-@onready var endpoint: Control = $Screen/Endpoint
 @onready var _choice_normal_style: StyleBox = yes_button.get_theme_stylebox("normal")
 @onready var _choice_selected_style: StyleBox = yes_button.get_theme_stylebox("focus")
 
@@ -77,7 +76,6 @@ func _ready() -> void:
 	door_body.clear_line()
 	door_panel.hide()
 	door_prompt.hide()
-	endpoint.hide()
 	fade.hide()
 	door_panel.resized.connect(_queue_door_layout)
 	$Screen.resized.connect(_queue_door_layout)
@@ -86,7 +84,6 @@ func _ready() -> void:
 	not_yet_button.pressed.connect(_on_choice_pressed.bind(1))
 	yes_button.mouse_entered.connect(_set_choice.bind(0))
 	not_yet_button.mouse_entered.connect(_set_choice.bind(1))
-	$Screen/Endpoint/ReturnButton.pressed.connect(_return_to_bedroom)
 	get_window().focus_exited.connect(_on_focus_exited)
 	_update_notebook()
 	# The parent decides whether to run or skip the introduction in its _ready().
@@ -197,8 +194,6 @@ func _advance_door() -> void:
 			_close_door()
 		else:
 			_complete_scene()
-	elif mode == &"endpoint":
-		_return_to_bedroom()
 
 func _set_choice(index: int) -> void:
 	if mode != &"door":
@@ -266,16 +261,6 @@ func _depart_to_school() -> void:
 		fade.hide()
 		_close_door()
 		push_error("Could not load School Exterior: " + error_string(error))
-
-func _return_to_bedroom() -> void:
-	if mode != &"endpoint" or _wait_for_release:
-		return
-	endpoint.hide()
-	fade.hide()
-	_release_door_control()
-	mode = &"exploration"
-	_begin_input_barrier()
-	_update_objective()
 
 func _queue_door_layout() -> void:
 	if _layout_queued:

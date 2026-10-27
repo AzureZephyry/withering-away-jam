@@ -718,7 +718,7 @@ started from a preserved clean state, with its expected incoming tip known.
    own reviewed path handling; do not paste this example over it.
 
 ```powershell
-$resolvedFile = 'scenes/prototypes/camera_lab.tscn'
+$resolvedFile = 'scenes/gameplay/bedroom_playable.tscn'
 git diff -- $resolvedFile
 git diff --check
 ```
@@ -807,7 +807,7 @@ or graphics failures instead of repeatedly restarting or changing drivers.
 2. Inspect Autoload, Input Map and main scene when their configuration changed.
 3. Open affected scenes and inspect script attachments, NodePaths, signals,
    resource references, inherited overrides and collisions.
-4. F5 tests `scenes/Dream.tscn`; F6 tests an open laboratory. The opening and
+4. F5 tests `scenes/story/dream_story.tscn`; F6 tests an open laboratory. The opening and
    playable rooms are separate entry points; do not infer a transition exists.
 5. Run only relevant approved checks: movement/animation/collision, affected
    cameras/UI, E/Space reveal/advance, interaction movement locking/restoration,
@@ -1211,7 +1211,7 @@ git status --short
 whose **entire staged difference** should be removed:
 
 ```powershell
-$mistakenFile = 'scenes/prototypes/camera_lab.tscn'
+$mistakenFile = 'scenes/gameplay/bedroom_playable.tscn'
 git restore --staged -- $mistakenFile
 ```
 

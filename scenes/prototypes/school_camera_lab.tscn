@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://scenes/prototypes/rooms/school_room.tscn" id="1_school"]
 [ext_resource type="PackedScene" uid="uid://b1aoc87u33jos" path="res://scenes/player.tscn" id="2_player"]
-[ext_resource type="Script" uid="uid://cbuuh60heihia" path="res://scripts/playerMovement.gd" id="3_movement"]
+[ext_resource type="Script" uid="uid://cbuuh60heihia" path="res://scripts/player_movement.gd" id="3_movement"]
 
 [ext_resource type="PackedScene" path="res://scenes/UI/sanity_hud.tscn" id="hud_sanity"]
 

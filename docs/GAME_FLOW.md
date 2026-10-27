@@ -33,13 +33,13 @@ not reset it. Only School Exterior currently uses its seven-phase atmospheric
 lighting. It triggers no story events or Sanity changes and does not replace
 scripted alarm text. This implementation is runtime-validated and manually
 accepted; see the
-[School prototype guide](SCHOOL_EXTERIOR_PROTOTYPE.md#session-clock-and-atmosphere).
+[School prototype guide](SCHOOL_EXTERIOR.md#session-clock-and-atmosphere).
 The Time HUD is instanced in both Bedroom and School laboratories. The Bedroom
 story keeps it hidden until exploration begins; its scripted wake-up alarm label
 and introduction remain separate. School also instances the existing adaptive
 Sanity HUD. Neither display resets the shared clock during departure.
 
-The configured main scene is [scenes/Dream.tscn](../scenes/Dream.tscn).
+The configured main scene is [scenes/story/dream_story.tscn](../scenes/story/dream_story.tscn).
 `GameState` and `SanityState` are available as separate Autoloads. The scene's
 `OpeningSequence` Control runs [opening_sequence.gd](../scripts/opening_sequence.gd).
 There is no movable overworld Player in this scene.
@@ -47,7 +47,7 @@ There is no movable overworld Player in this scene.
 ### Execution overview
 
 ```text
-F5: Dream.tscn
+F5: dream_story.tscn
     black text -> eyes opening -> Dream dialogue/effects
     -> waking fade to black -> playable Bedroom
     -> waking lines -> buzz/shake -> !!! -> phone -> choice -> selected branch
@@ -56,10 +56,10 @@ F5: Dream.tscn
     Scene 03 narrative is not implemented.
 
 F6: choose one independent test entry point
-    Bedroom laboratory: camera_lab.tscn
+    Bedroom playable scene: bedroom_playable.tscn
     Garden laboratory:  garden_camera_lab.tscn
     School Interior:    school_camera_lab.tscn
-    School Exterior:    school_exterior_lab.tscn (original laboratory spawn)
+    School Exterior:    school_exterior_playable.tscn (original laboratory spawn)
     These are separate runs, not connected room transitions.
 
 Developer F6 entry: tests/bedroom_intro_test.tscn
@@ -100,7 +100,7 @@ GameState flag or a record that a production story event has occurred.
 
 ### Dialogue input and audio hooks
 
-[text_Type.gd](../scripts/text_Type.gd) owns reveal/advance input for active opening
+[text_type.gd](../scripts/text_type.gd) owns reveal/advance input for active opening
 Labels. A fresh E/Space press reveals the current line if typing; a later press
 emits `advance_requested`. The sequence advances only while not busy or complete.
 Held-key echoes and duplicate presses are guarded. Timed transitions are not an
@@ -217,10 +217,10 @@ the shared Albert Player and a camera; room resources supply scenery/collisions.
 
 | Scene | Available experience | Current limits |
 | --- | --- | --- |
-| [camera_lab.tscn](../scenes/prototypes/camera_lab.tscn) | Walk through the Bedroom, collide with solid furniture/walls, inspect notebook/Student ID/medal with Object Focus; fixed room camera | Right door closed; direct entry skips the introduction and never writes its flag |
+| [bedroom_playable.tscn](../scenes/gameplay/bedroom_playable.tscn) | Walk through the Bedroom, collide with solid furniture/walls, inspect notebook/Student ID/medal with Object Focus; fixed room camera | Right door closed; direct entry skips the introduction and never writes its flag |
 | [garden_camera_lab.tscn](../scenes/prototypes/garden_camera_lab.tscn) | Explore the Garden with limited continuous camera follow, overhead fading, and automatic Corpse Lily dialogue | Conversation is temporary test content; no story-state effect or exit transition |
 | [school_camera_lab.tscn](../scenes/prototypes/school_camera_lab.tscn) | Explore the School Interior with classrooms, library, lobby/study areas, collisions, and bounded continuous follow | No environmental dialogue controller or connected School story progression; not the required School Exterior |
-| [school_exterior_lab.tscn](../scenes/prototypes/school_exterior_lab.tscn) | Explore Wayne's complete School Exterior with editable collisions, foreground objects and bounded 2× follow | Original F6 testing spawn; the local story wrapper supplies sidewalk arrival after Bedroom departure; no Scene 03 narrative; see the [prototype guide](SCHOOL_EXTERIOR_PROTOTYPE.md) |
+| [school_exterior_playable.tscn](../scenes/gameplay/school_exterior_playable.tscn) | Explore Wayne's complete School Exterior with editable collisions, foreground objects and bounded 2× follow | Original F6 testing spawn; the local story wrapper supplies sidewalk arrival after Bedroom departure; no Scene 03 narrative; see the [prototype guide](SCHOOL_EXTERIOR.md) |
 | [game.tscn](../scenes/game.tscn) | Earlier movement/camera sandbox with 4× dead-zone camera | Not the configured main scene or a connected chapter |
 
 Move with WASD/arrows. The active controller preserves speed 150 and normalized
@@ -318,8 +318,9 @@ Its existing narrative sequence and GameState completion behavior are unchanged.
 This is the only consequential production choice. Normal story play reaches
 score 0 or 1; recovery, higher stages, and failure are implemented in the service
 and exercised by tests, without further story choices making them reachable yet.
-Failure currently supplies state, notification, and the temporary zero-bar HUD,
-not a complete Game Over presentation, gameplay pause, or scene transition.
+Failure currently supplies state, notification, and the zero-bar HUD using the
+final artwork with a padding-only AtlasTexture. It does not supply a complete
+Game Over presentation, gameplay pause, or scene transition.
 
 Option C separates the current stage from the environment currently shown.
 An approved narrative moment may reveal deterioration or recovery during play,

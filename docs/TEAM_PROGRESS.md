@@ -4,6 +4,14 @@
 [Project structure](PROJECT_STRUCTURE.md) · [Development history](DEVELOPMENT_HISTORY.md) ·
 [Design decisions](DESIGN_DECISIONS.md)
 
+## Production scene organization
+
+The production Bedroom and School hosts now use `scenes/gameplay/`, their room
+resources use `scenes/environments/`, and the startup scene is
+`scenes/story/dream_story.tscn`. Runtime script/effect filenames are normalized;
+the old hidden wake-up and Return endpoints are retired. This changes organization,
+not story scope. Existing milestones below remain historical records.
+
 ## Delivery objective
 
 The minimum intended story scope is **Chapter 1 — Year One**. The published
@@ -62,7 +70,7 @@ checks and 2 fresh-process checks**, and verified **330 documentation links/anch
 against the public candidate. These are historical publication results, not tests
 newly executed for this documentation update. Full failure presentation,
 checkpoints/retry, transformations, psychological text, and further story
-consequences remain unimplemented; sanity_00.png remains temporary.
+consequences remain unimplemented. Isabela's final sanity_00.png is integrated with a padding-only AtlasTexture.
 
 ## Scene 02 — First Morning: published
 
@@ -159,7 +167,7 @@ they do not prove completion or assign authorship to every file in a shared syst
 | Environmental descriptions beyond current examples | Assigned; additional progress unverified | Inspect Christan's actual content/interface and agree on scene ownership |
 | Sanity | Foundation/HUD and first phone consequence accepted and published in `863678e` | Further outcomes need separate approval; current story score is only 0 or 1 |
 | Session-only checkpoint retry | Approved design; implementation not established | Locations, activation, retry behavior, and restoration ownership |
-| Sanity HUD | Isabela's seven combined images integrated and Project Lead-accepted, with adaptive corners and dark pulse | sanity_00.png remains an approved unfinished placeholder; final delivery/review pending |
+| Sanity HUD | Isabela's seven combined images integrated and Project Lead-accepted, with adaptive corners and dark pulse | Final sanity_00.png delivered and integrated; padding-only AtlasTexture preserves original pixels |
 | Environment/map expansion | Bedroom plus independent Garden/School Interior labs and accepted School Exterior | Continue approved Scene 03 development; retain the complete map as visual authority |
 | Story event registration | One introduction-completion flag and three published success-only preparation flags | Further events require approved meanings, producers, and consumers |
 | Connected room travel and chapter progression | Accepted Bedroom-to-School Exterior departure; Scene 03 narrative unimplemented | Approve Scene 03 NPCs, dialogue and objectives separately |

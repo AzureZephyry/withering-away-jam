@@ -1,7 +1,7 @@
 # School Exterior artwork
 
 Wayne supplied this environmental pixel-art delivery for Godot 4.7.2. The
-[School Exterior](../../../docs/SCHOOL_EXTERIOR_PROTOTYPE.md) integrates the
+[School Exterior](../../../docs/SCHOOL_EXTERIOR.md) integrates the
 complete map, editable collision, foreground separation and accepted Level 1
 atmosphere. The existing School Interior is a separate prototype. Bedroom
 departure reaches the exterior sidewalk; Scene 03 narrative, NPCs, dialogue and
@@ -15,7 +15,7 @@ objectives remain unimplemented. Original source archives remain preserved.
 - `props/`: separate object/vehicle-barrier variants and one map-aligned mixed export.
 - `foreground/`: the separate outer-wall strip and one aligned trees/front-lamps export.
 - `vehicles/`: black, red and white car variants.
-- `composite/`: the unchanged complete map and the prototype's technical occlusion
+- `composite/`: the unchanged complete map and the environment's technical occlusion
   mask, underlay and region metadata.
 - [TSV catalog](../../../docs/art/school_exterior_asset_manifest.tsv): all 31 files
   in the corrected delivery, original-to-runtime mapping, dimensions and hashes.
@@ -77,7 +77,7 @@ silhouettes define a technical mask that separates 30 foreground regions while
 sampling their original colors from the same map. No region is double rendered.
 Editable collision rectangles are independent of artwork opacity. World/camera
 settings and remaining baked-occlusion limitations belong to the
-[prototype guide](../../../docs/SCHOOL_EXTERIOR_PROTOTYPE.md), not a final tile grid
+[School Exterior guide](../../../docs/SCHOOL_EXTERIOR.md), not a final tile grid
 or architectural plan. Future layer exports can refine this setup without
 rebuilding Wayne's composition.
 
@@ -86,4 +86,4 @@ The additional `composite/school_antenna_mask.png` and
 preserving the original mask, underlay and all delivered PNGs. Their 685 selected
 pixels reuse original map colors and verified ground/rear-boundary samples;
 these are technical stencils/compositing data, not replacement artwork. The
-prototype guide describes their fade behavior and roof attachment limits.
+School Exterior guide describes their fade behavior and roof attachment limits.

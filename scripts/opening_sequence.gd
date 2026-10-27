@@ -7,7 +7,7 @@ signal event_cued(event_id: StringName)
 signal audio_cued(cue_id: StringName)
 signal character_revealed(character: String)
 
-const Typewriter = preload("res://scripts/text_Type.gd")
+const Typewriter = preload("res://scripts/text_type.gd")
 const EyelidEffect = preload("res://scenes/UI/eyelid_effect.gd")
 const DialoguePanel = preload("res://scripts/dialogue_panel.gd")
 
@@ -62,7 +62,6 @@ func _ready() -> void:
 	_clear_text()
 	$BlackBackdrop.show()
 	$WhitePlaceholder.show()
-	$WakeupPlaceholder.hide()
 	eyelids.hide()
 	glitch_placeholder.hide()
 	awakening_fade.hide()

@@ -1,7 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="FontFile" uid="uid://bw7pav7rmjw8v" path="res://assets/fonts/Pixel handwriting_regular.ttf" id="1_font"]
-[ext_resource type="Script" uid="uid://c1f2fv8k5p3g4" path="res://scripts/text_Type.gd" id="2_typewriter"]
+[ext_resource type="Script" uid="uid://c1f2fv8k5p3g4" path="res://scripts/text_type.gd" id="2_typewriter"]
 [ext_resource type="Script" path="res://scripts/dialogue_panel.gd" id="3_panel"]
 [ext_resource type="Texture2D" uid="uid://kv7an7q3doaf" path="res://assets/ui/dialogue/dialogue_dream_world.png" id="4_dream"]
 

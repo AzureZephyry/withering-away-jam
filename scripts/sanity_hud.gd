@@ -9,12 +9,19 @@ const TEXTURES: Array[Texture2D] = [
 	preload("res://assets/ui/sanity/sanity_03.png"),
 	preload("res://assets/ui/sanity/sanity_02.png"),
 	preload("res://assets/ui/sanity/sanity_01.png"),
-	preload("res://assets/ui/sanity/sanity_00.png"),
+	preload("res://assets/ui/sanity/sanity_00_display.tres"),
 ]
 
 @export var margin: float = 24.0
 @export var display_size: Vector2 = Vector2(426, 136)
 @export_range(0.05, 0.3, 0.01) var corner_fade_seconds: float = 0.10
+
+@export_group("Development preview")
+@export var preview_zero_sanity: bool = false:
+	set(value):
+		preview_zero_sanity = value and OS.is_debug_build()
+		if is_node_ready():
+			_update_artwork(SanityState.get_score())
 
 @onready var screen: Control = $Screen
 @onready var frame: Control = $Screen/Frame
@@ -31,10 +38,15 @@ func _ready() -> void:
 	SanityState.stage_changed.connect(_on_stage_changed)
 	SanityState.game_over.connect(_on_game_over)
 	screen.resized.connect(_queue_placement)
-	artwork.texture = TEXTURES[SanityState.get_score()]
+	_update_artwork(SanityState.get_score())
 	_layout_corner(false)
 	# Story panels finish entering after the instanced laboratory's HUD is ready.
 	_bind_panels.call_deferred()
+
+func _update_artwork(score: int) -> void:
+	# Preview changes only the image; it never writes to the session score.
+	var shown_score: int = State.MAX_SCORE if preview_zero_sanity and OS.is_debug_build() else score
+	artwork.texture = TEXTURES[shown_score]
 
 func _bind_panels() -> void:
 	for node in get_tree().get_nodes_in_group("dialogue_panels"):
@@ -79,7 +91,7 @@ func _layout_corner(bottom: bool) -> void:
 	_corner_tween.tween_property(frame, "modulate:a", 1.0, corner_fade_seconds)
 
 func _on_score_changed(_previous: int, current: int) -> void:
-	artwork.texture = TEXTURES[current]
+	_update_artwork(current)
 	_pulse(false)
 
 func _on_stage_changed(_previous: State.Stage, _current: State.Stage) -> void:

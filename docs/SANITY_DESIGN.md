@@ -173,16 +173,21 @@ shrink the slot proportionally. Normal 213 × 43 images display at 2× within it
 The story fade and phone dimmer are above this layer; the HUD remains visible
 during the phone choice with the same dimming as the room.
 
-### Temporary Game Over image
+### Final zero-bar artwork
 
-sanity_00.png is Isabela's explicitly approved unfinished placeholder. It is
-1016 × 322, compared with 213 × 43 for the other images. Its alpha is 223–255,
-with a visibly baked checkerboard/background; the normal images have transparency.
-It is fitted to the same slot with its own aspect ratio, without modifying pixels.
-Its temporary floral/text failure design is used as supplied; no assumption is
-made about a final Game Over portrait or reproduction of an earlier mockup.
-A replacement at the same path will be fitted the same way. The artist should
-confirm final canvas size, transparency, and appearance when delivering it.
+Isabela's final `sanity_00.png` replaces the earlier temporary image. Its original
+220 × 59 RGBA bytes are unchanged, with
+true transparency. Visible content occupies `Rect2(0, 6, 213, 44)`.
+[The AtlasTexture](../assets/ui/sanity/sanity_00_display.tres) omits only transparent
+canvas padding at display time. It presents the full text and portrait at 426 × 88
+inside the existing 426 × 136 slot; the other six images remain 426 × 86 at 2×.
+No PNG was cropped, repainted or resized, and no Game Over behavior changed.
+
+For a display-only development preview, run a laboratory and select **Remote →
+SanityHUD → Development preview → Preview Zero Sanity**. Disable it to return to
+the live image. The debug-only option does not change session score, emit Game
+Over or create a checkpoint. `sanity_00` means zero remaining bars at internal
+score 6; internal score 0 still displays six bars (`sanity_06.png`).
 
 ### Dialogue-aware placement and feedback
 
@@ -284,8 +289,8 @@ These are historical results, not gameplay tests rerun for this documentation up
 
 The Project Lead has since manually accepted the Dream-to-Bedroom sequence, all
 three phone choices and Option 3's consequence, adaptive Garden HUD placement,
-and relevant interactions, reporting no unusual gameplay behavior. The temporary
-zero-bar asset still needs its final artist delivery and review.
+and relevant interactions, reporting no unusual gameplay behavior. Isabela has
+since delivered the final zero-bar artwork; it is integrated with a padding-only AtlasTexture.
 
 For regression review, launch F5 from a fresh game: complete Dream, reach the phone,
 choose Option 3, and check six → five bars while Level 1 portrait remains.

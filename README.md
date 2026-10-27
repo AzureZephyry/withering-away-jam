@@ -48,6 +48,15 @@ Release platforms and minimum hardware requirements have not been established
 in the verified project material. The 4:3 viewport is the design target; it is not
 a claim that every resized window is forced to that aspect ratio.
 
+## Production scene organization
+
+Production hosts now live in `scenes/gameplay/`, environments in
+`scenes/environments/`, and the Dream entry in `scenes/story/dream_story.tscn`.
+The two retired hidden endpoints have been removed. Node names and existing
+gameplay contracts are preserved. Garden and
+School Interior remain independent laboratories. See
+[Project structure](docs/PROJECT_STRUCTURE.md) for the directory boundaries.
+
 ## Getting started
 
 1. Clone [the repository](https://github.com/AzureZephyry/withering-away-jam), or
@@ -61,27 +70,27 @@ a claim that every resized window is forced to that aspect ratio.
    your copy, and open the project.
 3. Wait for Godot to finish importing resources before running a scene.
 4. Press **F5** to run the configured main scene,
-   [scenes/Dream.tscn](scenes/Dream.tscn). Expect black first, then typing after a
+   [scenes/story/dream_story.tscn](scenes/story/dream_story.tscn). Expect black first, then typing after a
    short delay. E/Space reveals and advances Dream dialogue. The white Dream
    background is a placeholder. The opening then enters the playable Bedroom:
    waking dialogue, phone conversation, one choice, reflection, and exploration.
-5. To test a room, open one of the laboratory scenes below and press **F6** to
-   run that scene. Opening a room resource alone does not provide the laboratory's
+5. To test a room, open one of the standalone scenes below and press **F6** to
+   run that scene. Opening a room resource alone does not provide the playable host's
    player and camera setup.
 6. To test the Bedroom introduction without replaying Dream, open
    [bedroom_intro_test.tscn](scenes/tests/bedroom_intro_test.tscn) and press F6.
    It uses the actual story sequence without reading or writing its completion
-   flag. Rerun it to test another branch. The ordinary Bedroom laboratory below
+   flag. Rerun it to test another branch. The ordinary Bedroom playable scene below
    still starts directly in exploration.
 
-| Standalone prototype | Scene to open | Current camera |
+| Standalone scene | Scene to open | Current camera |
 | --- | --- | --- |
-| Bedroom | [camera_lab.tscn](scenes/prototypes/camera_lab.tscn) | Fixed room view, 2.5× zoom |
+| Bedroom | [bedroom_playable.tscn](scenes/gameplay/bedroom_playable.tscn) | Fixed room view, 2.5× zoom |
 | Dream Garden | [garden_camera_lab.tscn](scenes/prototypes/garden_camera_lab.tscn) | Continuous follow with room limits, 2.5× zoom |
 | School Interior | [school_camera_lab.tscn](scenes/prototypes/school_camera_lab.tscn) | Continuous follow with room limits, 2.5× zoom |
-| School Exterior (Level 1 prototype) | [school_exterior_lab.tscn](scenes/prototypes/school_exterior_lab.tscn) | Continuous follow with map limits, 2× zoom |
+| School Exterior (Level 1) | [school_exterior_playable.tscn](scenes/gameplay/school_exterior_playable.tscn) | Continuous follow with map limits, 2× zoom |
 
-The [School Exterior prototype guide](docs/SCHOOL_EXTERIOR_PROTOTYPE.md) covers
+The [School Exterior guide](docs/SCHOOL_EXTERIOR.md) covers
 Wayne's map, 99 editable barriers, foreground fading, 93 dynamic shadow groups,
 continuous fog and seven-phase lighting. Bedroom departure reaches its exterior
 sidewalk; the environment has passed Project Lead visual acceptance. This is
@@ -125,7 +134,7 @@ The shared session-only GameClock starts at 06:30, advances one game minute per
 real second and loops every 24 hours. Explicit story-time overrides resume normal
 ticking. The Time HUD is available in Bedroom and School exploration; School
 uses Morning, Noon, Afternoon, Sunset, Evening, Night and Dawn atmosphere.
-[School Exterior](docs/SCHOOL_EXTERIOR_PROTOTYPE.md) documents the lights,
+[School Exterior](docs/SCHOOL_EXTERIOR.md) documents the lights,
 shadows, fog, camera, spawn and development previews.
 See [the Scene 02 flow](docs/GAME_FLOW.md#scene-02--first-morning) for details.
 
@@ -289,7 +298,8 @@ roads and the family house remain future locations. General room routing and
 persistent saves are not implemented. Sanity's foundation,
 HUD, and first phone consequence work; full Game Over presentation, environmental
 transformations, psychological text, session checkpoints/retry, and additional
-story consequences remain unimplemented. The zero-bar HUD artwork is temporary.
+story consequences remain unimplemented. Isabela's final zero-bar HUD artwork is integrated;
+this asset replacement does not add Game Over behavior.
 The phone images are accepted temporary placeholders
 with differing visible widths. Final narrative content, Dream backgrounds,
 audio, and font redistribution permission

@@ -1,4 +1,4 @@
-# Standalone School Exterior prototype
+# School Exterior environment
 
 ## Status and entry
 
@@ -8,15 +8,19 @@ Wayne's complete map remains the visual authority; original artwork and editable
 sources are preserved. Scene 02 preparation from `b40ab47` remains intact.
 Scene 03 narrative, NPCs, dialogue, objectives and new Sanity effects are not added.
 The [story wrapper](../scenes/story/school_exterior_story.tscn) reuses this same
-laboratory for sidewalk arrival. F5 starts Dream; open
-[school_exterior_lab.tscn](../scenes/prototypes/school_exterior_lab.tscn) with F6
+playable scene for sidewalk arrival. F5 starts Dream; open
+[school_exterior_playable.tscn](../scenes/gameplay/school_exterior_playable.tscn) with F6
 for independent preview.
+
+The story wrapper still uses its `Laboratory` instance name, and the environment keeps
+its `SunShadowPrototype` node name for existing preview and controller NodePaths.
+Those names do not indicate duplicate or disconnected gameplay.
 
 ## Scene and world
 
-The laboratory instances [school_exterior_room.tscn](../scenes/prototypes/rooms/school_exterior_room.tscn),
+The playable scene instances [school_exterior_room.tscn](../scenes/environments/school_exterior/school_exterior_room.tscn),
 the published [Player](../scenes/player.tscn), and its unchanged
-[movement controller](../scripts/playerMovement.gd). World origin is the top-left
+[movement controller](../scripts/player_movement.gd). World origin is the top-left
 of the original 1455 × 1467 map. The environment is provisionally enlarged by
 1.1475× to 1669.6125 × 1683.3825 world units, using nearest filtering without resizing
 source images. Spawn is `(671.2875, 1365.525)`, transformed from `(585, 1190)` inside
@@ -29,7 +33,7 @@ equivalent to source-map `(160, 1294)`, on the lower-left grey sidewalk outside
 the southern wall. Its 14 × 10 feet rectangle is clear of all barriers and lies
 below the wall and above the curb. The wrapper places Albert and updates the
 camera under an opaque overlay before revealing the scene over 0.35 seconds;
-movement resumes after the fade. The standalone laboratory retains its original
+movement resumes after the fade. The standalone playable scene retains its original
 inside-campus testing spawn. No map, Player or camera is duplicated.
 
 A runtime walking check followed the sidewalk east toward `(568.0125, 1484.865)`,
@@ -46,7 +50,7 @@ original 2× sprite scale; the previous School-only 1.8× override was removed.
 His opaque feet still end at the Player's ground origin. The environment is
 larger around him; Player physics and camera zoom are unchanged.
 
-Only this laboratory overrides the Player instance's collision to a 14 × 10 feet
+Only this playable scene overrides the Player instance's collision to a 14 × 10 feet
 rectangle at `(0, -5)`. This fits the narrow school paths without editing the
 shared Player or any Bedroom instance. Review this footprint during manual testing.
 
@@ -93,7 +97,7 @@ tree and the shed have 36 and 157 overlapping/mismatched pixels respectively.
 Those pixels remain in their original background or another verified region.
 Native rendered composition was compared against a direct render of the full PNG.
 
-The scene-local [occlusion controller](../scenes/prototypes/school_exterior_occlusion.gd)
+The scene-local [occlusion controller](../scenes/environments/school_exterior/school_exterior_occlusion.gd)
 compares Albert's current animation-frame alpha pixels against the foreground ID
 mask, accounting for sprite scale, flipping and Y-sort order. Actual obstruction
 fades each eligible object independently to 65% over 0.20 seconds. A 0.06-second
@@ -268,7 +272,7 @@ the dynamic sunlight mask described below. All original PNGs are preserved.
 The five-caster prototype and its school-wide expansion passed Project Lead
 visual review. They remain provisional technical geometry for Level 1.
 The existing room instances
-[school_shadow_prototype.tscn](../scenes/prototypes/school_shadow_prototype.tscn),
+[school_sun_shadows.tscn](../scenes/environments/school_exterior/school_sun_shadows.tscn),
 driven by [school_sun_shadows.gd](../scripts/school_sun_shadows.gd).
 It now contains 93 caster groups, without changing the map or collision:
 
@@ -340,7 +344,7 @@ The replacement/retention polygons are editable scene nodes, not destructive
 artwork edits. Disabling the prototype restores the original static contributions
 as well as removing the dynamic mask.
 
-For comparison, run the laboratory and select **Remote → SchoolExterior →
+For comparison, run the playable scene and select **Remote → SchoolExterior →
 SunShadowPrototype**. Under **Development preview**, select 07:00, 12:00, 16:00,
 18:00, 21:00 or 05:30, then tick **Preview Now**. Toggle **Prototype Enabled**
 to compare with the accepted static layer. These are development controls only.
@@ -357,7 +361,7 @@ close-ups and five culling viewpoints. Warmed on/off samples both remained near
 
 ### Continuous ground mist
 
-The [fog scene](../scenes/prototypes/school_ground_fog.tscn) is implemented,
+The [fog scene](../scenes/environments/school_exterior/school_ground_fog.tscn) is implemented,
 runtime-checked and Project Lead-accepted.
 Its reusable [controller](../scripts/environment_fog.gd) reads GameClock and the
 existing lighting timeline. One [procedural shader](../shaders/ground_fog.gdshader)
@@ -418,7 +422,7 @@ stationary-camera motion sequence show the mist at normal artistic settings.
 Warmed courtyard/street comparisons stayed near 60 FPS on Intel UHD 620; this
 short sample is not a performance guarantee.
 
-For instant development preview, run this laboratory with F6, switch the Scene
+For instant development preview, run this playable scene with F6, switch the Scene
 dock to **Remote**, select `SchoolExterior`, choose **Development preview →
 Preview Phase Index**, then tick **Preview Now**. This debug-only action sets
 the shared session clock, clears the checkbox and resumes normal ticking. It
@@ -427,12 +431,12 @@ approved story callers can use `GameClock.set_time(14, 0)` explicitly.
 
 ### Animated time indicator
 
-The School laboratory instances the reusable
+The School playable scene instances the reusable
 [Time HUD](../scenes/UI/time_hud.tscn), driven by [time_hud.gd](../scripts/time_hud.gd).
 It reads GameClock and displays 12-hour time without owning a second clock. This
 UI is runtime-validated and manually accepted. It is instanced in both Bedroom and School laboratories. The Bedroom
 story hides it during the wake-up/phone/reflection sequence and enables it when
-exploration begins; direct Bedroom laboratory runs show it immediately. The clock
+exploration begins; direct Bedroom playable scene runs show it immediately. The clock
 itself already ticks globally during the opening, and no room entry resets it.
 The original scripted 06:30 alarm label is unchanged.
 
@@ -455,10 +459,10 @@ New overrides replace unfinished transitions. Time itself changes immediately,
 and its initial time, real-time speed and midnight wrap remain unchanged.
 No skipped minutes are counted visually. Each viewport keeps one HUD instance.
 
-To review, run the School laboratory with F6, watch a one-second tick, then use
+To review, run the School playable scene with F6, watch a one-second tick, then use
 the existing Remote School phase preview to jump between Morning and Night.
 The clock text and lighting should transition together. The existing story
-wrapper receives the same HUD through its laboratory instance.
+wrapper receives the same HUD through its playable scene instance.
 
 Focused native checks cover ticking/overrides, the midnight wrap, all seven phase
 boundaries, illumination changes, unchanged mask composition, all 27 foreground
@@ -520,9 +524,9 @@ require Project Lead review; passing automated probes does not establish perfect
 ## Manual review
 
 1. Open the development project's `project.godot` in Godot 4.7.2 and wait for
-   resource imports. Open the exterior laboratory above and press F6. F5 continues
+   resource imports. Open the exterior playable scene above and press F6. F5 continues
    to start Dream; after the Bedroom introduction and all three preparations,
-   Door Yes now enters the School story wrapper. The F6 laboratory is unchanged.
+   Door Yes now enters the School story wrapper. The F6 playable scene is unchanged.
 2. Move with WASD/arrows, including diagonals, stopping and reversing.
 3. Explore north on the central road, left through the grass courtyard, right
    along the east-hall frontage, and through the parking aisles.

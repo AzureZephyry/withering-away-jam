@@ -99,7 +99,7 @@ func _load_scene(path: String) -> Node:
 
 func _test_hud_and_lifecycle() -> void:
 	SanityState.reset_session()
-	var room: Node = await _load_scene("res://scenes/prototypes/camera_lab.tscn")
+	var room: Node = await _load_scene("res://scenes/gameplay/bedroom_playable.tscn")
 	var hud: Node = room.get_node("SanityHUD")
 	_check(get_tree().get_nodes_in_group("sanity_hud").size() == 1, "one Bedroom HUD")
 	_check(not hud.at_bottom, "default upper-right")
@@ -108,7 +108,8 @@ func _test_hud_and_lifecycle() -> void:
 		_check(hud.artwork.mouse_filter == Control.MOUSE_FILTER_IGNORE, "HUD ignores input")
 		if score < State.MAX_SCORE:
 			SanityState.apply_effect(1)
-	_check(hud.artwork.texture.resource_path.ends_with("sanity_00.png"), "temporary failure image loads")
+	var zero_artwork: AtlasTexture = hud.artwork.texture as AtlasTexture
+	_check(zero_artwork != null and zero_artwork.atlas.resource_path.ends_with("sanity_00.png"), "final zero-bar artwork loads")
 	SanityState.reset_session()
 	for step in range(4):
 		SanityState.apply_effect(1)

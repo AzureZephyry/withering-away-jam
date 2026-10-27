@@ -2,7 +2,7 @@ extends Node2D
 ## One scene-local controller for environmental interactions, separate from the opening.
 
 const DialoguePanel = preload("res://scripts/dialogue_panel.gd")
-const Typewriter = preload("res://scripts/text_Type.gd")
+const Typewriter = preload("res://scripts/text_type.gd")
 
 const Interactable = preload("res://scripts/overworld_interactable.gd")
 

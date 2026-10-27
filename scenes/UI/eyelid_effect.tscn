@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d3det35ey18mj"]
 
 [ext_resource type="Script" uid="uid://c1qrhfwr4rvn6" path="res://scenes/UI/eyelid_effect.gd" id="1_3hqs2"]
-[ext_resource type="Shader" uid="uid://cfiswbwgbyg5t" path="res://scenes/UI/eyelidEffect.gdshader" id="2_vkbcg"]
+[ext_resource type="Shader" uid="uid://cfiswbwgbyg5t" path="res://scenes/UI/eyelid_effect.gdshader" id="2_vkbcg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vkbcg"]
 resource_local_to_scene = true

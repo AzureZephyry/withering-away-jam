@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://scenes/prototypes/rooms/garden_room.tscn" id="1_garden"]
 [ext_resource type="PackedScene" uid="uid://b1aoc87u33jos" path="res://scenes/player.tscn" id="2_player"]
-[ext_resource type="Script" uid="uid://cbuuh60heihia" path="res://scripts/playerMovement.gd" id="3_movement"]
+[ext_resource type="Script" uid="uid://cbuuh60heihia" path="res://scripts/player_movement.gd" id="3_movement"]
 [ext_resource type="Script" uid="uid://b8cvoxsy8pso" path="res://scripts/garden_lily_interaction.gd" id="4_interaction"]
 [ext_resource type="PackedScene" path="res://scenes/UI/overworld_overlay.tscn" id="5_dialogue"]
 [ext_resource type="Script" path="res://scripts/overworld_interactable.gd" id="6_target"]

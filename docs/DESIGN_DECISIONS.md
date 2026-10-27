@@ -148,7 +148,7 @@ published `9987b51` and the animation guide verify the implementation.
 **Status:** Accepted constraints; implemented/published.
 
 **Decision/context:** Reuse [player.tscn](../scenes/player.tscn) across playable
-hosts. Hosts attach [playerMovement.gd](../scripts/playerMovement.gd); the sprite
+hosts. Hosts attach [player_movement.gd](../scripts/player_movement.gd); the sprite
 uses [albert_animation.gd](../scripts/albert_animation.gd). Keep movement/collision
 behavior separate from directional visual selection and preserve Isabela's
 original artwork.
@@ -188,7 +188,7 @@ is attributed to Albert. Preserve narrative order instead of rewriting the draft
 **Known rationale/evidence:** The two supplied skins carry the world distinction.
 [dialogue_panel.gd](../scripts/dialogue_panel.gd) preserves aspect ratio and uses
 world-specific text areas/colors. FontVariations trim oversized font metrics
-without changing the font. [text_Type.gd](../scripts/text_Type.gd) displays three
+without changing the font. [text_type.gd](../scripts/text_type.gd) displays three
 periods for an unsupported ellipsis glyph while leaving source dialogue intact.
 
 **Consequences:** E/Space reveals a line before advancing; held/duplicate input
@@ -493,7 +493,9 @@ or Sanity manager; no schema or combined manager is approved.
 
 **Status:** Earlier reference-only direction superseded by Isabela's seven combined
 images and the implemented adaptive HUD, accepted by the Project Lead.
-The unfinished sanity_00.png is explicitly approved as a temporary placeholder.
+Isabela's final sanity_00.png replaces the earlier approved placeholder;
+only transparent canvas padding is omitted by an AtlasTexture. The original PNG
+is unchanged.
 
 **Decision/context:** Keep the HUD small, legible at 1280 × 960, compatible with
 pixel art and discrete changes, and clear across three stages without obstructing
@@ -530,7 +532,7 @@ confirmed; Not Yet resumes Bedroom exploration. This supersedes the initial
 temporary endpoint. Scene 03 narrative, physical Bedroom NPCs, lateness
 consequences and new Sanity effects remain deferred. Isabela retains narrative
 approval authority. The independent GameClock controls atmosphere, not story
-progression; see the [School guide](SCHOOL_EXTERIOR_PROTOTYPE.md).
+progression; see the [School guide](SCHOOL_EXTERIOR.md).
 
 ## Open decisions and deferred work
 

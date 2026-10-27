@@ -7,7 +7,7 @@ signal audio_cued(cue_id: StringName)
 enum EntryContext { STORY, REENTRY, DEVELOPER_TEST }
 
 const DialoguePanel = preload("res://scripts/dialogue_panel.gd")
-const Typewriter = preload("res://scripts/text_Type.gd")
+const Typewriter = preload("res://scripts/text_type.gd")
 const PhoneConversation = preload("res://scripts/phone_conversation.gd")
 const OverworldInteraction = preload("res://scripts/overworld_interaction.gd")
 const COMPLETION_FLAG: String = "bedroom_intro_completed"

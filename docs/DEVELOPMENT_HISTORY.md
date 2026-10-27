@@ -268,7 +268,8 @@ their history is retained in [Design decisions](DESIGN_DECISIONS.md).
 SanityState service, combined adaptive HUD, seven supplied HUD PNGs and matching
 sidecars, native tests and UIDs, the public Autoload registration, phone consequence
 integration, scene instances, and accurate supporting documentation. Isabela's
-unfinished zero-bar image was explicitly accepted for temporary use.
+unfinished zero-bar image was explicitly accepted for temporary use. Its final
+artist replacement is now integrated; see [current HUD artwork status](SANITY_DESIGN.md#final-zero-bar-artwork).
 
 Options 1/2 remain neutral; Option 3 commits +1 once through the Bedroom controller.
 GameState stays Boolean-only. Higher stages, recovery and failure exist at the
@@ -328,7 +329,7 @@ room/canteen/guardhouse lighting, eight headlights including the north-facing
 white car, 93 dynamic shadow groups and a continuous ground fog field. The
 Project Lead accepted the environment visually. Scene 03 narrative, NPCs and
 new Sanity consequences are outside this release. See the
-[School guide](SCHOOL_EXTERIOR_PROTOTYPE.md) for implementation and limitations.
+[School guide](SCHOOL_EXTERIOR.md) for implementation and limitations.
 
 ## Historical gaps and future maintenance
 

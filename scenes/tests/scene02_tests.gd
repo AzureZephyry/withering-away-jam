@@ -1,7 +1,7 @@
 extends "res://scenes/tests/sanity_tests.gd"
 ## Run with Godot --headless --path . res://scenes/tests/scene02_tests.tscn.
 
-const LABORATORY: String = "res://scenes/prototypes/camera_lab.tscn"
+const LABORATORY: String = "res://scenes/gameplay/bedroom_playable.tscn"
 const NOTEBOOK: NodePath = ^"Bedroom/Decoration/Notebook/Interaction"
 
 func _run() -> void:
