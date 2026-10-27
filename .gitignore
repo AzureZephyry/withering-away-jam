@@ -2,15 +2,5 @@
 .godot/
 /android/
 
-# Local development configuration and incoming source deliveries
-/.codex/
-/.claude/
-/.agents/
-/AGENTS.md
-/CLAUDE.md
-/GODOT_AI.md
-/.mcp.json
-/.cursor/mcp.json
-/.vscode/mcp.json
-/addons/godot_forge/
+# Incoming source deliveries
 /_asset_inbox/

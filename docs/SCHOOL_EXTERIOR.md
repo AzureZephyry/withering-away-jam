@@ -336,6 +336,12 @@ is invisible. A cached swept-bound test includes offscreen casters whose shadows
 reach the view, but skips irrelevant geometry. The mask redraws only when its
 visible geometry or visibility changes. No new lights or shadow textures are added.
 
+The [ActorShadow2D integration](ACTOR_SHADOWS.md)
+adds Albert's animated silhouette and feet contact to this same mask. It consumes
+the effective environmental sun profile, preserves the ground receiver channel,
+and introduces no additional viewport or changes to the 93 environmental groups.
+Moving actors can request mask redraws between the static projection updates.
+
 Forty-three individually inspected regions of Wayne's overlay are suppressed
 only on receiving ground. Eleven regions retain small residual/contact details,
 including the library's front contact strip and a right-edge tree stamp whose

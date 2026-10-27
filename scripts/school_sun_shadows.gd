@@ -71,6 +71,7 @@ func _ready() -> void:
 	_update_state()
 	_update_projection()
 	_apply_uniforms()
+	add_to_group("actor_shadow_receiver")
 
 func sample_sun(minutes: float) -> Dictionary:
 	var hours: float = fposmod(minutes, 1440.0) / 60.0
@@ -190,3 +191,13 @@ func preview_time(index: int) -> bool:
 		return false
 	var minutes: int = [420, 720, 960, 1080, 1260, 330][index]
 	return clock.set_time(floori(minutes / 60.0), minutes % 60)
+
+func get_actor_shadow_map() -> Sprite2D:
+	return _map
+
+func attach_actor_shadow(visual: Node2D) -> void:
+	visual.reparent($Mask/MapCoordinates, false)
+	request_actor_shadow_redraw()
+
+func request_actor_shadow_redraw() -> void:
+	mask.render_target_update_mode = SubViewport.UPDATE_ONCE

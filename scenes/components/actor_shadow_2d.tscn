@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/actor_shadow_2d.gd" id="1_script"]
+[ext_resource type="Shader" path="res://shaders/actor_shadow_mask.gdshader" id="2_shader"]
+
+[sub_resource type="ShaderMaterial" id="CastMaterial"]
+resource_local_to_scene = true
+shader = ExtResource("2_shader")
+shader_parameter/strength = 0.8
+
+[sub_resource type="ShaderMaterial" id="ContactMaterial"]
+resource_local_to_scene = true
+shader = ExtResource("2_shader")
+shader_parameter/contact = true
+shader_parameter/strength = 0.8
+
+[node name="ActorShadow2D" type="Node"]
+process_priority = 10
+script = ExtResource("1_script")
+
+[node name="MaskVisual" type="Node2D" parent="."]
+visible = false
+texture_filter = 1
+
+[node name="Cast" type="Sprite2D" parent="MaskVisual"]
+material = SubResource("CastMaterial")
+
+[node name="Contact" type="Polygon2D" parent="MaskVisual"]
+material = SubResource("ContactMaterial")
+polygon = PackedVector2Array(-9, -3, 9, -3, 9, 3, -9, 3)
+uv = PackedVector2Array(0, 0, 1, 0, 1, 1, 0, 1)
