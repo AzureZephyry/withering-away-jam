@@ -48,3 +48,50 @@ The remaining unused sample-character library is removed after path/UID
 dependency checks and verified external backup.
 Albert's PNGs and frames remain together, behavior stays in `scripts/`, and the
 shared Player stays in `scenes/`. No active character resource was moved or changed.
+
+## NPC-001 animation reuse
+
+`scenes/characters/npc_001.tscn` reuses the directional animation script and
+ActorShadow2D without changing Albert. Its sheets use full 24-by-24 cells,
+2x scale and offset `(0, -12)` so the standing soles meet the actor origin.
+Idle loops at 3 fps and walking at 8 fps. The externally driven
+`scripts/npc_character.gd` exposes `set_move_direction(Vector2)` and
+`face_direction(Vector2)`; zero movement retains the last facing direction.
+There are no player-input bindings or dialogue.
+
+One instance starts beside the west courtyard path in the School Exterior
+playable host, also inherited by its story wrapper. Existing foreground depth
+sorting applies, but automatic foreground transparency still tracks Albert only.
+NPC-001's animation, roaming and maintenance behavior are approved.
+
+### Courtyard waypoint roaming
+
+The School instance adds `scripts/npc_waypoint_roaming.gd` as a child controller.
+It sends directions to the existing character; movement and animation stay in
+their original controllers. Five `Marker2D` children of `JanitorRoute` define
+the ordered loop. The School instance walks at 55 world units/second, stops
+within 2 units, idles for 2–4 seconds, and retains its last facing direction.
+
+After 0.35 seconds without forward progress it idles in a blocked state. Every
+1.25 seconds it checks the next step with the actual character physics shape;
+movement resumes when clear. It does not teleport, disable collision or find
+alternate paths. A permanent obstruction therefore leaves it waiting safely.
+The route and pause timings are editable in the School scene.
+Visible sweeping and dialogue remain unimplemented.
+
+### Contextual maintenance stops
+
+The southeast walkway corner and northwest courtyard edge keep their original
+route coordinates and add `scripts/npc_maintenance_stop.gd`. At these markers,
+the roaming controller faces the configured work direction, enters WORKING for
+6–10 seconds, then RESTING for 2–4 seconds before advancing. Other route stops
+retain their normal pauses. Neither work nor rest moves the character.
+
+The character exposes `begin_activity(direction, animation_name)` and
+`end_activity()`. A maintenance marker can name a future human-authored work
+animation. An empty or unavailable name uses existing directional Idle without
+a missing-animation warning. No broom or sweeping artwork has been integrated;
+WORKING currently represents a stationary maintenance pause, not visible sweeping.
+Wayne's existing trash-bin sprite is environmental artwork, not a broom or work
+animation. Visible sweeping requires a compatible human-authored animation and,
+if needed, a broom prop.

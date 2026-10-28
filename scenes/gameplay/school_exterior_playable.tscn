@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://ds2nox7naaxmg" path="res://assets/environments/school_exterior/composite/school_occlusion_mask.png" id="5_mask"]
 [ext_resource type="PackedScene" path="res://scenes/UI/time_hud.tscn" id="6_time_hud"]
 [ext_resource type="PackedScene" path="res://scenes/UI/sanity_hud.tscn" id="7_sanity_hud"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc_001.tscn" id="8_npc"]
+[ext_resource type="Script" uid="uid://dv22o2euvswn5" path="res://scripts/npc_waypoint_roaming.gd" id="9_roaming"]
+[ext_resource type="Script" uid="uid://c735stglogwtv" path="res://scripts/npc_maintenance_stop.gd" id="10_work_stop"]
 
 [sub_resource type="RectangleShape2D" id="SchoolFeet"]
 size = Vector2(14, 10)
@@ -33,6 +36,36 @@ limit_left = 0
 limit_top = 0
 limit_right = 1669
 limit_bottom = 1683
+
+[node name="NPC001" parent="." unique_id=128454042 instance=ExtResource("8_npc")]
+position = Vector2(596.7, 677.025)
+movement_speed = 55.0
+
+[node name="Roaming" type="Node" parent="NPC001" unique_id=748779359]
+process_physics_priority = -1
+script = ExtResource("9_roaming")
+route_path = NodePath("../../JanitorRoute")
+
+[node name="JanitorRoute" type="Node2D" parent="." unique_id=1426290347]
+
+[node name="SouthEast" type="Marker2D" parent="JanitorRoute" unique_id=1953260040]
+position = Vector2(596.7, 854.8875)
+script = ExtResource("10_work_stop")
+work_direction = Vector2(-1, -1)
+
+[node name="SouthWest" type="Marker2D" parent="JanitorRoute" unique_id=2114540609]
+position = Vector2(114.75, 854.8875)
+
+[node name="NorthWest" type="Marker2D" parent="JanitorRoute" unique_id=1476887483]
+position = Vector2(114.75, 447.525)
+script = ExtResource("10_work_stop")
+work_direction = Vector2(1, 1)
+
+[node name="NorthEast" type="Marker2D" parent="JanitorRoute" unique_id=845543447]
+position = Vector2(596.7, 447.525)
+
+[node name="EastPath" type="Marker2D" parent="JanitorRoute" unique_id=1884572819]
+position = Vector2(596.7, 677.025)
 
 [node name="TimeHUD" parent="." unique_id=2081364671 instance=ExtResource("6_time_hud")]
 
