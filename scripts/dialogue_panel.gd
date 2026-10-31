@@ -33,7 +33,7 @@ func _ready() -> void:
 func _apply_world() -> void:
 	var dreaming: bool = world == World.DREAM
 	artwork.texture = DREAM_ART if dreaming else REAL_ART
-	body.add_theme_color_override("font_color", Color("#f1eee7") if dreaming else Color("#252b32"))
+	body.add_theme_color_override("font_color", Color("#fff9ed") if dreaming else Color("#151d22"))
 	hint.add_theme_color_override("font_color", Color("#c4c9cf") if dreaming else Color("#515a64"))
 	# Both supplied name tabs are light, including the Dream World tab.
 	speaker.add_theme_color_override("font_color", Color("#252b32"))

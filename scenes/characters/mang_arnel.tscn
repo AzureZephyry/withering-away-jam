@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc_character.gd" id="1_controller"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/mang_arnel/mang_arnel_frames.tres" id="2_frames"]
+[ext_resource type="Script" path="res://scripts/albert_animation.gd" id="3_animation"]
+[ext_resource type="PackedScene" path="res://scenes/components/actor_shadow_2d.tscn" id="4_shadow"]
+[ext_resource type="Script" path="res://scripts/overworld_interactable.gd" id="5_interaction"]
+
+[sub_resource type="RectangleShape2D" id="Feet"]
+size = Vector2(14, 10)
+
+[node name="MangArnel" type="CharacterBody2D"]
+texture_filter = 1
+script = ExtResource("1_controller")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("2_frames")
+animation = &"idle_down"
+autoplay = "idle_down"
+offset = Vector2(0, -9)
+script = ExtResource("3_animation")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("Feet")
+
+[node name="ActorShadow2D" parent="." instance=ExtResource("4_shadow")]
+
+[node name="Interaction" type="Node2D" parent="."]
+script = ExtResource("5_interaction")
+radius = 64.0
+speakers = PackedStringArray("Mang Arnel")
+visual_path = NodePath("../AnimatedSprite2D")
+visual_bounds = Rect2(-7, -17, 15, 17)

@@ -13,6 +13,7 @@ enum Presentation { DREAM, REAL }
 @export var lines: PackedStringArray = []
 @export var speakers: PackedStringArray = []
 @export var focus_texture: Texture2D
+@export var inspection_scene: PackedScene
 @export_node_path("Node2D") var visual_path: NodePath = ^".."
 # Include the full movement envelope of any animated artwork.
 @export var visual_bounds: Rect2 = Rect2(0, 0, 32, 32)
@@ -47,6 +48,9 @@ func finish(success: bool) -> void:
 func screen_bounds() -> Rect2:
 	var visual: Node2D = get_node(visual_path)
 	return visual.get_global_transform_with_canvas() * visual_bounds
+
+func dialogue_available() -> bool:
+	return not lines.is_empty()
 
 func speaker(index: int) -> String:
 	return speakers[index] if index < speakers.size() else ""

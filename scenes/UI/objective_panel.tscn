@@ -1,0 +1,98 @@
+[gd_scene format=3]
+
+[ext_resource type="FontFile" path="res://assets/fonts/Pixel handwriting_regular.ttf" id="2_font"]
+[ext_resource type="Script" path="res://scripts/objective_panel.gd" id="2_presenter"]
+
+[sub_resource type="FontVariation" id="ObjectiveFont"]
+base_font = ExtResource("2_font")
+spacing_top = -36
+spacing_bottom = -18
+
+[sub_resource type="StyleBoxFlat" id="ObjectiveBox"]
+bg_color = Color(0.12, 0.15, 0.16, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.76, 0.72, 0.60, 1)
+content_margin_left = 14.0
+content_margin_right = 14.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="ChecklistBox"]
+bg_color = Color(0.12, 0.15, 0.16, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.87, 0.65, 1)
+
+[node name="Objective" type="Label" groups=["time_hud_obstacles"]]
+visible = false
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 384.0
+offset_bottom = 218.0
+texture_filter = 1
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.96, 0.93, 0.84, 1)
+theme_override_fonts/font = SubResource("ObjectiveFont")
+theme_override_font_sizes/font_size = 32
+theme_override_constants/line_spacing = 4
+theme_override_styles/normal = SubResource("ObjectiveBox")
+script = ExtResource("2_presenter")
+text = "Get ready for your first day."
+vertical_alignment = 1
+
+[node name="ScheduleCheck" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 12.0
+offset_bottom = 12.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("ChecklistBox")
+
+[node name="Fill" type="ColorRect" parent="ScheduleCheck"]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.95, 0.87, 0.65, 1)
+
+[node name="IDCheck" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 12.0
+offset_bottom = 12.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("ChecklistBox")
+
+[node name="Fill" type="ColorRect" parent="IDCheck"]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.95, 0.87, 0.65, 1)
+
+[node name="MedalCheck" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 12.0
+offset_bottom = 12.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("ChecklistBox")
+
+[node name="Fill" type="ColorRect" parent="MedalCheck"]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.95, 0.87, 0.65, 1)

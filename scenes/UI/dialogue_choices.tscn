@@ -1,0 +1,78 @@
+[gd_scene format=3]
+
+[ext_resource type="Theme" path="res://scenes/UI/dialogue_choice_theme.tres" id="1_theme"]
+[ext_resource type="FontFile" path="res://assets/fonts/Pixel handwriting_regular.ttf" id="2_font"]
+
+[sub_resource type="FontVariation" id="ResponseFont"]
+base_font = ExtResource("2_font")
+spacing_top = -35
+spacing_bottom = -20
+
+[sub_resource type="StyleBoxFlat" id="Section"]
+bg_color = Color(0.85, 0.87, 0.84, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.52, 0.58, 0.55, 1)
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+
+[node name="Choices" type="VBoxContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_filter = 1
+theme = ExtResource("1_theme")
+theme_override_constants/separation = 8
+
+[node name="Context" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SpokenLine" type="Label" parent="Context"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+
+[node name="ResponseLabel" type="Label" parent="Context"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.29, 0.34, 0.33, 1)
+theme_override_fonts/font = SubResource("ResponseFont")
+theme_override_font_sizes/font_size = 26
+text = "Albert's response"
+vertical_alignment = 1
+
+[node name="OptionsFrame" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Section")
+
+[node name="Rows" type="VBoxContainer" parent="OptionsFrame"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="First" type="Button" parent="OptionsFrame/Rows"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+toggle_mode = true
+alignment = 0
+
+[node name="Second" type="Button" parent="OptionsFrame/Rows"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+toggle_mode = true
+alignment = 0
+
+[node name="Third" type="Button" parent="OptionsFrame/Rows"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+toggle_mode = true
+alignment = 0

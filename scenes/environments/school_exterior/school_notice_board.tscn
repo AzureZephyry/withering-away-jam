@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://chgybnvrdame2"]
+
+[ext_resource type="Texture2D" uid="uid://drr6f1al6dmjw" path="res://assets/environments/school_exterior/props/school_notice_board.png" id="1_art"]
+[ext_resource type="PackedScene" path="res://scenes/components/actor_shadow_2d.tscn" id="2_shadow"]
+[ext_resource type="Script" uid="uid://dn3xwnheappns" path="res://scripts/school_notice_board.gd" id="3_xd5or"]
+[ext_resource type="PackedScene" path="res://scenes/UI/notice_board_inspection.tscn" id="4_ccf7q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1rs7k"]
+size = Vector2(36, 6)
+
+[node name="SchoolNoticeBoard" type="StaticBody2D" unique_id=213471483]
+texture_filter = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1652599202]
+texture = ExtResource("1_art")
+offset = Vector2(0, -28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=397764216]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_1rs7k")
+
+[node name="ActorShadow2D" parent="." unique_id=1373015020 instance=ExtResource("2_shadow")]
+visual_source_path = NodePath("../Sprite2D")
+contact_size = Vector2(32, 4)
+
+[node name="Interaction" type="Node2D" parent="." unique_id=2095384451]
+script = ExtResource("3_xd5or")
+radius = 64.0
+inspection_scene = ExtResource("4_ccf7q")
+visual_path = NodePath("../Sprite2D")
+visual_bounds = Rect2(-20, -53, 40, 53)

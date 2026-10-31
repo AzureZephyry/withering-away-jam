@@ -95,3 +95,26 @@ WORKING currently represents a stationary maintenance pause, not visible sweepin
 Wayne's existing trash-bin sprite is environmental artwork, not a broom or work
 animation. Visible sweeping requires a compatible human-authored animation and,
 if needed, a broom prop.
+
+## Mang Arnel character integration
+
+Isabela's original guard sheets remain unchanged under
+`assets/characters/mang_arnel/`. Idle is 94 by 122 pixels and Walk is 94 by 123.
+Their SpriteFrames use Albert's 22-by-24 regions at 24-pixel pitch: Idle starts
+at `(24*c, 24*r)` and Walk at `(24*c, 24*r + 1)`. Rows are down, down-right,
+right, up-right and up; left directions mirror. All 40 frames are retained.
+Idle loops at 3 fps and Walk at 8 fps. Partial source alpha is preserved.
+
+`scenes/characters/mang_arnel.tscn` reuses `npc_character.gd`,
+`albert_animation.gd` and ActorShadow2D. The sprite is 2x with offset `(0, -9)`
+and a 14-by-10 feet collider. One stationary, south-facing guard stands just
+inside the south entrance north of the gatehouse at `(605.3063, 1396.5074)`, outside
+the pedestrian opening. There is no roaming or maintenance controller.
+
+The child `Interaction` reuses OverworldInteractable with a 64-unit manual
+radius. Its standalone scene leaves dialogue empty; the School host supplies the
+first-time Scene 03 conversation through `school_guard_interaction.tscn`.
+See [Environmental interactions](overworld_interactions.md) for choices,
+completion state and input. No Sanity consequences are added. Foreground sorting
+applies; automatic foreground fading still follows Albert only.
+The character and Scene 03 dialogue integration are manually accepted.

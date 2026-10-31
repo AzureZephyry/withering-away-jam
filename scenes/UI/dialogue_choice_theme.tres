@@ -1,0 +1,62 @@
+[gd_resource type="Theme" format=3 uid="uid://6n0xwbd6ah40"]
+
+[ext_resource type="FontFile" uid="uid://bw7pav7rmjw8v" path="res://assets/fonts/Pixel handwriting_regular.ttf" id="1_font"]
+
+[sub_resource type="StyleBoxEmpty" id="Focus"]
+
+[sub_resource type="StyleBoxFlat" id="Hover"]
+content_margin_left = 18.0
+content_margin_top = 3.0
+content_margin_right = 18.0
+content_margin_bottom = 3.0
+bg_color = Color(0.84, 0.87, 0.84, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.47, 0.55, 0.53, 1)
+
+[sub_resource type="StyleBoxFlat" id="Selected"]
+content_margin_left = 18.0
+content_margin_top = 3.0
+content_margin_right = 18.0
+content_margin_bottom = 3.0
+bg_color = Color(0.73, 0.79, 0.76, 1)
+border_width_left = 3
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.44, 0.42, 1)
+
+[sub_resource type="StyleBoxFlat" id="Row"]
+content_margin_left = 18.0
+content_margin_top = 3.0
+content_margin_right = 18.0
+content_margin_bottom = 3.0
+bg_color = Color(0.93, 0.93, 0.9, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.65, 0.69, 0.67, 1)
+
+[sub_resource type="FontVariation" id="ReadableFont"]
+base_font = ExtResource("1_font")
+variation_embolden = 0.08
+spacing_top = -46
+spacing_bottom = -24
+
+[resource]
+default_font = SubResource("ReadableFont")
+default_font_size = 32
+Button/colors/font_color = Color(0.06, 0.08, 0.09, 1)
+Button/colors/font_hover_color = Color(0.06, 0.08, 0.09, 1)
+Button/colors/font_hover_pressed_color = Color(0.06, 0.08, 0.09, 1)
+Button/colors/font_pressed_color = Color(0.06, 0.08, 0.09, 1)
+Button/constants/outline_size = 0
+Button/styles/focus = SubResource("Focus")
+Button/styles/hover = SubResource("Hover")
+Button/styles/hover_pressed = SubResource("Selected")
+Button/styles/normal = SubResource("Row")
+Button/styles/pressed = SubResource("Selected")
+Label/colors/font_color = Color(0.06, 0.08, 0.09, 1)

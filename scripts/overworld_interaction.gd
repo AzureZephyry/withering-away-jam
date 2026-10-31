@@ -33,6 +33,7 @@ var _camera_shifted: bool = false
 var _camera_tween: Tween
 var _layout_transform: Transform2D
 var _layout_size: Vector2
+var _inspection: CanvasLayer
 var placement_issue: String = ""
 var suspended: bool = false
 var _resume_waiting_for_release: bool = false
@@ -51,7 +52,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if suspended:
 		return
-	if dialogue_open and not _layout_busy:
+	if dialogue_open and _inspection == null and not _layout_busy:
 		# Recheck only when the camera or logical viewport actually changes.
 		if not get_viewport().get_canvas_transform().is_equal_approx(_layout_transform) or get_viewport_rect().size != _layout_size:
 			_position_dialogue()
@@ -115,7 +116,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not event.pressed:
 		_held_keys.erase(key)
 		return
-	if suspended:
+	if suspended or _inspection != null:
 		return
 	get_viewport().set_input_as_handled()
 	if _resume_waiting_for_release:
@@ -130,13 +131,17 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if dialogue_open and not _layout_busy:
 		if body.is_typing:
 			body.reveal_line()
-		elif line_index < active.lines.size() - 1:
-			line_index += 1
-			_present_line()
 		else:
-			_close_dialogue()
+			_advance_dialogue()
 	elif not dialogue_open and not _closing and is_instance_valid(_selected) and _selected.available():
 		_open_dialogue()
+
+func _advance_dialogue() -> void:
+	if line_index < active.lines.size() - 1:
+		line_index += 1
+		_present_line()
+	else:
+		_close_dialogue()
 
 func _open_dialogue() -> void:
 	if suspended or _resume_waiting_for_release:
@@ -154,11 +159,35 @@ func _open_dialogue() -> void:
 	player.set_physics_process(false)
 	player.velocity = Vector2.ZERO
 	player.get_node("AnimatedSprite2D").show_idle()
+	if active.inspection_scene != null:
+		_inspection = active.inspection_scene.instantiate() as CanvasLayer
+		_inspection.connect("dismissed", _on_inspection_dismissed)
+		add_child(_inspection)
+		interaction_started.emit(active)
+		return
 	_present_line()
 	interaction_started.emit(active)
 	if not dialogue_open or not is_instance_valid(active):
 		return
 	_position_dialogue()
+
+func _on_inspection_dismissed() -> void:
+	if _inspection == null or not dialogue_open:
+		return
+	_dispose_inspection()
+	_clear_held_keys()
+	_resume_waiting_for_release = true
+	_last_press_frame = Engine.get_process_frames() + 1
+	if is_instance_valid(active) and active.dialogue_available():
+		_present_line()
+		_position_dialogue()
+	else:
+		_close_dialogue()
+
+func _dispose_inspection() -> void:
+	if is_instance_valid(_inspection):
+		_inspection.queue_free()
+	_inspection = null
 
 func _cache_visual_bounds() -> void:
 	var sprite: AnimatedSprite2D = player.get_node("AnimatedSprite2D")
@@ -277,6 +306,7 @@ func _close_dialogue(success: bool = true) -> void:
 	if _closing or not dialogue_open:
 		return
 	_closing = true
+	_dispose_inspection()
 	var finished: Interactable = active
 	if is_instance_valid(finished):
 		if finished.tree_exiting.is_connected(_on_active_target_exiting):
@@ -304,6 +334,7 @@ func _on_active_target_exiting() -> void:
 	_close_dialogue(false)
 
 func _exit_tree() -> void:
+	_dispose_inspection()
 	if is_instance_valid(_camera_tween):
 		_camera_tween.kill()
 	if _camera_shifted and is_instance_valid(_camera):

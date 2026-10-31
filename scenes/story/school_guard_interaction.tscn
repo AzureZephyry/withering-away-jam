@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/school_guard_interaction.gd" id="1_controller"]
+[ext_resource type="PackedScene" path="res://scenes/UI/overworld_overlay.tscn" id="2_overlay"]
+[ext_resource type="PackedScene" path="res://scenes/UI/dialogue_choices.tscn" id="3_choices"]
+
+[node name="SchoolGuardInteraction" type="Node2D"]
+script = ExtResource("1_controller")
+
+[node name="DialogueLayer" parent="." instance=ExtResource("2_overlay")]
+
+[node name="Choices" parent="DialogueLayer/DialoguePanel/Margin" instance=ExtResource("3_choices")]
+
+[connection signal="pressed" from="DialogueLayer/DialoguePanel/Margin/Choices/OptionsFrame/Rows/First" to="." method="_on_first_choice_pressed"]
+[connection signal="pressed" from="DialogueLayer/DialoguePanel/Margin/Choices/OptionsFrame/Rows/Second" to="." method="_on_second_choice_pressed"]
+[connection signal="pressed" from="DialogueLayer/DialoguePanel/Margin/Choices/OptionsFrame/Rows/Third" to="." method="_on_third_choice_pressed"]

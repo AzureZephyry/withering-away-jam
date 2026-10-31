@@ -8,6 +8,8 @@ const REGISTERED_FLAGS: Array[String] = [
 	"bedroom_schedule_checked",
 	"bedroom_id_checked",
 	"bedroom_medal_checked",
+	"school_arnel_intro_completed",
+	"school_notice_board_discovered",
 ]
 
 var _flags: Dictionary[String, bool] = {}

@@ -8,6 +8,7 @@ const InteractionController = preload("res://scripts/overworld_interaction.gd")
 const Interactable = preload("res://scripts/overworld_interactable.gd")
 const DialoguePanel = preload("res://scripts/dialogue_panel.gd")
 const Typewriter = preload("res://scripts/text_type.gd")
+const ObjectivePanel = preload("res://scripts/objective_panel.gd")
 const SCHEDULE_FLAG: String = "bedroom_schedule_checked"
 const PREPARATION_FLAGS: Array[String] = [SCHEDULE_FLAG, "bedroom_id_checked", "bedroom_medal_checked"]
 const PREPARATION_LABELS: Array[String] = [
@@ -36,7 +37,7 @@ const SCHOOL_EXTERIOR_SCENE: String = "res://scenes/story/school_exterior_story.
 	medal.get_parent().get_node("ObjectiveMarker"),
 ]
 @onready var exit_objective_marker: Node2D = get_node("../Laboratory/Bedroom/Decoration/ClosedDoorPanel/ObjectiveMarker")
-@onready var objective: Label = $Screen/Objective
+@onready var objective: ObjectivePanel = $Screen/Objective
 @onready var checklist_boxes: Array[Panel] = [$Screen/Objective/ScheduleCheck, $Screen/Objective/IDCheck, $Screen/Objective/MedalCheck]
 @onready var player: CharacterBody2D = get_node("../Laboratory/Player")
 @onready var door_marker: Marker2D = get_node("../Laboratory/Bedroom/DoorRight")
@@ -321,21 +322,13 @@ func _update_notebook() -> void:
 	notebook.speakers = PackedStringArray(["Albert", "Albert"])
 
 func _update_objective() -> void:
+	var completed: Array[bool] = []
+	for flag_name in PREPARATION_FLAGS:
+		completed.append(GameState.get_flag(flag_name) == true)
 	if preparations_complete():
-		objective.text = "Head out for school."
+		objective.present("Head out for school.", PackedStringArray(), [])
 	else:
-		var lines: PackedStringArray = ["Get ready for your first day."]
-		for index in range(PREPARATION_FLAGS.size()):
-			lines.append("   " + PREPARATION_LABELS[index])
-		objective.text = "\n".join(lines)
-	objective.size.y = maxf(66.0, objective.get_combined_minimum_size().y)
-	var line_height: float = objective.get_line_height()
-	var line_step: float = line_height + objective.get_theme_constant("line_spacing")
-	for index in range(checklist_boxes.size()):
-		var checkbox: Panel = checklist_boxes[index]
-		checkbox.visible = not preparations_complete()
-		checkbox.position = Vector2(14, 8 + (index + 1) * line_step + (line_height - 12) * 0.5)
-		checkbox.get_node("Fill").visible = GameState.get_flag(PREPARATION_FLAGS[index]) == true
+		objective.present("Get ready for your first day.", PackedStringArray(PREPARATION_LABELS), completed)
 	_update_objective_visibility()
 
 func preparations_complete() -> bool:

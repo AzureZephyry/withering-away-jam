@@ -6,7 +6,9 @@ The School Exterior Level 1 environment and Bedroom-to-School handoff are
 implemented, runtime-validated and manually accepted by the Project Lead.
 Wayne's complete map remains the visual authority; original artwork and editable
 sources are preserved. Scene 02 preparation from `b40ab47` remains intact.
-Scene 03 narrative, NPCs, dialogue, objectives and new Sanity effects are not added.
+Scene 03 integrates Mang Arnel's introductory encounter, the notice-board
+inspection and objective guidance. These have passed Project Lead review;
+Liezel, Jules, Scene 04 and new Sanity effects are not implemented here.
 The [story wrapper](../scenes/story/school_exterior_story.tscn) reuses this same
 playable scene for sidewalk arrival. F5 starts Dream; open
 [school_exterior_playable.tscn](../scenes/gameplay/school_exterior_playable.tscn) with F6
@@ -527,6 +529,109 @@ Map-edge barriers include small visible-sprite safety insets. No gate behavior o
 interaction system is implemented. Real collision routes and corner comfort still
 require Project Lead review; passing automated probes does not establish perfection.
 
+## School notice board
+
+The reusable [notice-board prop](../scenes/environments/school_exterior/school_notice_board.tscn)
+is instanced once in the playable scene at `(545, 1204)`, beside the western
+building frontage and just north of the waiting shelter. Its approved
+[48 × 64 PNG](../assets/environments/school_exterior/props/school_notice_board.png)
+and [six-layer KRA source](../art_source/environments/school_exterior/school_notice_board.kra)
+are copied unchanged from the approved delivery.
+
+The Sprite2D uses nearest filtering, unit scale and offset `(0, -28)`, placing
+the bottom of the occupied 40 × 53 artwork at the prop's ground origin. A 2×
+trial obstructed the narrow sidewalk, so this instance uses 1× instead. Its
+36 × 6 footprint is centered at `(0, -3)`. Root-level Y-sorting and the existing
+ActorShadow2D component provide depth ordering and a ground-masked sun/contact
+shadow. The original 99 map barriers are unchanged; the board adds one body.
+
+Focused runtime checks verified a clear route through the south pedestrian
+entrance, past the guard and along the board's east side, using Albert's actual
+14 × 10 feet shape. The board blocks direct approaches to its footprint and
+can be approached from the south. School arrival, the guard interaction and
+janitor movement were smoke-tested. The physical artwork and corrected west-side
+placement are manually approved.
+
+The inspection integration adds a manual 64-unit E/Space interaction from the
+open pedestrian side. It reuses the School's existing interaction controller and
+movement lock. The [inspection overlay](../scenes/UI/notice_board_inspection.tscn)
+displays the exact approved
+[480 × 340 PNG](../assets/environments/school_exterior/props/school_notice_board_inspection.png)
+at 960 × 680 in the 1280 × 960 viewport, with integer scaling and nearest filtering.
+The image occupies `(160, 20, 960, 680)`. An inspection-only instance of the
+existing Reality panel occupies `(370, 716, 540, 134)`, leaving a 16-pixel gap.
+It uses the neutral label "Inspection", the action "Close notice board" and the
+usual dialogue font. Smaller layouts use 1× artwork and a narrower panel when
+needed; bounds checks cover logical viewports down to 640 × 480. The shared
+dialogue scene and other conversations retain their original layout.
+The [18-layer KRA](../art_source/environments/school_exterior/school_notice_board_inspection.kra)
+is preserved separately. Printed content, including provisional rooms 201/202/203,
+is entirely in the image; the interface adds only a dimmer and dismissal panel.
+
+E, Space or a click inside the dismissal panel closes the inspection. The opening
+input must be released before dismissal is armed. Held keys, double-clicks and
+the closing press cannot also advance the first discovery line. On the first completed visit, the
+existing Reality dialogue presents Albert's "There." and "Found it." in order.
+Only successful completion of both lines sets the registered session flag
+`school_notice_board_discovered`. Repeat inspections omit those lines; ordinary
+scene reloads retain the flag, while a new game process resets it. Interrupted
+inspection/dialogue does not mark discovery complete. Failed interactions retain
+the existing leave-and-reenter retry rule. No guard-completion gate, Sanity change,
+permanent save or Scene 04 transition is added.
+
+Focused runtime checks cover keyboard/mouse dismissal, repeat visits, interruption,
+movement restoration, session reloads, guard branches, Garden dialogue and janitor
+activities. The inspection integration is manually accepted.
+
+## Scene 03 guidance
+
+"Find your classroom" has two entries: "Ask the campus guard for directions
+(optional)" and "Check the first-year class assignments (required)". The existing
+`school_arnel_intro_completed` and `school_notice_board_discovered` flags supply
+their completion state. Proximity does not complete either entry. Successful
+board discovery completes the goal even if the guard was skipped; after the
+dialogue finishes, the panel collapses to "Class assignments checked." There is
+no new classroom assignment, prerequisite, save mechanism or scene transition.
+
+The [School coordinator](../scripts/school_objectives.gd) uses the same
+[checklist presentation](../scenes/UI/objective_panel.tscn) as Scene 02. The
+Bedroom controller still owns its original preparation flags and exit rules.
+At 1280 × 960 the School checklist occupies `(24, 96, 480, 126)`, aligned with the
+clock's left edge and 16 pixels below it. Smaller layouts retain the previous
+HUD-band fallback when that position would overlap Sanity or leave the viewport.
+It hides during arrival, conversation and inspection, and
+checks visible HUD/prompt rectangles before showing. State is reconstructed from
+session flags on each scene entry; only one panel is instanced in the playable
+scene, also used by the story wrapper.
+
+The current School interactable inventory is:
+
+| Target | Role | Availability |
+| --- | --- | --- |
+| Mang Arnel | Optional story directions | Manual, 64-unit radius; introductory encounter becomes unavailable after successful completion |
+| School Notice Board | Required discovery and repeat inspection | Manual, 64-unit radius; remains readable after discovery |
+| NPC-001 and all other campus scenery | Noninteractive in the current implementation | No new prompt, objective or marker |
+
+Both targets share the existing E/Space prompt. The two objective indicators
+instance the existing gold, dark-outlined diamond from
+`scenes/UI/objective_marker.tscn`. Within 320 world units, each is positioned from
+its target's visual bounds, 12 screen pixels above the artwork; its screen center
+is pixel-snapped. The School's 2× camera makes each diamond 16 × 12 screen pixels.
+School-only unshaded material overrides preserve their gold/dark contrast at
+night; the shared marker scene and Bedroom appearance remain unchanged.
+The coordinator suppresses indicators off-screen, over HUD/prompt rectangles,
+during modal interactions, or after their respective flags complete. A selected
+target's valid proximity prompt replaces its diamond rather than duplicating it.
+The guard's optional marker can remain after the required goal completes; the
+board's marker disappears while its repeat-reading prompt stays available.
+
+Focused checks cover both objective orders, all four guard routes, successful-only
+completion, reloads, marker/prompt boundaries, modal suppression and pixel snapping.
+Runtime captures and bounds checks cover 1280 × 960 and smaller logical layouts.
+The shared checklist extraction also passed the three Bedroom inspections and
+both departure choices, including the real School handoff. The final layout and
+marker presentation are manually accepted.
+
 ## Manual review
 
 1. Open the development project's `project.godot` in Godot 4.7.2 and wait for
@@ -546,8 +651,8 @@ require Project Lead review; passing automated probes does not establish perfect
    and shed-adjacent FrontLamp03 intentionally remain opaque. Review scale,
    leftover baked occlusion and corner behavior.
 7. Check that the camera stops at map edges and the artwork remains sharp. Stop
-   the game after testing. School free exploration is the current endpoint; no
-   Scene 03 narrative or further story transition is implemented.
+   the game after testing. The current Scene 03 endpoint is notice-board discovery;
+   the guard remains optional and no Scene 04 transition is implemented.
 
 The catalog is [a TSV in docs/art](art/school_exterior_asset_manifest.tsv) so Godot
 does not import it as CSV translations. No private tooling/configuration is needed.

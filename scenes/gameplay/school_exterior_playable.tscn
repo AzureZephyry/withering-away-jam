@@ -10,9 +10,17 @@
 [ext_resource type="PackedScene" path="res://scenes/characters/npc_001.tscn" id="8_npc"]
 [ext_resource type="Script" uid="uid://dv22o2euvswn5" path="res://scripts/npc_waypoint_roaming.gd" id="9_roaming"]
 [ext_resource type="Script" uid="uid://c735stglogwtv" path="res://scripts/npc_maintenance_stop.gd" id="10_work_stop"]
+[ext_resource type="PackedScene" path="res://scenes/characters/mang_arnel.tscn" id="11_gw6t7"]
+[ext_resource type="PackedScene" path="res://scenes/story/school_guard_interaction.tscn" id="12_cuxr4"]
+[ext_resource type="PackedScene" uid="uid://chgybnvrdame2" path="res://scenes/environments/school_exterior/school_notice_board.tscn" id="13_cm0mo"]
+[ext_resource type="PackedScene" path="res://scenes/UI/objective_marker.tscn" id="14_ki1au"]
+[ext_resource type="PackedScene" path="res://scenes/UI/school_objectives.tscn" id="15_4415n"]
 
 [sub_resource type="RectangleShape2D" id="SchoolFeet"]
 size = Vector2(14, 10)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4415n"]
+light_mode = 1
 
 [node name="SchoolExteriorLaboratory" type="Node2D" unique_id=471497556]
 y_sort_enabled = true
@@ -71,4 +79,34 @@ position = Vector2(596.7, 677.025)
 
 [node name="SanityHUD" parent="." unique_id=1452487610 instance=ExtResource("7_sanity_hud")]
 
+[node name="MangArnel" parent="." unique_id=909902096 instance=ExtResource("11_gw6t7")]
+position = Vector2(605.3063, 1396.5074)
+
+[node name="GuardInteraction" parent="." unique_id=1033553425 instance=ExtResource("12_cuxr4")]
+
+[node name="SchoolNoticeBoard" parent="." unique_id=717064842 instance=ExtResource("13_cm0mo")]
+position = Vector2(545, 1204)
+
+[node name="GuardObjectiveMarker" parent="." unique_id=851900777 instance=ExtResource("14_ki1au")]
+position = Vector2(606.3063, 1353.5074)
+
+[node name="Outline" parent="GuardObjectiveMarker" index="0"]
+material = SubResource("CanvasItemMaterial_4415n")
+
+[node name="Diamond" parent="GuardObjectiveMarker" index="1"]
+material = SubResource("CanvasItemMaterial_4415n")
+
+[node name="BoardObjectiveMarker" parent="." unique_id=2083377346 instance=ExtResource("14_ki1au")]
+position = Vector2(545, 1142)
+
+[node name="Outline" parent="BoardObjectiveMarker" index="0"]
+material = SubResource("CanvasItemMaterial_4415n")
+
+[node name="Diamond" parent="BoardObjectiveMarker" index="1"]
+material = SubResource("CanvasItemMaterial_4415n")
+
+[node name="SchoolObjectives" parent="." unique_id=881756733 instance=ExtResource("15_4415n")]
+
 [editable path="Player"]
+[editable path="GuardObjectiveMarker"]
+[editable path="BoardObjectiveMarker"]

@@ -1,5 +1,41 @@
 # Environmental interaction prototype
 
+## School guard encounter
+
+`scenes/story/school_guard_interaction.tscn` adds one School-local interaction
+controller and instances the existing overworld overlay. Its controller extends
+`overworld_interaction.gd`, reusing proximity prompts, typewriter input,
+movement locks, framing and completion signals. The base `_advance_dialogue()`
+hook retains linear conversations by default; the School subclass presents text
+choices inside the existing Reality panel. Up/Down selects, E/Space confirms,
+and the native buttons also accept mouse clicks. No new artwork is required.
+
+`scenes/UI/dialogue_choices.tscn` and `dialogue_choice_theme.tres` provide the
+reusable choice section. The nameplate retains the current speaker, with the
+spoken line at 40 pixels above the response rows and an "Albert's response"
+caption. Choices use the existing regular handwritten font at 32 pixels,
+with 0.08 emboldening and no outline or slant transform. Keyboard focus and mouse
+hover synchronize selection. Rows have restrained 1-pixel borders; the selected
+row uses a muted fill and 3-pixel left marker, with the same dark text and font
+as other rows. Shared dialogue body text remains 48 pixels with 0.08 emboldening;
+the 40-pixel speaker name uses the regular weight. No font asset is altered.
+
+Mang Arnel's 64-unit manual interaction begins with "First year?". The three
+primary options preserve the Scene 03 working screenplay. Options 1 and 2 have
+different ID-check exchanges; Option 3 instead offers two follow-up responses
+and does not add an ID check. All four paths restore movement when finished.
+Held keys, same-frame input and duplicate selections cannot commit twice.
+
+Successful completion sets GameState's session flag
+`school_arnel_intro_completed`. It survives scene reloads during the current run;
+restart or `GameState.reset_session()` clears it. The first encounter then stays
+inactive until repeat dialogue is authored. Cancellation does not complete it,
+and the next attempt starts at the opening after leaving and re-entering range.
+School arrival suppresses interaction until its fade and movement handoff finish.
+The guard controller adds no automatic scene transition or Sanity effect.
+Scene 03 guidance tracks the optional guard and required board separately.
+The dialogue and presentation are manually accepted.
+
 This system handles objects in the playable world. The cinematic opening keeps
 its own sequence and input handler. The story Bedroom introduction reuses the
 dialogue presentation, not this proximity-based conversation lifecycle.
@@ -46,6 +82,31 @@ Entry-frame input, held keys, echoes and same-frame duplicate presses are ignore
 Movement resumes when dialogue closes; another interaction waits for camera
 restoration. `interaction_started` and `interaction_finished(target, completed)`
 are available for later scene-local hooks.
+
+## Optional inspection screen
+
+An interactable may assign `inspection_scene`, a CanvasLayer scene with a
+`dismissed` signal. The same controller opens it after acquiring the ordinary
+movement lock and hides its dialogue panel and prompt. This keeps one active
+interaction; the inspection scene consumes modal keyboard input and blocks mouse
+clicks behind it. The School notice board uses
+`scenes/UI/notice_board_inspection.tscn`, displaying its approved texture rather
+than rebuilding printed information with UI text.
+
+The notice-board inspection instances the existing Reality dialogue panel below
+the image as a neutral "Close notice board" action. E, Space or a panel click
+dismisses it after the opening input has been released. This panel has its own
+compact layout and typography overrides; the shared dialogue scene is unchanged.
+Integer artwork scaling and a measured 16-pixel gap keep the two regions separate.
+
+After dismissal, the controller calls the target's `dialogue_available()` hook.
+The default allows its configured dialogue. The notice-board target checks
+`school_notice_board_discovered` so only its first successful inspection proceeds
+to Albert's two discovery lines. Its `finish(success)` hook records completion
+only after that dialogue finishes. Both inspection and dialogue reuse the normal
+finish signal, movement restoration and target-removal cleanup. Resuming waits
+for entry keys and mouse buttons to be released. This extension is
+runtime-validated and manually accepted; it adds no permanent persistence.
 
 ## Scripted-story suspension
 
@@ -105,6 +166,24 @@ Sanity values and does not implement inventory. Scene 02 separately listens for
 successful required completions; repeat inspection does not duplicate progress.
 
 ## Current examples
+
+### Shared objective presentation
+
+`scenes/UI/objective_panel.tscn` and `scripts/objective_panel.gd` contain the
+original Bedroom checklist visuals and three checkbox rows. `present(title,
+entries, completed)` updates only text, checkbox fills and their layout. Scene
+controllers continue to own flags, prerequisites, completion and transitions.
+Scene 02 uses this component without changing its preparation or door rules;
+`scripts/school_objectives.gd` supplies the optional guard/required board checklist
+for Scene 03. No new GameState flags are needed.
+
+The School reuses `scenes/UI/objective_marker.tscn` for both real interactables.
+These are objective diamonds, not activation prompts: they can appear beyond the
+64-unit interaction radius, yield to the selected target's actual E/Space prompt,
+and disappear on that target's completion. Modal interactions suppress all School
+guidance. Decorative scenery and the janitor do not acquire interactions or markers.
+
+### Interactable examples
 
 - `scenes/prototypes/garden_camera_lab.tscn`: Lily, automatic/re-entry, Dream skin,
   radius 84. `garden_lily_interaction.gd` is a compatibility adapter preserving
